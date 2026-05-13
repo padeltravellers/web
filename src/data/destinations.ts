@@ -232,7 +232,7 @@ const baliExperiences: Experience[] = [
   },
 ];
 
-// === BALI ITINERARY — 15 días según PDF oficial 2026 ===
+// === BALI ITINERARY — 15 días según itinerario oficial PT ===
 const baliItinerary: ItineraryDay[] = [
   {
     day: 1,
@@ -240,7 +240,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Llegada a Bali",
     subtitle: "Aeropuerto, traslado al hotel y bienvenida",
     description:
-      "Aterrizaje en el aeropuerto de Denpasar. Recogida en transporte privado incluido y traslado al hotel en Canggu, tu hogar las próximas dos semanas. Tarde para deshacer maletas, refrescarse y empezar a adaptarse al cambio horario. Cena de bienvenida con el grupo y presentación detallada del plan del viaje.",
+      "Aterrizaje en el aeropuerto de Denpasar. Recogida en transporte privado incluido y traslado al hotel en Canggu, tu hogar las próximas dos semanas. Tarde para deshacer maletas, refrescarse y empezar a adaptarse al cambio horario. Cena de bienvenida con el grupo y presentación del viaje.",
     tags: ["social", "libre"],
     photo: "/photos/villa/1.jpg",
     highlights: [],
@@ -248,144 +248,144 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 2,
     weekday: "Día 2",
-    title: "Aclimatación y visita a BPA",
-    subtitle: "Recuperar fuerzas y conocer el club",
+    title: "Pádel y Tanah Lot",
+    subtitle: "Introducción al viaje, clase en BPA y templo del atardecer",
     description:
-      "Día tranquilo para recuperarse del viaje. Mañana en el hotel o paseo por Canggu — tiendas, cafés, playa a 5 minutos. Por la tarde visitamos Bali Padel Academy: las 7 pistas cubiertas premium entre arrozales, la pista central con grada para 200 espectadores, la zona de recuperación con sauna de vapor, baño de hielo y piscina infinita, y el restaurante Bandeja del club. Te presentamos a los coaches y al equipo.",
-    tags: ["padel", "libre"],
-    photo: "/photos/extra/bpa/aerial.jpg",
-    highlights: [],
-  },
-  {
-    day: 3,
-    weekday: "Día 3",
-    title: "Primer pádel + Uluwatu",
-    subtitle: "Mañana en pista, tarde en los acantilados del sur",
-    description:
-      "Por la mañana arrancamos el pádel en BPA con clase técnica y partido entre el grupo en pistas de máximo 4 jugadores por nivel. Tras comer, salida al sur de la isla. Empezamos en una de las playas de Uluwatu, comida en zona de acantilados contemplando a los surfistas con las olas desafiantes, paseo por el templo de Uluwatu en lo alto del acantilado, y parada en otra playa de camino de vuelta para el atardecer.",
-    tags: ["padel", "cultura"],
-    photo: "/photos/bali/uluwatu/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 4,
-    weekday: "Día 4",
-    title: "Día completo en Ubud",
-    subtitle: "Cultura, espiritualidad y arte",
-    description:
-      "Salimos pronto hacia Ubud, centro cultural y artístico de la isla. Empezamos en el Templo de Purificación, donde podrás participar en el ritual tradicional balinés de sumergirse en sus piscinas sagradas. Después, las terrazas de arroz de Tegallalang — uno de los paisajes más icónicos de Bali. Visita al Palacio Real, hogar histórico de la familia real de Ubud, y tiempo libre en el Mercado de Arte Tradicional para llevarte algún recuerdo. Regreso a Canggu para descansar.",
-    tags: ["cultura", "naturaleza"],
-    photo: "/photos/extra/arrozales/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 5,
-    weekday: "Día 5",
-    title: "Pádel + tiempo libre",
-    subtitle: "Mañana en BPA, tarde a tu ritmo",
-    description:
-      "Sesión de pádel matinal en BPA: clase con coach y partidos rotativos del grupo. Por la tarde, tiempo libre para que cada uno haga lo que más le apetezca — repetir surf si te gustó, masaje balinés y spa, sesión de yoga, otra ronda de pádel con jugadores internacionales, o relajarte en alguno de los beach clubs frente al mar. El coordinador te orienta con planes y recomendaciones.",
-    tags: ["padel", "libre"],
-    photo: "/photos/extra/padel-action/2.jpg",
-    highlights: [],
-  },
-  {
-    day: 6,
-    weekday: "Día 6",
-    title: "Día libre — Nusa Penida",
-    subtitle: "Isla de ensueño a 40 minutos en ferry",
-    description:
-      "Día libre del programa de pádel — te proponemos una excursión espectacular a Nusa Penida. Salimos del puerto de Sanur en ferry y al llegar un conductor local nos acompaña por los rincones más bellos: Angel's Billabong (piscina natural entre acantilados con aguas turquesa), Broken Beach (bahía con espectacular arco de roca abierto al océano), Kelingking Beach (el icónico acantilado con forma de dinosaurio sobre arena blanca) y Crystal Bay (playa para nadar, snorkel y atardecer). Ferry de vuelta a las 17h.",
-    tags: ["playa", "naturaleza"],
-    photo: "/photos/nusa-penida/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 7,
-    weekday: "Día 7",
-    title: "Torneo fin de semana",
-    subtitle: "Pádel competitivo en BPA",
-    description:
-      "Fin de semana de torneo. Los clubes de pádel de Bali organizan torneos internacionales con cientos de jugadores cada fin de semana, y participamos. Los partidos se reparten entre mañana y tarde, así que hay tiempo libre entre rondas para playa, comida o descanso. Pondrás a prueba lo aprendido durante la semana y conocerás a jugadores de todo el mundo.",
-    tags: ["padel", "social"],
-    photo: "/photos/bali/partidos/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 8,
-    weekday: "Día 8",
-    title: "Clase de surf",
-    subtitle: "Dos horas con instructor en Canggu",
-    description:
-      "Las playas de Bali están entre las mejores del mundo para surfear. Reservamos una tarde para clase de surf en Canggu: dos horas con instructor experimentado que adapta la sesión a tu nivel, desde primeras olas hasta perfeccionar técnica. Tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol — uno de los momentos más recordados del viaje.",
-    tags: ["playa", "naturaleza"],
-    photo: "/photos/extra/surf-extra/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 9,
-    weekday: "Día 9",
-    title: "Día en Bali Este",
-    subtitle: "Puertas del Cielo + snorkel en Amed",
-    description:
-      "Salimos al este de la isla. Empezamos en Pura Lempuyang, uno de los templos más antiguos y sagrados de Bali, conocido por sus famosas Puertas del Cielo con vista enmarcada al volcán Agung — uno de los lugares más fotografiados de Bali. Ruta panorámica con miradores y bajada a Amed, pueblo costero de arena negra volcánica con ambiente relajado. Actividad de snorkel sobre los arrecifes de coral. Opción de buceo con centros locales (coste aparte, sujeto a disponibilidad).",
-    tags: ["cultura", "playa", "naturaleza"],
-    photo: "/photos/bali/amed/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 10,
-    weekday: "Día 10",
-    title: "Pádel + tiempo libre",
-    subtitle: "Otra mañana en BPA, tarde abierta",
-    description:
-      "Mañana de clase y partido en BPA, con el grupo ya rodado y los niveles bien identificados. Tarde libre para spa, masajes, yoga, scooter por la costa, mercado nocturno, o más pádel libre con jugadores del club. Si te apetece, cena de grupo opcional en restaurante con música en vivo.",
-    tags: ["padel", "libre"],
-    photo: "/photos/extra/bpa/piscina-atardecer.jpg",
-    highlights: [],
-  },
-  {
-    day: 11,
-    weekday: "Día 11",
-    title: "Día en Ubud Norte",
-    subtitle: "Pura Ulun Danu, cascada y Jatiluwih",
-    description:
-      "Día completo en la zona oeste y norte de Bali, descubriendo paisajes increíbles. Visita al templo Pura Ulun Danu Bratan, construido en el siglo XVII y dedicado a Dewi Danu, la diosa del agua — parece flotar sobre el lago cuando sube el nivel del agua. Después, cascada en Tabanan tras una caminata entre vegetación y puentes, con baño en la piscina natural en su base. Finalmente, los arrozales de Jatiluwih: Patrimonio de la Humanidad por la UNESCO con el sistema de irrigación tradicional «subak» y el volcán Gunung Batularu al fondo.",
-    tags: ["cultura", "naturaleza"],
-    photo: "/photos/bali/ubud-norte/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 12,
-    weekday: "Día 12",
-    title: "Plantación de café + Taman Ayun",
-    subtitle: "Cata del Luwak y templo real",
-    description:
-      "Por la mañana, visita inmersiva a una plantación tradicional de café. Conoces el proceso completo del famoso café Luwak — uno de los más exclusivos del mundo, en el que la civeta asiática selecciona y digiere los granos antes de su tueste. Cata de cafés y tés balineses con vistas a los campos. Por la tarde, templo de Taman Ayun, construido en el siglo XVII por la dinastía real de Mengwi: arquitectura balinesa tradicional, jardines extensos y canales que aportan un ambiente sereno. Patrimonio de la Humanidad por la UNESCO.",
-    tags: ["cultura", "naturaleza"],
-    photo: "/photos/bali/cafe/1.jpg",
-    highlights: [],
-  },
-  {
-    day: 13,
-    weekday: "Día 13",
-    title: "Pádel + Tanah Lot",
-    subtitle: "Última sesión técnica y atardecer mítico",
-    description:
-      "Mañana en BPA: clase técnica para pulir detalles y partido para ajustar parejas pensando en el torneo de mañana. Tras comer, traslado a Tanah Lot — «Tierra en el Mar» en balinés. El templo se alza sobre una gran roca rodeada por el océano, solo accesible cuando baja la marea. Con marea alta, parece flotar sobre las olas. Es uno de los lugares más fotografiados de Bali y también un importante lugar de peregrinación local. Atardecer sobre el templo en silueta.",
+      "Por la mañana introducción al viaje y traslado a Bali Padel Academy para la primera clase de pádel — conoces el club, los coaches y las pistas. Comida en el club. Por la tarde, visita al templo de Tanah Lot: «Tierra en el Mar» en balinés, alzado sobre una gran roca rodeada por el océano. Con marea alta parece flotar sobre las olas. Atardecer sobre el templo en silueta — uno de los lugares más fotografiados de Bali.",
     tags: ["padel", "cultura"],
     photo: "/photos/bali/tanah-lot/1.jpg",
     highlights: [],
   },
   {
-    day: 14,
-    weekday: "Día 14",
-    title: "Torneo final + despedida",
-    subtitle: "El cierre del viaje",
+    day: 3,
+    weekday: "Día 3",
+    title: "Día completo en Ubud",
+    subtitle: "Templo de purificación, arrozales y palacio real",
     description:
-      "Día del torneo final del grupo en BPA. Formato americana con eliminatorias, ambiente competitivo pero amistoso — lo importante es disfrutar, reír y cerrar la semana de pádel a lo grande. Entrega de premios con la copa Padel Travellers para la pareja campeona (sí, hay copa de verdad). Por la noche, cena de despedida del grupo en un restaurante especial con vistas, brindis y memorias.",
+      "Salimos pronto hacia Ubud, centro cultural y artístico de la isla. Empezamos en el templo Pura Mengening, donde quien quiera puede participar en el ritual tradicional balinés de purificación sumergiéndose en sus piscinas sagradas. Después, las terrazas de arroz de Tegalalang — uno de los paisajes más icónicos de Bali. Visita al Palacio Real Puri Saren Agung, hogar histórico de la familia real de Ubud, y tiempo libre en el Mercado Artesanal para llevarte algún recuerdo.",
+    tags: ["cultura", "naturaleza"],
+    photo: "/photos/extra/arrozales/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 4,
+    weekday: "Día 4",
+    title: "Partidos de pádel + surf",
+    subtitle: "Mañana en BPA, tarde en las olas de Canggu",
+    description:
+      "Por la mañana, partidos de pádel en BPA por niveles, con descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
+    tags: ["padel", "playa", "naturaleza"],
+    photo: "/photos/extra/surf-extra/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 5,
+    weekday: "Día 5",
+    title: "Día en Uluwatu",
+    subtitle: "Playa Thomas, templo y atardecer en Jimbaran",
+    description:
+      "Salida al sur de la isla. Empezamos en Thomas Beach, una de las playas escondidas de Uluwatu entre acantilados — mañana de baño, snorkel y sol. Después, paseo por Pura Luhur Uluwatu, el templo en lo alto del acantilado con vistas espectaculares al océano (cuidado con los monos del lugar). Cerramos con la puesta de sol en la playa de Jimbaran y cena de pescado fresco en chiringuitos sobre la arena.",
+    tags: ["playa", "cultura"],
+    photo: "/photos/bali/uluwatu/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 6,
+    weekday: "Día 6",
+    title: "Pádel + beach club",
+    subtitle: "Partido por la mañana, tarde frente al mar",
+    description:
+      "Partido de pádel matinal en BPA con descanso en el club. Por la tarde, sesión en Finns Beach Club — uno de los beach clubs más conocidos de Canggu, con piscinas infinitas frente al océano, tumbonas, música y atardecer en directo. Tarde para desconectar, nadar, tomar algo y disfrutar del ambiente.",
+    tags: ["padel", "playa", "libre"],
+    photo: "/photos/extra/bpa/piscina-atardecer.jpg",
+    highlights: [],
+  },
+  {
+    day: 7,
+    weekday: "Día 7",
+    title: "Día libre en Canggu",
+    subtitle: "A tu ritmo",
+    description:
+      "Día libre para que cada uno haga lo que más le apetezca: spa balinés, sesión de yoga, otra ronda de surf, scooter por la costa, mercados, cafés especializados, pádel libre con jugadores internacionales del club, o simplemente piscina y desconexión. El coordinador te orienta con recomendaciones según lo que te apetezca.",
+    tags: ["libre"],
+    photo: "/photos/villa/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 8,
+    weekday: "Día 8",
+    title: "Norte de Bali",
+    subtitle: "Twin Lakes, Pura Ulun Danu, Jatiluwih y cascada Leke Leke",
+    description:
+      "Día completo en el norte de la isla. Empezamos en el mirador de Twin Lakes (Lagos Gemelos), con vistas a los lagos Buyan y Tamblingan rodeados de selva. Después, el templo Pura Ulun Danu Beratan, construido en el siglo XVII y dedicado a Dewi Danu, la diosa del agua — parece flotar sobre el lago cuando sube el nivel. Continuamos por los arrozales de Jatiluwih, Patrimonio de la Humanidad por la UNESCO. Cierre en la cascada Leke Leke con baño en la piscina natural a sus pies.",
+    tags: ["cultura", "naturaleza"],
+    photo: "/photos/bali/ubud-norte/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 9,
+    weekday: "Día 9",
+    title: "Pádel, Taman Ayun y plantación de café",
+    subtitle: "Mañana en BPA, tarde cultural",
+    description:
+      "Por la mañana, clase de pádel en BPA y comida en el club. Por la tarde, visita al templo Taman Ayun, construido en el siglo XVII por la dinastía real de Mengwi — arquitectura balinesa tradicional, jardines extensos y canales que crean un ambiente sereno. Después, parada en una plantación tradicional de café: conoces el proceso del famoso café Luwak y haces una cata de cafés y tés balineses con vistas a los campos.",
+    tags: ["padel", "cultura"],
+    photo: "/photos/bali/cafe/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 10,
+    weekday: "Día 10",
+    title: "Nusa Penida",
+    subtitle: "Excursión todo el día a la isla de ensueño",
+    description:
+      "Día completo en Nusa Penida. Salida temprano desde el puerto de Sanur en ferry rápido. Una vez en la isla, recorrido con conductor local por los puntos más espectaculares: Broken Beach (bahía con un arco de roca abierto al océano), Angel's Billabong (piscina natural entre acantilados con aguas turquesa), Kelingking Beach (el icónico acantilado con forma de dinosaurio sobre arena blanca) y Crystal Bay (playa para nadar y snorkel). Ferry de vuelta a media tarde.",
+    tags: ["playa", "naturaleza"],
+    photo: "/photos/nusa-penida/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 11,
+    weekday: "Día 11",
+    title: "Pádel + tarde libre",
+    subtitle: "Última mañana de partidos, tarde a tu ritmo",
+    description:
+      "Mañana de partido de pádel en BPA con descanso y comida en el club. Tarde libre para masaje balinés, spa, otro paseo por la costa, mercados nocturnos, cena de grupo opcional, o simplemente descansar antes del torneo. Es el último día «tranquilo» antes del cierre competitivo del viaje.",
+    tags: ["padel", "libre"],
+    photo: "/photos/extra/padel-action/2.jpg",
+    highlights: [],
+  },
+  {
+    day: 12,
+    weekday: "Día 12",
+    title: "Torneo internacional · Día 1",
+    subtitle: "Arranca el fin de semana de competición",
+    description:
+      "Empieza el torneo internacional en Bali. Los clubes de la isla organizan torneos cada fin de semana con cientos de jugadores de todo el mundo, y participamos por niveles. Revisamos los cuadros juntos para que cada uno sepa el horario de sus partidos y pueda llegar al club con antelación. Entre rondas hay tiempo libre para playa, comida o descanso.",
+    tags: ["padel", "social"],
+    photo: "/photos/bali/partidos/1.jpg",
+    highlights: [],
+  },
+  {
+    day: 13,
+    weekday: "Día 13",
+    title: "Torneo internacional · Día 2",
+    subtitle: "Segunda jornada de partidos",
+    description:
+      "Continúa el torneo. Según cómo cada pareja avance en los cuadros, los partidos se reparten entre mañana y tarde. Para los que no juegan en alguna franja, organizamos actividades o salidas según preferencias del grupo — talleres, beach club, exploración por la zona, lo que se ajuste mejor.",
     tags: ["padel", "social"],
     photo: "/photos/bali/partidos/2.jpg",
+    highlights: [],
+  },
+  {
+    day: 14,
+    weekday: "Día 14",
+    title: "Final del torneo + cena de despedida",
+    subtitle: "El cierre del viaje",
+    description:
+      "Último día de torneo con las finales y entrega de premios. Por la noche, cena de despedida del grupo en un restaurante especial — brindis, fotos, recuerdos y el cierre que se merecen dos semanas tan intensas. Para muchos es uno de los momentos más recordados del viaje.",
+    tags: ["padel", "social"],
+    photo: "/photos/extra/bpa/aerial.jpg",
     highlights: [],
   },
   {
