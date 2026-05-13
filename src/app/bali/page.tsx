@@ -135,7 +135,7 @@ export default function BaliPage() {
             <div className="text-center mb-10 max-w-2xl mx-auto">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias</p>
               <p className="text-pt-muted text-lg leading-relaxed">
-                Doce experiencias incluidas en el viaje, repartidas en pádel, turismo y aventura. Todas pensadas
+                Experiencias incluidas en el viaje, repartidas en pádel, turismo y aventura. Todas pensadas
                 para que vivas Bali a fondo.
               </p>
             </div>
