@@ -109,6 +109,47 @@ export default function BaliPage() {
           </div>
         </section>
 
+        {/* EXPERIENCIAS — qué vas a hacer en Bali */}
+        <section className="py-24 lg:py-36 px-6 lg:px-12 max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Experiencias incluidas</p>
+            <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
+              13 experiencias dentro del viaje.
+            </h2>
+            <p className="text-pt-muted mt-6 max-w-2xl mx-auto leading-relaxed">
+              Cada una con su carácter, su foto y su sitio en la semana. Todas incluidas en el precio.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+            {d.experiences.map((e) => (
+              <article
+                key={e.slug}
+                className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-pt-cream/40">
+                  <Image
+                    src={e.photos[0]}
+                    alt={e.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width:1024px) 50vw, 33vw"
+                  />
+                  {e.photos.length > 1 && (
+                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.18em] text-pt-green">
+                      +{e.photos.length - 1} fotos
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">{e.short}</p>
+                  <h3 className="font-display font-bold text-xl text-pt-green mb-3 leading-tight">{e.title}</h3>
+                  <p className="text-sm text-pt-muted leading-relaxed">{e.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         {/* ITINERARIO DÍA A DÍA — estilo introtravel con tabs */}
         <section id="itinerario" className="py-24 lg:py-36 px-6 lg:px-12 bg-pt-green-pale/40">
           <div className="max-w-4xl mx-auto">
@@ -285,7 +326,7 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* GALERÍA */}
+        {/* GALERÍA — masonry asimétrica */}
         <section className="bg-pt-cream/40 py-20 lg:py-28 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
@@ -293,13 +334,31 @@ export default function BaliPage() {
               <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green leading-tight">
                 Bali en imágenes.
               </h2>
+              <p className="text-pt-muted mt-4 max-w-xl mx-auto">
+                Una muestra del archivo del viaje. Fotos reales tomadas por el equipo y los viajeros.
+              </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {d.experiences.slice(0, 8).map((e, i) => (
-                <div key={e.slug} className={`relative ${i % 5 === 0 ? "md:col-span-2 md:row-span-2 aspect-square" : "aspect-square"} rounded-2xl overflow-hidden`}>
-                  <Image src={e.photos[0]} alt={e.title} fill className="object-cover hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 50vw, 25vw" />
-                </div>
-              ))}
+              {d.gallery.map((src, i) => {
+                const big = i === 0 || i === 6;
+                const tall = i === 3 || i === 9;
+                return (
+                  <div
+                    key={src + i}
+                    className={`relative rounded-2xl overflow-hidden ${
+                      big ? "md:col-span-2 md:row-span-2 aspect-square" : tall ? "row-span-2 aspect-[3/5]" : "aspect-square"
+                    }`}
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width:768px) 50vw, 25vw"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

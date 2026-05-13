@@ -13,6 +13,11 @@ export const metadata = {
 
 export default function FilipinasPage() {
   const d = getDestination("filipinas")!;
+  const filipinasPhotos = [
+    "/photos/filipinas/1.jpg",
+    "/photos/filipinas/2.jpg",
+    "/photos/filipinas/3.jpg",
+  ];
   return (
     <>
       <Header transparent />
@@ -115,6 +120,24 @@ export default function FilipinasPage() {
                 Avísame por email
               </a>
             </div>
+          </div>
+        </section>
+
+        {/* GALERÍA Filipinas (3 fotos disponibles) */}
+        <section className="py-20 px-6 lg:px-12 bg-pt-cream/30">
+          <div className="max-w-6xl mx-auto">
+            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4 text-center">Vistazo previo</p>
+            <h2 className="font-display font-light text-3xl md:text-4xl text-pt-green text-center mb-12">
+              Algunas fotos del viaje de scouting.
+            </h2>
+            <div className="grid grid-cols-3 gap-3 md:gap-4">
+              {filipinasPhotos.map((p, i) => (
+                <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                  <Image src={p} alt="" fill className="object-cover hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 33vw, 33vw" />
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-xs text-pt-muted mt-8">Más fotos vendrán cuando empecemos la operación.</p>
           </div>
         </section>
 

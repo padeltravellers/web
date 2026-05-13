@@ -19,7 +19,7 @@ export default function Home() {
       <main className="text-pt-ink">
         {/* HERO — calma A + badge live C */}
         <section className="relative h-[100svh] min-h-[680px] overflow-hidden">
-          <Image src="/photos/home/hero.jpg" alt="Bali con pádel" fill priority className="object-cover ken-burns" />
+          <Image src="/photos/extra/atardecer/1.jpg" alt="Atardecer en Bali" fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
@@ -87,16 +87,16 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7 grid grid-cols-6 gap-3 lg:gap-4">
               <div className="col-span-4 aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Image src="/photos/bali/partidos/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" />
+                <Image src="/photos/extra/padel-action/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" />
               </div>
               <div className="col-span-2 aspect-square relative rounded-2xl overflow-hidden mt-12">
-                <Image src="/photos/bali/club-bali/2.jpg" alt="" fill className="object-cover" />
+                <Image src="/photos/extra/arrozales/1.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="col-span-3 aspect-square relative rounded-2xl overflow-hidden -mt-6">
-                <Image src="/photos/bali/uluwatu/1.jpg" alt="" fill className="object-cover" />
+                <Image src="/photos/extra/atardecer/2.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="col-span-3 aspect-[3/4] relative rounded-2xl overflow-hidden">
-                <Image src="/photos/bali/ubud/2.jpg" alt="" fill className="object-cover" />
+                <Image src="/photos/extra/la-brisa/1.jpg" alt="" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -234,7 +234,7 @@ export default function Home() {
         {/* CTA FINAL */}
         <section className="relative py-32 lg:py-44 overflow-hidden bg-pt-ink text-white">
           <div className="absolute inset-0">
-            <Image src="/photos/bali/tanah-lot/1.jpg" alt="" fill className="object-cover opacity-35" />
+            <Image src="/photos/extra/atardecer/3.jpg" alt="" fill className="object-cover opacity-35" />
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">

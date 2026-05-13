@@ -41,19 +41,19 @@ const team = [
     name: "Oriol",
     role: "Fundador y dirección",
     bio: "Cofundador y cara visible. Es con quien hablas antes de reservar. Vive entre Barcelona y Bali según la temporada.",
-    photo: "/photos/home/hero.jpg",
+    photo: "/photos/extra/bpa/2.jpg",
   },
   {
     name: "Marta",
     role: "Atención y onboarding",
     bio: "Tu primera conversación con PT seguramente es con Marta. Te ayuda a elegir destino, fecha y a entender si te encaja antes de hablar con Oriol.",
-    photo: "/photos/bali/club-bali/1.jpg",
+    photo: "/photos/extra/padel-action/3.jpg",
   },
   {
     name: "Coordinador en destino",
     role: "Persona PT en el viaje",
     bio: "Cambia según la salida. Siempre alguien del equipo, español, que ya conoce el grupo desde antes y os acompaña los 14 días.",
-    photo: "/photos/bali/uluwatu/1.jpg",
+    photo: "/photos/extra/la-brisa/2.jpg",
   },
 ];
 
