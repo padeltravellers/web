@@ -77,7 +77,7 @@ export default function BaliPage() {
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-end pb-16 lg:pb-24">
-            <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
+            <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Bali
               </h1>

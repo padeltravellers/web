@@ -66,7 +66,7 @@ export default function Home() {
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-16 lg:pb-20">
-            <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
+            <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
               <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.15] tracking-tight">
                 Viajes en Grupo
                 <br />
