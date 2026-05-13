@@ -239,22 +239,20 @@ export default function Home() {
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
               <h2 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl mt-5 leading-[0.92]">
-                ¿Te animas?
+                Cuatro pasos
                 <br />
-                <span className="font-script italic font-normal text-pt-cream">Estos son los pasos</span>
+                <span className="font-script italic font-normal text-pt-cream">sin sorpresas</span>
               </h2>
             </div>
-            <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            <ol className="grid md:grid-cols-4 gap-8">
               {[
-                { n: "01", title: "Llamada inicial", text: "Videollamada para conocernos, explicarte el viaje en detalle y resolver cualquier duda." },
-                { n: "02", title: "Reserva tu plaza", text: "Confirmas la fecha, firmas el contrato y pagas 500€ de reserva para asegurar tu plaza." },
-                { n: "03", title: "Confirmación del grupo", text: "Con 4 reservas se confirma el viaje. Es momento de comprar los vuelos — te ayudamos." },
-                { n: "04", title: "Segundo pago", text: "1.000€ adicionales al momento de confirmar el grupo." },
-                { n: "05", title: "Llamada grupal", text: "Encuentro online para que el grupo se conozca, dudas y últimos detalles." },
-                { n: "06", title: "Último pago", text: "30 días antes del viaje pagas el resto. A preparar la maleta." },
+                { n: "01", title: "Eliges destino", text: "Bali abierto, Filipinas en lista de espera. Si dudas, te ayudamos a elegir." },
+                { n: "02", title: "Hablamos contigo", text: "Videollamada para entender qué buscas, explicarte el viaje en detalle y resolver dudas." },
+                { n: "03", title: "Reserva 500€", text: "Plaza confirmada con contrato y pago inicial. El resto se abona en plazos." },
+                { n: "04", title: "Vives el viaje", text: "El coordinador te espera al aterrizar y no te suelta hasta volver." },
               ].map((s) => (
                 <li key={s.n}>
-                  <div className="font-display font-medium text-6xl text-pt-cream/40 mb-3">{s.n}</div>
+                  <div className="font-display font-medium text-6xl text-pt-cream/40 mb-4">{s.n}</div>
                   <h3 className="font-display font-semibold text-xl mb-3">{s.title}</h3>
                   <p className="text-pt-cream/85 leading-relaxed text-sm">{s.text}</p>
                 </li>
