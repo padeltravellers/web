@@ -11,14 +11,14 @@ export default function Header({ transparent = false }: { transparent?: boolean 
     : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";
   return (
     <header className={base}>
-      <div className="max-w-7xl mx-auto px-5 lg:px-10 py-2 lg:py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group no-tap-highlight">
+      <div className="max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 py-1 lg:py-2 flex items-center justify-between">
+        <Link href="/" className="flex items-center group no-tap-highlight -ml-2 lg:-ml-3">
           <Img
             src="/logos/logo-main.png"
             alt="Padel Travellers"
-            width={280}
-            height={280}
-            className={`object-contain h-32 md:h-40 lg:h-48 w-auto ${transparent ? "brightness-0 invert" : ""}`}
+            width={400}
+            height={400}
+            className={`object-contain h-56 md:h-72 lg:h-80 w-auto ${transparent ? "brightness-0 invert" : ""}`}
           />
         </Link>
         <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">
