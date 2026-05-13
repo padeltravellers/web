@@ -71,7 +71,7 @@ export default function BaliPage() {
       <Header transparent />
       <main className="text-pt-ink">
         {/* HERO con carousel */}
-        <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
+        <section className="relative h-[85svh] min-h-[600px] overflow-hidden">
           {baliHeroSlides.map((s) => (
             <div key={s.src} className="hero-slide">
               <Img src={s.src} alt={s.alt} fill priority className="object-cover" sizes="100vw" />
