@@ -46,7 +46,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
             </svg>
           </a>
           <Link
-            href="/reservar"
+            href="/contacto"
             className={`ml-2 inline-flex items-center gap-1.5 text-sm md:text-base font-display font-semibold px-5 md:px-6 py-2.5 md:py-3 rounded-full transition ${
               transparent
                 ? "bg-white text-pt-green hover:bg-pt-cream"

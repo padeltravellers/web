@@ -73,8 +73,9 @@ export default function LeadForm() {
           />
         </label>
         <label className="block">
-          <span className="block font-display font-medium text-sm text-pt-ink mb-1.5">Teléfono</span>
+          <span className="block font-display font-medium text-sm text-pt-ink mb-1.5">Teléfono*</span>
           <input
+            required
             name="phone"
             type="tel"
             placeholder="+34 ..."
