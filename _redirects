@@ -17,12 +17,8 @@
 /gracias                  /           301
 /gracias/                 /           301
 
-# Legal pages — redirect old WP slugs to new clean ones
-/politica-de-privacidad-y-proteccion-de-datos    /privacidad/  301
-/politica-de-privacidad-y-proteccion-de-datos/   /privacidad/  301
-/aviso-legal-old                                 /aviso-legal/ 301
-/politica-de-cookies                             /cookies/     301
-/politica-de-cookies/                            /cookies/     301
+# Legal pages — URLs preservadas (registradas en Meta / Google etc).
+# Las rutas viven con su slug original; no se redirigen.
 
 # Test page
 /test    /  301
