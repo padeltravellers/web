@@ -70,7 +70,7 @@ export default function PreguntasPage() {
       <Header />
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-16 pb-12 lg:pt-24 lg:pb-16 max-w-5xl mx-auto">
-          <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">Preguntas frecuentes</p>
+          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Preguntas frecuentes</p>
           <h1 className="font-display font-extralight text-5xl md:text-7xl text-pt-green leading-[0.9]">
             Lo que <span className="font-script italic">nos preguntáis.</span>
           </h1>

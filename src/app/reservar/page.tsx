@@ -17,7 +17,7 @@ export default function ReservarPage() {
       <Header />
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-16 pb-16 lg:pt-24 lg:pb-20 max-w-6xl mx-auto">
-          <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">Reservar plaza</p>
+          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Reservar plaza</p>
           <h1 className="font-display font-extralight text-5xl md:text-7xl text-pt-green leading-[0.9] mb-8">
             Tu plaza,
             <br />
@@ -71,7 +71,7 @@ export default function ReservarPage() {
         {/* DESTINOS PICK */}
         <section className="bg-pt-cream/50 py-20 lg:py-28 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
-            <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-5 text-center">Paso 1</p>
+            <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5 text-center">Paso 1</p>
             <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green text-center leading-tight mb-14">
               ¿Qué destino?
             </h2>
@@ -108,7 +108,7 @@ export default function ReservarPage() {
           <div className="max-w-3xl mx-auto bg-pt-green text-white rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
             <div className="absolute -right-32 -top-32 w-80 h-80 rounded-full bg-pt-clay/20 blur-3xl" />
             <div className="relative">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-cream/70 mb-5">Recordatorio</p>
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70 mb-5">Recordatorio</p>
               <h2 className="font-display font-extralight text-4xl md:text-5xl leading-tight mb-8">
                 {pricing.deposit} reserva.
                 <br />

@@ -106,8 +106,8 @@ export default function BaliPage() {
         <section className="px-6 lg:px-12 py-16 lg:py-24 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">Nuestra isla favorita</p>
-              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-pt-green mb-7">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestra isla favorita</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-7">
                 Donde empezó
                 <br />
                 <span className="font-script italic text-pt-clay">Padel Travellers.</span>
@@ -138,8 +138,8 @@ export default function BaliPage() {
         <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4">Experiencias dentro del viaje</p>
-              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl text-pt-green leading-[0.95]">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias dentro del viaje</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
                 Pádel, turismo
                 <br />
                 <span className="font-script italic text-pt-clay">y aventura.</span>
@@ -171,7 +171,7 @@ export default function BaliPage() {
         <section id="itinerario" className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-green-pale/40">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4">Itinerario</p>
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Itinerario</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
                 15 días. Día a día.
               </h2>
@@ -271,8 +271,8 @@ export default function BaliPage() {
         <section className="py-16 lg:py-24 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">Dónde nos quedamos</p>
-              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-pt-green mb-6">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Dónde nos quedamos</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
                 Hotel boutique en Canggu.
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-4">
@@ -312,8 +312,8 @@ export default function BaliPage() {
         <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/40">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4">El precio incluye</p>
-              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl text-pt-green leading-[0.95]">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">El precio incluye</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
                 Lo que pagas, lo que no.
               </h2>
             </div>
@@ -375,7 +375,7 @@ export default function BaliPage() {
         <section id="fechas" className="py-16 lg:py-24 px-6 lg:px-12 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4">Calendario 2026</p>
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Calendario 2026</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
@@ -433,7 +433,7 @@ export default function BaliPage() {
           <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
           <div className="relative max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-cream/70">Precio Bali 2026</span>
+              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2026</span>
               <h2 className="font-display font-extralight text-3xl md:text-5xl mt-4 leading-tight">
                 Un precio. Todo dentro.
               </h2>
