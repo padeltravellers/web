@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCta from "@/components/StickyMobileCta";
+import PhotoCarousel from "@/components/PhotoCarousel";
 import { contact } from "@/data/content";
 import { getDestination, Experience } from "@/data/destinations";
 
@@ -32,23 +33,15 @@ export const metadata = {
 };
 
 function ExperienceCard({ e }: { e: Experience }) {
-  const main = e.photos[0];
-  const thumbs = e.photos.slice(1, 3);
   return (
     <article className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-      <div className="grid grid-cols-3 gap-1.5 p-1.5">
-        <div className="col-span-2 relative aspect-[4/5] rounded-2xl overflow-hidden bg-pt-cream/40">
-          <Img src={main} alt={e.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:1024px) 33vw, 22vw" />
-        </div>
-        <div className="col-span-1 grid grid-rows-2 gap-1.5">
-          {thumbs.map((p, i) => (
-            <div key={p + i} className="relative aspect-square rounded-xl overflow-hidden bg-pt-cream/40">
-              <Img src={p} alt="" fill className="object-cover" sizes="(max-width:1024px) 16vw, 11vw" />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="px-6 pb-6 pt-3">
+      <PhotoCarousel
+        photos={e.photos}
+        alt={e.title}
+        aspectClass="aspect-[4/3] rounded-none"
+        sizes="(max-width:1024px) 50vw, 33vw"
+      />
+      <div className="p-6">
         <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">{e.short}</p>
         <h3 className="font-display font-bold text-xl text-pt-green mb-3 leading-tight">{e.title}</h3>
         <p className="text-sm text-pt-muted leading-relaxed">{e.text}</p>
@@ -128,21 +121,15 @@ export default function BaliPage() {
         {/* EXPERIENCIAS POR GRUPO */}
         <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias dentro del viaje</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
-                Pádel, turismo
-                <br />
-                <span className="font-script italic font-normal text-pt-clay">y aventura</span>
-              </h2>
+            <div className="text-center mb-10">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Experiencias</p>
             </div>
 
             {groups.map((g, gi) => (
-              <div key={g.key} className={gi > 0 ? "mt-16" : ""}>
-                <div className="mb-8 text-center">
-                  <span className="inline-block w-12 h-px bg-pt-clay mb-5" />
-                  <h3 className="font-display font-medium text-3xl md:text-5xl text-pt-green">{g.label.title}</h3>
-                  <p className="font-script italic text-pt-clay text-xl md:text-2xl mt-2">{g.label.kicker}</p>
+              <div key={g.key} className={gi > 0 ? "mt-12" : ""}>
+                <div className="mb-6 flex items-baseline justify-between border-b border-pt-green/15 pb-3">
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
+                  <span className="font-script italic text-pt-clay text-base md:text-lg">{g.label.kicker}</span>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
                   {g.items.map((e) => <ExperienceCard key={e.slug} e={e} />)}

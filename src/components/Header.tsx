@@ -21,7 +21,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
             className={`object-contain ${transparent ? "brightness-0 invert" : ""}`}
           />
         </Link>
-        <nav className="hidden lg:flex items-center gap-10 text-base font-display font-medium">
+        <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">
           <Link href="/bali" className="hover:opacity-70 transition">Bali</Link>
           <Link href="/filipinas" className="hover:opacity-70 transition">Filipinas</Link>
           <Link href="/sobre" className="hover:opacity-70 transition">Sobre nosotros</Link>

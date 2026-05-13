@@ -85,13 +85,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* STATS — compacto, inspirador */}
+        {/* STATS — compacto */}
         <section className="bg-pt-cream py-12 lg:py-16 px-6 lg:px-12">
           <div className="max-w-5xl mx-auto text-center">
-            <p className="font-script text-pt-clay text-3xl md:text-4xl leading-none mb-2">
-              Padel & aventura
-            </p>
-            <div className="grid grid-cols-3 items-end gap-4 md:gap-8 mt-8 divide-x divide-pt-green/25">
+            <div className="grid grid-cols-3 items-end gap-4 md:gap-8 divide-x divide-pt-green/25">
               {ptStats.map((s) => (
                 <div key={s.label} className="px-1 md:px-4">
                   <div className="flex items-start justify-center text-pt-green">
@@ -116,9 +113,10 @@ export default function Home() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-8 text-balance">
-                Viajes que combinan{" "}
-                <span className="font-script italic font-normal text-pt-clay whitespace-nowrap">pádel y aventura</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-8">
+                Viajes que combinan
+                <br />
+                <span className="font-script italic font-normal text-pt-clay">pádel y aventura</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Padel Travellers nació como la unión de dos pasiones: viajar y el pádel. Diseñamos viajes en
@@ -173,20 +171,37 @@ export default function Home() {
                 >
                   <Img src={d.hero} alt={d.heroAlt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:1024px) 100vw, 50vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-pt-ink via-pt-ink/30 to-transparent" />
+                  {d.status !== "open" && (
+                    <span className="absolute top-5 left-5 px-3 py-1.5 rounded-full bg-pt-clay/85 backdrop-blur text-white text-[11px] font-display uppercase tracking-[0.22em]">
+                      Próximamente
+                    </span>
+                  )}
                   <div className="absolute left-6 right-6 bottom-6 text-white">
                     <h3 className="font-display text-6xl md:text-7xl font-medium leading-none mb-4">{d.name}</h3>
-                    <p className="text-white/95 text-lg leading-relaxed mb-5 max-w-md font-light">{d.shortPitch}</p>
-                    <div className="flex flex-wrap items-center gap-5 text-base mb-6">
-                      <span><span className="opacity-70">Duración </span>{d.duration}</span>
-                      <span><span className="opacity-70">Grupo </span>{d.groupSize}</span>
-                      {d.status === "open" && (
-                        <span><span className="opacity-70">Desde </span>{d.basePrice}</span>
-                      )}
-                    </div>
-                    <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
-                      {d.status === "open" ? "Ver destino" : "Apúntate a la lista de espera"}
-                      <span aria-hidden>→</span>
-                    </div>
+                    {d.status === "open" ? (
+                      <>
+                        <p className="text-white/95 text-lg leading-relaxed mb-5 max-w-md font-light">{d.shortPitch}</p>
+                        <div className="flex flex-wrap items-center gap-5 text-base mb-6">
+                          <span><span className="opacity-70">Duración </span>{d.duration}</span>
+                          <span><span className="opacity-70">Grupo </span>{d.groupSize}</span>
+                          <span><span className="opacity-70">Desde </span>{d.basePrice}</span>
+                        </div>
+                        <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
+                          Ver destino
+                          <span aria-hidden>→</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-white/95 text-lg leading-relaxed mb-6 max-w-md font-light">
+                          Estamos preparando el próximo destino. Daremos noticias cuando lo tengamos listo.
+                        </p>
+                        <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
+                          Avísame cuando abráis
+                          <span aria-hidden>→</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </Link>
               ))}
