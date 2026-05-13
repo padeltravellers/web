@@ -435,7 +435,7 @@ export const destinations: Destination[] = [
     shortPitch: "14 días en Indonesia — pádel, cultura, surf y aventura.",
     description:
       "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador español acompañando el viaje completo.",
-    hero: "/photos/hero/1-piscina.jpg",
+    hero: "/photos/extra/atardecer/1.jpg",
     heroAlt: "Acantilados de Uluwatu al atardecer",
     duration: "15 días",
     groupSize: "8–12 personas",
