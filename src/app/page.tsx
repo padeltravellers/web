@@ -14,10 +14,10 @@ export const metadata = {
 };
 
 const heroSlides = [
-  { src: "/photos/extra/bpa/aerial.jpg", alt: "Pista de pádel desde arriba — Bali Padel Academy" },
-  { src: "/photos/extra/bpa/piscina-atardecer.jpg", alt: "Piscina infinita sobre arrozales al atardecer" },
-  { src: "/photos/extra/templos/1.jpg", alt: "Templo balinés" },
-  { src: "/photos/extra/arrozales/1.jpg", alt: "Arrozales de Tegallalang" },
+  { src: "/photos/hero/1-grupo.jpg", alt: "Grupo Padel Travellers en Bali Padel Academy" },
+  { src: "/photos/hero/2-pista.jpg", alt: "Pista central — Bali Padel Academy" },
+  { src: "/photos/hero/3-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/4-atardecer.jpg", alt: "Atardecer en la costa de Bali" },
 ];
 
 const ptStats = [

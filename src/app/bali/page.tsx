@@ -20,6 +20,13 @@ const TAG_LABEL: Record<string, { label: string; color: string }> = {
   social:     { label: "Social",      color: "bg-pt-cream text-pt-ink" },
 };
 
+const baliHeroSlides = [
+  { src: "/photos/hero/1-grupo.jpg", alt: "Grupo Padel Travellers en Bali Padel Academy" },
+  { src: "/photos/hero/2-pista.jpg", alt: "Pista central — Bali Padel Academy" },
+  { src: "/photos/hero/3-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/4-atardecer.jpg", alt: "Atardecer en la costa de Bali" },
+];
+
 const GROUP_LABEL = {
   padel:        { title: "Pádel",       kicker: "Pistas, clases y torneo" },
   turismo:      { title: "Turismo",     kicker: "Templos, arrozales y mar" },
@@ -62,9 +69,13 @@ export default function BaliPage() {
     <>
       <Header transparent />
       <main className="text-pt-ink">
-        {/* HERO */}
+        {/* HERO con carousel */}
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
-          <Img src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
+          {baliHeroSlides.map((s) => (
+            <div key={s.src} className="hero-slide">
+              <Img src={s.src} alt={s.alt} fill priority className="object-cover" sizes="100vw" />
+            </div>
+          ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-end pb-16 lg:pb-24">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
