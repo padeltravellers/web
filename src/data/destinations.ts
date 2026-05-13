@@ -226,10 +226,9 @@ const baliExperiences: Experience[] = [
     text:
       "Isla de ensueño a 40 minutos en ferry. Angel's Billabong (piscina natural entre acantilados), Broken Beach, Kelingking Beach (acantilado con forma de dinosaurio) y Crystal Bay para nadar o hacer snorkel.",
     photos: [
-      "/photos/extra/playa/3.jpg",
-      "/photos/extra/playa/4.jpg",
-      "/photos/extra/playa/5.jpg",
-      "/photos/extra/atardecer/4.jpg",
+      "/photos/nusa-penida/1.jpg",
+      "/photos/nusa-penida/2.jpg",
+      "/photos/nusa-penida/3.jpg",
     ],
     group: "actividades",
   },
