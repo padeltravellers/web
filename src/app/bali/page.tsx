@@ -24,7 +24,7 @@ const baliHeroSlides = [
   { src: "/photos/hero/1-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
   { src: "/photos/hero/4-grupo-cancha.jpg", alt: "Grupo Padel Travellers en la cancha" },
   { src: "/photos/hero/2-padel.jpg", alt: "Partido de pádel en BPA" },
-  { src: "/photos/hero/5-grupo-padel.jpg", alt: "Grupo de pádel" },
+  { src: "/photos/hero/5-grupo-padel.jpg", alt: "Grupo de pádel", position: "50% 80%" },
   { src: "/photos/hero/3-sunset.jpg", alt: "Atardecer en la costa de Bali" },
 ];
 
@@ -74,7 +74,15 @@ export default function BaliPage() {
         <section className="relative h-[85svh] min-h-[600px] overflow-hidden">
           {baliHeroSlides.map((s) => (
             <div key={s.src} className="hero-slide">
-              <Img src={s.src} alt={s.alt} fill priority className="object-cover" sizes="100vw" />
+              <Img
+                src={s.src}
+                alt={s.alt}
+                fill
+                priority
+                className="object-cover"
+                sizes="100vw"
+                style={(s as { position?: string }).position ? { objectPosition: (s as { position?: string }).position } : undefined}
+              />
             </div>
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
