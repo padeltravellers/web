@@ -1,66 +1,45 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { faqs, contact } from "@/data/content";
+import { contact } from "@/data/content";
 
 export const metadata = {
   title: "Preguntas frecuentes — Padel Travellers",
-  description: "Todo lo que normalmente preguntan los viajeros antes de reservar. Nivel de pádel, viajar solo, vuelos, alojamiento, pagos, cancelación.",
+  description: "Todas las dudas habituales del viaje: seguro, métodos de pago, visado, vuelos, niveles, vacunas y pasaporte.",
 };
 
-const categories = [
+const faqs = [
   {
-    title: "Antes del viaje",
-    items: [
-      ...faqs.slice(0, 4),
-      {
-        q: "¿Y si no tengo a nadie con quien venir?",
-        a: "Más de la mitad del grupo viene en solitario. Es lo más común y lo que más recomendamos a quien duda. A los 2-3 días ya os conocéis todos.",
-      },
-      {
-        q: "¿Hay que tener material propio?",
-        a: "Tu pala, sí. Zapatillas de pádel también. Lo demás (pelotas, agua, toallas) lo pone el club. Si vienes sin pala, el club tiene alquiler.",
-      },
-    ],
+    q: "¿Necesito seguro de viaje?",
+    a: "Sí, es obligatorio para todas nuestras experiencias. Cada viajero debe contratar un seguro que cubra el viaje con anterioridad a la fecha de salida. Te recomendamos varias compañías cuando confirmamos la reserva.",
   },
   {
-    title: "Durante el viaje",
-    items: [
-      {
-        q: "¿Qué pasa si me lesiono o no puedo jugar?",
-        a: "El programa tiene siempre planes alternativos no-pádel (templos, cultura, surf, descanso). Y si necesitas médico, el coordinador te acompaña y te ayuda con el seguro.",
-      },
-      {
-        q: "¿Se puede llevar pareja no jugadora?",
-        a: "Sí. Cada vez tenemos más casos. El programa tiene actividades para no jugar (cultura, surf, spa, días libres). Hablamos del precio en estos casos para ajustar.",
-      },
-      {
-        q: "¿El nivel medio del grupo es alto?",
-        a: "Tenemos de todo, nivel 2 a 5. Lo importante es que rotamos parejas para que cada uno juegue siempre con gente de su nivel. Nadie se queda fuera.",
-      },
-      {
-        q: "¿Hay conexión / WiFi / cobertura?",
-        a: "En todas las villas hay WiFi decente. Cobertura móvil en casi toda la isla. Si necesitas trabajar algún día, hay zonas con muy buena conexión.",
-      },
-    ],
+    q: "¿Métodos de pago?",
+    a: "Aceptamos tarjeta vía Stripe (pasarela 100% segura, Visa, Mastercard, American Express) y también transferencia bancaria. La reserva se formaliza con 300€ y el resto antes del viaje.",
   },
   {
-    title: "Pagos y reserva",
-    items: [
-      ...faqs.slice(4, 7),
-      {
-        q: "¿Cómo se paga el resto del viaje?",
-        a: "Por transferencia, antes de la salida. Te avisamos con tiempo y te pasamos toda la documentación. Sin recargos por método de pago.",
-      },
-      {
-        q: "¿Hay seguro de viaje incluido?",
-        a: "No, pero te recomendamos uno específico y te pasamos las opciones que mejor funcionan para Bali. Es obligatorio para entrar a Indonesia.",
-      },
-      {
-        q: "¿Política de cancelación?",
-        a: "Antes de cierto plazo (te lo explicamos en la llamada), reembolso total menos gastos de gestión. Después, depende del momento. Lo importante: te lo decimos antes de cobrar nada.",
-      },
-    ],
+    q: "¿Necesito visado?",
+    a: "Para ciudadanos españoles, el visado a Indonesia se tramita a la llegada o de forma online (https://molina.imigrasi.go.id/) y tiene un coste de 30€. Si tienes otra nacionalidad, te ayudamos a comprobar requisitos.",
+  },
+  {
+    q: "¿Incluye el vuelo?",
+    a: "No, los vuelos no se incluyen y cada participante compra su propio billete. Desde Padel Travellers te recomendamos las mejores combinaciones de ida y vuelta para cuadrar con el grupo.",
+  },
+  {
+    q: "¿Cuántos jugadores habrá por clase?",
+    a: "Las clases son en grupos reducidos, máximo 4 jugadores del mismo nivel. Así aprovechas al máximo cada sesión con el coach.",
+  },
+  {
+    q: "¿Nivel de pádel?",
+    a: "Los clinics están abiertos a cualquier nivel. Da igual si llevas años jugando o si acabas de empezar — adaptamos clases y partidos a tu experiencia.",
+  },
+  {
+    q: "¿Vigencia del pasaporte?",
+    a: "Para entrar a Indonesia tu pasaporte debe tener mínimo 6 meses de vigencia desde la fecha del vuelo de regreso. Compruébalo antes de comprar vuelos.",
+  },
+  {
+    q: "¿Hay vacunas obligatorias?",
+    a: "No se requiere ninguna vacuna obligatoria para entrar a Indonesia. Consulta con tu centro de salud por si te aconsejan alguna recomendada según tu historial.",
   },
 ];
 
@@ -69,57 +48,52 @@ export default function PreguntasPage() {
     <>
       <Header />
       <main className="text-pt-ink">
-        <section className="px-6 lg:px-12 pt-16 pb-12 lg:pt-24 lg:pb-16 max-w-5xl mx-auto">
-          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Preguntas frecuentes</p>
-          <h1 className="font-display font-extralight text-5xl md:text-7xl text-pt-green leading-[0.9]">
-            Lo que <span className="font-script italic">nos preguntáis.</span>
+        <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-20 lg:pb-12 max-w-4xl mx-auto text-center">
+          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Preguntas frecuentes</p>
+          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
+            Lo que nos
+            <br />
+            <span className="font-script italic font-normal text-pt-clay">preguntáis</span>
           </h1>
-          <p className="mt-8 text-lg text-pt-muted max-w-2xl leading-relaxed">
-            Si tu duda no está aquí, escríbenos por WhatsApp y te la resolvemos. Las respuestas las redacta el
-            equipo, no un bot.
-          </p>
         </section>
 
-        <section className="px-6 lg:px-12 py-12 max-w-4xl mx-auto">
-          {categories.map((cat, ci) => (
-            <div key={cat.title} className={ci > 0 ? "mt-16" : ""}>
-              <h2 className="font-display font-light text-3xl text-pt-green mb-8 leading-tight border-b border-pt-green/15 pb-4">
-                {cat.title}
-              </h2>
-              <div className="space-y-3">
-                {cat.items.map((f, i) => (
-                  <details
-                    key={i}
-                    className="group bg-white rounded-2xl border border-pt-green/10 px-6 py-5 hover:border-pt-green/30 transition"
-                  >
-                    <summary className="cursor-pointer list-none flex items-center justify-between gap-4 font-display font-semibold text-pt-ink">
-                      {f.q}
-                      <span className="w-7 h-7 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center text-lg group-open:rotate-45 transition-transform shrink-0">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-4 text-pt-muted leading-relaxed text-sm">{f.a}</p>
-                  </details>
-                ))}
-              </div>
-            </div>
-          ))}
+        <section className="px-6 lg:px-12 pb-16 max-w-3xl mx-auto">
+          <div className="space-y-3">
+            {faqs.map((f, i) => (
+              <details
+                key={i}
+                className="group bg-white rounded-2xl border border-pt-green/10 hover:border-pt-green/30 transition overflow-hidden"
+              >
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-5 px-6 md:px-8 py-5 md:py-6">
+                  <span className="font-display font-semibold text-lg md:text-xl text-pt-green leading-tight">
+                    {f.q}
+                  </span>
+                  <span className="w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center text-xl group-open:rotate-45 transition-transform shrink-0">
+                    +
+                  </span>
+                </summary>
+                <div className="px-6 md:px-8 pb-6 md:pb-7 -mt-1">
+                  <p className="text-pt-muted leading-relaxed text-base">{f.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
         </section>
 
-        <section className="py-24 px-6 lg:px-12 bg-pt-cream mt-10">
+        <section className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green leading-tight mb-6">
+            <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green leading-tight mb-6">
               ¿No has encontrado tu pregunta?
             </h2>
             <p className="text-pt-muted text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-              Escríbenos por WhatsApp y te la resolvemos en el mismo día. Sin formularios largos.
+              Escríbenos por WhatsApp y te la resolvemos el mismo día.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href={contact.whatsappLink} className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition">
-                WhatsApp Marta
+              <a href={contact.whatsappLink} className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-base hover:bg-pt-green-soft transition">
+                WhatsApp
               </a>
-              <a href={`mailto:${contact.email}`} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-sm hover:bg-pt-green hover:text-white transition">
-                Email a Oriol
+              <a href={`mailto:${contact.email}`} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-base hover:bg-pt-green hover:text-white transition">
+                Email
               </a>
             </div>
           </div>
