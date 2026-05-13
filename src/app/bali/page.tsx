@@ -22,6 +22,7 @@ const TAG_LABEL: Record<string, { label: string; color: string }> = {
 
 const baliHeroSlides = [
   { src: "/photos/hero/1-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/2-padel.jpg", alt: "Partido de pádel en BPA" },
   { src: "/photos/hero/3-sunset.jpg", alt: "Atardecer en la costa de Bali" },
 ];
 
