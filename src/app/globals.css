@@ -94,6 +94,22 @@ html { scroll-behavior: smooth; }
 }
 
 /* Tape effect (editorial polaroid) */
+/* Itinerary CSS-only tabs (semana 1 / semana 2) */
+.itin-tab-panel { display: none; }
+#tab-w1:checked ~ .itin-panels #panel-w1 { display: block; }
+#tab-w2:checked ~ .itin-panels #panel-w2 { display: block; }
+#tab-w1:checked ~ .itin-tabs label[for="tab-w1"],
+#tab-w2:checked ~ .itin-tabs label[for="tab-w2"] {
+  background-color: var(--pt-green);
+  color: var(--pt-cream);
+}
+
+/* Itinerary day accordion arrow */
+.day-summary { list-style: none; }
+.day-summary::-webkit-details-marker { display: none; }
+details[open] .day-arrow { transform: rotate(180deg); }
+
+/* Tape effect (editorial polaroid) */
 .tape::before, .tape::after {
   content: "";
   position: absolute;

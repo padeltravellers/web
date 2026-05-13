@@ -109,67 +109,173 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* ITINERARIO DÍA A DÍA */}
-        <section id="itinerario" className="py-24 lg:py-36 px-6 lg:px-12">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
+        {/* ITINERARIO DÍA A DÍA — estilo introtravel con tabs */}
+        <section id="itinerario" className="py-24 lg:py-36 px-6 lg:px-12 bg-pt-green-pale/40">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-12">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Itinerario</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
+              <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
                 14 días. Día a día.
               </h2>
-              <p className="text-pt-muted mt-6 max-w-2xl mx-auto leading-relaxed">
-                Esto es un viaje tipo. El coordinador adapta detalles según el grupo, la climatología y los
-                planes paralelos que vayan surgiendo. La columna vertebral siempre es la misma.
+              <p className="text-pt-muted text-lg max-w-2xl leading-relaxed">
+                Pádel en BPA, templos del sur, surf, Ubud, cascadas, snorkel y torneo final. Te llevamos a la
+                Bali que importa. El coordinador adapta detalles según el grupo y el tiempo.
               </p>
             </div>
 
-            <ol className="relative">
-              {/* timeline vertical line */}
-              <div className="absolute left-[27px] md:left-[55px] top-2 bottom-2 w-px bg-pt-green/20" aria-hidden />
+            {/* Tabs CSS-only */}
+            <input type="radio" name="itin-tabs" id="tab-w1" defaultChecked className="hidden peer/w1" />
+            <input type="radio" name="itin-tabs" id="tab-w2" className="hidden peer/w2" />
 
-              {d.itinerary.map((day) => (
-                <li key={day.day} className="relative pl-16 md:pl-32 pb-12 last:pb-0">
-                  <div className="absolute left-0 md:left-3 top-0 w-[55px] h-[55px] rounded-full bg-pt-cream border-2 border-pt-green/30 flex items-center justify-center font-display font-bold text-pt-green text-sm shadow-sm">
-                    {String(day.day).padStart(2, "0")}
-                  </div>
+            <div className="itin-tabs grid grid-cols-2 gap-2 bg-white p-2 rounded-full shadow-sm border border-pt-green/10 mb-10 max-w-xl">
+              <label
+                htmlFor="tab-w1"
+                className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all"
+              >
+                Semana 1 · Días 1–7
+              </label>
+              <label
+                htmlFor="tab-w2"
+                className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all"
+              >
+                Semana 2 · Días 8–14
+              </label>
+            </div>
 
-                  <article className="group bg-white border border-pt-green/10 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <div className="grid md:grid-cols-12 gap-0">
-                      <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[260px]">
-                        <Image src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
-                          {day.weekday}
-                        </div>
+            <div className="itin-panels">
+              {/* SEMANA 1 */}
+              <div id="panel-w1" className="itin-tab-panel space-y-3">
+                <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-5 pl-2">
+                  Llegada · primer pádel · templos del sur · Ubud
+                </p>
+                {d.itinerary.slice(0, 7).map((day, i) => (
+                  <details
+                    key={day.day}
+                    open={i === 0}
+                    className="bg-white rounded-full open:rounded-3xl border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm"
+                  >
+                    <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4 group">
+                      <div className="flex items-center gap-4">
+                        <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
+                          Día {day.day}
+                        </span>
+                        <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
+                        <span className="hidden md:inline font-display font-medium text-pt-ink/85">
+                          {day.title}
+                        </span>
                       </div>
-                      <div className="md:col-span-7 p-6 md:p-8 flex flex-col">
-                        <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span
+                        className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0"
+                        aria-hidden
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </span>
+                    </summary>
+                    <div className="grid md:grid-cols-12 gap-0 border-t border-pt-green/10">
+                      <div className="md:col-span-7 p-6 md:p-8 md:order-1 order-2 flex flex-col">
+                        <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
+                        <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
+                        <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
+                        {day.highlights.length > 0 && (
+                          <ul className="space-y-2 mb-4">
+                            {day.highlights.map((h) => (
+                              <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
+                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                  <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                {h}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        <div className="flex flex-wrap gap-2">
                           {day.tags.map((t) => (
                             <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
                               {TAG_LABEL[t].label}
                             </span>
                           ))}
                         </div>
-                        <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green leading-tight mb-2">
+                      </div>
+                      <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
+                        <Image src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
+                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
+                          {day.weekday}
+                        </div>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+
+              {/* SEMANA 2 */}
+              <div id="panel-w2" className="itin-tab-panel space-y-3">
+                <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-5 pl-2">
+                  Café · norte · Amed · torneo · despedida
+                </p>
+                {d.itinerary.slice(7, 14).map((day) => (
+                  <details
+                    key={day.day}
+                    className="bg-white rounded-full open:rounded-3xl border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm"
+                  >
+                    <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4 group">
+                      <div className="flex items-center gap-4">
+                        <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
+                          Día {day.day}
+                        </span>
+                        <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
+                        <span className="hidden md:inline font-display font-medium text-pt-ink/85">
                           {day.title}
-                        </h3>
+                        </span>
+                      </div>
+                      <span
+                        className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0"
+                        aria-hidden
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </span>
+                    </summary>
+                    <div className="grid md:grid-cols-12 gap-0 border-t border-pt-green/10">
+                      <div className="md:col-span-7 p-6 md:p-8 md:order-1 order-2 flex flex-col">
+                        <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
                         <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
-                        <p className="text-sm text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
+                        <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
                         {day.highlights.length > 0 && (
-                          <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-pt-muted">
+                          <ul className="space-y-2 mb-4">
                             {day.highlights.map((h) => (
-                              <li key={h} className="flex items-center gap-1.5">
-                                <span className="w-1 h-1 rounded-full bg-pt-clay" />
+                              <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
+                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                  <circle cx="12" cy="10" r="3" />
+                                </svg>
                                 {h}
                               </li>
                             ))}
                           </ul>
                         )}
+                        <div className="flex flex-wrap gap-2">
+                          {day.tags.map((t) => (
+                            <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
+                              {TAG_LABEL[t].label}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
+                        <Image src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
+                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
+                          {day.weekday}
+                        </div>
                       </div>
                     </div>
-                  </article>
-                </li>
-              ))}
-            </ol>
+                  </details>
+                ))}
+              </div>
+            </div>
 
             <div className="mt-16 text-center">
               <Link href="/reservar" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
