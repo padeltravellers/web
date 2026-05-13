@@ -15,7 +15,9 @@ export const metadata = {
 
 const heroSlides = [
   { src: "/photos/hero/1-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/4-grupo-cancha.jpg", alt: "Grupo Padel Travellers en la cancha" },
   { src: "/photos/hero/2-padel.jpg", alt: "Partido de pádel en BPA" },
+  { src: "/photos/hero/5-grupo-padel.jpg", alt: "Grupo de pádel" },
   { src: "/photos/hero/3-sunset.jpg", alt: "Atardecer en la costa de Bali" },
 ];
 

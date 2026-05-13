@@ -124,22 +124,23 @@ html { scroll-behavior: smooth; }
 .prose-legal th, .prose-legal td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid rgba(14,59,45,0.12); }
 .prose-legal th { background: rgba(217,228,220,0.5); font-family: var(--font-jost); font-weight: 600; color: var(--pt-green); }
 
-/* Hero carousel — fade between background images */
+/* Hero carousel — fade between background images (5 slides) */
 @keyframes hero-fade {
-  0%, 20%   { opacity: 0; transform: scale(1.05); }
-  25%, 45%  { opacity: 1; transform: scale(1.12); }
-  50%, 100% { opacity: 0; transform: scale(1.18); }
+  0%, 16%   { opacity: 0; transform: scale(1.05); }
+  20%, 36%  { opacity: 1; transform: scale(1.12); }
+  40%, 100% { opacity: 0; transform: scale(1.18); }
 }
 .hero-slide {
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: hero-fade 24s infinite;
+  animation: hero-fade 30s infinite;
 }
 .hero-slide:nth-child(1) { animation-delay: 0s; }
 .hero-slide:nth-child(2) { animation-delay: 6s; }
 .hero-slide:nth-child(3) { animation-delay: 12s; }
 .hero-slide:nth-child(4) { animation-delay: 18s; }
+.hero-slide:nth-child(5) { animation-delay: 24s; }
 
 /* Itinerary CSS-only tabs (semana 1 / semana 2) */
 .itin-tab-panel { display: none; }
