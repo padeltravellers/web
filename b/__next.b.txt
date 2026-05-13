@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[39756,["/padeltravellers-web/_next/static/chunks/01xlw8hd842-c.js","/padeltravellers-web/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
-3:I[37457,["/padeltravellers-web/_next/static/chunks/01xlw8hd842-c.js","/padeltravellers-web/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+2:I[39756,["/web/_next/static/chunks/01xlw8hd842-c.js","/web/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+3:I[37457,["/web/_next/static/chunks/01xlw8hd842-c.js","/web/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"zdv7c-ifmS0NHvZ0h525j"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"1uRajQh-FQYVH3xo50UB2"}
