@@ -235,8 +235,8 @@ const baliExperiences: Experience[] = [
 // === BALI ITINERARY — 15 días según brochure oficial PT 2026 ===
 const baliItinerary: ItineraryDay[] = [
   {
-    day: 1,
-    weekday: "Día 1",
+    day: 0,
+    weekday: "Día 0",
     title: "Llegada a Bali",
     subtitle: "Aeropuerto, traslado al hotel y bienvenida",
     description:
@@ -246,8 +246,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 2,
-    weekday: "Día 2",
+    day: 1,
+    weekday: "Día 1",
     title: "Clase de pádel + Tanah Lot",
     subtitle: "Introducción al viaje, primera clase en BPA y templo del atardecer",
     description:
@@ -257,8 +257,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 3,
-    weekday: "Día 3",
+    day: 2,
+    weekday: "Día 2",
     title: "Día en Ubud",
     subtitle: "Templo de purificación, arrozales y palacio real",
     description:
@@ -268,8 +268,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 4,
-    weekday: "Día 4",
+    day: 3,
+    weekday: "Día 3",
     title: "Partido de pádel + surf",
     subtitle: "Mañana en BPA, tarde en las olas de Canggu",
     description:
@@ -279,8 +279,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 5,
-    weekday: "Día 5",
+    day: 4,
+    weekday: "Día 4",
     title: "Día en Uluwatu",
     subtitle: "Playas, templo y atardecer",
     description:
@@ -290,8 +290,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 6,
-    weekday: "Día 6",
+    day: 5,
+    weekday: "Día 5",
     title: "Partido de pádel + tarde libre",
     subtitle: "Pádel por la mañana, tarde a tu ritmo",
     description:
@@ -301,8 +301,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 7,
-    weekday: "Día 7",
+    day: 6,
+    weekday: "Día 6",
     title: "Día libre — Nusa Penida",
     subtitle: "Isla de ensueño a 40 minutos en ferry",
     description:
@@ -312,8 +312,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 8,
-    weekday: "Día 8",
+    day: 7,
+    weekday: "Día 7",
     title: "Día en Bali Este",
     subtitle: "Puertas del Cielo + snorkel en Amed",
     description:
@@ -323,8 +323,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 9,
-    weekday: "Día 9",
+    day: 8,
+    weekday: "Día 8",
     title: "Clase de pádel + Taman Ayun + Coffee Plantation",
     subtitle: "Mañana en BPA, tarde cultural",
     description:
@@ -334,8 +334,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 10,
-    weekday: "Día 10",
+    day: 9,
+    weekday: "Día 9",
     title: "Día en Ubud Norte",
     subtitle: "Pura Ulun Danu, cascada y Jatiluwih",
     description:
@@ -345,8 +345,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 11,
-    weekday: "Día 11",
+    day: 10,
+    weekday: "Día 10",
     title: "Partido de pádel + tarde libre",
     subtitle: "Mañana en BPA, tarde a tu ritmo",
     description:
@@ -356,8 +356,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 12,
-    weekday: "Día 12",
+    day: 11,
+    weekday: "Día 11",
     title: "Día libre — Aventura y Relax",
     subtitle: "Quad en Ubud + piscinas de Cretya",
     description:
@@ -367,8 +367,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 13,
-    weekday: "Día 13",
+    day: 12,
+    weekday: "Día 12",
     title: "Partido de pádel + preparación torneo",
     subtitle: "Última sesión técnica antes del torneo",
     description:
@@ -378,8 +378,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 14,
-    weekday: "Día 14",
+    day: 13,
+    weekday: "Día 13",
     title: "Torneo internacional + cena de despedida",
     subtitle: "Día de competición y cierre del viaje",
     description:
@@ -389,8 +389,8 @@ const baliItinerary: ItineraryDay[] = [
     highlights: [],
   },
   {
-    day: 15,
-    weekday: "Día 15",
+    day: 14,
+    weekday: "Día 14",
     title: "Vuelta",
     subtitle: "Hasta la próxima",
     description:

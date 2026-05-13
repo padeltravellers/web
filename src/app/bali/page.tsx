@@ -183,16 +183,16 @@ export default function BaliPage() {
 
             <div className="itin-tabs grid grid-cols-2 gap-2 bg-white p-2 rounded-full shadow-sm border border-pt-green/10 mb-10 max-w-xl">
               <label htmlFor="tab-w1" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 1 · Días 1–7
+                Semana 1 · Días 0–7
               </label>
               <label htmlFor="tab-w2" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 2 · Días 8–15
+                Semana 2 · Días 8–14
               </label>
             </div>
 
             <div className="itin-panels">
               {(["w1", "w2"] as const).map((wk) => {
-                const slice = wk === "w1" ? d.itinerary.slice(0, 7) : d.itinerary.slice(7, 15);
+                const slice = wk === "w1" ? d.itinerary.slice(0, 8) : d.itinerary.slice(8, 15);
                 return (
                   <div key={wk} id={`panel-${wk}`} className="itin-tab-panel space-y-3">
                     {slice.map((day, i) => (
