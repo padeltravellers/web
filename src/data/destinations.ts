@@ -84,10 +84,10 @@ const baliExperiences: Experience[] = [
   },
   {
     slug: "torneo",
-    title: "Torneo del grupo",
-    short: "El fin de semana competimos",
+    title: "Torneo fin de semana",
+    short: "Torneo internacional con cientos de jugadores",
     text:
-      "Los clubes de pádel de Bali organizan torneos internacionales cada fin de semana y participamos. Si ese fin de semana no hay torneo externo, montamos uno interno con eliminatorias y la copa Padel Travellers. La competición sana cierra siempre la semana.",
+      "Los clubes de pádel de Bali organizan torneos internacionales cada fin de semana y participamos. Son torneos amateur con más de 500 jugadores en múltiples categorías, ambiente brutal y la oportunidad de competir con gente de todo el mundo en una pista de nivel.",
     photos: [
       "/photos/extra/padel-action/2.jpg",
       "/photos/bali/partidos/2.jpg",
@@ -98,7 +98,7 @@ const baliExperiences: Experience[] = [
   // ===== TURISMO =====
   {
     slug: "ubud",
-    title: "Ubud — corazón cultural",
+    title: "Ubud — Corazón cultural",
     short: "Templo Tirta Empul, terrazas de arroz, Palacio Real y Mercado",
     text:
       "Día en Ubud, centro cultural y artístico de Bali. Templo de Purificación (ritual en piscinas sagradas), campos de arroz de Tegallalang, Palacio Real y el Mercado de Arte Tradicional con tiempo libre para souvenirs.",
@@ -116,7 +116,7 @@ const baliExperiences: Experience[] = [
   },
   {
     slug: "uluwatu",
-    title: "Uluwatu — acantilados del sur",
+    title: "Uluwatu — Acantilados del sur",
     short: "Playa, acantilados y el templo Pura Luhur",
     text:
       "Uluwatu es famoso por sus impresionantes acantilados, su templo y sus olas desafiantes. Mañana de playa, comida con vistas a los surfistas, paseo por el templo y atardecer con vistas al Índico de regreso a Canggu.",
@@ -147,7 +147,7 @@ const baliExperiences: Experience[] = [
   },
   {
     slug: "ubud-norte",
-    title: "Ubud Norte — naturaleza pura",
+    title: "Ubud Norte — Naturaleza pura",
     short: "Templo Pura Ulun Danu, cascada y Jatiluwih",
     text:
       "Día en la zona oeste y norte. Templo Pura Ulun Danu Bratan flotando sobre el lago, cascada en Tabanan con piscina natural, y arrozales de Jatiluwih, Patrimonio de la Humanidad por la UNESCO.",

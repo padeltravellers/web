@@ -132,15 +132,19 @@ export default function BaliPage() {
         {/* EXPERIENCIAS POR GRUPO */}
         <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-10">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Experiencias</p>
+            <div className="text-center mb-10 max-w-2xl mx-auto">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias</p>
+              <p className="text-pt-muted text-lg leading-relaxed">
+                Doce experiencias incluidas en el viaje, repartidas en pádel, turismo y aventura. Todas pensadas
+                para que vivas Bali a fondo.
+              </p>
             </div>
 
             {groups.map((g, gi) => (
               <div key={g.key} className={gi > 0 ? "mt-12" : ""}>
                 <div className="mb-6 flex items-baseline justify-between border-b border-pt-green/15 pb-3">
-                  <h3 className="font-display font-semibold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
-                  <span className="font-script italic text-pt-clay text-base md:text-lg">{g.label.kicker}</span>
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
+                  <span className="font-display font-semibold text-pt-clay text-base md:text-xl">{g.label.kicker}</span>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
                   {g.items.map((e) => <ExperienceCard key={e.slug} e={e} />)}
