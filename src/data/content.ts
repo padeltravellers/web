@@ -148,18 +148,23 @@ export const baliExperiences = [
 ];
 
 export const included = [
-  "Alojamiento privado con desayuno (nunca habitación compartida con desconocidos)",
-  "Pádel: 2 días de partidos a la semana en BPA + 1 clase semanal + torneo el fin de semana",
-  "Todas las actividades del programa (templos, surf, café, cultura)",
-  "Entradas a los lugares del itinerario",
-  "Transporte interno entre actividades",
-  "Coordinador Padel Travellers español acompañando todo el viaje",
+  "Alojamiento en el hotel del pack seleccionado durante 14 noches",
+  "Todos los desayunos",
+  "4 h de clases de pádel + torneo internacional o partidos",
+  "4 partidos del grupo de 1,5 h",
+  "Traslados aeropuerto – hotel – aeropuerto",
+  "Traslados días de pádel: hotel ↔ Bali Padel Academy",
+  "Traslados hasta el final de cada actividad diaria",
+  "Todas las actividades y entradas del pack",
+  "Acompañamiento personal Padel Travellers durante todas las actividades",
 ];
 
 export const notIncluded = [
-  "Vuelos internacionales (cada viajero sale desde su origen)",
-  "Comidas y cenas",
-  "Gastos personales y propinas",
+  "Vuelos ida y vuelta",
+  "Comidas, cenas y consumiciones",
+  "Seguro de viaje (obligatorio)",
+  "Visado de Indonesia (30€)",
+  "Todo lo que no se mencione en «Incluye»",
 ];
 
 export const pricing = {
