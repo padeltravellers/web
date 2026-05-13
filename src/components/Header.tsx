@@ -11,7 +11,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
     : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";
   return (
     <header className={base}>
-      <div className="max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 py-1 lg:py-2 flex items-center justify-between">
+      <div className="max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 pt-0 pb-0 -mt-2 lg:-mt-3 flex items-center justify-between">
         <Link href="/" className="flex items-center group no-tap-highlight -ml-2 lg:-ml-3">
           <Img
             src="/logos/logo-main.png"
