@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Img from "@/components/Img";
 import { contact } from "@/data/content";
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10">
         <div className="md:col-span-5">
           <div className="flex items-center gap-3 mb-5">
-            <Image src="/logos/monogram.png" alt="PT" width={40} height={40} className="object-contain" />
+            <Img src="/logos/monogram.png" alt="PT" width={40} height={40} className="object-contain" />
             <span className="font-display font-semibold text-pt-cream text-lg">Padel Travellers</span>
           </div>
           <p className="text-sm leading-relaxed max-w-sm mb-6">

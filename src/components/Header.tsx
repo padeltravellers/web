@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Img from "@/components/Img";
 import { contact } from "@/data/content";
 
 export default function Header({ transparent = false }: { transparent?: boolean }) {
@@ -10,7 +10,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
     <header className={base}>
       <div className="max-w-7xl mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group no-tap-highlight">
-          <Image
+          <Img
             src="/logos/monogram.png"
             alt="PT"
             width={36}

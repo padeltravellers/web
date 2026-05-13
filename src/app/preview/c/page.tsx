@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import {
   hero,
@@ -28,7 +28,7 @@ export default function ProposalC() {
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-pt-green/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-3.5 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <Image src="/logos/monogram.png" alt="" width={32} height={32} className="object-contain" />
+            <Img src="/logos/monogram.png" alt="" width={32} height={32} className="object-contain" />
             <span className="font-display font-bold tracking-tight text-pt-green">Padel Travellers</span>
           </Link>
           <div className="hidden md:flex gap-7 text-sm font-display font-medium text-pt-ink">
@@ -82,7 +82,7 @@ export default function ProposalC() {
                 <div className="flex -space-x-2 mb-2">
                   {["uluwatu/1", "ubud/1", "partidos/1", "club-bali/1"].map((p) => (
                     <div key={p} className="w-9 h-9 rounded-full ring-2 ring-white overflow-hidden relative">
-                      <Image src={`/photos/bali/${p}.jpg`} alt="" fill className="object-cover" />
+                      <Img src={`/photos/bali/${p}.jpg`} alt="" fill className="object-cover" />
                     </div>
                   ))}
                 </div>
@@ -97,17 +97,17 @@ export default function ProposalC() {
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-6 gap-3 lg:gap-4">
               <div className="col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden">
-                <Image src="/photos/bali/partidos/1.jpg" alt="" fill priority className="object-cover" />
+                <Img src="/photos/bali/partidos/1.jpg" alt="" fill priority className="object-cover" />
                 <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full text-xs font-display font-semibold text-pt-green flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-pt-clay animate-pulse" /> Quedan 5 plazas · Viaje 6
                 </div>
               </div>
               <div className="col-span-2 flex flex-col gap-3 lg:gap-4">
                 <div className="relative aspect-square rounded-2xl overflow-hidden">
-                  <Image src="/photos/bali/uluwatu/1.jpg" alt="" fill className="object-cover" />
+                  <Img src="/photos/bali/uluwatu/1.jpg" alt="" fill className="object-cover" />
                 </div>
                 <div className="relative aspect-square rounded-2xl overflow-hidden">
-                  <Image src="/photos/bali/club-bali/1.jpg" alt="" fill className="object-cover" />
+                  <Img src="/photos/bali/club-bali/1.jpg" alt="" fill className="object-cover" />
                 </div>
                 <div className="rounded-2xl bg-pt-green text-white p-4">
                   <div className="font-display font-bold text-3xl leading-none">1.725€</div>
@@ -173,7 +173,7 @@ export default function ProposalC() {
             {baliExperiences.map((b) => (
               <article key={b.slug} className="group bg-white rounded-2xl overflow-hidden border border-pt-green/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={b.photos[0]} alt={b.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width:1024px) 100vw, 33vw" />
+                  <Img src={b.photos[0]} alt={b.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width:1024px) 100vw, 33vw" />
                   <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-xs font-display font-semibold text-pt-green">
                     Incluido
                   </div>
@@ -337,7 +337,7 @@ export default function ProposalC() {
       {/* CTA */}
       <section id="reservar" className="relative py-28 px-6 lg:px-12 bg-pt-ink text-white overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/photos/bali/uluwatu/2.jpg" alt="" fill className="object-cover opacity-30" />
+          <Img src="/photos/bali/uluwatu/2.jpg" alt="" fill className="object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
         </div>
         <div className="relative max-w-3xl mx-auto text-center">
@@ -363,7 +363,7 @@ export default function ProposalC() {
       <footer className="py-12 px-6 lg:px-12 bg-pt-ink text-pt-cream/60 border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
           <div className="flex items-center gap-2.5">
-            <Image src="/logos/monogram.png" alt="" width={28} height={28} className="object-contain" />
+            <Img src="/logos/monogram.png" alt="" width={28} height={28} className="object-contain" />
             <span className="font-display font-semibold text-pt-cream">Padel Travellers</span>
           </div>
           <div className="flex items-center gap-6">

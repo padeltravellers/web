@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -33,7 +33,7 @@ export default function BaliPage() {
       <main className="text-pt-ink">
         {/* HERO destino */}
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
-          <Image src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
+          <Img src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
@@ -127,7 +127,7 @@ export default function BaliPage() {
                 className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-pt-cream/40">
-                  <Image
+                  <Img
                     src={e.photos[0]}
                     alt={e.title}
                     fill
@@ -241,7 +241,7 @@ export default function BaliPage() {
                         </div>
                       </div>
                       <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
-                        <Image src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
+                        <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
                         <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
                           {day.weekday}
                         </div>
@@ -307,7 +307,7 @@ export default function BaliPage() {
                         </div>
                       </div>
                       <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
-                        <Image src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
+                        <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
                         <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
                           {day.weekday}
                         </div>
@@ -349,7 +349,7 @@ export default function BaliPage() {
                       big ? "md:col-span-2 md:row-span-2 aspect-square" : tall ? "row-span-2 aspect-[3/5]" : "aspect-square"
                     }`}
                   >
-                    <Image
+                    <Img
                       src={src}
                       alt=""
                       fill

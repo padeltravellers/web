@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -24,7 +24,7 @@ export default function FilipinasPage() {
       <main className="text-pt-ink">
         {/* HERO */}
         <section className="relative h-[90svh] min-h-[600px] overflow-hidden">
-          <Image src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
+          <Img src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/40 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
             <div className="px-6 lg:px-12 max-w-5xl text-white fade-up">
@@ -133,7 +133,7 @@ export default function FilipinasPage() {
             <div className="grid grid-cols-3 gap-3 md:gap-4">
               {filipinasPhotos.map((p, i) => (
                 <div key={i} className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-                  <Image src={p} alt="" fill className="object-cover hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 33vw, 33vw" />
+                  <Img src={p} alt="" fill className="object-cover hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 33vw, 33vw" />
                 </div>
               ))}
             </div>

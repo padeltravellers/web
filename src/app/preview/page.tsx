@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Img from "@/components/Img";
 
 const proposals = [
   {
@@ -35,7 +35,7 @@ export default function PreviewIndex() {
     <main className="min-h-screen bg-pt-cream text-pt-ink">
       <header className="px-6 lg:px-12 py-10 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logos/monogram.png" alt="PT" width={36} height={36} className="object-contain" />
+          <Img src="/logos/monogram.png" alt="PT" width={36} height={36} className="object-contain" />
           <span className="font-display font-semibold text-pt-green">Padel Travellers</span>
         </Link>
         <Link href="/" className="text-xs font-display uppercase tracking-[0.22em] text-pt-muted hover:text-pt-green">
@@ -64,7 +64,7 @@ export default function PreviewIndex() {
             className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
           >
             <div className="relative aspect-[4/5] overflow-hidden">
-              <Image src={p.hero} alt={p.name} fill sizes="(max-width:1024px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Img src={p.hero} alt={p.name} fill sizes="(max-width:1024px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-pt-green/70 via-transparent to-transparent" />
               <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-white">
                 <span className="font-display uppercase tracking-[0.22em] text-[10px] font-semibold">

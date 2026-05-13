@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import {
   hero,
@@ -22,7 +22,7 @@ export default function ProposalA() {
       {/* NAV */}
       <nav className="absolute top-0 inset-x-0 z-30 px-6 lg:px-16 py-7 flex items-center justify-between text-white">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/logos/monogram.png" alt="" width={36} height={36} className="object-contain invert brightness-200" />
+          <Img src="/logos/monogram.png" alt="" width={36} height={36} className="object-contain invert brightness-200" />
           <span className="font-display tracking-tight font-medium">Padel Travellers</span>
         </Link>
         <div className="hidden md:flex gap-8 font-display uppercase tracking-[0.18em] text-xs">
@@ -42,7 +42,7 @@ export default function ProposalA() {
 
       {/* HERO — full bleed cinema */}
       <section className="relative h-[100svh] min-h-[640px] overflow-hidden">
-        <Image src="/photos/home/hero.jpg" alt="Bali" fill priority className="object-cover ken-burns" />
+        <Img src="/photos/home/hero.jpg" alt="Bali" fill priority className="object-cover ken-burns" />
         <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/10 to-pt-green/80" />
         <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
           <div className="px-6 lg:px-16 max-w-5xl text-white fade-up">
@@ -106,16 +106,16 @@ export default function ProposalA() {
           </div>
           <div className="lg:col-span-7 grid grid-cols-6 gap-3 lg:gap-4">
             <div className="col-span-4 aspect-[4/5] relative rounded-lg overflow-hidden">
-              <Image src="/photos/bali/partidos/1.jpg" alt="" fill className="object-cover" />
+              <Img src="/photos/bali/partidos/1.jpg" alt="" fill className="object-cover" />
             </div>
             <div className="col-span-2 aspect-square relative rounded-lg overflow-hidden mt-12">
-              <Image src="/photos/bali/club-bali/2.jpg" alt="" fill className="object-cover" />
+              <Img src="/photos/bali/club-bali/2.jpg" alt="" fill className="object-cover" />
             </div>
             <div className="col-span-3 aspect-square relative rounded-lg overflow-hidden -mt-6">
-              <Image src="/photos/bali/uluwatu/1.jpg" alt="" fill className="object-cover" />
+              <Img src="/photos/bali/uluwatu/1.jpg" alt="" fill className="object-cover" />
             </div>
             <div className="col-span-3 aspect-[3/4] relative rounded-lg overflow-hidden">
-              <Image src="/photos/bali/ubud/2.jpg" alt="" fill className="object-cover" />
+              <Img src="/photos/bali/ubud/2.jpg" alt="" fill className="object-cover" />
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ export default function ProposalA() {
               className={`grid lg:grid-cols-12 gap-8 items-center py-10 border-t border-pt-green/15 ${i % 2 ? "lg:grid-flow-dense" : ""}`}
             >
               <div className={`lg:col-span-7 relative aspect-[16/10] rounded-lg overflow-hidden ${i % 2 ? "lg:col-start-6" : ""}`}>
-                <Image src={b.photos[0]} alt={b.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" />
+                <Img src={b.photos[0]} alt={b.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 60vw" />
               </div>
               <div className={`lg:col-span-5 ${i % 2 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
                 <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-3">
@@ -313,7 +313,7 @@ export default function ProposalA() {
       {/* CTA RESERVA */}
       <section id="reservar" className="relative py-32 lg:py-44 overflow-hidden bg-pt-green text-white">
         <div className="absolute inset-0 opacity-20">
-          <Image src="/photos/bali/tanah-lot/1.jpg" alt="" fill className="object-cover" />
+          <Img src="/photos/bali/tanah-lot/1.jpg" alt="" fill className="object-cover" />
         </div>
         <div className="relative px-6 lg:px-16 max-w-4xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-cream/70 mb-6">Reservar plaza</p>

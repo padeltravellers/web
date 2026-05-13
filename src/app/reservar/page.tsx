@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Img from "@/components/Img";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { contact, pricing } from "@/data/content";
@@ -82,7 +82,7 @@ export default function ReservarPage() {
                   href={d.status === "open" ? `/${d.slug}#fechas` : `/${d.slug}`}
                   className={`group relative aspect-[4/3] rounded-3xl overflow-hidden ${d.status === "open" ? "" : "opacity-90"}`}
                 >
-                  <Image src={d.hero} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
+                  <Img src={d.hero} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-pt-ink to-pt-ink/10" />
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1.5 rounded-full text-[10px] font-display uppercase tracking-[0.22em] ${d.status === "open" ? "bg-white/20 backdrop-blur text-white" : "bg-pt-clay text-white"}`}>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import {
   hero,
@@ -23,7 +23,7 @@ export default function ProposalB() {
       <nav className="border-b border-pt-green/15 bg-pt-cream/95 backdrop-blur sticky top-0 z-40">
         <div className="px-6 lg:px-16 py-5 flex items-center justify-between max-w-7xl mx-auto">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logos/monogram.png" alt="" width={32} height={32} className="object-contain" />
+            <Img src="/logos/monogram.png" alt="" width={32} height={32} className="object-contain" />
             <span className="font-display font-semibold tracking-tight text-pt-green">Padel Travellers</span>
           </Link>
           <div className="hidden md:flex gap-7 font-serif italic text-sm text-pt-green">
@@ -62,14 +62,14 @@ export default function ProposalB() {
           </div>
           <div className="lg:col-span-7 grid grid-cols-12 gap-3 lg:gap-4">
             <div className="col-span-8 relative aspect-[4/5] rounded-sm overflow-hidden tape">
-              <Image src="/photos/bali/ubud/1.jpg" alt="" fill className="object-cover" priority />
+              <Img src="/photos/bali/ubud/1.jpg" alt="" fill className="object-cover" priority />
             </div>
             <div className="col-span-4 flex flex-col gap-3 lg:gap-4 pt-10">
               <div className="relative aspect-square rounded-sm overflow-hidden">
-                <Image src="/photos/bali/partidos/2.jpg" alt="" fill className="object-cover" />
+                <Img src="/photos/bali/partidos/2.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="relative aspect-square rounded-sm overflow-hidden">
-                <Image src="/photos/bali/uluwatu/2.jpg" alt="" fill className="object-cover" />
+                <Img src="/photos/bali/uluwatu/2.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="bg-pt-green text-pt-cream rounded-sm p-4 font-serif italic text-sm leading-tight">
                 <span className="font-script text-2xl text-pt-cream block leading-none mb-1">14</span>
@@ -179,7 +179,7 @@ export default function ProposalB() {
                   className={`${isFeature ? "lg:col-span-12 lg:grid lg:grid-cols-12 lg:gap-10" : "lg:col-span-6"} space-y-5`}
                 >
                   <div className={`${isFeature ? "lg:col-span-7" : ""} relative ${isFeature ? "aspect-[16/10]" : "aspect-[4/5]"} rounded-sm overflow-hidden`}>
-                    <Image src={b.photos[0]} alt={b.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
+                    <Img src={b.photos[0]} alt={b.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
                   </div>
                   <div className={`${isFeature ? "lg:col-span-5 lg:pt-8" : ""}`}>
                     <p className="font-display uppercase tracking-[0.28em] text-[10px] text-pt-clay mb-3">

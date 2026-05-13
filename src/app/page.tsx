@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,7 +19,7 @@ export default function Home() {
       <main className="text-pt-ink">
         {/* HERO — calma A + badge live C */}
         <section className="relative h-[100svh] min-h-[680px] overflow-hidden">
-          <Image src="/photos/extra/atardecer/1.jpg" alt="Atardecer en Bali" fill priority className="object-cover ken-burns" />
+          <Img src="/photos/extra/atardecer/1.jpg" alt="Atardecer en Bali" fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
@@ -87,16 +87,16 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7 grid grid-cols-6 gap-3 lg:gap-4">
               <div className="col-span-4 aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Image src="/photos/extra/padel-action/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" />
+                <Img src="/photos/extra/padel-action/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 100vw, 60vw" />
               </div>
               <div className="col-span-2 aspect-square relative rounded-2xl overflow-hidden mt-12">
-                <Image src="/photos/extra/arrozales/1.jpg" alt="" fill className="object-cover" />
+                <Img src="/photos/extra/arrozales/1.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="col-span-3 aspect-square relative rounded-2xl overflow-hidden -mt-6">
-                <Image src="/photos/extra/atardecer/2.jpg" alt="" fill className="object-cover" />
+                <Img src="/photos/extra/atardecer/2.jpg" alt="" fill className="object-cover" />
               </div>
               <div className="col-span-3 aspect-[3/4] relative rounded-2xl overflow-hidden">
-                <Image src="/photos/extra/la-brisa/1.jpg" alt="" fill className="object-cover" />
+                <Img src="/photos/extra/la-brisa/1.jpg" alt="" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function Home() {
                   href={`/${d.slug}`}
                   className="group relative aspect-[4/5] lg:aspect-[4/3] rounded-3xl overflow-hidden hover:-translate-y-1 transition-all duration-500 no-tap-highlight"
                 >
-                  <Image src={d.hero} alt={d.heroAlt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:1024px) 100vw, 50vw" />
+                  <Img src={d.hero} alt={d.heroAlt} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:1024px) 100vw, 50vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-pt-ink via-pt-ink/30 to-transparent" />
                   <div className="absolute top-5 left-5 right-5 flex justify-between items-center text-white">
                     <span className={`px-3.5 py-1.5 rounded-full text-[10px] font-display uppercase tracking-[0.22em] backdrop-blur ${d.status === "open" ? "bg-white/20" : "bg-pt-clay/80"}`}>
@@ -234,7 +234,7 @@ export default function Home() {
         {/* CTA FINAL */}
         <section className="relative py-32 lg:py-44 overflow-hidden bg-pt-ink text-white">
           <div className="absolute inset-0">
-            <Image src="/photos/extra/atardecer/3.jpg" alt="" fill className="object-cover opacity-35" />
+            <Img src="/photos/extra/atardecer/3.jpg" alt="" fill className="object-cover opacity-35" />
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">

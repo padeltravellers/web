@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -134,7 +134,7 @@ export default function SobrePage() {
               {team.map((m) => (
                 <article key={m.name} className="bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-xl transition">
                   <div className="relative aspect-[4/5]">
-                    <Image src={m.photo} alt={m.name} fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />
+                    <Img src={m.photo} alt={m.name} fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />
                   </div>
                   <div className="p-7">
                     <h3 className="font-display font-bold text-2xl text-pt-green mb-1">{m.name}</h3>
