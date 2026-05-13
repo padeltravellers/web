@@ -55,8 +55,8 @@ export default function Footer() {
         <span>© {new Date().getFullYear()} Padel World Experience LLC. Todos los derechos reservados.</span>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
           <Link href="/aviso-legal" className="hover:text-pt-cream/80">Aviso legal</Link>
-          <Link href="/privacidad" className="hover:text-pt-cream/80">Privacidad</Link>
-          <Link href="/cookies" className="hover:text-pt-cream/80">Cookies</Link>
+          <Link href="/politica-de-privacidad-y-proteccion-de-datos" className="hover:text-pt-cream/80">Privacidad</Link>
+          <Link href="/politica-de-cookies" className="hover:text-pt-cream/80">Cookies</Link>
         </div>
       </div>
     </footer>
