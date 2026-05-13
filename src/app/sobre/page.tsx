@@ -66,7 +66,7 @@ export default function SobrePage() {
         <section className="px-6 lg:px-12 pt-16 pb-20 lg:pt-24 lg:pb-28 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-7">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-7">Sobre nosotros</p>
+              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-7">Sobre nosotros</p>
               <h1 className="font-display font-extralight text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight text-pt-green">
                 Pequeños,
                 <br />
@@ -103,7 +103,7 @@ export default function SobrePage() {
         {/* PRINCIPIOS */}
         <section className="px-6 lg:px-12 py-24 lg:py-36 max-w-6xl mx-auto">
           <div className="mb-16">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-5">Filosofía</p>
+            <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-5">Filosofía</p>
             <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green max-w-3xl">
               Cuatro decisiones que no negociamos.
             </h2>
@@ -125,7 +125,7 @@ export default function SobrePage() {
         <section className="bg-pt-cream/50 py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-5">El equipo</p>
+              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-5">El equipo</p>
               <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
                 Tres personas detrás del viaje.
               </h2>

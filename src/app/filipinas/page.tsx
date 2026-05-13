@@ -54,7 +54,7 @@ export default function FilipinasPage() {
         <section className="px-6 lg:px-12 py-24 lg:py-36 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-14">
             <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">El siguiente destino</p>
+              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">El siguiente destino</p>
               <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green">
                 7.641 islas. Mucha agua. Pádel.
               </h2>
@@ -77,7 +77,7 @@ export default function FilipinasPage() {
         {/* QUÉ ESPERAMOS */}
         <section className="bg-pt-cream/50 py-24 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4 text-center">Qué planeamos</p>
+            <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4 text-center">Qué planeamos</p>
             <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green text-center max-w-3xl mx-auto mb-16 leading-tight">
               Cuatro razones por las que Filipinas.
             </h2>
@@ -126,7 +126,7 @@ export default function FilipinasPage() {
         {/* GALERÍA Filipinas (3 fotos disponibles) */}
         <section className="py-20 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-6xl mx-auto">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4 text-center">Vistazo previo</p>
+            <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4 text-center">Vistazo previo</p>
             <h2 className="font-display font-light text-3xl md:text-4xl text-pt-green text-center mb-12">
               Algunas fotos del viaje de scouting.
             </h2>
@@ -144,7 +144,7 @@ export default function FilipinasPage() {
         {/* CTA cross-link a Bali */}
         <section className="py-24 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Mientras tanto</p>
+            <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-4">Mientras tanto</p>
             <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green leading-tight mb-6">
               ¿Te animas con Bali 2026?
             </h2>

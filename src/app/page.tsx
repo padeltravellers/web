@@ -148,7 +148,7 @@ export default function Home() {
         <section className="px-6 lg:px-12 py-20 lg:py-28 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
+              <p className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
               <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-pt-green mb-8">
                 Viajes que combinan
                 <br />
@@ -194,7 +194,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
               <div>
-                <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay">Destinos</span>
+                <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay">Destinos</span>
                 <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl mt-4 leading-[0.95] text-pt-green">
                   Dónde viajamos.
                 </h2>
@@ -237,7 +237,7 @@ export default function Home() {
         {/* ¿POR QUÉ ELEGIRNOS? — título grande */}
         <section className="py-20 lg:py-28 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay">¿Por qué elegirnos?</span>
+            <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay">¿Por qué elegirnos?</span>
             <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl mt-5 leading-[0.95] text-pt-green">
               Cuatro razones
               <br />
@@ -261,7 +261,7 @@ export default function Home() {
         <section className="bg-pt-green text-pt-cream py-20 lg:py-28 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
-              <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-cream/70">Cómo reservar</span>
+              <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-cream/70">Cómo reservar</span>
               <h2 className="font-display font-extralight text-5xl md:text-7xl lg:text-8xl mt-5 leading-[0.92]">
                 Cuatro pasos.
                 <br />
@@ -294,7 +294,7 @@ export default function Home() {
         <section className="py-20 lg:py-28 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay">Reseñas</span>
+              <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-clay">Reseñas</span>
               <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl mt-4 text-pt-green leading-[0.95]">
                 Lo que dicen los que
                 <br />
@@ -350,7 +350,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">
-            <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-cream/70 mb-6 inline-block">Próximas fechas 2026</span>
+            <span className="font-display uppercase tracking-[0.28em] text-sm md:text-base font-semibold text-pt-cream/70 mb-6 inline-block">Próximas fechas 2026</span>
             <h2 className="font-display font-extralight text-5xl md:text-7xl leading-[0.95] mb-10">
               Ocho salidas.
               <br />
