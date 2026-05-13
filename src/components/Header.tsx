@@ -18,7 +18,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
             alt="Padel Travellers"
             width={88}
             height={88}
-            className={`object-contain ${transparent ? "invert brightness-200" : ""}`}
+            className={`object-contain ${transparent ? "brightness-0 invert" : ""}`}
           />
         </Link>
         <nav className="hidden lg:flex items-center gap-10 text-base font-display font-medium">
