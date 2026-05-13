@@ -16,9 +16,9 @@ export default function Header({ transparent = false }: { transparent?: boolean 
           <Img
             src="/logos/logo-main.png"
             alt="Padel Travellers"
-            width={88}
-            height={88}
-            className={`object-contain ${transparent ? "brightness-0 invert" : ""}`}
+            width={140}
+            height={140}
+            className={`object-contain h-16 lg:h-20 w-auto ${transparent ? "brightness-0 invert" : ""}`}
           />
         </Link>
         <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">

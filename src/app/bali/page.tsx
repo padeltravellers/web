@@ -28,9 +28,9 @@ const baliHeroSlides = [
 ];
 
 const GROUP_LABEL = {
-  padel:        { title: "Pádel",       kicker: "Pistas, clases y torneo" },
-  turismo:      { title: "Turismo",     kicker: "Templos, arrozales y mar" },
-  actividades:  { title: "Actividades", kicker: "Surf, café, aventura" },
+  padel:        { title: "Pádel",       kicker: "Nuestra pasión" },
+  turismo:      { title: "Turismo",     kicker: "¿Qué descubriremos?" },
+  actividades:  { title: "Actividades", kicker: "Y más aventura" },
 };
 
 export const metadata = {
@@ -207,19 +207,6 @@ export default function BaliPage() {
                           <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
                           <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
                           <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5">{day.description}</p>
-                          {day.highlights.length > 0 && (
-                            <ul className="space-y-2 mb-4">
-                              {day.highlights.map((h) => (
-                                <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                  </svg>
-                                  {h}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
                           <div className="flex flex-wrap gap-2">
                             {day.tags.map((t) => (
                               <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
@@ -269,22 +256,19 @@ export default function BaliPage() {
                 <li className="flex gap-2.5"><span className="text-pt-green">✓</span>2 min del club de pádel · 5 min de la playa</li>
               </ul>
             </div>
-            <div className="lg:col-span-7">
-              <PhotoCarousel
-                photos={[
-                  "/photos/villa/1.jpg",
-                  "/photos/villa/2.jpg",
-                  "/photos/villa/3.jpg",
-                  "/photos/villa/4.jpg",
-                  "/photos/villa/5.jpg",
-                  "/photos/villa/6.jpg",
-                  "/photos/villa/7.jpg",
-                  "/photos/villa/8.jpg",
-                ]}
-                alt="Hotel boutique en Canggu"
-                aspectClass="aspect-[4/3] rounded-3xl"
-                sizes="(max-width:1024px) 100vw, 58vw"
-              />
+            <div className="lg:col-span-7 grid grid-cols-2 grid-rows-2 gap-3 lg:gap-4">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Img src="/photos/villa/1.jpg" alt="Habitación" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Img src="/photos/villa/2.jpg" alt="Piscina" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Img src="/photos/villa/3.jpg" alt="Hotel" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Img src="/photos/villa/4.jpg" alt="Desayuno" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
             </div>
           </div>
         </section>
