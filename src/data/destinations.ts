@@ -72,9 +72,9 @@ const baliExperiences: Experience[] = [
   {
     slug: "partidos-clases",
     title: "Partidos y clases con coaches NOX",
-    short: "4 h de clase + 4 partidos de 1,5 h",
+    short: "2 h de clase + 4 partidos de 1,5 h",
     text:
-      "Entrenamientos en grupo con coaches profesionales de NOX Academy: 4 horas semanales de clase para trabajar técnica y posicionamiento, más 4 partidos de hora y media entre los miembros del grupo para poner en práctica lo aprendido y formar parejas del torneo.",
+      "Entrenamientos en grupo con coaches profesionales de NOX Academy: 2 horas semanales de clase para trabajar técnica y posicionamiento, más 4 partidos de hora y media entre los miembros del grupo para poner en práctica lo aprendido y formar parejas del torneo.",
     photos: [
       "/photos/bali/entrenos/1.jpg",
       "/photos/bali/partidos/1.jpg",

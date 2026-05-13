@@ -150,7 +150,7 @@ export const baliExperiences = [
 export const included = [
   "Alojamiento en el hotel del pack seleccionado durante 14 noches",
   "Todos los desayunos",
-  "4 h de clases de pádel + torneo internacional o partidos",
+  "2 h semanales de clases de pádel + torneo internacional o partidos",
   "4 partidos del grupo de 1,5 h",
   "Traslados aeropuerto – hotel – aeropuerto",
   "Traslados días de pádel: hotel ↔ Bali Padel Academy",
