@@ -2,6 +2,7 @@ import Link from "next/link";
 import Img from "@/components/Img";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LeadForm from "@/components/LeadForm";
 import { contact, pricing } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
@@ -69,7 +70,7 @@ export default function ReservarPage() {
         </section>
 
         {/* DESTINOS PICK */}
-        <section className="bg-pt-cream/50 py-20 lg:py-28 px-6 lg:px-12">
+        <section className="bg-pt-cream/50 py-14 lg:py-20 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5 text-center">Paso 1</p>
             <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green text-center leading-tight mb-14">
@@ -123,27 +124,36 @@ export default function ReservarPage() {
           </div>
         </section>
 
-        {/* CTA WHATSAPP DIRECTO */}
-        <section className="py-24 px-6 lg:px-12 bg-pt-cream">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green leading-tight mb-6">
-              ¿Listo para hablar?
-            </h2>
-            <p className="text-pt-muted text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-              Mánda un WhatsApp con tu nombre y tu pregunta. Marta responde el mismo día.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        {/* FORM DE CONTACTO + WhatsApp directo */}
+        <section className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-cream">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Déjanos tus datos</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95] mb-6">
+                Y nosotros te
+                <br />
+                <span className="font-script italic text-pt-clay">contactamos.</span>
+              </h2>
+              <p className="text-pt-muted text-lg max-w-xl mx-auto leading-relaxed">
+                Si prefieres ir más rápido, escríbenos por WhatsApp y respondemos el mismo día.
+              </p>
+            </div>
+
+            <LeadForm />
+
+            <div className="mt-10 text-center text-sm text-pt-muted">
+              <span>O directo: </span>
               <a
                 href={`${contact.whatsappLink}?text=${encodeURIComponent("Hola Marta! Me interesa el viaje a Bali. ¿Me cuentas?")}`}
-                className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20"
+                className="font-display font-semibold text-pt-green hover:underline"
               >
-                WhatsApp · {contact.whatsapp}
+                WhatsApp {contact.whatsapp}
               </a>
-              <a href={`mailto:${contact.email}`} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-sm hover:bg-pt-green hover:text-white transition">
-                Email a Oriol
+              <span> · </span>
+              <a href={`mailto:${contact.email}`} className="font-display font-semibold text-pt-green hover:underline">
+                {contact.email}
               </a>
             </div>
-            <p className="mt-6 text-xs text-pt-muted">Respuesta media: 30 min · Lun a Vie 10:00–20:00 (ES)</p>
           </div>
         </section>
       </main>

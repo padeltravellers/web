@@ -101,7 +101,7 @@ export default function SobrePage() {
         </section>
 
         {/* PRINCIPIOS */}
-        <section className="px-6 lg:px-12 py-24 lg:py-36 max-w-6xl mx-auto">
+        <section className="px-6 lg:px-12 py-14 lg:py-20 max-w-6xl mx-auto">
           <div className="mb-16">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Filosofía</p>
             <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green max-w-3xl">

@@ -51,7 +51,7 @@ export default function FilipinasPage() {
         </section>
 
         {/* INTRO */}
-        <section className="px-6 lg:px-12 py-24 lg:py-36 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-12 py-14 lg:py-20 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-14">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">El siguiente destino</p>
@@ -96,7 +96,7 @@ export default function FilipinasPage() {
         </section>
 
         {/* INTERESADO */}
-        <section id="interesado" className="py-24 lg:py-36 px-6 lg:px-12 bg-pt-green text-white">
+        <section id="interesado" className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-green text-white">
           <div className="max-w-3xl mx-auto text-center">
             <p className="font-script text-pt-cream text-3xl mb-6 -rotate-2">apúntate</p>
             <h2 className="font-display font-extralight text-4xl md:text-6xl leading-[0.95] mb-8">

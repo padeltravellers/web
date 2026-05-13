@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Jost, Inter, Petit_Formal_Script, Eczar } from "next/font/google";
 import "./globals.css";
 
-// Jost ≈ Futura | Inter ≈ Helvetica | Petit Formal Script ≈ Sloop | Eczar ≈ Vintage
 const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
@@ -27,13 +26,84 @@ const eczar = Eczar({
   display: "swap",
 });
 
+const SITE_URL = "https://padeltravellers.com";
+const SITE_OG = `${SITE_URL}/photos/extra/atardecer/1.jpg`;
+
 export const metadata: Metadata = {
-  title: "Padel Travellers — Viajes de pádel a Bali",
-  description: "Viajes en grupo a Bali con pádel. 14 días, alojamiento premium, partidos diarios, cultura, surf y aventura. Desde 1.725€.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Padel Travellers — Viajes en grupo de pádel y aventura",
+    template: "%s · Padel Travellers",
+  },
+  description:
+    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado con desayuno, coordinador español. Bali abierto 2026, Filipinas próximamente.",
+  keywords: [
+    "viajes pádel",
+    "padel bali",
+    "viajes en grupo pádel",
+    "viaje padel bali",
+    "vacaciones pádel",
+    "padel travellers",
+    "viajes deportivos",
+    "padel viaje",
+    "bali padel",
+    "retiros pádel",
+    "padel y aventura",
+  ],
+  authors: [{ name: "Padel Travellers" }],
+  creator: "Padel Travellers",
+  publisher: "Padel Travellers",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Padel Travellers — Bali con pádel",
-    description: "14 días en Bali. Pádel + cultura + aventura. Grupos de 8–12. Coordinador español.",
-    images: ["/photos/home/Banner_Principal.jpg"],
+    type: "website",
+    locale: "es_ES",
+    url: SITE_URL,
+    siteName: "Padel Travellers",
+    title: "Padel Travellers — Viajes en grupo de pádel y aventura",
+    description:
+      "Viajes premium en grupo que combinan pádel y aventura. Bali 2026, Filipinas próximamente. Alojamiento privado, coordinador español de principio a fin.",
+    images: [{ url: SITE_OG, width: 1200, height: 630, alt: "Padel Travellers — viajes a Bali" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Padel Travellers — Viajes en grupo de pádel y aventura",
+    description: "Pádel, cultura y aventura. Bali 2026, Filipinas próximamente.",
+    images: [SITE_OG],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: "Padel Travellers",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logos/monogram.png`,
+  image: SITE_OG,
+  description:
+    "Viajes en grupo que combinan pádel y aventura. Bali 2026, Filipinas 2027. Alojamiento privado, coordinador español.",
+  telephone: "+34 686 176 386",
+  email: "info@padeltravellers.com",
+  address: { "@type": "PostalAddress", addressCountry: "ES" },
+  areaServed: ["ES", "AD", "ID", "PH"],
+  sameAs: [
+    "https://instagram.com/padeltravellers",
+    "https://maps.app.goo.gl/VKFUsVDmY8sWB2DU7",
+  ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "8",
+    bestRating: "5",
   },
 };
 
@@ -45,6 +115,12 @@ export default function RootLayout({
       lang="es"
       className={`${jost.variable} ${inter.variable} ${petit.variable} ${eczar.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-pt-ink">{children}</body>
     </html>
   );
