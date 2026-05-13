@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
-// GitHub Pages serves at /padeltravellers-web/ subfolder
-const basePath = isProd ? "/web" : "";
+// On CF Pages we serve from root domain — no basePath needed.
+// To deploy to GitHub Pages subfolder, set GH_PAGES=1 to enable basePath "/web".
+const ghPages = process.env.GH_PAGES === "1";
+const basePath = ghPages ? "/web" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
