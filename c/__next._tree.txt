@@ -1,6 +1,6 @@
-:HL["/_next/static/chunks/0kai8-d7rw6wb.css","style"]
-:HL["/_next/static/media/28b509d3421c55f0-s.p.11-uas5do~l9~.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/media/81cef6a21128489e-s.p.0rb1wy2~c~egv.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/media/8375abd741af9b6b-s.p.0ql8lmedwq9mz.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/_next/static/media/83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"c","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"JmsCGrsjnGen0MHGuBZZd"}
+:HL["/padeltravellers-web/_next/static/chunks/0kai8-d7rw6wb.css","style"]
+:HL["/padeltravellers-web/_next/static/media/28b509d3421c55f0-s.p.11-uas5do~l9~.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/padeltravellers-web/_next/static/media/81cef6a21128489e-s.p.0rb1wy2~c~egv.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/padeltravellers-web/_next/static/media/8375abd741af9b6b-s.p.0ql8lmedwq9mz.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/padeltravellers-web/_next/static/media/83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"c","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"zdv7c-ifmS0NHvZ0h525j"}
