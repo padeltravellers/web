@@ -115,27 +115,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* STATS — estilo The Padel Retreat, minimal */}
-        <section className="bg-pt-green text-pt-cream py-14 lg:py-20 px-6 lg:px-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-3 gap-4 md:gap-8">
+        {/* STATS — layout Padel Retreat con tipos/colores PT */}
+        <section className="bg-pt-cream py-16 lg:py-24 px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="font-script text-pt-clay text-4xl md:text-6xl leading-none mb-6">
+              Padel & aventura
+            </p>
+            <p className="font-display uppercase tracking-[0.36em] text-xs md:text-base font-semibold text-pt-green mb-14 md:mb-20">
+              Afina tu juego. Reconecta contigo.
+            </p>
+
+            <div className="grid grid-cols-3 items-end divide-x divide-pt-green/25">
               {ptStats.map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="flex items-start justify-center">
+                <div key={s.label} className="px-2 md:px-6">
+                  <div className="flex items-start justify-center text-pt-green">
                     {s.suffix && (
-                      <span className="font-display font-light text-3xl md:text-5xl text-pt-cream/70 mt-3 md:mt-5">{s.suffix}</span>
+                      <span className="font-display font-bold text-4xl md:text-7xl mt-1 md:mt-3">{s.suffix}</span>
                     )}
-                    <span className="font-display font-extralight text-7xl md:text-9xl tracking-tight leading-none">
+                    <span className="font-display font-bold text-6xl md:text-9xl lg:text-[9rem] tracking-tight leading-[0.85]">
                       {s.value}
                     </span>
                   </div>
-                  <div className="font-display font-medium uppercase tracking-[0.28em] text-[10px] md:text-sm text-pt-cream/80 mt-4 md:mt-6">
+                  <div className="font-display font-semibold uppercase tracking-[0.28em] text-[10px] md:text-base text-pt-green mt-5 md:mt-8">
                     {s.label}
                   </div>
                 </div>
               ))}
             </div>
-            <p className="text-center font-display uppercase tracking-[0.18em] text-xs md:text-sm text-pt-cream/70 mt-12 md:mt-16 max-w-3xl mx-auto leading-relaxed">
+
+            <p className="font-display uppercase tracking-[0.28em] text-[11px] md:text-sm font-medium text-pt-green/85 mt-14 md:mt-20 max-w-4xl mx-auto leading-loose">
               Más que pádel. Más que un destino bonito. Más que unas vacaciones —<br className="hidden md:block" /> Padel Travellers es comunidad, deporte y un sitio para reconectar.
             </p>
           </div>
