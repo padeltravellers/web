@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
+/* Padel Travellers — Brand Tokens */
 :root {
+  /* Primary brand */
+  --pt-green: #0E3B2D;      /* verde profundo principal */
+  --pt-green-soft: #1B5840; /* verde medio */
+  --pt-green-pale: #D9E4DC; /* verde clarísimo bg */
+  --pt-cream: #F5EFE6;      /* crema cálido */
+  --pt-sand: #E8DCC8;       /* arena */
+  --pt-clay: #B8543A;       /* tierra/clay accent */
+  --pt-ink: #0B1F19;        /* texto fuerte */
+  --pt-muted: #6B7570;      /* texto suave */
+
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: var(--pt-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-pt-green: var(--pt-green);
+  --color-pt-green-soft: var(--pt-green-soft);
+  --color-pt-green-pale: var(--pt-green-pale);
+  --color-pt-cream: var(--pt-cream);
+  --color-pt-sand: var(--pt-sand);
+  --color-pt-clay: var(--pt-clay);
+  --color-pt-ink: var(--pt-ink);
+  --color-pt-muted: var(--pt-muted);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-jost); /* Futura fallback */
+  --font-body: var(--font-inter);   /* Helvetica fallback */
+  --font-script: var(--font-petit); /* Sloop fallback */
+  --font-serif: var(--font-eczar);  /* Vintage serif */
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* Display utilities */
+.font-display { font-family: var(--font-display), system-ui, sans-serif; letter-spacing: -0.01em; }
+.font-body    { font-family: var(--font-body), system-ui, sans-serif; }
+.font-script  { font-family: var(--font-script), cursive; }
+.font-serif   { font-family: var(--font-serif), Georgia, serif; }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Subtle scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(14,59,45,0.25); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(14,59,45,0.45); }
+
+/* Reset focus rings to brand */
+:focus-visible { outline: 2px solid var(--pt-green); outline-offset: 3px; border-radius: 4px; }
+
+/* Hide outline on photo links unless keyboard */
+.no-tap-highlight { -webkit-tap-highlight-color: transparent; }
+
+/* Reveal animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.9s cubic-bezier(0.22,1,0.36,1) both; }
+
+@keyframes ken-burns {
+  0%   { transform: scale(1.05); }
+  100% { transform: scale(1.18); }
+}
+.ken-burns { animation: ken-burns 18s ease-in-out infinite alternate; }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 38s linear infinite; }
+
+/* Drop cap (proposal B) */
+.drop-cap::first-letter {
+  font-family: var(--font-script), cursive;
+  font-size: 5.5rem;
+  line-height: 0.85;
+  float: left;
+  padding: 0.2rem 0.6rem 0 0;
+  color: var(--pt-green);
+}
+
+/* Tape effect (editorial polaroid) */
+.tape::before, .tape::after {
+  content: "";
+  position: absolute;
+  width: 80px; height: 22px;
+  background: rgba(245,239,230,0.85);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  z-index: 10;
+}
+.tape::before { top: -10px; left: 12%; transform: rotate(-4deg); }
+.tape::after  { top: -10px; right: 12%; transform: rotate(3deg); }
