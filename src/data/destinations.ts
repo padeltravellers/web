@@ -214,8 +214,6 @@ const baliExperiences: Experience[] = [
     photos: [
       "/photos/bali/cafe/1.jpg",
       "/photos/bali/cafe/2.jpg",
-      "/photos/extra/comida/1.jpg",
-      "/photos/extra/comida/2.jpg",
     ],
     group: "actividades",
   },
