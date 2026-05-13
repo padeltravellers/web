@@ -67,10 +67,10 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-16 lg:pb-20">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
-              <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight">
+              <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.15] tracking-tight">
                 Viajes en Grupo
                 <br />
-                <span className="font-display font-medium italic">Pádel y Aventura</span>
+                <span className="font-script font-normal italic">Pádel y Aventura</span>
               </h1>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
                 <Link href="/bali" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base hover:bg-pt-cream transition">
