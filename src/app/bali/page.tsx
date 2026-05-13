@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import { contact } from "@/data/content";
-import { getDestination } from "@/data/destinations";
+import { getDestination, Experience } from "@/data/destinations";
 
 const liveAvailability: Record<number, number> = {
   1: 12, 2: 6, 3: 12, 4: 10, 5: 7, 6: 5, 7: 6, 8: 12,
@@ -19,26 +19,64 @@ const TAG_LABEL: Record<string, { label: string; color: string }> = {
   social:     { label: "Social",      color: "bg-pt-cream text-pt-ink" },
 };
 
-export const metadata = {
-  title: "Bali — destino Padel Travellers · 14 días",
-  description:
-    "14 días en Bali. Pádel en BPA, alojamiento privado con desayuno, 11 experiencias culturales y de naturaleza. 8 salidas en 2026, desde 1.725€. Itinerario día a día completo.",
+const GROUP_LABEL = {
+  padel:        { title: "Pádel",       kicker: "Pistas, clases y torneo" },
+  turismo:      { title: "Turismo",     kicker: "Templos, arrozales y mar" },
+  actividades:  { title: "Actividades", kicker: "Surf, café, aventura" },
 };
+
+export const metadata = {
+  title: "Bali — destino Padel Travellers · 15 días",
+  description:
+    "15 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2026, desde 1.725€. Itinerario completo día a día.",
+};
+
+function ExperienceCard({ e }: { e: Experience }) {
+  return (
+    <article className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="relative aspect-[4/3] overflow-hidden bg-pt-cream/40">
+        <Img
+          src={e.photos[0]}
+          alt={e.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width:1024px) 50vw, 33vw"
+        />
+        {e.photos.length > 1 && (
+          <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.18em] text-pt-green">
+            +{e.photos.length - 1} fotos
+          </div>
+        )}
+      </div>
+      <div className="p-6">
+        <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">{e.short}</p>
+        <h3 className="font-display font-bold text-xl text-pt-green mb-3 leading-tight">{e.title}</h3>
+        <p className="text-sm text-pt-muted leading-relaxed">{e.text}</p>
+      </div>
+    </article>
+  );
+}
 
 export default function BaliPage() {
   const d = getDestination("bali")!;
+  const groups = (["padel", "turismo", "actividades"] as const).map((g) => ({
+    key: g,
+    label: GROUP_LABEL[g],
+    items: d.experiences.filter((e) => e.group === g),
+  }));
+
   return (
     <>
       <Header transparent />
       <main className="text-pt-ink">
-        {/* HERO destino */}
+        {/* HERO */}
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
           <Img src={d.hero} alt={d.heroAlt} fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
-          <div className="absolute inset-0 flex items-end pb-20 lg:pb-28">
+          <div className="absolute inset-0 flex items-end pb-16 lg:pb-24">
             <div className="px-6 lg:px-12 max-w-6xl text-white fade-up">
               <p className="font-display uppercase tracking-[0.32em] text-[11px] mb-6 opacity-90">
-                Destino · 01 · {d.duration}
+                Destino · {d.duration}
               </p>
               <h1 className="font-display font-extralight text-6xl md:text-8xl lg:text-9xl leading-[0.88] tracking-tight">
                 Bali.
@@ -54,7 +92,7 @@ export default function BaliPage() {
               </div>
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <Link href="#itinerario" className="px-8 py-3.5 rounded-full bg-white text-pt-green font-display font-semibold text-sm hover:bg-pt-cream transition">
-                  Ver itinerario 14 días
+                  Ver itinerario día a día
                 </Link>
                 <Link href="#fechas" className="px-8 py-3.5 rounded-full border border-white/50 text-white font-display font-semibold text-sm hover:bg-white/10 transition">
                   Fechas y plazas
@@ -64,261 +102,162 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* INTRO BALI */}
-        <section className="px-6 lg:px-12 py-24 lg:py-36 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-14">
-            <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">Por qué Bali</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green">
-                La isla que entendimos primero.
+        {/* NUESTRA ISLA FAVORITA */}
+        <section className="px-6 lg:px-12 py-16 lg:py-24 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-5 order-2 lg:order-1">
+              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">Nuestra isla favorita</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green mb-7">
+                Donde empezó
+                <br />
+                <span className="font-script italic text-pt-clay">Padel Travellers.</span>
               </h2>
+              <p className="text-pt-muted text-lg leading-relaxed mb-5">
+                Bali entró en nuestra vida y ya no la dejó. Es el sitio donde el clima permite jugar todo el año,
+                la cultura tiene profundidad real, y dos semanas no son suficientes pero ya cambian algo.
+              </p>
+              <p className="text-pt-muted text-lg leading-relaxed">
+                Canggu es nuestro hogar durante el viaje: comunidad internacional, playas a 5 minutos, los
+                arrozales detrás. Y entre ellos, el club Bali Padel Academy donde jugamos cada día.
+              </p>
             </div>
-            <div className="lg:col-span-7 lg:pt-10 space-y-5 text-lg leading-relaxed text-pt-ink/85">
-              <p>{d.description}</p>
-              <p>
-                Bali permite hacer un viaje al ritmo de cada uno. Por la mañana puedes estar en pista; por la
-                tarde, en un templo del siglo XI; al día siguiente, surfeando o snorkelando. Y todo en una isla
-                lo bastante pequeña como para no perder media semana en traslados.
-              </p>
-              <p>
-                En estos años hemos llevado 54 viajeros y refinado el viaje cada vez. Lo que vas a leer abajo no
-                es teoría: es lo que funciona.
-              </p>
+            <div className="lg:col-span-7 order-1 lg:order-2">
+              <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                  <Img src="/photos/extra/bpa/aerial.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+                </div>
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mt-8">
+                  <Img src="/photos/extra/arrozales/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* HIGHLIGHTS DESTINO */}
-        <section className="bg-pt-cream/50 py-20 lg:py-28 px-6 lg:px-12">
+        {/* EXPERIENCIAS POR GRUPO */}
+        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4 text-center">Qué hace este viaje</p>
-            <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green text-center max-w-3xl mx-auto mb-14 leading-tight">
-              Cuatro razones para venir a Bali con nosotros.
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {d.highlights.map((h) => (
-                <div key={h.title} className="bg-white border border-pt-green/10 rounded-2xl p-7 hover:shadow-xl transition">
-                  <div className="w-12 h-12 rounded-xl bg-pt-green-pale flex items-center justify-center text-2xl mb-5">
-                    {h.icon}
-                  </div>
-                  <h3 className="font-display font-bold text-lg text-pt-ink mb-3">{h.title}</h3>
-                  <p className="text-sm text-pt-muted leading-relaxed">{h.text}</p>
-                </div>
-              ))}
+            <div className="text-center mb-12">
+              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Experiencias dentro del viaje</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
+                Pádel, turismo y aventura.
+              </h2>
+              <p className="text-pt-muted mt-5 max-w-2xl mx-auto leading-relaxed">
+                Catorce experiencias incluidas en el precio del viaje, repartidas en tres bloques que se
+                alternan a lo largo de los 15 días.
+              </p>
             </div>
-          </div>
-        </section>
 
-        {/* EXPERIENCIAS — qué vas a hacer en Bali */}
-        <section className="py-24 lg:py-36 px-6 lg:px-12 max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Experiencias incluidas</p>
-            <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
-              13 experiencias dentro del viaje.
-            </h2>
-            <p className="text-pt-muted mt-6 max-w-2xl mx-auto leading-relaxed">
-              Cada una con su carácter, su foto y su sitio en la semana. Todas incluidas en el precio.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-            {d.experiences.map((e) => (
-              <article
-                key={e.slug}
-                className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-pt-cream/40">
-                  <Img
-                    src={e.photos[0]}
-                    alt={e.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width:1024px) 50vw, 33vw"
-                  />
-                  {e.photos.length > 1 && (
-                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.18em] text-pt-green">
-                      +{e.photos.length - 1} fotos
-                    </div>
-                  )}
+            {groups.map((g, gi) => (
+              <div key={g.key} className={gi > 0 ? "mt-14" : ""}>
+                <div className="flex items-baseline justify-between mb-6 border-b border-pt-green/15 pb-4">
+                  <div>
+                    <h3 className="font-display font-semibold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
+                    <p className="text-pt-muted text-sm mt-1">{g.label.kicker}</p>
+                  </div>
+                  <span className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay">{g.items.length} experiencias</span>
                 </div>
-                <div className="p-6">
-                  <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">{e.short}</p>
-                  <h3 className="font-display font-bold text-xl text-pt-green mb-3 leading-tight">{e.title}</h3>
-                  <p className="text-sm text-pt-muted leading-relaxed">{e.text}</p>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                  {g.items.map((e) => <ExperienceCard key={e.slug} e={e} />)}
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </section>
 
-        {/* ITINERARIO DÍA A DÍA — estilo introtravel con tabs */}
-        <section id="itinerario" className="py-24 lg:py-36 px-6 lg:px-12 bg-pt-green-pale/40">
+        {/* ITINERARIO DÍA A DÍA */}
+        <section id="itinerario" className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-green-pale/40">
           <div className="max-w-4xl mx-auto">
-            <div className="mb-12">
+            <div className="mb-10">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Itinerario</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
-                14 días. Día a día.
+                15 días. Día a día.
               </h2>
               <p className="text-pt-muted text-lg max-w-2xl leading-relaxed">
-                Pádel en BPA, templos del sur, surf, Ubud, cascadas, snorkel y torneo final. Te llevamos a la
-                Bali que importa. El coordinador adapta detalles según el grupo y el tiempo.
+                Esto es un viaje tipo. El coordinador adapta detalles según el grupo, la climatología y los
+                planes paralelos que vayan surgiendo. La columna vertebral siempre es la misma.
               </p>
             </div>
 
-            {/* Tabs CSS-only */}
-            <input type="radio" name="itin-tabs" id="tab-w1" defaultChecked className="hidden peer/w1" />
-            <input type="radio" name="itin-tabs" id="tab-w2" className="hidden peer/w2" />
+            <input type="radio" name="itin-tabs" id="tab-w1" defaultChecked className="hidden" />
+            <input type="radio" name="itin-tabs" id="tab-w2" className="hidden" />
 
             <div className="itin-tabs grid grid-cols-2 gap-2 bg-white p-2 rounded-full shadow-sm border border-pt-green/10 mb-10 max-w-xl">
-              <label
-                htmlFor="tab-w1"
-                className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all"
-              >
+              <label htmlFor="tab-w1" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
                 Semana 1 · Días 1–7
               </label>
-              <label
-                htmlFor="tab-w2"
-                className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all"
-              >
-                Semana 2 · Días 8–14
+              <label htmlFor="tab-w2" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
+                Semana 2 · Días 8–15
               </label>
             </div>
 
             <div className="itin-panels">
-              {/* SEMANA 1 */}
-              <div id="panel-w1" className="itin-tab-panel space-y-3">
-                <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-5 pl-2">
-                  Llegada · primer pádel · templos del sur · Ubud
-                </p>
-                {d.itinerary.slice(0, 7).map((day, i) => (
-                  <details
-                    key={day.day}
-                    open={i === 0}
-                    className="bg-white rounded-full open:rounded-3xl border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm"
-                  >
-                    <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4 group">
-                      <div className="flex items-center gap-4">
-                        <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
-                          Día {day.day}
-                        </span>
-                        <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
-                        <span className="hidden md:inline font-display font-medium text-pt-ink/85">
-                          {day.title}
-                        </span>
-                      </div>
-                      <span
-                        className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0"
-                        aria-hidden
+              {(["w1", "w2"] as const).map((wk) => {
+                const slice = wk === "w1" ? d.itinerary.slice(0, 7) : d.itinerary.slice(7, 15);
+                const kicker = wk === "w1" ? "Llegada · primer pádel · Ubud · día libre Nusa Penida" : "Surf · Bali Este · norte · torneo final";
+                return (
+                  <div key={wk} id={`panel-${wk}`} className="itin-tab-panel space-y-3">
+                    <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-5 pl-2">{kicker}</p>
+                    {slice.map((day, i) => (
+                      <details
+                        key={day.day}
+                        open={wk === "w1" && i === 0}
+                        className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm rounded-3xl"
                       >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      </span>
-                    </summary>
-                    <div className="grid md:grid-cols-12 gap-0 border-t border-pt-green/10">
-                      <div className="md:col-span-7 p-6 md:p-8 md:order-1 order-2 flex flex-col">
-                        <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
-                        <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
-                        <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
-                        {day.highlights.length > 0 && (
-                          <ul className="space-y-2 mb-4">
-                            {day.highlights.map((h) => (
-                              <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                  <circle cx="12" cy="10" r="3" />
-                                </svg>
-                                {h}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        <div className="flex flex-wrap gap-2">
-                          {day.tags.map((t) => (
-                            <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
-                              {TAG_LABEL[t].label}
+                        <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-4">
+                            <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
+                              Día {day.day}
                             </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
-                        <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
-                          {day.weekday}
-                        </div>
-                      </div>
-                    </div>
-                  </details>
-                ))}
-              </div>
-
-              {/* SEMANA 2 */}
-              <div id="panel-w2" className="itin-tab-panel space-y-3">
-                <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-5 pl-2">
-                  Café · norte · Amed · torneo · despedida
-                </p>
-                {d.itinerary.slice(7, 14).map((day) => (
-                  <details
-                    key={day.day}
-                    className="bg-white rounded-full open:rounded-3xl border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm"
-                  >
-                    <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4 group">
-                      <div className="flex items-center gap-4">
-                        <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
-                          Día {day.day}
-                        </span>
-                        <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
-                        <span className="hidden md:inline font-display font-medium text-pt-ink/85">
-                          {day.title}
-                        </span>
-                      </div>
-                      <span
-                        className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0"
-                        aria-hidden
-                      >
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      </span>
-                    </summary>
-                    <div className="grid md:grid-cols-12 gap-0 border-t border-pt-green/10">
-                      <div className="md:col-span-7 p-6 md:p-8 md:order-1 order-2 flex flex-col">
-                        <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
-                        <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
-                        <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
-                        {day.highlights.length > 0 && (
-                          <ul className="space-y-2 mb-4">
-                            {day.highlights.map((h) => (
-                              <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                  <circle cx="12" cy="10" r="3" />
-                                </svg>
-                                {h}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        <div className="flex flex-wrap gap-2">
-                          {day.tags.map((t) => (
-                            <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
-                              {TAG_LABEL[t].label}
+                            <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
+                            <span className="hidden md:inline font-display font-medium text-pt-ink/85">
+                              {day.title}
                             </span>
-                          ))}
+                          </div>
+                          <span className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0" aria-hidden>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                          </span>
+                        </summary>
+                        <div className="grid md:grid-cols-12 gap-0 border-t border-pt-green/10">
+                          <div className="md:col-span-7 p-6 md:p-8 md:order-1 order-2 flex flex-col">
+                            <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
+                            <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
+                            <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5 flex-1">{day.description}</p>
+                            {day.highlights.length > 0 && (
+                              <ul className="space-y-2 mb-4">
+                                {day.highlights.map((h) => (
+                                  <li key={h} className="flex items-start gap-2.5 text-sm text-pt-ink/85">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pt-green shrink-0 mt-0.5">
+                                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                      <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    {h}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                            <div className="flex flex-wrap gap-2">
+                              {day.tags.map((t) => (
+                                <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>
+                                  {TAG_LABEL[t].label}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
+                            <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
+                          </div>
                         </div>
-                      </div>
-                      <div className="md:col-span-5 relative aspect-[4/3] md:aspect-auto md:min-h-[280px] md:order-2 order-1">
-                        <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 40vw" />
-                        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.22em] text-pt-green">
-                          {day.weekday}
-                        </div>
-                      </div>
-                    </div>
-                  </details>
-                ))}
-              </div>
+                      </details>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="mt-16 text-center">
+            <div className="mt-12 text-center">
               <Link href="/reservar" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Quiero reservar plaza Bali
               </Link>
@@ -326,140 +265,172 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* GALERÍA — masonry asimétrica */}
-        <section className="bg-pt-cream/40 py-20 lg:py-28 px-6 lg:px-12">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Galería</p>
-              <h2 className="font-display font-light text-3xl md:text-5xl text-pt-green leading-tight">
-                Bali en imágenes.
+        {/* DÓNDE NOS QUEDAMOS */}
+        <section className="py-16 lg:py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-5">
+              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">Dónde nos quedamos</p>
+              <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green mb-6">
+                Hotel boutique en Canggu.
               </h2>
-              <p className="text-pt-muted mt-4 max-w-xl mx-auto">
-                Una muestra del archivo del viaje. Fotos reales tomadas por el equipo y los viajeros.
+              <p className="text-pt-muted text-lg leading-relaxed mb-4">
+                Hotel pequeño, seleccionado a mano, en el corazón de Canggu. Piscina, terrazas, ambiente
+                tranquilo. Habitaciones privadas siempre — nunca compartirás con desconocidos. Si vienes en
+                pareja o grupo, compartís entre vosotros; si vienes solo, habitación individual.
               </p>
+              <p className="text-pt-muted text-lg leading-relaxed">
+                Desayuno incluido cada mañana con productos frescos de la zona. Cinco minutos andando del club
+                de pádel y diez del beach club más cercano.
+              </p>
+              <ul className="mt-7 space-y-2.5 text-sm text-pt-ink/85">
+                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Habitación privada</li>
+                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Desayuno incluido</li>
+                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Piscina y terraza</li>
+                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>5 min andando al club BPA</li>
+              </ul>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {d.gallery.map((src, i) => {
-                const big = i === 0 || i === 6;
-                const tall = i === 3 || i === 9;
-                return (
-                  <div
-                    key={src + i}
-                    className={`relative rounded-2xl overflow-hidden ${
-                      big ? "md:col-span-2 md:row-span-2 aspect-square" : tall ? "row-span-2 aspect-[3/5]" : "aspect-square"
-                    }`}
-                  >
-                    <Img
-                      src={src}
-                      alt=""
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width:768px) 50vw, 25vw"
-                    />
-                  </div>
-                );
-              })}
+            <div className="lg:col-span-7 grid grid-cols-2 gap-3 lg:gap-4">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Img src="/photos/villa/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mt-8">
+                <Img src="/photos/villa/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden -mt-4">
+                <Img src="/photos/villa/3.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mt-4">
+                <Img src="/photos/villa/4.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* INCLUIDO */}
-        <section className="py-24 px-6 lg:px-12 max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-            <div>
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Qué incluye</p>
-              <h2 className="font-display font-light text-3xl text-pt-green mb-8 leading-tight">Todo lo importante.</h2>
-              <ul className="space-y-4">
-                {d.included.map((i) => (
-                  <li key={i} className="flex gap-3 text-pt-ink leading-relaxed">
-                    <span className="text-pt-green font-bold mt-0.5">✓</span>
-                    <span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="md:border-l md:border-pt-green/15 md:pl-16">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">No incluye</p>
-              <h2 className="font-display font-light text-3xl text-pt-green mb-8 leading-tight">Lo dejamos a tu criterio.</h2>
-              <ul className="space-y-4">
-                {d.notIncluded.map((i) => (
-                  <li key={i} className="flex gap-3 text-pt-muted leading-relaxed">
-                    <span className="text-pt-clay">—</span>
-                    <span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {(d.weather || d.gettingThere) && (
-                <div className="mt-10 space-y-5">
-                  {d.weather && (
-                    <div>
-                      <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">Clima</p>
-                      <p className="text-sm text-pt-ink/80 leading-relaxed">{d.weather}</p>
-                    </div>
-                  )}
-                  {d.gettingThere && (
-                    <div>
-                      <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-clay mb-2">Cómo llegar</p>
-                      <p className="text-sm text-pt-ink/80 leading-relaxed">{d.gettingThere}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* FECHAS LIVE */}
-        <section id="fechas" className="py-24 px-6 lg:px-12 bg-white">
-          <div className="max-w-5xl mx-auto">
+        {/* INCLUIDO / NO INCLUIDO */}
+        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/40">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Salidas 2026</p>
+              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">El precio incluye</p>
               <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
-                Ocho fechas. Plazas actualizadas.
+                Lo que pagas, lo que no.
               </h2>
             </div>
-            <div className="bg-pt-cream/40 rounded-3xl border border-pt-green/10 overflow-hidden">
-              {d.trips.map((t, i) => {
+            <div className="grid md:grid-cols-5 gap-5">
+              <div className="md:col-span-3 bg-white rounded-3xl p-8 md:p-10 border border-pt-green/10 shadow-sm">
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-11 h-11 rounded-2xl bg-pt-green text-white flex items-center justify-center">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <h3 className="font-display font-bold text-2xl text-pt-green">Incluido</h3>
+                </div>
+                <ul className="space-y-4">
+                  {d.included.map((i) => (
+                    <li key={i} className="flex gap-3 text-pt-ink leading-relaxed border-b border-pt-green/10 pb-4 last:border-0 last:pb-0">
+                      <span className="text-pt-green text-xl leading-none shrink-0 mt-0.5">✓</span>
+                      <span>{i}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="md:col-span-2 bg-pt-ink/95 text-pt-cream rounded-3xl p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-7">
+                  <div className="w-11 h-11 rounded-2xl bg-pt-clay text-white flex items-center justify-center">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </div>
+                  <h3 className="font-display font-bold text-2xl text-pt-cream">No incluido</h3>
+                </div>
+                <ul className="space-y-4">
+                  {d.notIncluded.map((i) => (
+                    <li key={i} className="flex gap-3 leading-relaxed text-pt-cream/85 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                      <span className="text-pt-clay shrink-0">—</span>
+                      <span>{i}</span>
+                    </li>
+                  ))}
+                </ul>
+                {(d.weather || d.gettingThere) && (
+                  <div className="mt-7 pt-6 border-t border-white/10 space-y-4 text-sm text-pt-cream/80">
+                    {d.weather && (
+                      <div>
+                        <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/60 mb-1.5">Clima</p>
+                        <p className="leading-relaxed">{d.weather}</p>
+                      </div>
+                    )}
+                    {d.gettingThere && (
+                      <div>
+                        <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/60 mb-1.5">Cómo llegar</p>
+                        <p className="leading-relaxed">{d.gettingThere}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FECHAS — compacto en cards */}
+        <section id="fechas" className="py-16 lg:py-24 px-6 lg:px-12 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Calendario 2026</p>
+              <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
+                Ocho salidas.
+                <br />
+                <span className="font-script italic text-pt-clay">Elige la tuya.</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+              {d.trips.map((t) => {
                 const left = liveAvailability[t.n] ?? 12;
                 const fillPct = ((12 - left) / 12) * 100;
                 const urgent = left <= 6;
                 return (
-                  <div key={t.n} className={`grid grid-cols-12 items-center gap-3 lg:gap-6 px-5 lg:px-8 py-5 ${i < d.trips.length - 1 ? "border-b border-pt-green/10" : ""} ${urgent ? "bg-pt-clay/5" : ""}`}>
-                    <div className="col-span-2 lg:col-span-1 font-display font-bold text-2xl text-pt-green">{String(t.n).padStart(2, "0")}</div>
-                    <div className="col-span-7 lg:col-span-5">
-                      <div className="font-display font-semibold text-pt-ink">{t.range}</div>
-                      <div className="text-xs text-pt-muted">{t.month} · 14 días</div>
+                  <Link
+                    key={t.n}
+                    href="/reservar"
+                    className={`group flex flex-col rounded-2xl border p-5 hover:-translate-y-0.5 transition-all duration-300 ${
+                      urgent
+                        ? "bg-pt-clay/5 border-pt-clay/30 hover:border-pt-clay hover:shadow-xl"
+                        : "bg-white border-pt-green/10 hover:border-pt-green hover:shadow-xl"
+                    }`}
+                  >
+                    <div className="flex items-baseline justify-between mb-3">
+                      <span className={`font-display font-extralight text-4xl ${urgent ? "text-pt-clay" : "text-pt-green"}`}>
+                        {String(t.n).padStart(2, "0")}
+                      </span>
+                      <span className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-muted">{t.month}</span>
                     </div>
-                    <div className="col-span-12 lg:col-span-4 order-last lg:order-none">
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1 h-2 bg-pt-green-pale rounded-full overflow-hidden">
+                    <div className="font-display font-semibold text-pt-ink leading-tight">{t.range}</div>
+                    <div className="text-xs text-pt-muted mt-1 mb-4">15 días</div>
+                    <div className="mt-auto">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="flex-1 h-1.5 bg-pt-green-pale rounded-full overflow-hidden">
                           <div className={`h-full ${urgent ? "bg-pt-clay" : "bg-pt-green"}`} style={{ width: `${fillPct}%` }} />
                         </div>
-                        <span className={`text-xs font-display font-semibold whitespace-nowrap ${urgent ? "text-pt-clay" : "text-pt-green"}`}>
-                          {left <= 6 ? `Quedan ${left}` : "Disponible"}
-                        </span>
+                      </div>
+                      <div className={`text-[11px] font-display font-semibold ${urgent ? "text-pt-clay" : "text-pt-green"}`}>
+                        {urgent ? `🔥 Quedan ${left}` : "Disponible"}
                       </div>
                     </div>
-                    <Link href="/reservar" className={`col-span-3 lg:col-span-2 text-center text-xs font-display font-semibold px-3 py-2 rounded-full ${urgent ? "bg-pt-clay text-white" : "bg-pt-green text-white"} hover:opacity-90 transition`}>
-                      Reservar
-                    </Link>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
-            <p className="mt-6 text-sm text-pt-muted text-center">
+
+            <p className="mt-8 text-sm text-pt-muted text-center">
               ¿No sabes cuál te encaja? <a href={contact.whatsappLink} className="text-pt-green font-medium hover:underline">Pregúntale a Marta por WhatsApp</a>.
             </p>
           </div>
         </section>
 
         {/* PRECIO */}
-        <section className="py-24 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
+        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
           <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-pt-clay/20 blur-3xl" />
           <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
           <div className="relative max-w-6xl mx-auto">
-            <div className="text-center mb-14">
+            <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.32em] text-xs text-pt-cream/70">Precio Bali 2026</span>
               <h2 className="font-display font-extralight text-3xl md:text-5xl mt-4 leading-tight">
                 Un precio. Todo dentro.
@@ -497,10 +468,10 @@ export default function BaliPage() {
         </section>
 
         {/* CTA FINAL */}
-        <section className="py-28 px-6 lg:px-12 bg-pt-cream">
+        <section className="py-20 lg:py-24 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
             <p className="font-script text-pt-clay text-3xl mb-5 -rotate-2">cierra tu plaza</p>
-            <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95] mb-8">
+            <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">
               ¿Vamos a Bali?
             </h2>
             <p className="text-pt-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed">

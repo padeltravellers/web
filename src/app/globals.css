@@ -94,6 +94,23 @@ html { scroll-behavior: smooth; }
 }
 
 /* Tape effect (editorial polaroid) */
+/* Hero carousel — fade between background images */
+@keyframes hero-fade {
+  0%, 20%   { opacity: 0; transform: scale(1.05); }
+  25%, 45%  { opacity: 1; transform: scale(1.12); }
+  50%, 100% { opacity: 0; transform: scale(1.18); }
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: hero-fade 24s infinite;
+}
+.hero-slide:nth-child(1) { animation-delay: 0s; }
+.hero-slide:nth-child(2) { animation-delay: 6s; }
+.hero-slide:nth-child(3) { animation-delay: 12s; }
+.hero-slide:nth-child(4) { animation-delay: 18s; }
+
 /* Itinerary CSS-only tabs (semana 1 / semana 2) */
 .itin-tab-panel { display: none; }
 #tab-w1:checked ~ .itin-panels #panel-w1 { display: block; }
@@ -104,10 +121,12 @@ html { scroll-behavior: smooth; }
   color: var(--pt-cream);
 }
 
-/* Itinerary day accordion arrow */
+/* Itinerary day accordion */
 .day-summary { list-style: none; }
 .day-summary::-webkit-details-marker { display: none; }
 details[open] .day-arrow { transform: rotate(180deg); }
+.day-card { transition: box-shadow 0.3s, border-color 0.3s; }
+/* No animar border-radius porque causa jump al abrir */
 
 /* Tape effect (editorial polaroid) */
 .tape::before, .tape::after {
