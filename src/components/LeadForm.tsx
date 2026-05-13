@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_LEAD_FORM_URL ||
-  ""; // Google Apps Script Web App URL — set in workflow secrets
+  "https://script.google.com/macros/s/AKfycbyDoTntTQ9VVzWzSac6C7dxRHGIAyXtElrKRotFHhSvFsL2_wn6fpXnPle486W2fRnb/exec";
 
 export default function LeadForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
