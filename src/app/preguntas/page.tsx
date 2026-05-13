@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "¿Métodos de pago?",
-    a: "Aceptamos tarjeta vía Stripe (pasarela 100% segura, Visa, Mastercard, American Express) y también transferencia bancaria. La reserva se formaliza con 300€ y el resto antes del viaje.",
+    a: "Aceptamos tarjeta vía Stripe (pasarela 100% segura, Visa, Mastercard, American Express) y también transferencia bancaria. La reserva se formaliza con 500€ y el resto antes del viaje.",
   },
   {
     q: "¿Necesito visado?",

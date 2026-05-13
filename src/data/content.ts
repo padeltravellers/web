@@ -172,8 +172,8 @@ export const pricing = {
   baseNote: "por persona si vais 2 compartiendo habitación",
   solo: "1.975€",
   soloNote: "si viajas en solitario (suplemento individual 250€)",
-  deposit: "300€",
-  depositNote: "reserva. El resto se paga antes del viaje.",
+  deposit: "500€",
+  depositNote: "reserva. El resto se paga en dos plazos (1.000€ al confirmar el grupo, resto 30 días antes del viaje).",
 };
 
 export const faqs = [
