@@ -14,33 +14,23 @@ export const metadata = {
 const steps = [
   {
     n: "01",
-    title: "Llamada inicial",
-    text: "Videollamada para conocernos, explicarte el viaje en detalle y resolver cualquier duda o pregunta que tengas.",
+    title: "Eliges destino",
+    text: "Bali abierto, Filipinas en lista de espera. Si dudas, te ayudamos a elegir la fecha que mejor encaja.",
   },
   {
     n: "02",
-    title: "Reserva tu plaza",
-    text: "Confirmas la fecha, firmas el contrato y realizas el pago de reserva de 500€ para asegurar tu plaza en el grupo.",
+    title: "Hablamos contigo",
+    text: "Videollamada para conocernos, explicarte el viaje en detalle y resolver cualquier duda que tengas.",
   },
   {
     n: "03",
-    title: "Confirmación del grupo",
-    text: "Con 4 reservas se confirma el viaje. Es momento de comprar los vuelos — te ayudamos a conseguir las mejores combinaciones y tarifas.",
+    title: "Reserva 500€",
+    text: "Confirmas fecha, firmas el contrato y pagas 500€ para asegurar tu plaza. El resto se abona en plazos.",
   },
   {
     n: "04",
-    title: "Segundo pago",
-    text: "Realizas un segundo pago de 1.000€ al confirmar el grupo.",
-  },
-  {
-    n: "05",
-    title: "Llamada grupal",
-    text: "Organizamos un encuentro online para que el grupo se conozca, resolver dudas y ultimar detalles del viaje.",
-  },
-  {
-    n: "06",
-    title: "Último pago",
-    text: "30 días antes del viaje se realiza el pago restante. ¡Y a preparar la maleta!",
+    title: "Vives el viaje",
+    text: "El coordinador te espera al aterrizar y no te suelta hasta volver. A disfrutar.",
   },
 ];
 
@@ -67,18 +57,17 @@ export default function ReservarPage() {
         <section className="px-6 lg:px-12 pt-14 pb-12 lg:pt-20 lg:pb-16 max-w-5xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Cómo reservar</p>
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
-            ¿Te animas?
+            Cuatro pasos
             <br />
-            <span className="font-script italic font-normal text-pt-clay">Estos son los pasos</span>
+            <span className="font-script italic font-normal text-pt-clay">sin sorpresas</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-2xl mx-auto mt-7 leading-relaxed">
-            Sin sorpresas, en tu ritmo. Después de hablar contigo formalizamos la reserva con 500€ y luego se
-            paga en dos plazos más.
+            Sin sorpresas y a tu ritmo. Reserva con 500€ y el resto se paga en plazos antes del viaje.
           </p>
         </section>
 
         <section className="px-6 lg:px-12 pb-14 max-w-6xl mx-auto">
-          <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
+          <ol className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7">
             {steps.map((s) => (
               <li key={s.n} className="bg-white border border-pt-green/10 rounded-3xl p-7 flex flex-col hover:shadow-xl transition">
                 <span className="font-display font-medium text-5xl text-pt-clay/80 mb-4">{s.n}</span>
