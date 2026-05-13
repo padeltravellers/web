@@ -115,37 +115,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* STATS rediseñadas — cards con número grande y caja */}
-        <section className="bg-pt-cream/50 border-b border-pt-green/10">
-          <div className="max-w-6xl mx-auto px-6 lg:px-12 py-14 lg:py-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* STATS — estilo The Padel Retreat, minimal */}
+        <section className="bg-pt-green text-pt-cream py-14 lg:py-20 px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-3 gap-4 md:gap-8">
               {ptStats.map((s) => (
-                <div
-                  key={s.label}
-                  className="relative bg-white rounded-3xl p-8 lg:p-10 border border-pt-green/10 hover:border-pt-green hover:shadow-xl transition-all group overflow-hidden"
-                >
-                  <div className="absolute -right-6 -top-6 w-32 h-32 rounded-full bg-pt-green-pale opacity-50 group-hover:scale-125 transition-transform duration-500" />
-                  <div className="relative">
-                    <div className="flex items-baseline gap-1">
-                      {s.suffix && (
-                        <span className="font-display font-light text-3xl md:text-4xl text-pt-clay">{s.suffix}</span>
-                      )}
-                      <span className="font-display font-extralight text-7xl md:text-8xl text-pt-green tracking-tight leading-none">
-                        {s.value}
-                      </span>
-                    </div>
-                    <div className="font-display font-medium uppercase tracking-[0.22em] text-xs text-pt-muted mt-5">
-                      {s.label}
-                    </div>
+                <div key={s.label} className="text-center">
+                  <div className="flex items-start justify-center">
+                    {s.suffix && (
+                      <span className="font-display font-light text-3xl md:text-5xl text-pt-cream/70 mt-3 md:mt-5">{s.suffix}</span>
+                    )}
+                    <span className="font-display font-extralight text-7xl md:text-9xl tracking-tight leading-none">
+                      {s.value}
+                    </span>
+                  </div>
+                  <div className="font-display font-medium uppercase tracking-[0.28em] text-[10px] md:text-sm text-pt-cream/80 mt-4 md:mt-6">
+                    {s.label}
                   </div>
                 </div>
               ))}
             </div>
+            <p className="text-center font-display uppercase tracking-[0.18em] text-xs md:text-sm text-pt-cream/70 mt-12 md:mt-16 max-w-3xl mx-auto leading-relaxed">
+              Más que pádel. Más que un destino bonito. Más que unas vacaciones —<br className="hidden md:block" /> Padel Travellers es comunidad, deporte y un sitio para reconectar.
+            </p>
           </div>
         </section>
 
-        {/* ¿Qué es Padel Travellers? — copy genérico, título grande, fotos alineadas */}
-        <section className="px-6 lg:px-12 py-20 lg:py-28 max-w-7xl mx-auto">
+        {/* ¿Qué es Padel Travellers? */}
+        <section className="px-6 lg:px-12 py-16 lg:py-20 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
@@ -189,20 +186,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* DESTINOS — título más grande */}
-        <section id="destinos" className="bg-pt-cream/50 py-20 lg:py-28 px-6 lg:px-12">
+        {/* DESTINOS */}
+        <section id="destinos" className="bg-pt-cream/50 py-14 lg:py-20 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-              <div>
-                <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Destinos</span>
-                <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl mt-4 leading-[0.95] text-pt-green">
-                  Dónde viajamos.
-                </h2>
-              </div>
-              <p className="text-pt-muted max-w-md text-lg">
-                Empezamos en Bali porque era el destino que mejor conocíamos. Filipinas viene en 2027. Cada
-                destino, una temporada.
-              </p>
+            <div className="text-center mb-12">
+              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Destinos</span>
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl mt-4 leading-[0.95] text-pt-green">
+                Dónde viajamos.
+              </h2>
             </div>
             <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
               {destinations.map((d) => (
@@ -235,7 +226,7 @@ export default function Home() {
         </section>
 
         {/* ¿POR QUÉ ELEGIRNOS? — título grande */}
-        <section className="py-20 lg:py-28 px-6 lg:px-12 max-w-7xl mx-auto">
+        <section className="py-14 lg:py-20 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">¿Por qué elegirnos?</span>
             <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl mt-5 leading-[0.95] text-pt-green">
@@ -258,7 +249,7 @@ export default function Home() {
         </section>
 
         {/* CÓMO RESERVAR — título grande ya */}
-        <section className="bg-pt-green text-pt-cream py-20 lg:py-28 px-6 lg:px-12">
+        <section className="bg-pt-green text-pt-cream py-14 lg:py-20 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70">Cómo reservar</span>
@@ -291,7 +282,7 @@ export default function Home() {
         </section>
 
         {/* REVIEWS — embed Maps con CID real + cards */}
-        <section className="py-20 lg:py-28 px-6 lg:px-12">
+        <section className="py-14 lg:py-20 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
