@@ -72,13 +72,14 @@ export default function BaliPage() {
       <main className="text-pt-ink">
         {/* HERO con carousel */}
         <section className="relative h-[85svh] min-h-[600px] overflow-hidden">
-          {baliHeroSlides.map((s) => (
+          {baliHeroSlides.map((s, i) => (
             <div key={s.src} className="hero-slide">
               <Img
                 src={s.src}
                 alt={s.alt}
                 fill
-                priority
+                priority={i === 0}
+                loading={i === 0 ? undefined : "lazy"}
                 className="object-cover"
                 sizes="100vw"
                 style={(s as { position?: string }).position ? { objectPosition: (s as { position?: string }).position } : undefined}
