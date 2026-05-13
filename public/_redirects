@@ -17,13 +17,12 @@
 /gracias                  /           301
 /gracias/                 /           301
 
-# Legal pages stay (we'll re-create later)
-/politica-de-privacidad-y-proteccion-de-datos    /  301
-/politica-de-privacidad-y-proteccion-de-datos/   /  301
-/aviso-legal                                     /  301
-/aviso-legal/                                    /  301
-/politica-de-cookies                             /  301
-/politica-de-cookies/                            /  301
+# Legal pages — redirect old WP slugs to new clean ones
+/politica-de-privacidad-y-proteccion-de-datos    /privacidad/  301
+/politica-de-privacidad-y-proteccion-de-datos/   /privacidad/  301
+/aviso-legal-old                                 /aviso-legal/ 301
+/politica-de-cookies                             /cookies/     301
+/politica-de-cookies/                            /cookies/     301
 
 # Test page
 /test    /  301

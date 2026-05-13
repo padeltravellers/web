@@ -51,12 +51,13 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto border-t border-white/10 mt-14 pt-7 flex flex-col md:flex-row justify-between gap-3 text-xs text-pt-cream/50">
-        <span>© {new Date().getFullYear()} Padel Travellers. Todos los derechos reservados.</span>
-        <span>
-          Diseñado y construido en {new Date().getFullYear()}. ·{" "}
-          <Link href="/preview" className="hover:text-pt-cream/80">Propuestas de diseño</Link>
-        </span>
+      <div className="max-w-7xl mx-auto border-t border-white/10 mt-14 pt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-pt-cream/50">
+        <span>© {new Date().getFullYear()} Padel World Experience LLC. Todos los derechos reservados.</span>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link href="/aviso-legal" className="hover:text-pt-cream/80">Aviso legal</Link>
+          <Link href="/privacidad" className="hover:text-pt-cream/80">Privacidad</Link>
+          <Link href="/cookies" className="hover:text-pt-cream/80">Cookies</Link>
+        </div>
       </div>
     </footer>
   );
