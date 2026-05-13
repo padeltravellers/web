@@ -107,7 +107,7 @@ export default function BaliPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">Nuestra isla favorita</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green mb-7">
+              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-pt-green mb-7">
                 Donde empezó
                 <br />
                 <span className="font-script italic text-pt-clay">Padel Travellers.</span>
@@ -126,7 +126,7 @@ export default function BaliPage() {
                 <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
                   <Img src="/photos/extra/bpa/aerial.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
                 </div>
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mt-8">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
                   <Img src="/photos/extra/arrozales/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
                 </div>
               </div>
@@ -139,12 +139,14 @@ export default function BaliPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">Experiencias dentro del viaje</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
-                Pádel, turismo y aventura.
+              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl text-pt-green leading-[0.95]">
+                Pádel, turismo
+                <br />
+                <span className="font-script italic text-pt-clay">y aventura.</span>
               </h2>
               <p className="text-pt-muted mt-5 max-w-2xl mx-auto leading-relaxed">
-                Catorce experiencias incluidas en el precio del viaje, repartidas en tres bloques que se
-                alternan a lo largo de los 15 días.
+                Doce experiencias incluidas en el precio del viaje, repartidas en tres bloques que se alternan
+                a lo largo de los 15 días.
               </p>
             </div>
 
@@ -270,7 +272,7 @@ export default function BaliPage() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-6">Dónde nos quedamos</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl leading-tight text-pt-green mb-6">
+              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-pt-green mb-6">
                 Hotel boutique en Canggu.
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-4">
@@ -289,17 +291,17 @@ export default function BaliPage() {
                 <li className="flex gap-2.5"><span className="text-pt-green">✓</span>5 min andando al club BPA</li>
               </ul>
             </div>
-            <div className="lg:col-span-7 grid grid-cols-2 gap-3 lg:gap-4">
+            <div className="lg:col-span-7 grid grid-cols-2 grid-rows-2 gap-3 lg:gap-4">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Img src="/photos/villa/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mt-8">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Img src="/photos/villa/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden -mt-4">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Img src="/photos/villa/3.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mt-4">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <Img src="/photos/villa/4.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
             </div>
@@ -311,7 +313,7 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.32em] text-xs text-pt-clay mb-4">El precio incluye</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl text-pt-green leading-tight">
+              <h2 className="font-display font-light text-5xl md:text-6xl lg:text-7xl text-pt-green leading-[0.95]">
                 Lo que pagas, lo que no.
               </h2>
             </div>

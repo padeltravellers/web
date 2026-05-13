@@ -105,21 +105,6 @@ const baliExperiences: Experience[] = [
     ],
     group: "padel",
   },
-  {
-    slug: "torneo",
-    title: "Torneo del fin de semana",
-    short: "Compite con el grupo y otros internacionales",
-    text:
-      "Los clubs de pádel de Bali organizan torneos durante los fines de semana y nosotros no nos lo perdemos. Participaremos junto al resto de jugadores internacionales de la isla. Si no hay torneo externo, organizamos uno interno.",
-    photos: [
-      "/photos/extra/padel-action/5.jpg",
-      "/photos/extra/padel-action/6.jpg",
-      "/photos/extra/padel-action/7.jpg",
-      "/photos/extra/padel-action/8.jpg",
-    ],
-    group: "padel",
-  },
-
   // ===== TURISMO =====
   {
     slug: "ubud",
@@ -255,19 +240,6 @@ const baliExperiences: Experience[] = [
       "/photos/extra/playa/4.jpg",
       "/photos/extra/playa/5.jpg",
       "/photos/extra/atardecer/4.jpg",
-    ],
-    group: "actividades",
-  },
-  {
-    slug: "quad-cretya",
-    title: "Quad y piscinas Cretya (día libre)",
-    short: "Mañana aventura, tarde relax",
-    text:
-      "Aventura en quad por arrozales, túneles naturales y cueva con cascada en Ubud. Por la tarde, relax en las piscinas de Cretya Ubud, uno de los beach clubs más espectaculares del interior.",
-    photos: [
-      "/photos/extra/la-brisa/3.jpg",
-      "/photos/extra/la-brisa/4.jpg",
-      "/photos/extra/la-brisa/2.jpg",
     ],
     group: "actividades",
   },
