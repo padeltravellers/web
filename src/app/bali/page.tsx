@@ -21,9 +21,9 @@ const TAG_LABEL: Record<string, { label: string; color: string }> = {
 };
 
 const baliHeroSlides = [
-  { src: "/photos/hero/1-grupo.jpg", alt: "Grupo Padel Travellers en la playa" },
-  { src: "/photos/hero/2-pista.jpg", alt: "Partido de pádel nocturno" },
-  { src: "/photos/hero/3-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/1-piscina.jpg", alt: "Piscina del club sobre los arrozales" },
+  { src: "/photos/hero/2-nox.jpg", alt: "NOX Stadium — pista central BPA" },
+  { src: "/photos/hero/3-sunset.jpg", alt: "Atardecer en la costa de Bali" },
   { src: "/photos/hero/4-arrozales.jpg", alt: "Campos de arroz panorámicos de Bali" },
 ];
 
