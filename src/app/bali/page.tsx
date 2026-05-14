@@ -201,7 +201,6 @@ export default function BaliPage() {
                     {slice.map((day, i) => (
                       <details
                         key={day.day}
-                        open={wk === "w1" && i === 0}
                         className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm rounded-3xl"
                       >
                         <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4">
