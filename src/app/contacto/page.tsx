@@ -4,7 +4,7 @@ import LeadForm from "@/components/LeadForm";
 import { contact } from "@/data/content";
 
 export const metadata = {
-  title: "Contacto — Padel Travellers",
+  title: "Contacto",
   description: "Déjanos tus datos y te llamamos. Resolvemos cualquier duda sobre los viajes a Bali y Filipinas.",
 };
 

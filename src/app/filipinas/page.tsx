@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { contact } from "@/data/content";
 
 export const metadata = {
-  title: "Filipinas — próximo destino Padel Travellers",
+  title: "Filipinas · próximo destino",
   description: "Filipinas será nuestro próximo destino. Te avisamos cuando abramos fechas.",
 };
 

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { contact } from "@/data/content";
 
 export const metadata = {
-  title: "Preguntas frecuentes — Padel Travellers",
+  title: "Preguntas frecuentes",
   description: "Todas las dudas habituales del viaje: seguro, métodos de pago, visado, vuelos, niveles, vacunas y pasaporte.",
 };
 

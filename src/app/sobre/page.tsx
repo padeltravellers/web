@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { contact } from "@/data/content";
 
 export const metadata = {
-  title: "Sobre nosotros — Padel Travellers",
+  title: "Sobre nosotros",
   description: "Quiénes somos, cómo nació Padel Travellers, qué nos diferencia. Equipo pequeño con base en España y operativa en Bali.",
 };
 
