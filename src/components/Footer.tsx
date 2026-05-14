@@ -15,7 +15,7 @@ export default function Footer() {
             Viajes en grupo a Bali con pádel. 14 días, 8–12 personas, alojamiento premium, coordinador
             español. Hechos con calma, vividos con intensidad.
           </p>
-          <p className="font-script text-pt-cream text-lg">Bali con pádel.</p>
+          <p className="font-script text-pt-cream text-lg">Bali con pádel</p>
         </div>
 
         <div className="md:col-span-3">

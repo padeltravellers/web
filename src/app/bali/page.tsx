@@ -112,10 +112,10 @@ export default function BaliPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestra isla favorita</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-7">
+              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
                 Donde empezó
                 <br />
-                <span className="font-script italic text-pt-clay">Padel Travellers.</span>
+                <span className="font-script italic text-pt-clay inline-block mt-1">Padel Travellers</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Bali entró en nuestra vida y ya no la dejó. Es el sitio donde el clima permite jugar todo el año,
@@ -348,7 +348,7 @@ export default function BaliPage() {
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
-                <span className="font-script italic text-pt-clay">Elige la tuya.</span>
+                <span className="font-script italic text-pt-clay">Elige la tuya</span>
               </h2>
             </div>
 
