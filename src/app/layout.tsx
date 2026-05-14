@@ -159,6 +159,122 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        {/* Auto-tracking — clicks, scroll depth, WhatsApp, outbound */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                var origin = window.location.hostname;
+
+                function track(eventName, params) {
+                  try {
+                    if (typeof window.gtag === 'function') {
+                      window.gtag('event', eventName, params || {});
+                    }
+                  } catch (e) {}
+                }
+
+                // === Click tracking ===
+                document.addEventListener('click', function(e) {
+                  var el = e.target;
+                  while (el && el !== document) {
+                    var tag = el.tagName;
+                    if (tag === 'A' || tag === 'BUTTON') break;
+                    el = el.parentNode;
+                  }
+                  if (!el || el === document) return;
+
+                  var text = (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 80);
+                  var href = el.getAttribute('href') || '';
+                  var section = '';
+                  var ancestor = el.closest('section');
+                  if (ancestor && ancestor.id) section = ancestor.id;
+
+                  // WhatsApp
+                  if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
+                    track('whatsapp_click', {
+                      link_text: text,
+                      link_url: href,
+                      page_path: window.location.pathname,
+                      section: section
+                    });
+                    return;
+                  }
+
+                  // Email
+                  if (href.indexOf('mailto:') === 0) {
+                    track('email_click', {
+                      link_text: text,
+                      page_path: window.location.pathname
+                    });
+                    return;
+                  }
+
+                  // Phone
+                  if (href.indexOf('tel:') === 0) {
+                    track('phone_click', {
+                      link_text: text,
+                      page_path: window.location.pathname
+                    });
+                    return;
+                  }
+
+                  // Outbound link
+                  if (href.indexOf('http') === 0 && href.indexOf(origin) === -1) {
+                    track('outbound_click', {
+                      link_text: text,
+                      link_url: href,
+                      page_path: window.location.pathname
+                    });
+                    return;
+                  }
+
+                  // Internal CTA (a or button)
+                  if (text) {
+                    track('cta_click', {
+                      link_text: text,
+                      link_url: href,
+                      element: el.tagName.toLowerCase(),
+                      page_path: window.location.pathname,
+                      section: section
+                    });
+                  }
+                }, { passive: true, capture: true });
+
+                // === Scroll depth ===
+                var depths = [25, 50, 75, 100];
+                var fired = {};
+                function checkScroll() {
+                  var docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+                  if (docH <= 0) return;
+                  var pct = Math.round((window.scrollY / docH) * 100);
+                  depths.forEach(function(d) {
+                    if (pct >= d && !fired[d]) {
+                      fired[d] = true;
+                      track('scroll_depth', { percent: d, page_path: window.location.pathname });
+                    }
+                  });
+                }
+                window.addEventListener('scroll', function() {
+                  if (window._scrollT) return;
+                  window._scrollT = setTimeout(function() { window._scrollT = null; checkScroll(); }, 400);
+                }, { passive: true });
+
+                // === Form interactions ===
+                document.addEventListener('focusin', function(e) {
+                  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
+                    var name = e.target.getAttribute('name') || 'unknown';
+                    if (!window._formStarted) {
+                      window._formStarted = true;
+                      track('form_start', { field: name, page_path: window.location.pathname });
+                    }
+                  }
+                }, { passive: true });
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-white text-pt-ink">{children}</body>
     </html>
