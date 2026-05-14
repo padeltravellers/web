@@ -9,16 +9,25 @@ export default function Header({ transparent = false }: { transparent?: boolean 
   const iconBtn = transparent
     ? "w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center transition"
     : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";
+  // Logo grande con margen negativo solo cuando hay hero a sangre detrás
+  // En páginas sin hero (contacto, sobre, etc) compacto y sin overflow
+  const containerClass = transparent
+    ? "max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 pt-0 pb-0 -mt-8 lg:-mt-12 flex items-center justify-between"
+    : "max-w-[1600px] mx-auto pl-4 lg:pl-8 pr-5 lg:pr-10 py-3 flex items-center justify-between";
+  const logoClass = transparent
+    ? "object-contain h-56 md:h-72 lg:h-80 w-auto brightness-0 invert"
+    : "object-contain h-20 md:h-24 lg:h-28 w-auto";
+
   return (
     <header className={base}>
-      <div className="max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 pt-0 pb-0 -mt-8 lg:-mt-12 flex items-center justify-between">
-        <Link href="/" className="flex items-center group no-tap-highlight -ml-2 lg:-ml-3">
+      <div className={containerClass}>
+        <Link href="/" className={`flex items-center group no-tap-highlight ${transparent ? "-ml-2 lg:-ml-3" : ""}`}>
           <Img
             src="/logos/logo-main.png"
             alt="Padel Travellers"
             width={400}
             height={400}
-            className={`object-contain h-56 md:h-72 lg:h-80 w-auto ${transparent ? "brightness-0 invert" : ""}`}
+            className={logoClass}
           />
         </Link>
         <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">
