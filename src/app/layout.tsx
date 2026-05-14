@@ -91,7 +91,7 @@ const orgJsonLd = {
   image: SITE_OG,
   description:
     "Viajes en grupo que combinan pádel y aventura. Bali 2026, Filipinas 2027. Alojamiento privado, coordinador español.",
-  telephone: "+34 686 176 386",
+  telephone: "+34 614 47 60 68",
   email: "info@padeltravellers.com",
   address: { "@type": "PostalAddress", addressCountry: "ES" },
   areaServed: ["ES", "AD", "ID", "PH"],
