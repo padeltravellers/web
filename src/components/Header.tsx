@@ -16,7 +16,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
     : "max-w-[1600px] mx-auto pl-4 lg:pl-8 pr-5 lg:pr-10 py-3 flex items-center justify-between";
   const logoClass = transparent
     ? "object-contain h-56 md:h-72 lg:h-80 w-auto brightness-0 invert"
-    : "object-contain h-20 md:h-24 lg:h-28 w-auto";
+    : "object-contain h-28 md:h-36 lg:h-40 w-auto";
 
   return (
     <header className={base}>
