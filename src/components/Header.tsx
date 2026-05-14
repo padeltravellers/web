@@ -13,10 +13,10 @@ export default function Header({ transparent = false }: { transparent?: boolean 
   // En páginas sin hero (contacto, sobre, etc) compacto y sin overflow
   const containerClass = transparent
     ? "max-w-[1600px] mx-auto pl-1 lg:pl-2 pr-5 lg:pr-10 pt-0 pb-0 -mt-8 lg:-mt-12 flex items-center justify-between"
-    : "max-w-[1600px] mx-auto pl-4 lg:pl-8 pr-5 lg:pr-10 py-3 flex items-center justify-between";
+    : "max-w-[1600px] mx-auto pl-3 lg:pl-6 pr-5 lg:pr-10 -my-1 lg:-my-2 flex items-center justify-between";
   const logoClass = transparent
     ? "object-contain h-56 md:h-72 lg:h-80 w-auto brightness-0 invert"
-    : "object-contain h-28 md:h-36 lg:h-40 w-auto";
+    : "object-contain h-32 md:h-44 lg:h-52 w-auto";
 
   return (
     <header className={base}>
