@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Inter, Petit_Formal_Script, Eczar } from "next/font/google";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
 const jost = Jost({
@@ -276,7 +277,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-pt-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-pt-ink">
+        {children}
+        <FloatingWhatsApp />
+      </body>
     </html>
   );
 }

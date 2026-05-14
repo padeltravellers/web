@@ -7,7 +7,7 @@ import { contact, pricing } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
 export const metadata = {
-  title: "Reservar plaza",
+  title: "Solicitar plaza",
   description: "Cómo reservar tu plaza paso a paso: llamada inicial, reserva 500€, confirmación del grupo, segundo pago, llamada grupal y pago final.",
 };
 

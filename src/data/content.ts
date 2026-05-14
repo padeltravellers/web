@@ -14,7 +14,7 @@ export const hero = {
   title: "Donde el pádel se vuelve viaje.",
   subtitle:
     "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y una persona del equipo PT contigo de principio a fin.",
-  ctaPrimary: { label: "Reservar plaza (500€)", href: "#reservar" },
+  ctaPrimary: { label: "Solicitar plaza (500€)", href: "#reservar" },
   ctaSecondary: { label: "Ver fechas 2026", href: "#fechas" },
 };
 

@@ -2,7 +2,6 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StickyMobileCta from "@/components/StickyMobileCta";
 import PhotoCarousel from "@/components/PhotoCarousel";
 import PdfLeadMagnet from "@/components/PdfLeadMagnet";
 import { contact } from "@/data/content";
@@ -420,7 +419,7 @@ export default function BaliPage() {
                 </div>
                 <p className="text-pt-cream/80 text-sm mb-6 flex-1">Compartiendo habitación con tu pareja, amigo o familiar.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-sm hover:bg-white transition">
-                  Reservar plaza
+                  Solicitar plaza
                 </Link>
               </div>
               <div className="bg-white text-pt-ink rounded-3xl p-9">
@@ -431,7 +430,7 @@ export default function BaliPage() {
                 </div>
                 <p className="text-pt-muted text-sm mb-6">Suplemento individual de 250€. Tu habitación, tu llave.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
-                  Reservar plaza
+                  Solicitar plaza
                 </Link>
               </div>
             </div>
@@ -464,7 +463,6 @@ export default function BaliPage() {
         </section>
       </main>
       <Footer />
-      <StickyMobileCta label="Reservar Bali" />
     </>
   );
 }

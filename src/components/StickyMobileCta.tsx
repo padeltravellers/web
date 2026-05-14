@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function StickyMobileCta({ label = "Reservar plaza", price = "500€" }: { label?: string; price?: string }) {
+export default function StickyMobileCta({ label = "Solicitar plaza", price = "500€" }: { label?: string; price?: string }) {
   return (
     <div className="md:hidden fixed bottom-4 inset-x-4 z-40">
       <Link

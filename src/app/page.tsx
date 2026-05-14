@@ -2,7 +2,6 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StickyMobileCta from "@/components/StickyMobileCta";
 import TrustindexReviews from "@/components/TrustindexReviews";
 import { contact } from "@/data/content";
 import { destinations } from "@/data/destinations";
@@ -345,7 +344,6 @@ export default function Home() {
         </section>
       </main>
       <Footer />
-      <StickyMobileCta />
     </>
   );
 }
