@@ -23,7 +23,7 @@ const heroSlides = [
 const ptStats = [
   { value: "3", label: "Años organizando", suffix: "" },
   { value: "7", label: "Viajes completados", suffix: "" },
-  { value: "54", label: "Viajeros con nosotros", suffix: "+" },
+  { value: "54", label: "Viajeros", suffix: "+" },
 ];
 
 const pillars = [
