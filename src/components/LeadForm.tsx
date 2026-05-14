@@ -87,7 +87,7 @@ export default function LeadForm() {
           ) : (
             <>
               Te contactamos en menos de 24h por WhatsApp o email. Mientras tanto, si prefieres adelantar la
-              conversación, escríbenos directamente al +34 641 12 68 87.
+              conversación, escríbenos directamente al +34 614 47 60 68.
             </>
           )}
         </p>

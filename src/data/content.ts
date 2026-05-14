@@ -242,8 +242,8 @@ export const stats = [
 ];
 
 export const contact = {
-  whatsapp: "+34 641 12 68 87",
-  whatsappLink: "https://wa.me/34641126887",
+  whatsapp: "+34 614 47 60 68",
+  whatsappLink: "https://wa.me/34614476068",
   email: "info@padeltravellers.com",
   instagram: "https://instagram.com/padeltravellers",
 };
