@@ -20,31 +20,25 @@ export default function PdfLeadMagnet({
   title,
   kicker,
 }: Props) {
-  // === VARIANT: dark (fondo verde profundo) ===
+  // === VARIANT: dark (fondo verde profundo) — COMPACTO ===
   if (variant === "dark") {
     return (
-      <div className="bg-pt-green text-pt-cream rounded-3xl p-8 md:p-12 relative overflow-hidden">
-        <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-pt-clay/20 blur-3xl" />
-        <div className="relative max-w-2xl">
-          <p className="font-display uppercase tracking-[0.26em] text-xs md:text-sm font-semibold text-pt-cream/70 mb-4">
-            {kicker || "Programa completo"}
-          </p>
-          <h3 className="font-display font-medium text-3xl md:text-5xl leading-[1.05] mb-5">
-            {title || (
-              <>
-                Recibe el dossier
-                <br />
-                <span className="font-script italic font-normal text-pt-cream">en tu email</span>
-              </>
-            )}
-          </h3>
-          <p className="text-pt-cream/85 mb-7 leading-relaxed max-w-lg">
-            PDF de 30 páginas con todo: día a día, hotel, club, fechas, precios y política de cancelación.
-            Déjanos tu contacto y se te abre al instante.
-          </p>
+      <div className="bg-pt-green text-pt-cream rounded-2xl p-6 md:p-7 relative overflow-hidden">
+        <div className="absolute -right-20 -top-20 w-56 h-56 rounded-full bg-pt-clay/20 blur-3xl" />
+        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div className="md:flex-1">
+            <p className="font-display uppercase tracking-[0.22em] text-[10px] md:text-xs font-semibold text-pt-cream/70 mb-2">
+              {kicker || "Programa completo · PDF"}
+            </p>
+            <h3 className="font-display font-medium text-xl md:text-2xl leading-snug">
+              {title || (
+                <>Recibe el dossier completo del viaje <span className="font-script italic font-normal text-pt-cream">al instante</span></>
+              )}
+            </h3>
+          </div>
           <Link
             href={CTA_HREF}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-bold text-base hover:bg-white transition"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-bold text-sm md:text-base hover:bg-white transition shrink-0 self-start md:self-auto"
           >
             Quiero el programa
             <span aria-hidden>→</span>

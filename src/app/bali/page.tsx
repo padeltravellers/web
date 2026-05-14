@@ -288,14 +288,10 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* PDF LEAD MAGNET — variante dark, alto contraste tras día a día */}
-        <section className="px-6 lg:px-12 py-10 lg:py-12">
+        {/* PDF LEAD MAGNET — compacto tras día a día */}
+        <section className="px-6 lg:px-12 py-6 lg:py-8">
           <div className="max-w-6xl mx-auto">
-            <PdfLeadMagnet
-              variant="dark"
-              kicker="¿Quieres todo el detalle?"
-              title={<>Recibe el dossier completo<br/><span className="font-script italic font-normal text-pt-cream">en tu email</span></>}
-            />
+            <PdfLeadMagnet variant="dark" kicker="¿Quieres todo el detalle? · PDF" />
           </div>
         </section>
 
