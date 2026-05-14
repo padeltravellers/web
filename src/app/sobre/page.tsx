@@ -42,7 +42,7 @@ export default function SobrePage() {
       <Header />
       <main className="text-pt-ink">
         {/* HERO */}
-        <section className="px-6 lg:px-12 pt-12 pb-14 lg:pt-20 lg:pb-20 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-12 pt-12 pb-10 lg:pt-14 lg:pb-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-7">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-7">Sobre nosotros</p>
@@ -68,7 +68,7 @@ export default function SobrePage() {
         </section>
 
         {/* PRINCIPIOS */}
-        <section className="px-6 lg:px-12 py-14 lg:py-20 max-w-6xl mx-auto">
+        <section className="px-6 lg:px-12 py-10 lg:py-10 max-w-6xl mx-auto">
           <div className="mb-14">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Filosofía</p>
             <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green max-w-3xl">
@@ -91,7 +91,7 @@ export default function SobrePage() {
         </section>
 
         {/* CTA */}
-        <section className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-cream">
+        <section className="py-10 lg:py-10 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green mb-6 leading-tight">
               ¿Te encajan estos principios?

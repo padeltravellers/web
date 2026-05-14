@@ -54,7 +54,7 @@ export default function ReservarPage() {
     <>
       <Header />
       <main className="text-pt-ink">
-        <section className="px-6 lg:px-12 pt-14 pb-12 lg:pt-20 lg:pb-16 max-w-5xl mx-auto text-center">
+        <section className="px-6 lg:px-12 pt-14 pb-12 lg:pt-14 lg:pb-12 max-w-5xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Cómo reservar</p>
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
             Cuatro pasos
@@ -66,7 +66,7 @@ export default function ReservarPage() {
           </p>
         </section>
 
-        <section className="px-6 lg:px-12 pb-14 max-w-6xl mx-auto">
+        <section className="px-6 lg:px-12 pb-10 max-w-6xl mx-auto">
           <ol className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7">
             {steps.map((s) => (
               <li key={s.n} className="bg-white border border-pt-green/10 rounded-3xl p-7 flex flex-col hover:shadow-xl transition">
@@ -79,7 +79,7 @@ export default function ReservarPage() {
         </section>
 
         {/* DESTINOS */}
-        <section className="bg-pt-cream/50 py-14 lg:py-20 px-6 lg:px-12">
+        <section className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5 text-center">Elige destino</p>
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green text-center leading-[0.95] mb-12">
@@ -114,7 +114,7 @@ export default function ReservarPage() {
         </section>
 
         {/* PRECIO + Política de cancelación */}
-        <section className="py-14 lg:py-20 px-6 lg:px-12">
+        <section className="py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-5">
             <div className="bg-pt-green text-white rounded-3xl p-9 md:p-12 relative overflow-hidden">
               <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-pt-clay/20 blur-3xl" />
@@ -167,7 +167,7 @@ export default function ReservarPage() {
         </section>
 
         {/* FORM DE CONTACTO */}
-        <section className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-cream">
+        <section className="py-10 lg:py-10 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Empieza por aquí</p>

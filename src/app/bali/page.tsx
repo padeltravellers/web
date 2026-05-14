@@ -87,7 +87,7 @@ export default function BaliPage() {
             </div>
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
-          <div className="absolute inset-0 flex items-end pb-16 lg:pb-24">
+          <div className="absolute inset-0 flex items-end pb-12 lg:pb-12">
             <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Bali
@@ -108,7 +108,7 @@ export default function BaliPage() {
         </section>
 
         {/* NUESTRA ISLA FAVORITA */}
-        <section className="px-6 lg:px-12 py-16 lg:py-24 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-12 py-12 lg:py-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestra isla favorita</p>
@@ -140,7 +140,7 @@ export default function BaliPage() {
         </section>
 
         {/* EXPERIENCIAS POR GRUPO */}
-        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/30">
+        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 max-w-2xl mx-auto">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias</p>
@@ -165,7 +165,7 @@ export default function BaliPage() {
         </section>
 
         {/* ITINERARIO DÍA A DÍA */}
-        <section id="itinerario" className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-green-pale/40">
+        <section id="itinerario" className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green-pale/40">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Itinerario</p>
@@ -245,7 +245,7 @@ export default function BaliPage() {
         </section>
 
         {/* NUESTRO HOGAR */}
-        <section className="py-16 lg:py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+        <section className="py-12 lg:py-12 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestro hogar</p>
@@ -288,7 +288,7 @@ export default function BaliPage() {
         </section>
 
         {/* INCLUIDO / NO INCLUIDO */}
-        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-cream/40">
+        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/40">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">El precio incluye</p>
@@ -335,7 +335,7 @@ export default function BaliPage() {
         </section>
 
         {/* FECHAS — compacto en cards */}
-        <section id="fechas" className="py-16 lg:py-24 px-6 lg:px-12 bg-white">
+        <section id="fechas" className="py-12 lg:py-12 px-6 lg:px-12 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Calendario 2026</p>
@@ -391,7 +391,7 @@ export default function BaliPage() {
         </section>
 
         {/* PRECIO */}
-        <section className="py-16 lg:py-24 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
+        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
           <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-pt-clay/20 blur-3xl" />
           <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
           <div className="relative max-w-6xl mx-auto">
@@ -436,7 +436,7 @@ export default function BaliPage() {
         </section>
 
         {/* CTA FINAL */}
-        <section className="py-20 lg:py-24 px-6 lg:px-12 bg-pt-cream">
+        <section className="py-10 lg:py-12 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
             <p className="font-script text-pt-clay text-3xl mb-5 -rotate-2">cierra tu plaza</p>
             <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">

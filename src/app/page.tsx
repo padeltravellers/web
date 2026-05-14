@@ -76,7 +76,7 @@ export default function Home() {
             </div>
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
-          <div className="absolute inset-0 flex items-end pb-16 lg:pb-20">
+          <div className="absolute inset-0 flex items-end pb-12 lg:pb-10">
             <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
               <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.15] tracking-tight">
                 Viajes en Grupo
@@ -96,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* STATS — compacto */}
-        <section className="bg-pt-cream py-12 lg:py-16 px-6 lg:px-12">
+        <section className="bg-pt-cream py-12 lg:py-12 px-6 lg:px-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="grid grid-cols-3 items-end gap-4 md:gap-8 divide-x divide-pt-green/25">
               {ptStats.map((s) => (
@@ -119,7 +119,7 @@ export default function Home() {
         </section>
 
         {/* ¿Qué es Padel Travellers? */}
-        <section className="px-6 lg:px-12 py-14 lg:py-20 max-w-7xl mx-auto">
+        <section className="px-6 lg:px-12 py-10 lg:py-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
@@ -164,7 +164,7 @@ export default function Home() {
         </section>
 
         {/* DESTINOS */}
-        <section id="destinos" className="bg-pt-cream/50 py-14 lg:py-20 px-6 lg:px-12">
+        <section id="destinos" className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Destinos</span>
@@ -220,7 +220,7 @@ export default function Home() {
         </section>
 
         {/* ¿POR QUÉ ELEGIRNOS? — con foto en cada card */}
-        <section className="py-14 lg:py-20 px-6 lg:px-12 max-w-7xl mx-auto">
+        <section className="py-10 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">¿Por qué elegirnos?</span>
             <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-5 leading-[0.95] text-pt-green">
@@ -245,7 +245,7 @@ export default function Home() {
         </section>
 
         {/* CÓMO RESERVAR */}
-        <section className="bg-pt-green text-pt-cream py-14 lg:py-20 px-6 lg:px-12">
+        <section className="bg-pt-green text-pt-cream py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
@@ -278,7 +278,7 @@ export default function Home() {
         </section>
 
         {/* REVIEWS — Featurable widget (real Google reviews) */}
-        <section className="py-14 lg:py-20 px-6 lg:px-12">
+        <section className="py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
@@ -317,7 +317,7 @@ export default function Home() {
         </section>
 
         {/* CTA FINAL */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-pt-ink text-white">
+        <section className="relative py-10 lg:py-18 overflow-hidden bg-pt-ink text-white">
           <div className="absolute inset-0">
             <Img src="/photos/extra/atardecer/3.jpg" alt="" fill className="object-cover opacity-35" />
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />

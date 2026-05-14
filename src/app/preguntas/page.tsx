@@ -48,7 +48,7 @@ export default function PreguntasPage() {
     <>
       <Header />
       <main className="text-pt-ink">
-        <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-20 lg:pb-12 max-w-4xl mx-auto text-center">
+        <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-14 lg:pb-12 max-w-4xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Preguntas frecuentes</p>
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
             Lo que nos
@@ -57,7 +57,7 @@ export default function PreguntasPage() {
           </h1>
         </section>
 
-        <section className="px-6 lg:px-12 pb-16 max-w-3xl mx-auto">
+        <section className="px-6 lg:px-12 pb-12 max-w-3xl mx-auto">
           <div className="space-y-3">
             {faqs.map((f, i) => (
               <details
@@ -80,7 +80,7 @@ export default function PreguntasPage() {
           </div>
         </section>
 
-        <section className="py-14 lg:py-20 px-6 lg:px-12 bg-pt-cream">
+        <section className="py-10 lg:py-10 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green leading-tight mb-6">
               ¿No has encontrado tu pregunta?

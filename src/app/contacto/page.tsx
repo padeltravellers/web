@@ -13,7 +13,7 @@ export default function ContactoPage() {
     <>
       <Header />
       <main className="text-pt-ink">
-        <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-20 lg:pb-12 max-w-3xl mx-auto text-center">
+        <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-14 lg:pb-12 max-w-3xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">
             ¿Hablamos?
           </p>
@@ -28,7 +28,7 @@ export default function ContactoPage() {
           </p>
         </section>
 
-        <section className="px-6 lg:px-12 pb-16 lg:pb-24">
+        <section className="px-6 lg:px-12 pb-12 lg:pb-12">
           <div className="max-w-3xl mx-auto">
             <LeadForm />
 

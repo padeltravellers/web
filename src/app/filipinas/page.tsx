@@ -38,7 +38,7 @@ export default function FilipinasPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-20 px-6 lg:px-12 bg-pt-cream text-center">
+        <section className="py-12 lg:py-10 px-6 lg:px-12 bg-pt-cream text-center">
           <div className="max-w-3xl mx-auto">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Mientras tanto</p>
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green leading-[0.95] mb-6">
