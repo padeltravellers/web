@@ -34,6 +34,14 @@ const proposals = [
     description: "Dark mode, sin nav, sin cards. Capítulos pantalla completa, tipografía oversize, timeline horizontal, chat bubbles. Para comparar contra la web actual.",
     hero: "/photos/bali/tanah-lot/1.jpg",
   },
+  {
+    slug: "e",
+    name: "Pantallas · Brand intacto",
+    vibe: "Mismo brand, otra estructura",
+    palette: ["#F5EFE6", "#0E3B2D", "#B8543A"],
+    description: "Cream/verde/clay y tipografías como la actual, pero estructura nueva: 7 pantallas completas en lugar de scroll largo. Una idea por pantalla, mucho espacio.",
+    hero: "/photos/hero/1-piscina.jpg",
+  },
 ];
 
 export const metadata = { title: "Propuestas de diseño · Padel Travellers (preview interno)" };
