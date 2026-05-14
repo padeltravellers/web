@@ -203,12 +203,12 @@ export default function BaliPage() {
                         className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm rounded-3xl"
                       >
                         <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-4">
-                            <span className="font-display font-bold text-xl md:text-2xl text-pt-green">
+                          <div className="flex items-baseline gap-3 flex-1 min-w-0">
+                            <span className="font-display font-bold text-lg md:text-2xl text-pt-green shrink-0">
                               Día {day.day}
                             </span>
-                            <span className="hidden md:inline font-display text-pt-muted text-sm">·</span>
-                            <span className="hidden md:inline font-display font-medium text-pt-ink/85">
+                            <span className="font-display text-pt-muted shrink-0">—</span>
+                            <span className="font-display font-medium text-pt-ink/85 text-base md:text-lg truncate">
                               {day.title}
                             </span>
                           </div>
@@ -219,7 +219,6 @@ export default function BaliPage() {
                           </span>
                         </summary>
                         <div className="border-t border-pt-green/10 p-6 md:p-8 flex flex-col">
-                          <p className="md:hidden font-display font-medium text-pt-ink mb-2">{day.title}</p>
                           <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
                           <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5">{day.description}</p>
                           <div className="flex flex-wrap gap-2">
