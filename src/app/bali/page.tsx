@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import PhotoCarousel from "@/components/PhotoCarousel";
+import PdfLeadMagnet from "@/components/PdfLeadMagnet";
 import { contact } from "@/data/content";
 import { getDestination, Experience } from "@/data/destinations";
 
@@ -284,6 +285,17 @@ export default function BaliPage() {
                 <Img src="/photos/villa/4.jpg" alt="Desayuno" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* PDF LEAD MAGNET — variante dark, alto contraste tras día a día */}
+        <section className="px-6 lg:px-12 py-10 lg:py-12">
+          <div className="max-w-6xl mx-auto">
+            <PdfLeadMagnet
+              variant="dark"
+              kicker="¿Quieres todo el detalle?"
+              title={<>Recibe el dossier completo<br/><span className="font-script italic font-normal text-pt-cream">en tu email</span></>}
+            />
           </div>
         </section>
 
