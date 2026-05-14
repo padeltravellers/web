@@ -26,6 +26,14 @@ const proposals = [
     description: "Plazas live, sticky CTA, social proof arriba, cards, micro-animaciones.",
     hero: "/photos/bali/partidos/1.jpg",
   },
+  {
+    slug: "d",
+    name: "Manifiesto · Revolucionaria",
+    vibe: "Brutalist · chat-first · scrollytelling",
+    palette: ["#0A0F0C", "#B8543A", "#5CFFB0"],
+    description: "Dark mode, sin nav, sin cards. Capítulos pantalla completa, tipografía oversize, timeline horizontal, chat bubbles. Para comparar contra la web actual.",
+    hero: "/photos/bali/tanah-lot/1.jpg",
+  },
 ];
 
 export const metadata = { title: "Propuestas de diseño · Padel Travellers (preview interno)" };
