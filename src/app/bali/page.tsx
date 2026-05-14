@@ -38,6 +38,9 @@ export const metadata = {
   title: "Bali · 15 días",
   description:
     "15 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2026, desde 1.725€. Itinerario completo día a día.",
+  openGraph: {
+    images: [{ url: "https://padeltravellers.com/og/bali.jpg", width: 1200, height: 630, alt: "Bali con Padel Travellers — piscina del club sobre los arrozales" }],
+  },
 };
 
 function ExperienceCard({ e }: { e: Experience }) {

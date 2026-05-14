@@ -28,7 +28,7 @@ const eczar = Eczar({
 });
 
 const SITE_URL = "https://padeltravellers.com";
-const SITE_OG = `${SITE_URL}/photos/extra/atardecer/1.jpg`;
+const SITE_OG = `${SITE_URL}/og/home.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "Padel Travellers — Viajes en grupo de pádel y aventura",
     description:
       "Viajes premium en grupo que combinan pádel y aventura. Bali 2026, Filipinas próximamente. Alojamiento privado, coordinador español de principio a fin.",
-    images: [{ url: SITE_OG, width: 1200, height: 630, alt: "Padel Travellers — viajes a Bali" }],
+    images: [{ url: SITE_OG, width: 1200, height: 630, alt: "Grupo Padel Travellers en la cancha · Bali" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -108,6 +108,32 @@ const orgJsonLd = {
   },
 };
 
+// Schema Product → permite rich snippet en Google con precio destacado
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Viaje Padel y Bali 2026",
+  description:
+    "15 días en Bali combinando pádel en Bali Padel Academy con cultura, surf y aventura. Alojamiento privado con desayuno, coordinador español, 8 salidas en 2026.",
+  image: SITE_OG,
+  brand: { "@type": "Brand", name: "Padel Travellers" },
+  offers: {
+    "@type": "Offer",
+    price: "1725",
+    priceCurrency: "EUR",
+    availability: "https://schema.org/InStock",
+    url: `${SITE_URL}/bali/`,
+    validFrom: "2026-01-01",
+    priceValidUntil: "2026-10-11",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "8",
+    bestRating: "5",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -120,6 +146,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
         />
         {/* Google Analytics 4 — Padel Travellers */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLNXCY4BM8" />
