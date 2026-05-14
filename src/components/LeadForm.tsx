@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/path";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_LEAD_FORM_URL ||
   "https://script.google.com/macros/s/AKfycbyDoTntTQ9VVzWzSac6C7dxRHGIAyXtElrKRotFHhSvFsL2_wn6fpXnPle486W2fRnb/exec";
+
+const PDF_URL = asset("/programa-bali-2026.pdf");
 
 export default function LeadForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
@@ -43,14 +46,22 @@ export default function LeadForm() {
       };
       const w = window as TrackWindow;
       if (typeof w.fbq === "function") {
-        w.fbq("track", "Lead", { content_name: "Web form" });
+        w.fbq("track", "Lead", {
+          content_name: wantsPdf ? "Web form + PDF" : "Web form",
+        });
       }
       if (typeof w.gtag === "function") {
         w.gtag("event", "generate_lead", {
-          source: "web-form",
+          source: wantsPdf ? "web-form-pdf" : "web-form",
           page_location: window.location.pathname,
         });
       }
+
+      // Si pidió el PDF, lo abrimos en pestaña nueva al instante (gratificación inmediata)
+      if (wantsPdf) {
+        window.open(PDF_URL, "_blank", "noopener");
+      }
+
       setStatus("ok");
       form.reset();
     } catch {
@@ -67,8 +78,11 @@ export default function LeadForm() {
         <p className="text-pt-cream/90 max-w-md mx-auto">
           {wantsPdf ? (
             <>
-              Te enviamos el programa completo a tu email en unos minutos. Y te contactamos en menos de 24h
-              por WhatsApp para resolver dudas.
+              El programa se ha abierto en una pestaña nueva. Si no lo ves,{" "}
+              <a href={PDF_URL} target="_blank" rel="noreferrer" className="underline font-semibold hover:text-white">
+                descárgalo aquí
+              </a>
+              . Y te contactamos en menos de 24h por WhatsApp.
             </>
           ) : (
             <>
@@ -146,8 +160,8 @@ export default function LeadForm() {
           className="mt-1 w-5 h-5 accent-pt-green cursor-pointer"
         />
         <span className="text-sm text-pt-ink leading-snug">
-          <span className="font-display font-semibold">Envíame el programa completo del viaje en PDF</span>
-          <span className="block text-pt-muted mt-0.5">30 páginas con día a día, hotel, club, fechas y precios. Te lo mandamos al email gratis.</span>
+          <span className="font-display font-semibold">Quiero el programa completo del viaje en PDF</span>
+          <span className="block text-pt-muted mt-0.5">30 páginas con día a día, hotel, club, fechas y precios. Se abre al enviar el form.</span>
         </span>
       </label>
 

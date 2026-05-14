@@ -40,7 +40,7 @@ export default function PdfLeadMagnet({
           </h3>
           <p className="text-pt-cream/85 mb-7 leading-relaxed max-w-lg">
             PDF de 30 páginas con todo: día a día, hotel, club, fechas, precios y política de cancelación.
-            Déjanos tus datos y te lo enviamos.
+            Déjanos tu contacto y se te abre al instante.
           </p>
           <Link
             href={CTA_HREF}
@@ -96,7 +96,7 @@ export default function PdfLeadMagnet({
           </h3>
           <p className="text-pt-muted text-lg leading-relaxed mb-7 max-w-md">
             PDF de 30 páginas con todo: día a día, hotel, club, fechas, precios y política de cancelación.
-            Déjanos tus datos y te lo enviamos al email.
+            Déjanos tu contacto y se te abre al instante.
           </p>
           <Link
             href={CTA_HREF}
