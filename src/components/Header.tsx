@@ -5,7 +5,7 @@ import { contact } from "@/data/content";
 export default function Header({ transparent = false }: { transparent?: boolean }) {
   const base = transparent
     ? "absolute inset-x-0 top-0 z-30 text-white"
-    : "sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-pt-green/10 text-pt-ink";
+    : "relative z-30 bg-white border-b border-pt-green/10 text-pt-ink";
   const iconBtn = transparent
     ? "w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center transition"
     : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";

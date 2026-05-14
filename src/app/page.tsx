@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCta from "@/components/StickyMobileCta";
 import TrustindexReviews from "@/components/TrustindexReviews";
-import PdfLeadMagnet from "@/components/PdfLeadMagnet";
 import { contact } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
@@ -161,13 +160,6 @@ export default function Home() {
                 <Img src="/photos/villa/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* PDF LEAD MAGNET — bloque cálido card */}
-        <section className="px-6 lg:px-12 py-10 lg:py-12">
-          <div className="max-w-6xl mx-auto">
-            <PdfLeadMagnet variant="card" />
           </div>
         </section>
 
