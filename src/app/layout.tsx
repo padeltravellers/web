@@ -120,6 +120,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
+        {/* Google Analytics 4 — Padel Travellers */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLNXCY4BM8" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-TLNXCY4BM8');
+            `,
+          }}
+        />
         {/* Meta Pixel — Padel Travellers */}
         <script
           dangerouslySetInnerHTML={{

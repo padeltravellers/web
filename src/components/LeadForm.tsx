@@ -28,11 +28,20 @@ export default function LeadForm() {
         body,
       });
       if (!r.ok) throw new Error("Network error");
-      // Meta Pixel Lead event
-      type FbqWindow = Window & { fbq?: (...args: unknown[]) => void };
-      const w = window as FbqWindow;
+      // Tracking: Meta Pixel + GA4 Lead event
+      type TrackWindow = Window & {
+        fbq?: (...args: unknown[]) => void;
+        gtag?: (...args: unknown[]) => void;
+      };
+      const w = window as TrackWindow;
       if (typeof w.fbq === "function") {
         w.fbq("track", "Lead", { content_name: "Web form" });
+      }
+      if (typeof w.gtag === "function") {
+        w.gtag("event", "generate_lead", {
+          source: "web-form",
+          page_location: window.location.pathname,
+        });
       }
       setStatus("ok");
       form.reset();
