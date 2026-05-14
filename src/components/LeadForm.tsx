@@ -28,6 +28,12 @@ export default function LeadForm() {
         body,
       });
       if (!r.ok) throw new Error("Network error");
+      // Meta Pixel Lead event
+      type FbqWindow = Window & { fbq?: (...args: unknown[]) => void };
+      const w = window as FbqWindow;
+      if (typeof w.fbq === "function") {
+        w.fbq("track", "Lead", { content_name: "Web form" });
+      }
       setStatus("ok");
       form.reset();
     } catch {
