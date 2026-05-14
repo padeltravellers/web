@@ -126,9 +126,10 @@ html { scroll-behavior: smooth; }
 
 /* Hero carousel — fade between background images (5 slides) */
 @keyframes hero-fade {
-  0%, 16%   { opacity: 0; transform: scale(1.05); }
-  20%, 36%  { opacity: 1; transform: scale(1.12); }
-  40%, 100% { opacity: 0; transform: scale(1.18); }
+  0%        { opacity: 0; transform: scale(1.05); }
+  5%        { opacity: 1; transform: scale(1.06); }
+  20%       { opacity: 1; transform: scale(1.12); }
+  25%, 100% { opacity: 0; transform: scale(1.18); }
 }
 .hero-slide {
   position: absolute;
@@ -136,11 +137,12 @@ html { scroll-behavior: smooth; }
   opacity: 0;
   animation: hero-fade 20s infinite;
 }
-.hero-slide:nth-child(1) { animation-delay: 0s; }
-.hero-slide:nth-child(2) { animation-delay: 4s; }
-.hero-slide:nth-child(3) { animation-delay: 8s; }
-.hero-slide:nth-child(4) { animation-delay: 12s; }
-.hero-slide:nth-child(5) { animation-delay: 16s; }
+/* Slide 1: arranca con delay negativo para verse YA visible al cargar la web */
+.hero-slide:nth-child(1) { animation-delay: -1s; }
+.hero-slide:nth-child(2) { animation-delay: 3s; }
+.hero-slide:nth-child(3) { animation-delay: 7s; }
+.hero-slide:nth-child(4) { animation-delay: 11s; }
+.hero-slide:nth-child(5) { animation-delay: 15s; }
 
 /* Itinerary CSS-only tabs (semana 1 / semana 2) */
 .itin-tab-panel { display: none; }
