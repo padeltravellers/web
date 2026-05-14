@@ -1,12 +1,4 @@
-"use client";
-import { useState } from "react";
-import { asset } from "@/lib/path";
-
-const ENDPOINT =
-  process.env.NEXT_PUBLIC_LEAD_FORM_URL ||
-  "https://script.google.com/macros/s/AKfycbyDoTntTQ9VVzWzSac6C7dxRHGIAyXtElrKRotFHhSvFsL2_wn6fpXnPle486W2fRnb/exec";
-
-const PDF_URL = asset("/programa-bali-2026.pdf");
+import Link from "next/link";
 
 interface Props {
   /** "card" para bloque destacado, "inline" para insertar más discreto */
@@ -17,44 +9,18 @@ interface Props {
   kicker?: string;
 }
 
+// === CTA hacia el form único de contacto ===
+// El usuario hace click → /contacto?wants=pdf → form único (LeadForm)
+// Apps Script lee el query string y, si wants=pdf, adjunta el PDF al email de confirmación.
+
+const CTA_HREF = "/contacto?wants=pdf";
+
 export default function PdfLeadMagnet({
   variant = "card",
   title,
   kicker,
 }: Props) {
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("sending");
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    try {
-      const body = new URLSearchParams();
-      data.forEach((v, k) => body.append(k, String(v)));
-      body.append("source", "pdf-request");
-      body.append("page", typeof window !== "undefined" ? window.location.pathname : "/");
-      await fetch(ENDPOINT, { method: "POST", body });
-
-      // Tracking
-      type T = Window & {
-        fbq?: (...a: unknown[]) => void;
-        gtag?: (...a: unknown[]) => void;
-      };
-      const w = window as T;
-      if (typeof w.fbq === "function") w.fbq("track", "Lead", { content_name: "PDF programa Bali" });
-      if (typeof w.gtag === "function")
-        w.gtag("event", "pdf_request", { source: "lead_magnet", page: window.location.pathname });
-
-      setStatus("ok");
-      // Abre el PDF en pestaña nueva (gratificación inmediata)
-      window.open(PDF_URL, "_blank", "noopener");
-    } catch {
-      setStatus("err");
-    }
-  }
-
-  // === VARIANT: dark (bloque verde profundo, alto contraste) ===
+  // === VARIANT: dark (fondo verde profundo) ===
   if (variant === "dark") {
     return (
       <div className="bg-pt-green text-pt-cream rounded-3xl p-8 md:p-12 relative overflow-hidden">
@@ -74,40 +40,21 @@ export default function PdfLeadMagnet({
           </h3>
           <p className="text-pt-cream/85 mb-7 leading-relaxed max-w-lg">
             PDF de 30 páginas con todo: día a día, hotel, club, fechas, precios y política de cancelación.
-            Para que lo leas con calma.
+            Déjanos tus datos y te lo enviamos.
           </p>
-          {status === "ok" ? (
-            <SuccessBlock onDark />
-          ) : (
-            <form onSubmit={onSubmit} className="grid sm:grid-cols-[1fr_auto] gap-3 max-w-lg">
-              <input
-                required
-                type="email"
-                name="email"
-                placeholder="tu@email.com"
-                className="w-full rounded-full px-5 py-3.5 bg-white/95 text-pt-ink placeholder:text-pt-muted text-base focus:outline-none focus:ring-2 focus:ring-pt-cream"
-              />
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="px-7 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-bold text-base hover:bg-white transition disabled:opacity-60"
-              >
-                {status === "sending" ? "Enviando…" : "Quiero el programa →"}
-              </button>
-              <input type="hidden" name="name" value="(PDF request)" />
-              {status === "err" && (
-                <p className="text-sm text-pt-clay sm:col-span-2 -mt-1">
-                  No se ha podido. <a href={PDF_URL} target="_blank" rel="noreferrer" className="underline">Descarga el PDF directamente</a>.
-                </p>
-              )}
-            </form>
-          )}
+          <Link
+            href={CTA_HREF}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-bold text-base hover:bg-white transition"
+          >
+            Quiero el programa
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     );
   }
 
-  // === VARIANT: inline (compacto, en línea con resto de página) ===
+  // === VARIANT: inline (compacto) ===
   if (variant === "inline") {
     return (
       <div className="bg-pt-cream border border-pt-green/15 rounded-2xl px-6 py-5 md:flex md:items-center md:justify-between gap-6">
@@ -115,29 +62,17 @@ export default function PdfLeadMagnet({
           <p className="font-display font-semibold text-pt-green text-base md:text-lg">
             {title || "¿Quieres el programa completo en PDF?"}
           </p>
-          <p className="text-pt-muted text-sm">Te lo enviamos a tu email en 30 segundos.</p>
+          <p className="text-pt-muted text-sm">
+            Déjanos tu email y te lo enviamos.
+          </p>
         </div>
-        {status === "ok" ? (
-          <SuccessBlock />
-        ) : (
-          <form onSubmit={onSubmit} className="flex gap-2 shrink-0">
-            <input
-              required
-              type="email"
-              name="email"
-              placeholder="tu@email.com"
-              className="rounded-full px-4 py-2.5 bg-white border border-pt-green/20 text-pt-ink text-sm placeholder:text-pt-muted/60 focus:outline-none focus:border-pt-green w-48"
-            />
-            <input type="hidden" name="name" value="(PDF request)" />
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="px-5 py-2.5 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition disabled:opacity-60 whitespace-nowrap"
-            >
-              {status === "sending" ? "..." : "Recibir"}
-            </button>
-          </form>
-        )}
+        <Link
+          href={CTA_HREF}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition whitespace-nowrap shrink-0"
+        >
+          Pedir programa
+          <span aria-hidden>→</span>
+        </Link>
       </div>
     );
   }
@@ -161,36 +96,17 @@ export default function PdfLeadMagnet({
           </h3>
           <p className="text-pt-muted text-lg leading-relaxed mb-7 max-w-md">
             PDF de 30 páginas con todo: día a día, hotel, club, fechas, precios y política de cancelación.
-            Lo abres ahora mismo + te llega copia al email.
+            Déjanos tus datos y te lo enviamos al email.
           </p>
-          {status === "ok" ? (
-            <SuccessBlock />
-          ) : (
-            <form onSubmit={onSubmit} className="grid sm:grid-cols-[1fr_auto] gap-3 max-w-lg">
-              <input
-                required
-                type="email"
-                name="email"
-                placeholder="tu@email.com"
-                className="w-full rounded-full px-5 py-3.5 bg-pt-cream/60 border border-pt-green/15 text-pt-ink placeholder:text-pt-muted text-base focus:outline-none focus:border-pt-green focus:bg-white transition"
-              />
-              <input type="hidden" name="name" value="(PDF request)" />
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="px-7 py-3.5 rounded-full bg-pt-green text-white font-display font-bold text-base hover:bg-pt-green-soft transition disabled:opacity-60 shadow-lg shadow-pt-green/20"
-              >
-                {status === "sending" ? "Enviando…" : "Quiero el programa →"}
-              </button>
-              {status === "err" && (
-                <p className="text-sm text-pt-clay sm:col-span-2 -mt-1">
-                  No se ha podido enviar. <a href={PDF_URL} target="_blank" rel="noreferrer" className="underline font-semibold">Descarga el PDF aquí</a>.
-                </p>
-              )}
-            </form>
-          )}
+          <Link
+            href={CTA_HREF}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-pt-green text-white font-display font-bold text-base hover:bg-pt-green-soft transition shadow-lg shadow-pt-green/20"
+          >
+            Quiero el programa
+            <span aria-hidden>→</span>
+          </Link>
           <p className="text-xs text-pt-muted/80 mt-4">
-            Solo te escribimos sobre el viaje. Sin spam, sin terceros.
+            Solo te escribimos sobre el viaje. Sin spam.
           </p>
         </div>
 
@@ -208,22 +124,6 @@ export default function PdfLeadMagnet({
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function SuccessBlock({ onDark = false }: { onDark?: boolean }) {
-  return (
-    <div className={`flex items-center gap-3 ${onDark ? "text-pt-cream" : "text-pt-green"}`}>
-      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${onDark ? "bg-pt-cream text-pt-green" : "bg-pt-green text-white"}`}>
-        ✓
-      </div>
-      <div>
-        <p className="font-display font-semibold">¡Programa abierto!</p>
-        <p className={`text-sm ${onDark ? "text-pt-cream/80" : "text-pt-muted"}`}>
-          También te llega copia al email en 1-2 minutos.
-        </p>
       </div>
     </div>
   );

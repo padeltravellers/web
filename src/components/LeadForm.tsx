@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_LEAD_FORM_URL ||
@@ -8,6 +8,14 @@ const ENDPOINT =
 export default function LeadForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [errMsg, setErrMsg] = useState<string>("");
+  const [wantsPdf, setWantsPdf] = useState<boolean>(false);
+
+  // Si la URL trae ?wants=pdf, pre-marcamos el checkbox del programa
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("wants") === "pdf") setWantsPdf(true);
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -57,8 +65,17 @@ export default function LeadForm() {
         <div className="text-4xl mb-4">✓</div>
         <h3 className="font-display font-semibold text-2xl mb-3">¡Recibido!</h3>
         <p className="text-pt-cream/90 max-w-md mx-auto">
-          Te contactamos en menos de 24h por WhatsApp o email. Mientras tanto, si prefieres adelantar la
-          conversación, escríbenos directamente al +34 641 12 68 87.
+          {wantsPdf ? (
+            <>
+              Te enviamos el programa completo a tu email en unos minutos. Y te contactamos en menos de 24h
+              por WhatsApp para resolver dudas.
+            </>
+          ) : (
+            <>
+              Te contactamos en menos de 24h por WhatsApp o email. Mientras tanto, si prefieres adelantar la
+              conversación, escríbenos directamente al +34 641 12 68 87.
+            </>
+          )}
         </p>
       </div>
     );
@@ -119,7 +136,22 @@ export default function LeadForm() {
           className="w-full rounded-xl border border-pt-green/20 px-4 py-3 text-base text-pt-ink placeholder:text-pt-muted/60 focus:border-pt-green focus:outline-none transition resize-none"
         />
       </label>
-      <input type="hidden" name="source" value="web-form" />
+      <label className="flex items-start gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          name="wants_pdf"
+          checked={wantsPdf}
+          onChange={(e) => setWantsPdf(e.target.checked)}
+          value="1"
+          className="mt-1 w-5 h-5 accent-pt-green cursor-pointer"
+        />
+        <span className="text-sm text-pt-ink leading-snug">
+          <span className="font-display font-semibold">Envíame el programa completo del viaje en PDF</span>
+          <span className="block text-pt-muted mt-0.5">30 páginas con día a día, hotel, club, fechas y precios. Te lo mandamos al email gratis.</span>
+        </span>
+      </label>
+
+      <input type="hidden" name="source" value={wantsPdf ? "web-form-pdf" : "web-form"} />
       <input type="hidden" name="page" value={typeof window !== "undefined" ? window.location.pathname : "/"} />
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
