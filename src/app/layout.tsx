@@ -306,6 +306,12 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Cloudflare Web Analytics — privacy-first, sin cookies */}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "b7a423fbe46f4e85886ea64e60622727"}'
+        />
       </head>
       <body className="min-h-full flex flex-col bg-white text-pt-ink">
         {children}
