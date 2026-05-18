@@ -1,0 +1,25 @@
+name: Bot Cron Trigger
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: bot-cron-trigger
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Hit bot /cron-tick (5x, ~1/min)
+        run: |
+          for i in 1 2 3 4 5; do
+            code=$(curl -sS -m 25 -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${{ secrets.CRON_TICK_TOKEN }}" \
+              "https://pt-whatsapp-bot.padeltravellers.workers.dev/cron-tick?cron=*+*+*+*+*" || echo 000)
+            echo "tick $i -> HTTP $code"
+            [ "$i" -lt 5 ] && sleep 55 || true
+          done
