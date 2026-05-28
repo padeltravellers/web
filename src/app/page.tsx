@@ -2,7 +2,7 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import TrustindexReviews from "@/components/TrustindexReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import { contact } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
@@ -299,7 +299,7 @@ export default function Home() {
               </div>
             </div>
 
-            <TrustindexReviews />
+            <GoogleReviews />
 
             <div className="text-center mt-10">
               <a
