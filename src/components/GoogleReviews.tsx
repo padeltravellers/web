@@ -43,6 +43,22 @@ function Chevron({ dir }: { dir: "l" | "r" }) {
   );
 }
 
+export function RatingSummary() {
+  return (
+    <a href="https://maps.app.goo.gl/VKFUsVDmY8sWB2DU7" target="_blank" rel="noreferrer"
+      className="inline-flex items-center gap-3.5 rounded-2xl bg-white border border-black/5 shadow-[0_2px_18px_rgba(14,59,45,0.08)] px-5 py-3.5 hover:shadow-[0_4px_24px_rgba(14,59,45,0.12)] transition">
+      <GoogleG />
+      <div className="text-left leading-tight">
+        <div className="flex items-center gap-2">
+          <span className="font-display font-bold text-2xl text-pt-ink">5,0</span>
+          <Stars />
+        </div>
+        <span className="text-xs text-black/50">Excelente · Reseñas verificadas en Google</span>
+      </div>
+    </a>
+  );
+}
+
 export default function GoogleReviews() {
   const track = useRef<HTMLDivElement>(null);
   const scroll = (d: number) => {

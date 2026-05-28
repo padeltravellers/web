@@ -2,7 +2,7 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import GoogleReviews from "@/components/GoogleReviews";
+import GoogleReviews, { RatingSummary } from "@/components/GoogleReviews";
 import { contact } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
@@ -286,17 +286,7 @@ export default function Home() {
                 <br />
                 <span className="font-script italic font-normal text-pt-clay">ya volvieron</span>
               </h2>
-              <div className="mt-7 inline-flex items-center gap-3">
-                <span className="text-pt-clay text-xl">★★★★★</span>
-                <a
-                  href="https://maps.app.goo.gl/VKFUsVDmY8sWB2DU7"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-display font-medium text-pt-green hover:underline"
-                >
-                  Ver todas en Google →
-                </a>
-              </div>
+              <div className="mt-7 flex justify-center"><RatingSummary /></div>
             </div>
 
             <GoogleReviews />
