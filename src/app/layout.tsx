@@ -103,7 +103,7 @@ const orgJsonLd = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
-    reviewCount: "8",
+    reviewCount: "5",
     bestRating: "5",
   },
 };
@@ -129,7 +129,7 @@ const productJsonLd = {
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "5.0",
-    reviewCount: "8",
+    reviewCount: "5",
     bestRating: "5",
   },
 };

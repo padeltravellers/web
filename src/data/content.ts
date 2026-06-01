@@ -10,7 +10,7 @@ export const brand = {
 };
 
 export const hero = {
-  kicker: "Bali · 14 días · 8–12 personas",
+  kicker: "Bali · 15 días · 8–12 personas",
   title: "Donde el pádel se vuelve viaje.",
   subtitle:
     "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y una persona del equipo PT contigo de principio a fin.",
@@ -60,7 +60,7 @@ export const baliExperiences = [
   {
     slug: "club-bali",
     title: "Bali Padel Academy",
-    short: "Tu pista durante 14 días",
+    short: "Tu pista durante 15 días",
     text:
       "Club oficial del viaje. Pistas premium, comunidad local que ya nos conoce, ambiente joven. Aquí jugamos los partidos, las clases y el torneo.",
     photos: ["/photos/bali/club-bali/1.jpg", "/photos/bali/club-bali/2.jpg"],
@@ -207,36 +207,9 @@ export const faqs = [
   },
 ];
 
-export const reviews = [
-  {
-    name: "Pau M.",
-    quote:
-      "Vine a jugar pádel y volví con un grupo de amigos para toda la vida. El equipo PT lo borda en lo pequeño: que no falte nada, que cada día cuadre.",
-    trip: "Bali · agosto 2025",
-  },
-  {
-    name: "Sara R.",
-    quote:
-      "Iba con miedo de ir sola. A los dos días ya era imposible imaginarse el viaje sin el resto. La pista, los templos, el café, Uluwatu… todo cuadra.",
-    trip: "Bali · julio 2025",
-  },
-  {
-    name: "Iker L.",
-    quote:
-      "El nivel de pádel sorprende. No es \"viaje de jugar a peloteo\": se compite, se aprende. Pero también se desconecta. Está bien medido.",
-    trip: "Bali · septiembre 2025",
-  },
-  {
-    name: "Adria V.",
-    quote:
-      "Volvería mañana mismo. El coordinador hace que no te tengas que preocupar de nada. Llegas al aeropuerto y desconectas hasta el día que vuelves.",
-    trip: "Bali · julio 2025",
-  },
-];
-
 export const stats = [
   { value: "54", label: "viajeros con nosotros" },
-  { value: "14", label: "días por viaje" },
+  { value: "15", label: "días por viaje" },
   { value: "8–12", label: "personas por grupo" },
   { value: "8", label: "salidas en 2026" },
 ];

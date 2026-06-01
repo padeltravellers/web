@@ -432,7 +432,7 @@ export const destinations: Destination[] = [
     slug: "bali",
     name: "Bali",
     status: "open",
-    shortPitch: "14 días en Indonesia — pádel, cultura, surf y aventura.",
+    shortPitch: "15 días en Indonesia — pádel, cultura, surf y aventura.",
     description:
       "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador español acompañando el viaje completo.",
     hero: "/photos/extra/atardecer/1.jpg",

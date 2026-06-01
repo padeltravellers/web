@@ -10,7 +10,7 @@ const REVIEWS = [
     text: "¡Una experiencia increíble en Bali! El viaje en grupo fue espectacular: combinamos turismo, relax y pádel, y no pudo salir mejor. Destacable la dedicación detrás de cada detalle de Oriol y Miriam, unos auténticos cracks: siempre atentos, flexibles y dispuestos a adaptarse. Un planazo todo el viaje, y además conocí personas estupendas. Sin duda repetiría mil destinos más con ellos. ¡Recomendadísimo!" },
   { name: "Mar Cosp Pons", badge: "Local Guide", meta: "22 reseñas", when: "hace 6 meses", color: "#0E3B2D",
     text: "¡Uno de los mejores viajes de mi vida! Compartir experiencias con gente nueva, conocer un país nuevo y mucho pádel. Está todo organizado meticulosamente para que funcione sin ningún fallo. Recomiendo este viaje 100%, Bali + Pádel, gran combinación 😊" },
-  { name: "Ghg", badge: null, meta: "3 reseñas · 7 fotos", when: "hace 6 meses", color: "#B45309",
+  { name: "Laia", badge: null, meta: "3 reseñas · 7 fotos", when: "hace 6 meses", color: "#B45309",
     text: "Dos semanas en Bali que se sintieron como un sueño 🌴✨ El viaje, con el pádel como punto de unión, nos regaló un grupo increíble y momentos que recordaré siempre. Entre templos, arrozales, cascadas y risas infinitas, descubrimos una isla mágica. Nuestro coordinador fue clave: siempre atento y positivo. Vuelvo con el corazón lleno, nuevos amigos y ganas locas de repetir 💚 Terima kasih!" },
 ];
 
