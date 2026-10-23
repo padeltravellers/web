@@ -82,7 +82,7 @@ export default function PdfLeadMagnet({
           <h3 className="font-display font-medium text-3xl md:text-5xl leading-[1.05] text-pt-green mb-5">
             {title || (
               <>
-                Recibe el dossier de Bali 2026
+                Recibe el dossier de Bali 2027
                 <br />
                 <span className="font-script italic font-normal text-pt-clay">en tu email</span>
               </>
@@ -110,7 +110,7 @@ export default function PdfLeadMagnet({
             <div className="absolute inset-0 bg-gradient-to-br from-pt-green via-pt-green-soft to-pt-ink" />
             <div className="absolute inset-5 flex flex-col text-pt-cream">
               <p className="font-script text-xl mb-1">Padel & Bali</p>
-              <p className="font-display font-bold text-lg leading-tight">Programa<br/>2026</p>
+              <p className="font-display font-bold text-lg leading-tight">Programa<br/>2027</p>
               <div className="mt-auto">
                 <div className="h-0.5 bg-pt-cream/40 w-12 mb-2" />
                 <p className="font-mono text-[10px] opacity-70">30 páginas · PDF</p>

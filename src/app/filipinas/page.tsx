@@ -42,7 +42,7 @@ export default function FilipinasPage() {
           <div className="max-w-3xl mx-auto">
             <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Mientras tanto</p>
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green leading-[0.95] mb-6">
-              Bali 2026 abierto
+              Bali 2027 abierto
             </h2>
             <p className="text-pt-muted text-lg mb-8 max-w-xl mx-auto leading-relaxed">
               8 salidas entre junio y octubre. Si te gusta la idea de pádel + isla + cultura, ya tienes plan

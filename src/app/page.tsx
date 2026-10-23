@@ -9,7 +9,7 @@ import { destinations } from "@/data/destinations";
 export const metadata = {
   title: "Padel Travellers — Viajes en grupo de pádel y aventura",
   description:
-    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado, coordinador español. Bali abierto 2026, Filipinas próximamente.",
+    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado, coordinador español. Bali abierto 2027, Filipinas próximamente.",
 };
 
 const heroSlides = [
@@ -312,7 +312,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">
-            <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80 mb-6 inline-block">Próximas fechas 2026</span>
+            <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80 mb-6 inline-block">Próximas fechas 2027</span>
             <h2 className="font-display font-medium text-5xl md:text-7xl leading-[0.95] mb-10">
               Ocho salidas
               <br />
@@ -324,7 +324,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/bali" className="px-10 py-4 rounded-full bg-white text-pt-green font-display font-bold text-base hover:bg-pt-cream transition shadow-2xl shadow-pt-green/30">
-                Ver fechas Bali 2026
+                Ver fechas Bali 2027
               </Link>
               <a href={contact.whatsappLink} className="px-10 py-4 rounded-full border-2 border-white/40 font-display font-bold text-base hover:bg-white/10 transition">
                 WhatsApp Marta

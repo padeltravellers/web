@@ -35,9 +35,9 @@ const GROUP_LABEL = {
 };
 
 export const metadata = {
-  title: "Bali · 15 días",
+  title: "Bali · 14 días",
   description:
-    "15 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2026, desde 1.725€. Itinerario completo día a día.",
+    "14 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2027, desde 1.525€. Itinerario completo día a día.",
   openGraph: {
     images: [{ url: "https://padeltravellers.com/og/bali.jpg", width: 1200, height: 630, alt: "Bali con Padel Travellers — piscina del club sobre los arrozales" }],
   },
@@ -173,7 +173,7 @@ export default function BaliPage() {
             <div className="mb-10">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Itinerario</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
-                15 días. Día a día.
+                14 días. Día a día.
               </h2>
               <p className="text-pt-muted text-lg max-w-2xl leading-relaxed">
                 El viaje está diseñado al detalle. Cada día tiene su sitio: pádel, cultura, naturaleza,
@@ -186,16 +186,16 @@ export default function BaliPage() {
 
             <div className="itin-tabs grid grid-cols-2 gap-2 bg-white p-2 rounded-full shadow-sm border border-pt-green/10 mb-10 max-w-xl">
               <label htmlFor="tab-w1" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 1 · Días 0–7
+                Semana 1 · Días 0–6
               </label>
               <label htmlFor="tab-w2" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 2 · Días 8–14
+                Semana 2 · Días 7–13
               </label>
             </div>
 
             <div className="itin-panels">
               {(["w1", "w2"] as const).map((wk) => {
-                const slice = wk === "w1" ? d.itinerary.slice(0, 8) : d.itinerary.slice(8, 15);
+                const slice = wk === "w1" ? d.itinerary.slice(0, 7) : d.itinerary.slice(7, 14);
                 return (
                   <div key={wk} id={`panel-${wk}`} className="itin-tab-panel space-y-3">
                     {slice.map((day, i) => (
@@ -346,7 +346,7 @@ export default function BaliPage() {
         <section id="fechas" className="py-12 lg:py-12 px-6 lg:px-12 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Calendario 2026</p>
+              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Calendario 2027</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
@@ -376,7 +376,7 @@ export default function BaliPage() {
                       <span className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-muted">{t.month}</span>
                     </div>
                     <div className="font-display font-semibold text-pt-ink leading-tight">{t.range}</div>
-                    <div className="text-xs text-pt-muted mt-1 mb-4">15 días</div>
+                    <div className="text-xs text-pt-muted mt-1 mb-4">14 días</div>
                     <div className="mt-auto">
                       <div className="flex items-center gap-2 mb-2">
                         <div className="flex-1 h-1.5 bg-pt-green-pale rounded-full overflow-hidden">
@@ -404,7 +404,7 @@ export default function BaliPage() {
           <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
           <div className="relative max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2026</span>
+              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
               <h2 className="font-display font-extralight text-3xl md:text-5xl mt-4 leading-tight">
                 Un precio. Todo incluido
               </h2>
@@ -430,7 +430,7 @@ export default function BaliPage() {
                   <span className="font-display font-bold text-6xl text-pt-green">{d.solo}</span>
                   <span className="text-pt-muted">/ persona</span>
                 </div>
-                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 250€. Tu habitación, tu llave.</p>
+                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 225€. Tu habitación, tu llave.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
                   Solicitar plaza
                 </Link>

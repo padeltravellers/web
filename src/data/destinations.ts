@@ -1,7 +1,7 @@
 // Padel Travellers — Datos por destino
 // Fotos: catálogo Drive PT (Fotos web + Bali Oriol). 106 fotos disponibles.
 
-import { trips2026 as bali2026, faqs, included, notIncluded } from "./content";
+import { trips2027 as bali2026, faqs, included, notIncluded } from "./content";
 
 export type DayTag = "padel" | "cultura" | "naturaleza" | "playa" | "libre" | "social";
 
@@ -74,24 +74,11 @@ const baliExperiences: Experience[] = [
     title: "Partidos y clases con coaches NOX",
     short: "2 h de clase + 4 partidos de 1,5 h",
     text:
-      "Entrenamientos en grupo con coaches profesionales de NOX Academy: 2 horas semanales de clase para trabajar técnica y posicionamiento, más 4 partidos de hora y media entre los miembros del grupo para poner en práctica lo aprendido y formar parejas del torneo.",
+      "Entrenamientos en grupo con coaches profesionales de NOX Academy: 2 horas semanales de clase para trabajar técnica y posicionamiento, más 4 partidos de hora y media entre los miembros del grupo para poner en práctica lo aprendido y jugar partidos entre el grupo.",
     photos: [
       "/photos/bali/entrenos/1.jpg",
       "/photos/bali/partidos/1.jpg",
       "/photos/extra/padel-action/1.jpg",
-    ],
-    group: "padel",
-  },
-  {
-    slug: "torneo",
-    title: "Torneo fin de semana",
-    short: "Torneo internacional con cientos de jugadores",
-    text:
-      "Los clubes de pádel de Bali organizan torneos internacionales cada fin de semana y participamos. Son torneos amateur con más de 500 jugadores en múltiples categorías, ambiente brutal y la oportunidad de competir con gente de todo el mundo en una pista de nivel.",
-    photos: [
-      "/photos/extra/padel-action/2.jpg",
-      "/photos/bali/partidos/2.jpg",
-      "/photos/extra/padel-action/3.jpg",
     ],
     group: "padel",
   },
@@ -232,7 +219,7 @@ const baliExperiences: Experience[] = [
   },
 ];
 
-// === BALI ITINERARY — 15 días según brochure oficial PT 2026 ===
+// === BALI ITINERARY — 14 días (13 noches) PT 2027 ===
 const baliItinerary: ItineraryDay[] = [
   {
     day: 0,
@@ -273,7 +260,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Partido de pádel + surf",
     subtitle: "Mañana en BPA, tarde en las olas de Canggu",
     description:
-      "Por la mañana, primer partido de pádel en BPA por niveles con la pareja con la que jugarás el torneo, descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
+      "Por la mañana, primer partido de pádel en BPA por niveles con tu pareja, descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
     tags: ["padel", "playa", "naturaleza"],
     photo: "/photos/extra/surf-extra/1.jpg",
     highlights: [],
@@ -350,7 +337,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Partido de pádel + tarde libre",
     subtitle: "Mañana en BPA, tarde a tu ritmo",
     description:
-      "Tercer partido de pádel en BPA con la pareja del torneo, descanso y comida en el club. Tarde libre para que cada uno haga lo que más le apetezca: spa, masaje balinés, yoga, scooter por la costa, mercados, cafés especializados o simplemente piscina y desconexión.",
+      "Tercer partido de pádel en BPA con tu pareja, descanso y comida en el club. Tarde libre para que cada uno haga lo que más le apetezca: spa, masaje balinés, yoga, scooter por la costa, mercados, cafés especializados o simplemente piscina y desconexión.",
     tags: ["padel", "libre"],
     photo: "/photos/extra/padel-action/2.jpg",
     highlights: [],
@@ -369,28 +356,17 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 12,
     weekday: "Día 12",
-    title: "Partido de pádel + preparación torneo",
-    subtitle: "Última sesión técnica antes del torneo",
+    title: "Último partido + cena de despedida",
+    subtitle: "Cierre del viaje con el grupo",
     description:
-      "Cuarto y último partido de pádel en BPA por niveles, con la pareja del torneo. Es el momento de ajustar detalles tácticos, comunicación y ritmo antes del fin de semana de competición. Comida en el club y revisión de los cuadros del torneo con el coordinador para que cada pareja conozca sus horarios. Tarde libre para descansar.",
-    tags: ["padel"],
+      "Cuarto y último partido de pádel en BPA por niveles con tu pareja, comida en el club y tarde libre para descansar o aprovechar la isla. Por la noche, cena de despedida del grupo en un restaurante especial — brindis, fotos, recuerdos y el cierre de dos semanas inolvidables.",
+    tags: ["padel", "social"],
     photo: "/photos/bali/partidos/1.jpg",
     highlights: [],
   },
   {
     day: 13,
     weekday: "Día 13",
-    title: "Torneo internacional + cena de despedida",
-    subtitle: "Día de competición y cierre del viaje",
-    description:
-      "Día del torneo internacional en BPA junto a jugadores de todo el mundo. Los partidos se reparten entre mañana y tarde, así que hay tiempo libre entre rondas para playa, comida o descanso. Es el momento de poner en práctica todo lo aprendido y vivir el espíritu competitivo y social del pádel en Bali. Por la noche, cena de despedida del grupo en un restaurante especial — brindis, fotos, recuerdos y el cierre de dos semanas inolvidables.",
-    tags: ["padel", "social"],
-    photo: "/photos/bali/partidos/2.jpg",
-    highlights: [],
-  },
-  {
-    day: 14,
-    weekday: "Día 14",
     title: "Vuelta",
     subtitle: "Hasta la próxima",
     description:
@@ -432,15 +408,15 @@ export const destinations: Destination[] = [
     slug: "bali",
     name: "Bali",
     status: "open",
-    shortPitch: "15 días en Indonesia — pádel, cultura, surf y aventura.",
+    shortPitch: "14 días en Indonesia — pádel, cultura, surf y aventura.",
     description:
       "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador español acompañando el viaje completo.",
     hero: "/photos/extra/atardecer/1.jpg",
     heroAlt: "Acantilados de Uluwatu al atardecer",
-    duration: "15 días",
+    duration: "14 días",
     groupSize: "8–12 personas",
-    basePrice: "1.725€",
-    solo: "1.975€",
+    basePrice: "1.525€",
+    solo: "1.750€",
     deposit: "500€",
     trips: bali2026,
     highlights: baliHighlights,

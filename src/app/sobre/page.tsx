@@ -101,7 +101,7 @@ export default function SobrePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/bali" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-base hover:bg-pt-green-soft transition">
-                Ver Bali 2026
+                Ver Bali 2027
               </Link>
               <a href={contact.whatsappLink} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-base hover:bg-pt-green hover:text-white transition">
                 Hablamos por WhatsApp

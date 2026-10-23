@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s · Padel Travellers",
   },
   description:
-    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado con desayuno, coordinador español. Bali abierto 2026, Filipinas próximamente.",
+    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado con desayuno, coordinador español. Bali abierto 2027, Filipinas próximamente.",
   keywords: [
     "viajes pádel",
     "padel bali",
@@ -62,13 +62,13 @@ export const metadata: Metadata = {
     siteName: "Padel Travellers",
     title: "Padel Travellers — Viajes en grupo de pádel y aventura",
     description:
-      "Viajes premium en grupo que combinan pádel y aventura. Bali 2026, Filipinas próximamente. Alojamiento privado, coordinador español de principio a fin.",
+      "Viajes premium en grupo que combinan pádel y aventura. Bali 2027, Filipinas próximamente. Alojamiento privado, coordinador español de principio a fin.",
     images: [{ url: SITE_OG, width: 1200, height: 630, alt: "Grupo Padel Travellers en la cancha · Bali" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Padel Travellers — Viajes en grupo de pádel y aventura",
-    description: "Pádel, cultura y aventura. Bali 2026, Filipinas próximamente.",
+    description: "Pádel, cultura y aventura. Bali 2027, Filipinas próximamente.",
     images: [SITE_OG],
   },
   robots: {
@@ -91,7 +91,7 @@ const orgJsonLd = {
   logo: `${SITE_URL}/logos/monogram.png`,
   image: SITE_OG,
   description:
-    "Viajes en grupo que combinan pádel y aventura. Bali 2026, Filipinas 2027. Alojamiento privado, coordinador español.",
+    "Viajes en grupo que combinan pádel y aventura. Bali 2027, Filipinas próximamente. Alojamiento privado, coordinador español.",
   telephone: "+34 614 47 60 68",
   email: "info@padeltravellers.com",
   address: { "@type": "PostalAddress", addressCountry: "ES" },
@@ -112,19 +112,19 @@ const orgJsonLd = {
 const productJsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: "Viaje Padel y Bali 2026",
+  name: "Viaje Padel y Bali 2027",
   description:
-    "15 días en Bali combinando pádel en Bali Padel Academy con cultura, surf y aventura. Alojamiento privado con desayuno, coordinador español, 8 salidas en 2026.",
+    "14 días en Bali combinando pádel en Bali Padel Academy con cultura, surf y aventura. Alojamiento privado con desayuno, coordinador español, 8 salidas en 2027.",
   image: SITE_OG,
   brand: { "@type": "Brand", name: "Padel Travellers" },
   offers: {
     "@type": "Offer",
-    price: "1725",
+    price: "1525",
     priceCurrency: "EUR",
     availability: "https://schema.org/InStock",
     url: `${SITE_URL}/bali/`,
-    validFrom: "2026-01-01",
-    priceValidUntil: "2026-10-11",
+    validFrom: "2027-01-01",
+    priceValidUntil: "2027-06-20",
   },
   aggregateRating: {
     "@type": "AggregateRating",

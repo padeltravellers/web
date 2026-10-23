@@ -12,7 +12,7 @@ export default function Footer() {
             <span className="font-display font-semibold text-pt-cream text-lg">Padel Travellers</span>
           </div>
           <p className="text-sm leading-relaxed max-w-sm mb-6">
-            Viajes en grupo a Bali con pádel. 15 días, 8–12 personas, alojamiento premium, coordinador
+            Viajes en grupo a Bali con pádel. 14 días, 8–12 personas, alojamiento premium, coordinador
             español. Hechos con calma, vividos con intensidad.
           </p>
           <p className="font-script text-pt-cream text-lg">Bali con pádel</p>
@@ -23,7 +23,7 @@ export default function Footer() {
             Destinos
           </div>
           <ul className="space-y-2.5 text-sm">
-            <li><Link href="/bali" className="hover:text-pt-cream">Bali · abierto 2026</Link></li>
+            <li><Link href="/bali" className="hover:text-pt-cream">Bali · abierto 2027</Link></li>
             <li><Link href="/filipinas" className="hover:text-pt-cream">Filipinas · próximamente</Link></li>
           </ul>
         </div>

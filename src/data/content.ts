@@ -10,12 +10,12 @@ export const brand = {
 };
 
 export const hero = {
-  kicker: "Bali · 15 días · 8–12 personas",
+  kicker: "Bali · 14 días · 8–12 personas",
   title: "Donde el pádel se vuelve viaje.",
   subtitle:
     "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y una persona del equipo PT contigo de principio a fin.",
   ctaPrimary: { label: "Solicitar plaza (500€)", href: "#reservar" },
-  ctaSecondary: { label: "Ver fechas 2026", href: "#fechas" },
+  ctaSecondary: { label: "Ver fechas 2027", href: "#fechas" },
 };
 
 export const valuePillars = [
@@ -23,7 +23,7 @@ export const valuePillars = [
     icon: "🎾",
     title: "Pádel auténtico",
     text:
-      "Dos días de partidos a la semana en BPA, una clase semanal con coach local y un torneo el fin de semana. Sin overdose: pádel cuando apetece, descanso cuando toca.",
+      "Dos días de partidos a la semana en BPA y una clase semanal con coach local. Sin overdose: pádel cuando apetece, descanso cuando toca.",
   },
   {
     icon: "🏡",
@@ -45,24 +45,24 @@ export const valuePillars = [
   },
 ];
 
-export const trips2026 = [
-  { n: 1, range: "21 jun – 5 jul", month: "Junio" },
-  { n: 2, range: "5 – 19 jul", month: "Julio" },
-  { n: 3, range: "19 jul – 2 ago", month: "Julio" },
-  { n: 4, range: "2 – 16 ago", month: "Agosto" },
-  { n: 5, range: "16 – 30 ago", month: "Agosto", featured: "🔥 Buen grupo formándose" },
-  { n: 6, range: "30 ago – 13 sep", month: "Septiembre", featured: "🔥 Buen grupo formándose" },
-  { n: 7, range: "13 – 27 sep", month: "Septiembre" },
-  { n: 8, range: "27 sep – 11 oct", month: "Octubre" },
+export const trips2027 = [
+  { n: 1, range: "20 jun – 3 jul", month: "Junio" },
+  { n: 2, range: "4 – 17 jul", month: "Julio" },
+  { n: 3, range: "18 – 31 jul", month: "Julio" },
+  { n: 4, range: "1 – 14 ago", month: "Agosto" },
+  { n: 5, range: "15 – 28 ago", month: "Agosto", featured: "🔥 Buen grupo formándose" },
+  { n: 6, range: "29 ago – 11 sep", month: "Septiembre", featured: "🔥 Buen grupo formándose" },
+  { n: 7, range: "12 – 25 sep", month: "Septiembre" },
+  { n: 8, range: "25 sep – 9 oct", month: "Octubre" },
 ];
 
 export const baliExperiences = [
   {
     slug: "club-bali",
     title: "Bali Padel Academy",
-    short: "Tu pista durante 15 días",
+    short: "Tu pista durante 14 días",
     text:
-      "Club oficial del viaje. Pistas premium, comunidad local que ya nos conoce, ambiente joven. Aquí jugamos los partidos, las clases y el torneo.",
+      "Club oficial del viaje. Pistas premium, comunidad local que ya nos conoce, ambiente joven. Aquí jugamos los partidos y las clases.",
     photos: ["/photos/bali/club-bali/1.jpg", "/photos/bali/club-bali/2.jpg"],
   },
   {
@@ -70,7 +70,7 @@ export const baliExperiences = [
     title: "Partidos del grupo",
     short: "Tu nivel encuentra el suyo",
     text:
-      "Hacemos americana, formamos parejas rotando y montamos el torneo del fin de semana. Da igual si vienes con tu pareja habitual o si vienes solo: aquí siempre se juega.",
+      "Hacemos americana, formamos parejas rotando y jugamos partidos del grupo. Da igual si vienes con tu pareja habitual o si vienes solo: aquí siempre se juega.",
     photos: ["/photos/bali/partidos/1.jpg", "/photos/bali/partidos/2.jpg"],
   },
   {
@@ -148,9 +148,9 @@ export const baliExperiences = [
 ];
 
 export const included = [
-  "Alojamiento en el hotel del pack seleccionado durante 14 noches",
+  "Alojamiento en el hotel del pack seleccionado durante 13 noches",
   "Todos los desayunos",
-  "2 h semanales de clases de pádel + torneo internacional o partidos",
+  "2 h semanales de clases de pádel + partidos del grupo",
   "4 partidos del grupo de 1,5 h",
   "Traslados aeropuerto – hotel – aeropuerto",
   "Traslados días de pádel: hotel ↔ Bali Padel Academy",
@@ -168,12 +168,12 @@ export const notIncluded = [
 ];
 
 export const pricing = {
-  base: "1.725€",
+  base: "1.525€",
   baseNote: "por persona si vais 2 compartiendo habitación",
-  solo: "1.975€",
-  soloNote: "si viajas en solitario (suplemento individual 250€)",
+  solo: "1.750€",
+  soloNote: "si viajas en solitario (suplemento individual 225€)",
   deposit: "500€",
-  depositNote: "reserva. El resto se paga en dos plazos (1.000€ al confirmar el grupo, resto 30 días antes del viaje).",
+  depositNote: "reserva. El resto se abona en dos plazos antes del viaje (al confirmar el grupo y 30 días antes de la salida).",
 };
 
 export const faqs = [
@@ -209,9 +209,9 @@ export const faqs = [
 
 export const stats = [
   { value: "54", label: "viajeros con nosotros" },
-  { value: "15", label: "días por viaje" },
+  { value: "14", label: "días por viaje" },
   { value: "8–12", label: "personas por grupo" },
-  { value: "8", label: "salidas en 2026" },
+  { value: "8", label: "salidas en 2027" },
 ];
 
 export const contact = {

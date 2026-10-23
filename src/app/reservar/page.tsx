@@ -96,7 +96,7 @@ export default function ReservarPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-pt-ink to-pt-ink/10" />
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1.5 rounded-full text-[10px] font-display uppercase tracking-[0.22em] ${d.status === "open" ? "bg-white/20 backdrop-blur text-white" : "bg-pt-clay text-white"}`}>
-                      {d.status === "open" ? "Disponible 2026" : "Próximamente 2027"}
+                      {d.status === "open" ? "Disponible 2027" : "Próximamente 2028"}
                     </span>
                   </div>
                   <div className="absolute left-5 right-5 bottom-5 text-white">
@@ -131,7 +131,7 @@ export default function ReservarPage() {
                   </li>
                   <li className="flex justify-between gap-4 border-b border-white/15 pb-3">
                     <span className="font-display">Confirmación del grupo</span>
-                    <span className="font-display font-bold">1.000€</span>
+                    <span className="font-display font-bold">500€</span>
                   </li>
                   <li className="flex justify-between gap-4">
                     <span className="font-display">30 días antes del viaje</span>
@@ -139,7 +139,7 @@ export default function ReservarPage() {
                   </li>
                 </ul>
                 <p className="text-pt-cream/75 text-sm mt-7 leading-relaxed">
-                  Precio total Bali 2026: <strong className="text-white">{pricing.base}</strong> compartiendo
+                  Precio total Bali 2027: <strong className="text-white">{pricing.base}</strong> compartiendo
                   habitación · <strong className="text-white">{pricing.solo}</strong> habitación individual.
                 </p>
               </div>
