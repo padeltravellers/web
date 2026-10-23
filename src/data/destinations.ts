@@ -71,15 +71,28 @@ const baliExperiences: Experience[] = [
     group: "padel",
   },
   {
-    slug: "partidos-clases",
-    title: "Partidos y clases con coaches NOX",
-    short: "2 h de clase + 4 partidos de 1,5 h",
+    slug: "partidos",
+    title: "Partidos y americanas",
+    short: "4 partidos de 1,5 h con el grupo",
     text:
-      "Entrenamientos en grupo con coaches profesionales de NOX Academy: 2 horas semanales de clase para trabajar técnica y posicionamiento, más 4 partidos de hora y media entre los miembros del grupo para poner en práctica lo aprendido y jugar partidos entre el grupo.",
+      "Cuatro partidos de hora y media entre los miembros del grupo. Montamos americanas y rotamos parejas por niveles, para que siempre juegues con gente de tu nivel — y al final del viaje os conocéis todos. Da igual si vienes con tu pareja habitual o si vienes solo: aquí siempre se juega.",
+    photos: [
+      "/photos/bali/partidos/1.jpg",
+      "/photos/bali/partidos/2.jpg",
+      "/photos/extra/padel-action/1.jpg",
+    ],
+    group: "padel",
+  },
+  {
+    slug: "clases",
+    title: "Clases con coaches NOX",
+    short: "2 h semanales de clase",
+    text:
+      "Entrenamientos en grupo con coaches profesionales de NOX Academy: dos horas semanales para trabajar técnica, posicionamiento y juego en pareja. Sin presión — el ritmo lo pones tú, desde nivel iniciación hasta avanzado.",
     photos: [
       "/photos/bali/entrenos/1.jpg",
-      "/photos/bali/partidos/1.jpg",
-      "/photos/extra/padel-action/1.jpg",
+      "/photos/extra/bpa/1.jpg",
+      "/photos/extra/padel-action/2.jpg",
     ],
     group: "padel",
   },
@@ -236,10 +249,10 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 1,
     weekday: "Día 1",
-    title: "Clase de pádel + Tanah Lot",
-    subtitle: "Introducción al viaje, primera clase en BPA y templo del atardecer",
+    title: "Partido de pádel + Tanah Lot",
+    subtitle: "Introducción al viaje, primer partido en BPA y templo del atardecer",
     description:
-      "Por la mañana introducción al viaje y traslado a Bali Padel Academy para la primera clase con los coaches — conoces el club, las pistas y los grupos por nivel. Comida en el restaurante Bandeja del club. Por la tarde, visita al templo de Tanah Lot: «Tierra en el Mar» en balinés, alzado sobre una gran roca rodeada por el océano. Con marea alta parece flotar sobre las olas. Atardecer sobre el templo en silueta — uno de los lugares más fotografiados de Bali.",
+      "Por la mañana introducción al viaje y traslado a Bali Padel Academy para el primer partido por niveles — conoces el club, las pistas y al grupo. Comida en el restaurante Bandeja del club. Por la tarde, visita al templo de Tanah Lot: «Tierra en el Mar» en balinés, alzado sobre una gran roca rodeada por el océano. Con marea alta parece flotar sobre las olas. Atardecer sobre el templo en silueta — uno de los lugares más fotografiados de Bali.",
     tags: ["padel", "cultura"],
     photo: "/photos/bali/tanah-lot/1.jpg",
     highlights: [],
@@ -258,10 +271,10 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 3,
     weekday: "Día 3",
-    title: "Partido de pádel + surf",
+    title: "Clase de pádel + surf",
     subtitle: "Mañana en BPA, tarde en las olas de Canggu",
     description:
-      "Por la mañana, primer partido de pádel en BPA por niveles con tu pareja, descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
+      "Por la mañana, primera clase de pádel en BPA con los coaches de NOX para trabajar técnica y posicionamiento, descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
     tags: ["padel", "playa", "naturaleza"],
     photo: "/photos/extra/surf-extra/1.jpg",
     highlights: [],
@@ -313,10 +326,10 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 8,
     weekday: "Día 8",
-    title: "Clase de pádel + Taman Ayun + Coffee Plantation",
+    title: "Partido de pádel + Taman Ayun + Coffee Plantation",
     subtitle: "Mañana en BPA, tarde cultural",
     description:
-      "Por la mañana, segunda clase de pádel en BPA con los coaches para pulir técnica, y comida en el club. Por la tarde, visita al templo Taman Ayun, construido en el siglo XVII por la dinastía real de Mengwi — Patrimonio de la Humanidad por la UNESCO, con arquitectura balinesa tradicional, jardines extensos y canales que crean un ambiente sereno. Después, parada en una plantación tradicional de café: conoces el proceso del famoso café Luwak — seleccionado y digerido por la civeta asiática antes del tueste — y cata de cafés y tés balineses con vistas a los campos.",
+      "Por la mañana, partido de pádel en BPA con el grupo, y comida en el club. Por la tarde, visita al templo Taman Ayun, construido en el siglo XVII por la dinastía real de Mengwi — Patrimonio de la Humanidad por la UNESCO, con arquitectura balinesa tradicional, jardines extensos y canales que crean un ambiente sereno. Después, parada en una plantación tradicional de café: conoces el proceso del famoso café Luwak — seleccionado y digerido por la civeta asiática antes del tueste — y cata de cafés y tés balineses con vistas a los campos.",
     tags: ["padel", "cultura"],
     photo: "/photos/bali/cafe/1.jpg",
     highlights: [],
@@ -335,10 +348,10 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 10,
     weekday: "Día 10",
-    title: "Partido de pádel + tarde libre",
+    title: "Clase de pádel + tarde libre",
     subtitle: "Mañana en BPA, tarde a tu ritmo",
     description:
-      "Tercer partido de pádel en BPA con tu pareja, descanso y comida en el club. Tarde libre para que cada uno haga lo que más le apetezca: spa, masaje balinés, yoga, scooter por la costa, mercados, cafés especializados o simplemente piscina y desconexión.",
+      "Segunda clase de pádel en BPA con los coaches, descanso y comida en el club. Tarde libre para que cada uno haga lo que más le apetezca: spa, masaje balinés, yoga, scooter por la costa, mercados, cafés especializados o simplemente piscina y desconexión.",
     tags: ["padel", "libre"],
     photo: "/photos/extra/padel-action/2.jpg",
     highlights: [],
@@ -346,7 +359,7 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 11,
     weekday: "Día 11",
-    title: "Día en Bali Este",
+    title: "Día en Amed",
     subtitle: "Puertas del Cielo + snorkel en Amed",
     description:
       "Salimos al este de la isla. Empezamos en Pura Lempuyang, uno de los templos más antiguos y sagrados de Bali, conocido por sus famosas «Puertas del Cielo» con vista enmarcada al volcán Agung — uno de los lugares más fotografiados de la isla. Ruta panorámica de miradores con paisajes increíbles. Finalizamos en Amed, pueblo costero de arena negra volcánica y ambiente relajado, donde haremos una actividad de snorkel sobre los arrecifes de coral. Opcional: submarinismo con centros locales (coste aparte, sujeto a disponibilidad).",
@@ -368,7 +381,7 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 13,
     weekday: "Día 13",
-    title: "Vuelta",
+    title: "Regreso",
     subtitle: "Hasta la próxima",
     description:
       "Traslado privado al aeropuerto según el horario de tu vuelo de regreso. El coordinador organiza los shuttles para que cada uno salga a su hora. Muchos del grupo aprovechan para alargar la estancia unos días por su cuenta o combinar Bali con otro destino — te ayudamos con cualquier reserva extra si te quieres quedar más tiempo.",

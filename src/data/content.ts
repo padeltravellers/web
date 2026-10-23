@@ -46,14 +46,14 @@ export const valuePillars = [
 ];
 
 export const trips2027 = [
-  { n: 1, range: "20 jun – 3 jul", month: "Junio" },
-  { n: 2, range: "4 – 17 jul", month: "Julio" },
-  { n: 3, range: "18 – 31 jul", month: "Julio" },
-  { n: 4, range: "1 – 14 ago", month: "Agosto" },
-  { n: 5, range: "15 – 28 ago", month: "Agosto", featured: "🔥 Buen grupo formándose" },
-  { n: 6, range: "29 ago – 11 sep", month: "Septiembre", featured: "🔥 Buen grupo formándose" },
-  { n: 7, range: "12 – 25 sep", month: "Septiembre" },
-  { n: 8, range: "25 sep – 9 oct", month: "Octubre" },
+  { n: 1, range: "20 junio – 3 julio", month: "Junio" },
+  { n: 2, range: "4 – 17 julio", month: "Julio" },
+  { n: 3, range: "18 – 31 julio", month: "Julio" },
+  { n: 4, range: "1 – 14 agosto", month: "Agosto" },
+  { n: 5, range: "15 – 28 agosto", month: "Agosto" },
+  { n: 6, range: "29 agosto – 11 septiembre", month: "Septiembre" },
+  { n: 7, range: "12 – 25 septiembre", month: "Septiembre" },
+  { n: 8, range: "25 septiembre – 9 octubre", month: "Octubre" },
 ];
 
 export const baliExperiences = [
@@ -151,7 +151,7 @@ export const included = [
   "Alojamiento en el hotel del pack seleccionado durante 13 noches",
   "Todos los desayunos",
   "2 h semanales de clases de pádel + partidos del grupo",
-  "4 partidos del grupo de 1,5 h",
+  "4 partidos con el grupo de 1,5 h",
   "Traslados aeropuerto – hotel – aeropuerto",
   "Traslados días de pádel: hotel ↔ Bali Padel Academy",
   "Traslados hasta el final de cada actividad diaria",
@@ -191,7 +191,7 @@ export const faqs = [
   },
   {
     q: "¿Cómo es el alojamiento?",
-    a: "Villas o hoteles boutique con piscina y desayuno. Habitación privada siempre. Si venís en pareja o grupo cerrado, compartís entre vosotros; si vienes solo, habitación individual.",
+    a: "Villas u hoteles con piscina y desayuno. Habitación privada siempre. Si venís en pareja o grupo cerrado, compartís entre vosotros; si vienes solo, habitación individual.",
   },
   {
     q: "¿Y la comida y cena?",

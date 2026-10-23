@@ -249,7 +249,7 @@ export default function BaliPage() {
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestro hogar</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
-                Hotel boutique
+                Hotel
                 <br />
                 <span className="font-script italic font-normal text-pt-clay">en Canggu</span>
               </h2>

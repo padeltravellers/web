@@ -32,6 +32,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
         </Link>
         <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">
           <Link href="/bali" className="hover:opacity-70 transition">Bali</Link>
+          <Link href="/indonesia" className="hover:opacity-70 transition">Indonesia</Link>
           <Link href="/filipinas" className="hover:opacity-70 transition">Filipinas</Link>
           <Link href="/sobre" className="hover:opacity-70 transition">Sobre nosotros</Link>
           <Link href="/preguntas" className="hover:opacity-70 transition">Preguntas</Link>

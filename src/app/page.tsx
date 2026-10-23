@@ -36,7 +36,7 @@ const pillars = [
   {
     title: "Alojamientos confort",
     text:
-      "Hoteles boutique con desayuno incluido. Habitaciones privadas siempre — nunca compartirás con desconocidos. Máximo dos personas por habitación si vais juntos.",
+      "Hoteles con desayuno incluido. Habitaciones privadas siempre — nunca compartirás con desconocidos. Máximo dos personas por habitación si vais juntos.",
     photo: "/photos/villa/1.jpg",
   },
   {
