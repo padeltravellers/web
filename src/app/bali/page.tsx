@@ -438,7 +438,7 @@ export default function BaliPage() {
             </div>
             <div className="mt-10 text-center text-pt-cream/85">
               <span className="font-script italic text-2xl text-pt-cream">{d.deposit}</span>
-              <span> reserva. El resto antes del viaje. Sin bote común, sin recargos.</span>
+              <span> reserva reembolsable. El resto en dos plazos. Sin bote común, sin recargos.</span>
             </div>
           </div>
         </section>
@@ -455,7 +455,7 @@ export default function BaliPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/reservar" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
-                Empezar reserva · 500€
+                Empezar reserva · 100€
               </Link>
               <a href={contact.whatsappLink} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-sm hover:bg-pt-green hover:text-white transition">
                 Hablar por WhatsApp

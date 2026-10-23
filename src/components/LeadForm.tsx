@@ -136,6 +136,7 @@ export default function LeadForm() {
             className="w-full rounded-xl border border-pt-green/20 px-4 py-3 text-base text-pt-ink bg-white focus:border-pt-green focus:outline-none transition"
           >
             <option value="bali">Bali 2027</option>
+            <option value="indonesia">Indonesia (lista de espera)</option>
             <option value="filipinas">Filipinas (lista de espera)</option>
             <option value="aun-no-se">Aún no lo sé</option>
           </select>

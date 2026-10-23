@@ -14,7 +14,7 @@ export const hero = {
   title: "Donde el pádel se vuelve viaje.",
   subtitle:
     "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y una persona del equipo PT contigo de principio a fin.",
-  ctaPrimary: { label: "Solicitar plaza (500€)", href: "#reservar" },
+  ctaPrimary: { label: "Solicitar plaza (100€)", href: "#reservar" },
   ctaSecondary: { label: "Ver fechas 2027", href: "#fechas" },
 };
 
@@ -172,8 +172,8 @@ export const pricing = {
   baseNote: "por persona si vais 2 compartiendo habitación",
   solo: "1.750€",
   soloNote: "si viajas en solitario (suplemento individual 225€)",
-  deposit: "500€",
-  depositNote: "reserva. El resto se abona en dos plazos antes del viaje (al confirmar el grupo y 30 días antes de la salida).",
+  deposit: "100€",
+  depositNote: "reserva reembolsable. El resto en dos plazos: 1.000€ al confirmar el grupo y el importe restante antes del viaje.",
 };
 
 export const faqs = [
@@ -199,7 +199,7 @@ export const faqs = [
   },
   {
     q: "¿Cuánto se paga para reservar?",
-    a: "500€ y plaza confirmada. El resto se abona antes del viaje. Si surge un imprevisto serio antes de cierta fecha, hay política de cancelación clara.",
+    a: "100€ reembolsables y plaza confirmada. Al confirmar el grupo se abona un segundo pago de 1.000€ y el importe restante antes del viaje. La reserva se devuelve según la política de cancelación.",
   },
   {
     q: "¿Quién organiza esto?",

@@ -258,7 +258,7 @@ export default function Home() {
               {[
                 { n: "01", title: "Eliges destino", text: "Bali abierto, Filipinas en lista de espera. Si dudas, te ayudamos a elegir." },
                 { n: "02", title: "Hablamos contigo", text: "Videollamada para entender qué buscas, explicarte el viaje en detalle y resolver dudas." },
-                { n: "03", title: "Reserva 500€", text: "Plaza confirmada con contrato y pago inicial. El resto se abona en plazos." },
+                { n: "03", title: "Reserva 100€", text: "Plaza confirmada con contrato y pago inicial reembolsable de 100€. El resto se abona en plazos." },
                 { n: "04", title: "Vives el viaje", text: "El coordinador te espera al aterrizar y no te suelta hasta volver." },
               ].map((s) => (
                 <li key={s.n}>

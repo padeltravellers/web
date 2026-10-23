@@ -8,7 +8,7 @@ import { destinations } from "@/data/destinations";
 
 export const metadata = {
   title: "Solicitar plaza",
-  description: "Cómo reservar tu plaza paso a paso: llamada inicial, reserva 500€, confirmación del grupo, segundo pago, llamada grupal y pago final.",
+  description: "Cómo reservar tu plaza paso a paso: llamada inicial, reserva 100€ reembolsable, confirmación del grupo, segundo pago y pago final.",
 };
 
 const steps = [
@@ -24,8 +24,8 @@ const steps = [
   },
   {
     n: "03",
-    title: "Reserva 500€",
-    text: "Confirmas fecha, firmas el contrato y pagas 500€ para asegurar tu plaza. El resto se abona en plazos.",
+    title: "Reserva 100€",
+    text: "Confirmas fecha, firmas el contrato y pagas 100€ (reembolsables) para asegurar tu plaza. El resto se abona en plazos.",
   },
   {
     n: "04",
@@ -62,7 +62,7 @@ export default function ReservarPage() {
             <span className="font-script italic font-normal text-pt-clay">sin sorpresas</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-2xl mx-auto mt-7 leading-relaxed">
-            Sin sorpresas y a tu ritmo. Reserva con 500€ y el resto se paga en plazos antes del viaje.
+            Sin sorpresas y a tu ritmo. Reserva con 100€ reembolsables y el resto se paga en plazos antes del viaje.
           </p>
         </section>
 
@@ -96,7 +96,7 @@ export default function ReservarPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-pt-ink to-pt-ink/10" />
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1.5 rounded-full text-[10px] font-display uppercase tracking-[0.22em] ${d.status === "open" ? "bg-white/20 backdrop-blur text-white" : "bg-pt-clay text-white"}`}>
-                      {d.status === "open" ? "Disponible 2027" : "Próximamente 2028"}
+                      {d.status === "open" ? "Disponible 2027" : "Próximamente"}
                     </span>
                   </div>
                   <div className="absolute left-5 right-5 bottom-5 text-white">
@@ -131,7 +131,7 @@ export default function ReservarPage() {
                   </li>
                   <li className="flex justify-between gap-4 border-b border-white/15 pb-3">
                     <span className="font-display">Confirmación del grupo</span>
-                    <span className="font-display font-bold">500€</span>
+                    <span className="font-display font-bold">1.000€</span>
                   </li>
                   <li className="flex justify-between gap-4">
                     <span className="font-display">30 días antes del viaje</span>
