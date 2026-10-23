@@ -31,7 +31,11 @@ const faqs = [
   },
   {
     q: "¿Nivel de pádel?",
-    a: "Los clinics están abiertos a cualquier nivel. Da igual si llevas años jugando o si acabas de empezar — adaptamos clases y partidos a tu experiencia.",
+    a: "Las clases están abiertas a cualquier nivel. Da igual si llevas años jugando o si acabas de empezar — adaptamos clases y partidos a tu experiencia.",
+  },
+  {
+    q: "¿Los días libres son realmente libres?",
+    a: "Sí. Hay varios días libres para que vayas a tu aire. Nosotros te proponemos planes (Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf…), pero no es obligatorio: Bali tiene mil cosas por hacer y el coordinador te orienta según lo que te apetezca.",
   },
   {
     q: "¿Vigencia del pasaporte?",

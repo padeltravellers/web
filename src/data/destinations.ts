@@ -301,12 +301,12 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 7,
     weekday: "Día 7",
-    title: "Día en Bali Este",
-    subtitle: "Puertas del Cielo + snorkel en Amed",
+    title: "Día libre — tú eliges",
+    subtitle: "Domingo libre: Nusa Penida o quads + Cretya",
     description:
-      "Salimos al este de la isla. Empezamos en Pura Lempuyang, uno de los templos más antiguos y sagrados de Bali, conocido por sus famosas «Puertas del Cielo» con vista enmarcada al volcán Agung — uno de los lugares más fotografiados de la isla. Ruta panorámica de miradores con paisajes increíbles. Finalizamos en Amed, pueblo costero de arena negra volcánica y ambiente relajado, donde haremos una actividad de snorkel sobre los arrecifes de coral. Opcional: submarinismo con centros locales (coste aparte, sujeto a disponibilidad).",
-    tags: ["cultura", "playa", "naturaleza"],
-    photo: "/photos/bali/amed/1.jpg",
+      "Segundo día del primer fin de semana, totalmente libre. Puedes ampliar Nusa Penida a un segundo día, o montar la aventura de quads por los arrozales de Ubud y rematar en las piscinas infinitas de Cretya. Y si prefieres ir a tu aire, Bali tiene mil planes: playa, spa balinés, surf, beach club o pádel libre en el club. El coordinador te ayuda con lo que elijas.",
+    tags: ["libre", "naturaleza"],
+    photo: "/photos/nusa-penida/1.jpg",
     highlights: [],
   },
   {

@@ -6,7 +6,7 @@ import { contact } from "@/data/content";
 
 export const metadata = {
   title: "Sobre nosotros",
-  description: "Quiénes somos, cómo nació Padel Travellers, qué nos diferencia. Equipo pequeño con base en España y operativa en Bali.",
+  description: "Quiénes somos, cómo nació Padel Travellers, qué nos diferencia. Equipo pequeño con base en Bali —donde vivimos— y raíces en España.",
 };
 
 const principles = [
@@ -30,9 +30,9 @@ const principles = [
   },
   {
     n: "04",
-    title: "Dika, tu coordinador local",
+    title: "Un coordinador local que vive el viaje contigo",
     text:
-      "Dika es balinés, juega al pádel y vive el viaje contigo de principio a fin. No un guía que se va a las 18:00: te enseña su isla desde dentro y está para lo que necesites. Y detrás, el equipo español de Padel Travellers siempre disponible.",
+      "Dika es balinés, vive en la isla y juega al pádel. Viaja con el grupo de principio a fin: te enseña Bali desde dentro, comparte pista contigo y está para lo que necesites, día y noche. Y detrás, el equipo español de Padel Travellers, siempre disponible.",
   },
 ];
 
@@ -60,8 +60,7 @@ export default function SobrePage() {
                 pádel, qué tal si lo abríamos a más gente.
               </p>
               <p>
-                Tres temporadas después somos un equipo pequeño con base en España, operativa en Bali y un
-                puñado de viajeros que ya nos han dado la confianza para volver una segunda vez.
+                Cuatro temporadas después somos un equipo pequeño con base en Bali —es donde vivimos y operamos— y raíces en España, con un puñado de viajeros que ya nos han dado la confianza para volver una segunda vez.
               </p>
             </div>
           </div>

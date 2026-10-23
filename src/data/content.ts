@@ -198,6 +198,10 @@ export const faqs = [
     a: "Libres. Bali tiene una escena de comida brutal y barata. El coordinador propone planes cada noche y vas con quien quieras. Cenamos juntos cuando hay actividad nocturna programada.",
   },
   {
+    q: "¿Los días libres son realmente libres?",
+    a: "Sí. Hay varios días libres para que vayas a tu aire. Nosotros te proponemos planes (Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf…), pero no es obligatorio: Bali tiene mil cosas por hacer y el coordinador te orienta según lo que te apetezca.",
+  },
+  {
     q: "¿Cuánto se paga para reservar?",
     a: "100€ reembolsables y plaza confirmada. Al confirmar el grupo se abona un segundo pago de 1.000€ y el importe restante antes del viaje. La reserva se devuelve según la política de cancelación.",
   },
