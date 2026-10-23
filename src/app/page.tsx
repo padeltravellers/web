@@ -40,9 +40,9 @@ const pillars = [
     photo: "/photos/villa/1.jpg",
   },
   {
-    title: "Dika, tu coordinador local",
+    title: "Coordinador local",
     text:
-      "Dika, balinés y jugador de pádel, viaja con el grupo todo el viaje. Mucha experiencia y un encanto: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, disponible para lo que haga falta.",
+      "Un coordinador balinés y jugador de pádel viaja con el grupo todo el viaje. Mucha experiencia: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, disponible para lo que haga falta.",
     photo: "/photos/extra/la-brisa/2.jpg",
   },
   {

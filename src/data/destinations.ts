@@ -382,7 +382,7 @@ const baliHighlights = [
   { icon: "🎾", title: "Pádel en BPA", text: "Club Bali Padel Academy: pistas premium, comunidad local, coaches con nivel." },
   { icon: "🏝", title: "13 experiencias incluidas", text: "Templos, mercados, cascadas, surf, snorkel, café, danza tradicional, beach clubs." },
   { icon: "🍜", title: "Cultura real, no postal", text: "Vamos a los sitios donde van los locales, no donde van los turistas." },
-  { icon: "🧭", title: "Coordinador local, Dika", text: "Dika, balinés y jugador de pádel, vive el viaje con el grupo. Equipo español PT de apoyo." },
+  { icon: "🧭", title: "Coordinador local", text: "Un coordinador balinés que juega al pádel vive el viaje con el grupo. Equipo español PT de apoyo." },
 ];
 
 const baliGallery = [

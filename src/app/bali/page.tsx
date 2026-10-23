@@ -157,7 +157,7 @@ export default function BaliPage() {
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
                   <span className="font-display font-semibold text-pt-clay text-base md:text-xl">{g.label.kicker}</span>
                 </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                <div className={`grid gap-5 lg:gap-6 ${g.items.length <= 2 ? "sm:grid-cols-2 max-w-3xl mx-auto" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
                   {g.items.map((e) => <ExperienceCard key={e.slug} e={e} />)}
                 </div>
               </div>
