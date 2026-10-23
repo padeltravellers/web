@@ -2,14 +2,17 @@
 
 /* Padel Travellers — Brand Tokens */
 :root {
-  /* Primary brand */
-  --pt-green: #0E3B2D;      /* verde profundo principal */
-  --pt-green-soft: #1B5840; /* verde medio */
-  --pt-green-pale: #D9E4DC; /* verde clarísimo bg */
-  --pt-cream: #F5EFE6;      /* crema cálido */
-  --pt-sand: #E8DCC8;       /* arena */
-  --pt-clay: #B8543A;       /* tierra/clay accent */
-  --pt-ink: #0B1F19;        /* texto fuerte */
+  /* Primary brand — paleta OFICIAL del brandbook PT */
+  --pt-green: #0E3B2D;      /* verde profundo — principal */
+  --pt-green-nat1: #3F5039; /* verde natural 1 — brandbook */
+  --pt-green-nat2: #576842; /* verde natural 2 — brandbook */
+  --pt-green-soft: #3F5039; /* verde medio → verde natural 1 */
+  --pt-green-pale: #D9E4DC; /* verde clarísimo bg (derivado) */
+  --pt-cream: #FEFAE0;      /* crema — brandbook */
+  --pt-sand: #E8DCC8;       /* arena (derivado de apoyo) */
+  --pt-clay: #AA785A;       /* tierra 1 — brandbook (acento) */
+  --pt-clay-2: #947C64;     /* tierra 2 — brandbook */
+  --pt-ink: #0B1F19;        /* texto fuerte (derivado del verde) */
   --pt-muted: #6B7570;      /* texto suave */
 
   --background: #ffffff;
@@ -20,18 +23,20 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-pt-green: var(--pt-green);
+  --color-pt-green-nat1: var(--pt-green-nat1);
+  --color-pt-green-nat2: var(--pt-green-nat2);
   --color-pt-green-soft: var(--pt-green-soft);
   --color-pt-green-pale: var(--pt-green-pale);
   --color-pt-cream: var(--pt-cream);
   --color-pt-sand: var(--pt-sand);
   --color-pt-clay: var(--pt-clay);
+  --color-pt-clay-2: var(--pt-clay-2);
   --color-pt-ink: var(--pt-ink);
   --color-pt-muted: var(--pt-muted);
 
-  --font-display: var(--font-jost); /* Futura fallback */
+  --font-display: var(--font-jost); /* Futura STD Bold fallback */
   --font-body: var(--font-inter);   /* Helvetica fallback */
-  --font-script: var(--font-petit); /* Sloop fallback */
-  --font-serif: var(--font-eczar);  /* Vintage serif */
+  --font-script: var(--font-petit); /* Sloop Script Pro fallback */
 }
 
 body {

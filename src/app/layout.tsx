@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Jost, Inter, Petit_Formal_Script, Eczar } from "next/font/google";
+import { Jost, Inter, Petit_Formal_Script } from "next/font/google";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
@@ -18,12 +18,6 @@ const petit = Petit_Formal_Script({
   variable: "--font-petit",
   subsets: ["latin"],
   weight: ["400"],
-  display: "swap",
-});
-const eczar = Eczar({
-  variable: "--font-eczar",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -140,7 +134,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${jost.variable} ${inter.variable} ${petit.variable} ${eczar.variable} h-full antialiased`}
+      className={`${jost.variable} ${inter.variable} ${petit.variable} h-full antialiased`}
     >
       <head>
         <script
