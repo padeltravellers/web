@@ -33,6 +33,7 @@ export interface Destination {
   name: string;
   status: "open" | "comingsoon" | "draft";
   shortPitch: string;
+  cardTagline: string;   // línea corta para la tarjeta de "Nuestros destinos" (home)
   description: string;
   hero: string;
   heroAlt: string;
@@ -345,12 +346,12 @@ const baliItinerary: ItineraryDay[] = [
   {
     day: 11,
     weekday: "Día 11",
-    title: "Día libre — Aventura y Relax",
-    subtitle: "Quad en Ubud + piscinas de Cretya",
+    title: "Día en Bali Este",
+    subtitle: "Puertas del Cielo + snorkel en Amed",
     description:
-      "Mañana de aventura en quad: nos dirigimos a Ubud y recorremos en quad propio arrozales, senderos de barro, túneles naturales e incluso una cueva con cascada — una de las rutas más espectaculares de Bali. No se necesita experiencia previa, los instructores locales te enseñan lo necesario. Por la tarde, uno de los clubs más espectaculares de Ubud con piscinas infinitas en terrazas con vistas a los arrozales, música y ambiente chill — el sitio ideal para disfrutar hasta el atardecer.",
-    tags: ["naturaleza", "libre"],
-    photo: "/photos/extra/arrozales/2.jpg",
+      "Salimos al este de la isla. Empezamos en Pura Lempuyang, uno de los templos más antiguos y sagrados de Bali, conocido por sus famosas «Puertas del Cielo» con vista enmarcada al volcán Agung — uno de los lugares más fotografiados de la isla. Ruta panorámica de miradores con paisajes increíbles. Finalizamos en Amed, pueblo costero de arena negra volcánica y ambiente relajado, donde haremos una actividad de snorkel sobre los arrecifes de coral. Opcional: submarinismo con centros locales (coste aparte, sujeto a disponibilidad).",
+    tags: ["cultura", "playa", "naturaleza"],
+    photo: "/photos/bali/amed/1.jpg",
     highlights: [],
   },
   {
@@ -409,6 +410,7 @@ export const destinations: Destination[] = [
     name: "Bali",
     status: "open",
     shortPitch: "14 días en Indonesia — pádel, cultura, surf y aventura.",
+    cardTagline: "Pádel, Cultura y Aventura",
     description:
       "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador local acompañando el viaje completo.",
     hero: "/photos/extra/atardecer/1.jpg",
@@ -436,11 +438,12 @@ export const destinations: Destination[] = [
     name: "Indonesia",
     status: "comingsoon",
     shortPitch: "Próximamente — Yogyakarta, Bromo, Lombok y Flores.",
+    cardTagline: "Pádel · Yogyakarta · Bromo · Lombok · Flores",
     description:
       "El gran viaje por Indonesia, más allá de Bali. Yogyakarta y sus templos (Borobudur, Prambanan), el amanecer sobre el volcán Bromo, las playas y el pádel en Lombok, y la naturaleza salvaje de Flores (Komodo, lago Kelimutu). Pádel, aventura y cultura recorriendo varias islas. Lista de espera abierta.",
     hero: "/photos/extra/arrozales/1.jpg",
     heroAlt: "Paisajes de Indonesia",
-    duration: "Por confirmar",
+    duration: "14 días",
     groupSize: "8–12 personas",
     basePrice: "Por confirmar",
     solo: "Por confirmar",
@@ -464,19 +467,20 @@ export const destinations: Destination[] = [
     name: "Filipinas",
     status: "comingsoon",
     shortPitch: "1 salida 2027 — 25 jul a 7 ago · plazas limitadas.",
+    cardTagline: "Pádel · Moalboal · Siargao · Bohol",
     description:
-      "Una única salida en 2027: del 25 de julio al 7 de agosto. Pádel en Manila + travesía por las islas: Palawan, Cebú, Bohol. Buceo, playas vírgenes, comida filipina y la calidez de la gente local. Plazas limitadas — lista de espera abierta.",
+      "Una única salida en 2027: del 25 de julio al 7 de agosto, 13 días. Pádel + travesía por las islas: Moalboal, Siargao y Bohol. Buceo con sardinas y tortugas, surf, playas vírgenes, comida filipina y la calidez de la gente local. Plazas limitadas — lista de espera abierta.",
     hero: "/photos/filipinas/1.jpg",
     heroAlt: "Aguas turquesas de Filipinas",
-    duration: "14 días",
+    duration: "13 días",
     groupSize: "8–12 personas",
     basePrice: "Por confirmar",
     solo: "Por confirmar",
     deposit: "100€",
     trips: [{ n: 1, range: "25 jul – 7 ago", month: "Julio" }],
     highlights: [
-      { icon: "🤿", title: "Buceo de nivel mundial", text: "Tubbataha, Apo Reef y Bohol — algunos de los mejores spots del planeta." },
-      { icon: "🏝", title: "Multi-isla", text: "Manila + Palawan + Cebú o Bohol. Travesías cortas en barco y avión." },
+      { icon: "🤿", title: "Moalboal", text: "El banco de sardinas y las tortugas, snorkel desde la orilla. De lo mejor del planeta." },
+      { icon: "🏄", title: "Siargao", text: "La capital del surf de Filipinas: olas, lagunas y ambiente isleño." },
       { icon: "🎾", title: "Pádel en Manila", text: "Club local en arranque, en lo que el viaje empieza y termina." },
       { icon: "🍤", title: "Sabor filipino", text: "Adobo, sinigang, lechón. Comida potente y barata." },
     ],

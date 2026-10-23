@@ -19,12 +19,12 @@ export default function FilipinasPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6 lg:px-12 max-w-3xl text-white fade-up">
-              <p className="font-script text-pt-cream text-4xl md:text-5xl mb-4 -rotate-2">1 salida · 2027</p>
+              <p className="font-display uppercase tracking-[0.26em] text-pt-cream text-sm md:text-base font-semibold mb-5">1 salida · 2027</p>
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Filipinas
               </h1>
               <p className="mt-10 text-lg md:text-xl font-light leading-relaxed text-white/95 max-w-xl mx-auto">
-                Una única salida en 2027: del <strong className="font-semibold">25 de julio al 7 de agosto</strong>. Pádel en Manila y travesía por las islas. Plazas limitadas.
+                Una única salida en 2027: del <strong className="font-semibold">25 de julio al 7 de agosto</strong>, 13 días. Pádel y travesía por las islas: Moalboal, Siargao y Bohol. Plazas limitadas.
               </p>
               <div className="mt-12">
                 <a

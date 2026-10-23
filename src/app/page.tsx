@@ -186,31 +186,21 @@ export default function Home() {
                     </span>
                   )}
                   <div className="absolute left-6 right-6 bottom-6 text-white">
-                    <h3 className="font-display text-6xl md:text-7xl font-medium leading-none mb-4">{d.name}</h3>
-                    {d.status === "open" ? (
-                      <>
-                        <p className="text-white/95 text-lg leading-relaxed mb-5 max-w-md font-light">{d.shortPitch}</p>
-                        <div className="flex flex-wrap items-center gap-5 text-base mb-6">
-                          <span><span className="opacity-70">Duración </span>{d.duration}</span>
+                    <h3 className="font-display text-5xl md:text-6xl font-medium leading-none mb-3">{d.name}</h3>
+                    <p className="text-white/95 text-base md:text-lg leading-snug mb-4 max-w-md font-light">{d.cardTagline}</p>
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm md:text-base mb-5">
+                      <span><span className="opacity-70">Duración </span>{d.duration}</span>
+                      {d.status === "open" && (
+                        <>
                           <span><span className="opacity-70">Grupo </span>{d.groupSize}</span>
                           <span><span className="opacity-70">Desde </span>{d.basePrice}</span>
-                        </div>
-                        <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
-                          Ver destino
-                          <span aria-hidden>→</span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="text-white/95 text-lg leading-relaxed mb-6 max-w-md font-light">
-                          Estamos preparando el próximo destino. Daremos noticias cuando lo tengamos listo.
-                        </p>
-                        <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
-                          Avísame cuando abráis
-                          <span aria-hidden>→</span>
-                        </div>
-                      </>
-                    )}
+                        </>
+                      )}
+                    </div>
+                    <div className="inline-flex items-center gap-2 font-display font-semibold text-base group-hover:gap-3 transition-all">
+                      {d.status === "open" ? "Ver destino" : "Lista de espera"}
+                      <span aria-hidden>→</span>
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -248,10 +238,8 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
-              <h2 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl mt-5 leading-[0.92]">
-                Cuatro pasos
-                <br />
-                <span className="font-script italic font-normal text-pt-cream">sin sorpresas</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-5 leading-[0.95]">
+                Cuatro pasos <span className="font-script italic font-normal text-pt-cream">sin sorpresas</span>
               </h2>
             </div>
             <ol className="grid md:grid-cols-4 gap-8">

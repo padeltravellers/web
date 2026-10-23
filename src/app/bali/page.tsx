@@ -7,9 +7,7 @@ import PdfLeadMagnet from "@/components/PdfLeadMagnet";
 import { contact } from "@/data/content";
 import { getDestination, Experience } from "@/data/destinations";
 
-const liveAvailability: Record<number, number> = {
-  1: 12, 2: 6, 3: 12, 4: 10, 5: 7, 6: 5, 7: 6, 8: 12,
-};
+const liveAvailability: Record<number, number> = {};
 
 const TAG_LABEL: Record<string, { label: string; color: string }> = {
   padel:      { label: "Pádel",       color: "bg-pt-green text-white" },
@@ -446,7 +444,6 @@ export default function BaliPage() {
         {/* CTA FINAL */}
         <section className="py-10 lg:py-12 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="font-script text-pt-clay text-3xl mb-5 -rotate-2">cierra tu plaza</p>
             <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">
               ¿Vamos a Bali?
             </h2>

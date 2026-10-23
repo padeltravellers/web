@@ -26,7 +26,7 @@ export default function IndonesiaPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6 lg:px-12 max-w-3xl text-white fade-up">
-              <p className="font-script text-pt-cream text-4xl md:text-5xl mb-4 -rotate-2">próximamente</p>
+              <p className="font-display uppercase tracking-[0.26em] text-pt-cream text-sm md:text-base font-semibold mb-5">Próximamente</p>
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Indonesia
               </h1>
