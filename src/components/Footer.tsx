@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <p className="text-sm leading-relaxed max-w-sm mb-6">
             Viajes en grupo a Bali con pádel. 14 días, 8–12 personas, alojamiento premium, coordinador
-            español. Hechos con calma, vividos con intensidad.
+            local balinés. Hechos con calma, vividos con intensidad.
           </p>
           <p className="font-script text-pt-cream text-lg">Bali con pádel</p>
         </div>
@@ -24,6 +24,7 @@ export default function Footer() {
           </div>
           <ul className="space-y-2.5 text-sm">
             <li><Link href="/bali" className="hover:text-pt-cream">Bali · abierto 2027</Link></li>
+            <li><Link href="/indonesia" className="hover:text-pt-cream">Indonesia · próximamente</Link></li>
             <li><Link href="/filipinas" className="hover:text-pt-cream">Filipinas · próximamente</Link></li>
           </ul>
         </div>

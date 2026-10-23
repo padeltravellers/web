@@ -30,9 +30,9 @@ const principles = [
   },
   {
     n: "04",
-    title: "Una persona del equipo viaja contigo",
+    title: "Dika, tu coordinador local",
     text:
-      "No un guía local que se va a las 18:00. Alguien de Padel Travellers que conoce el grupo desde antes y resuelve cualquier cosa hasta el último día.",
+      "Dika es balinés, juega al pádel y vive el viaje contigo de principio a fin. No un guía que se va a las 18:00: te enseña su isla desde dentro y está para lo que necesites. Y detrás, el equipo español de Padel Travellers siempre disponible.",
   },
 ];
 

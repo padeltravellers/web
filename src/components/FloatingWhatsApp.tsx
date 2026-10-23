@@ -3,7 +3,7 @@ import { contact } from "@/data/content";
 /**
  * Botón circular flotante de WhatsApp visible en todas las páginas.
  * En desktop bottom-right, en mobile bottom-right también (no estorba).
- * Conecta directo al WhatsApp del bot Marta.
+ * Conecta directo al WhatsApp de Padel Travellers.
  */
 export default function FloatingWhatsApp({
   message = "Hola! Me interesa el viaje a Bali",

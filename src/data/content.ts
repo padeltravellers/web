@@ -4,7 +4,7 @@
 
 export const brand = {
   name: "Padel Travellers",
-  tagline: "Viajes de pádel a Bali. Premium, en grupo, con coordinador español.",
+  tagline: "Viajes de pádel a Bali. Premium, en grupo, con coordinador local balinés.",
   primaryGreen: "#0E3B2D",
   cream: "#F5EFE6",
 };
@@ -33,9 +33,9 @@ export const valuePillars = [
   },
   {
     icon: "🧭",
-    title: "Coordinador PT español",
+    title: "Dika, tu coordinador local",
     text:
-      "Una persona del equipo Padel Travellers viaja contigo todo el viaje. No es \"guía local\": es alguien que conoce el grupo, los sitios y resuelve cualquier cosa.",
+      "Dika, balinés y jugador de pádel, viaja con el grupo todo el viaje. Mucha experiencia y un encanto: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, disponible para lo que necesites.",
   },
   {
     icon: "🌴",
@@ -208,7 +208,7 @@ export const faqs = [
 ];
 
 export const stats = [
-  { value: "54", label: "viajeros con nosotros" },
+  { value: "61", label: "viajeros con nosotros" },
   { value: "14", label: "días por viaje" },
   { value: "8–12", label: "personas por grupo" },
   { value: "8", label: "salidas en 2027" },

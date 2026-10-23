@@ -9,7 +9,7 @@ import { destinations } from "@/data/destinations";
 export const metadata = {
   title: "Padel Travellers — Viajes en grupo de pádel y aventura",
   description:
-    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado, coordinador español. Bali abierto 2027, Filipinas próximamente.",
+    "Viajes en grupo que combinan pádel y aventura. Destinos cuidados, alojamiento privado, coordinador local balinés. Bali abierto 2027, Filipinas próximamente.",
 };
 
 const heroSlides = [
@@ -21,9 +21,9 @@ const heroSlides = [
 ];
 
 const ptStats = [
-  { value: "3", label: "Años organizando", suffix: "" },
-  { value: "7", label: "Viajes completados", suffix: "" },
-  { value: "54", label: "Viajeros", suffix: "+" },
+  { value: "4", label: "Años organizando", suffix: "" },
+  { value: "8", label: "Viajes completados", suffix: "" },
+  { value: "61", label: "Viajeros", suffix: "+" },
 ];
 
 const pillars = [
@@ -40,9 +40,9 @@ const pillars = [
     photo: "/photos/villa/1.jpg",
   },
   {
-    title: "Coordinador español",
+    title: "Dika, tu coordinador local",
     text:
-      "Una persona del equipo Padel Travellers viaja contigo todo el viaje. No es un guía local: conoce el destino, al grupo y resuelve cualquier cosa, día y noche.",
+      "Dika, balinés y jugador de pádel, viaja con el grupo todo el viaje. Mucha experiencia y un encanto: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, disponible para lo que haga falta.",
     photo: "/photos/extra/la-brisa/2.jpg",
   },
   {
@@ -166,12 +166,12 @@ export default function Home() {
         <section id="destinos" className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Destinos</span>
+              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Viajes</span>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-4 leading-[0.95] text-pt-green">
-                Dónde viajamos
+                Nuestros destinos
               </h2>
             </div>
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {destinations.map((d) => (
                 <Link
                   key={d.slug}
@@ -327,7 +327,7 @@ export default function Home() {
                 Ver fechas Bali 2027
               </Link>
               <a href={contact.whatsappLink} className="px-10 py-4 rounded-full border-2 border-white/40 font-display font-bold text-base hover:bg-white/10 transition">
-                WhatsApp Marta
+                Contactar por WhatsApp
               </a>
             </div>
           </div>

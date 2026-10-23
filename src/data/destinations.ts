@@ -381,7 +381,7 @@ const baliHighlights = [
   { icon: "🎾", title: "Pádel en BPA", text: "Club Bali Padel Academy: pistas premium, comunidad local, coaches con nivel." },
   { icon: "🏝", title: "13 experiencias incluidas", text: "Templos, mercados, cascadas, surf, snorkel, café, danza tradicional, beach clubs." },
   { icon: "🍜", title: "Cultura real, no postal", text: "Vamos a los sitios donde van los locales, no donde van los turistas." },
-  { icon: "🧭", title: "Coordinador español", text: "Una persona del equipo PT viaja con vosotros las 2 semanas." },
+  { icon: "🧭", title: "Coordinador local, Dika", text: "Dika, balinés y jugador de pádel, vive el viaje con el grupo. Equipo español PT de apoyo." },
 ];
 
 const baliGallery = [
@@ -410,7 +410,7 @@ export const destinations: Destination[] = [
     status: "open",
     shortPitch: "14 días en Indonesia — pádel, cultura, surf y aventura.",
     description:
-      "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador español acompañando el viaje completo.",
+      "Nuestro destino fundacional. Llevamos años llevando grupos a Bali y conocemos la isla como si fuera nuestra casa. Pádel en el club BPA, 13 experiencias en la isla, alojamiento privado y coordinador local acompañando el viaje completo.",
     hero: "/photos/extra/atardecer/1.jpg",
     heroAlt: "Acantilados de Uluwatu al atardecer",
     duration: "14 días",
