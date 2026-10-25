@@ -32,7 +32,7 @@ const principles = [
     n: "04",
     title: "Un coordinador local que vive el viaje contigo",
     text:
-      "Es balinés, vive en la isla y juega al pádel. Viaja con el grupo de principio a fin: te enseña Bali desde dentro, comparte pista contigo y está para lo que necesites, día y noche. Y detrás, el equipo español de Padel Travellers, siempre disponible.",
+      "Es balinés, vive en la isla y juega al pádel. Viaja con el grupo de principio a fin: te enseña Bali desde dentro, comparte pista contigo y está para lo que necesites, día y noche. Y detrás, el equipo español de Padel Travellers, que también vive en Bali: siempre disponible y con el grupo en algún momento del viaje.",
   },
 ];
 

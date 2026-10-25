@@ -1,6 +1,6 @@
 // Padel Travellers — copy oficial + datos producto
 // Fuente: Web Text Google Doc + brandbook + memoria operativa
-// NUNCA inventar: 54 viajeros totales, NO "150+"
+// NUNCA inventar: 61 viajeros totales, NO "150+"
 
 export const brand = {
   name: "Padel Travellers",
@@ -35,7 +35,7 @@ export const valuePillars = [
     icon: "🧭",
     title: "Coordinador local",
     text:
-      "Un coordinador balinés y jugador de pádel viaja con el grupo todo el viaje. Mucha experiencia: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, disponible para lo que necesites.",
+      "Un coordinador balinés y jugador de pádel viaja con el grupo todo el viaje. Mucha experiencia: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, que también vive en Bali: disponible para lo que necesites y con el grupo en algún momento del viaje.",
   },
   {
     icon: "🌴",
@@ -156,7 +156,7 @@ export const included = [
   "Traslados días de pádel: hotel ↔ Bali Padel Academy",
   "Traslados hasta el final de cada actividad diaria",
   "Todas las actividades y entradas del pack",
-  "Acompañamiento personal Padel Travellers durante todas las actividades",
+  "Coordinador local acompañando al grupo en todas las actividades",
 ];
 
 export const notIncluded = [
@@ -207,7 +207,7 @@ export const faqs = [
   },
   {
     q: "¿Quién organiza esto?",
-    a: "Padel Travellers, equipo afincado en España con base operativa en Bali. Llevamos 54 viajeros con nosotros y cada viaje nos cuentan lo mismo: \"se ha pasado volando\".",
+    a: "Padel Travellers, un equipo español que vive en Bali. Llevamos 61 viajeros con nosotros y cada viaje nos cuentan lo mismo: \"se ha pasado volando\".",
   },
 ];
 
