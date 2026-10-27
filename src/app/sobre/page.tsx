@@ -45,7 +45,7 @@ export default function SobrePage() {
         <section className="px-6 lg:px-12 pt-12 pb-10 lg:pt-14 lg:pb-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-7">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-7">Sobre nosotros</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Sobre nosotros</p>
               <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight text-pt-green">
                 Pequeños,
                 <br />
@@ -69,7 +69,7 @@ export default function SobrePage() {
         {/* PRINCIPIOS */}
         <section className="px-6 lg:px-12 py-10 lg:py-10 max-w-6xl mx-auto">
           <div className="mb-14">
-            <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Filosofía</p>
+            <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Filosofía</p>
             <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green max-w-3xl">
               Cuatro decisiones
               <br />

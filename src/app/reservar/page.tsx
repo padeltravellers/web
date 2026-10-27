@@ -55,7 +55,7 @@ export default function ReservarPage() {
       <Header />
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-14 pb-12 lg:pt-14 lg:pb-12 max-w-5xl mx-auto text-center">
-          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Cómo reservar</p>
+          <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Cómo reservar</p>
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
             Cuatro pasos
             <br />
@@ -81,7 +81,7 @@ export default function ReservarPage() {
         {/* DESTINOS */}
         <section className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
-            <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5 text-center">Elige destino</p>
+            <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Elige destino</p>
             <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green text-center leading-[0.95] mb-12">
               ¿A dónde quieres viajar?
             </h2>
@@ -170,7 +170,7 @@ export default function ReservarPage() {
         <section className="py-10 lg:py-10 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-5">Empieza por aquí</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Empieza por aquí</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95] mb-6">
                 Déjanos tus datos
                 <br />

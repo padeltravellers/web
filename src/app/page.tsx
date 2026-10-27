@@ -83,9 +83,6 @@ export default function Home() {
                 <span className="font-script font-normal italic">Pádel y Aventura</span>
               </h1>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
-                <Link href="/bali" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base hover:bg-pt-cream transition">
-                  Ver destino Bali
-                </Link>
                 <Link href="/reservar" className="px-9 py-4 rounded-full border border-white/50 text-white font-display font-semibold text-base hover:bg-white/10 transition">
                   Contacto
                 </Link>
@@ -121,7 +118,7 @@ export default function Home() {
         <section className="px-6 lg:px-12 py-10 lg:py-10 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">¿Qué es Padel Travellers?</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">¿Qué es Padel Travellers?</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-8">
                 Viajes que combinan
                 <br />
@@ -145,18 +142,12 @@ export default function Home() {
                 <span aria-hidden>→</span>
               </Link>
             </div>
-            <div className="lg:col-span-7 grid grid-cols-2 grid-rows-2 gap-3 lg:gap-4">
-              <div className="aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Img src="/photos/extra/bpa/aerial.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+            <div className="lg:col-span-7 grid gap-3 lg:gap-4">
+              <div className="aspect-[16/9] relative rounded-2xl overflow-hidden">
+                <Img src="/photos/bali/entrenos/3.jpg" alt="Grupo de Padel Travellers en la pista de Bali Padel Academy" fill className="object-cover" sizes="(max-width:1024px) 100vw, 55vw" />
               </div>
-              <div className="aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Img src="/photos/extra/arrozales/1.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
-              </div>
-              <div className="aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Img src="/photos/extra/atardecer/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
-              </div>
-              <div className="aspect-[4/5] relative rounded-2xl overflow-hidden">
-                <Img src="/photos/villa/2.jpg" alt="" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
+              <div className="aspect-[16/9] relative rounded-2xl overflow-hidden">
+                <Img src="/photos/bali/ubud-norte/1.jpg" alt="Terrazas de arroz con palmeras en el norte de Ubud" fill className="object-cover" sizes="(max-width:1024px) 100vw, 55vw" />
               </div>
             </div>
           </div>
@@ -166,8 +157,8 @@ export default function Home() {
         <section id="destinos" className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Viajes</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-4 leading-[0.95] text-pt-green">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Viajes</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95] text-pt-green">
                 Nuestros destinos
               </h2>
             </div>
@@ -211,8 +202,8 @@ export default function Home() {
         {/* ¿POR QUÉ ELEGIRNOS? — con foto en cada card */}
         <section className="py-10 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">¿Por qué elegirnos?</span>
-            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-5 leading-[0.95] text-pt-green">
+            <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">¿Por qué elegirnos?</span>
+            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95] text-pt-green">
               Cuatro razones
               <br />
               <span className="font-script italic font-normal text-pt-clay">que cambian el viaje</span>
@@ -237,8 +228,8 @@ export default function Home() {
         <section className="bg-pt-green text-pt-cream py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-5 leading-[0.95]">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95]">
                 Cuatro pasos <span className="font-script italic font-normal text-pt-cream">sin sorpresas</span>
               </h2>
             </div>
@@ -268,8 +259,8 @@ export default function Home() {
         <section className="py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-4 text-pt-green leading-[0.95]">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[0.95]">
                 Lo que dicen los que
                 <br />
                 <span className="font-script italic font-normal text-pt-clay">ya volvieron</span>
@@ -300,7 +291,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-br from-pt-ink via-pt-ink/85 to-pt-green/60" />
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">
-            <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/80 mb-6 inline-block">Próximas fechas 2027</span>
+            <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/80 mb-3 inline-block">Próximas fechas 2027</span>
             <h2 className="font-display font-medium text-5xl md:text-7xl leading-[0.95] mb-10">
               Ocho salidas
               <br />

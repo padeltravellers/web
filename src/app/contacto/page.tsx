@@ -14,7 +14,7 @@ export default function ContactoPage() {
       <Header />
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-14 lg:pb-12 max-w-3xl mx-auto text-center">
-          <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">
+          <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">
             ¿Hablamos?
           </p>
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.95]">

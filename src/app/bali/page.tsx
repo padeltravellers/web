@@ -97,10 +97,10 @@ export default function BaliPage() {
                 {d.shortPitch}
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <Link href="#itinerario" className="px-8 py-3.5 rounded-full bg-white text-pt-green font-display font-semibold text-sm hover:bg-pt-cream transition">
-                  Ver itinerario día a día
+                <Link href="#itinerario" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
+                  Ver itinerario
                 </Link>
-                <Link href="#fechas" className="px-8 py-3.5 rounded-full border border-white/50 text-white font-display font-semibold text-sm hover:bg-white/10 transition">
+                <Link href="#fechas" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Fechas y plazas
                 </Link>
               </div>
@@ -112,7 +112,7 @@ export default function BaliPage() {
         <section className="px-6 lg:px-12 py-12 lg:py-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestra isla favorita</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestra isla favorita</p>
               <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
                 Donde empezó
                 <br />
@@ -144,7 +144,7 @@ export default function BaliPage() {
         <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Experiencias</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Experiencias</p>
               <p className="text-pt-muted text-lg leading-relaxed">
                 Experiencias incluidas en el viaje, repartidas en pádel, turismo y aventura. Todas pensadas
                 para que vivas Bali a fondo.
@@ -169,7 +169,7 @@ export default function BaliPage() {
         <section id="itinerario" className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green-pale/40">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Itinerario</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Itinerario</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
                 14 días. Día a día.
               </h2>
@@ -261,7 +261,7 @@ export default function BaliPage() {
         <section className="py-12 lg:py-12 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-6">Nuestro hogar</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestro hogar</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
                 Hotel
                 <br />
@@ -311,7 +311,7 @@ export default function BaliPage() {
         <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/40">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">El precio incluye</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">El precio incluye</p>
               <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
                 Lo que pagas, lo que no.
               </h2>
@@ -358,7 +358,7 @@ export default function BaliPage() {
         <section id="fechas" className="py-12 lg:py-12 px-6 lg:px-12 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-clay mb-4">Calendario 2027</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Calendario 2027</p>
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
@@ -416,8 +416,8 @@ export default function BaliPage() {
           <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
           <div className="relative max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.26em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
-              <h2 className="font-display font-extralight text-3xl md:text-5xl mt-4 leading-tight">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
+              <h2 className="font-display font-extralight text-3xl md:text-5xl mt-2 leading-tight">
                 Un precio. Todo incluido
               </h2>
             </div>
