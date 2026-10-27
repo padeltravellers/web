@@ -201,15 +201,19 @@ export default function BaliPage() {
                         key={day.day}
                         className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm rounded-3xl"
                       >
-                        <summary className="day-summary cursor-pointer px-6 md:px-8 py-5 flex items-center justify-between gap-4">
-                          <div className="flex items-baseline gap-3 flex-1 min-w-0">
-                            <span className="font-display font-bold text-lg md:text-2xl text-pt-green shrink-0">
-                              Día {day.day}
-                            </span>
-                            <span className="font-display text-pt-muted shrink-0">—</span>
-                            <span className="font-display font-medium text-pt-ink/85 text-base md:text-lg truncate">
-                              {day.title}
-                            </span>
+                        <summary className="day-summary cursor-pointer p-3 md:p-4 pr-5 md:pr-7 flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-4 md:gap-5 flex-1 min-w-0">
+                            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shrink-0 bg-pt-green-pale">
+                              <Img src={day.photo} alt="" fill className="object-cover" sizes="80px" loading="lazy" />
+                            </div>
+                            <div className="min-w-0">
+                              <span className="block font-display font-bold uppercase tracking-[0.12em] text-xs md:text-sm text-pt-green">
+                                Día {day.day}
+                              </span>
+                              <span className="block font-display font-medium text-pt-ink/85 text-base md:text-lg leading-snug">
+                                {day.title}
+                              </span>
+                            </div>
                           </div>
                           <span className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0" aria-hidden>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -218,8 +222,18 @@ export default function BaliPage() {
                           </span>
                         </summary>
                         <div className="border-t border-pt-green/10 p-6 md:p-8 flex flex-col">
-                          <p className="font-display text-sm text-pt-muted italic mb-4">{day.subtitle}</p>
-                          <p className="text-sm md:text-base text-pt-ink/85 leading-relaxed mb-5">{day.description}</p>
+                          <div className="space-y-4 text-sm md:text-base text-pt-ink/85 leading-relaxed mb-6">
+                            {day.description.split("\n\n").map((para, pi) => (
+                              <p key={pi}>
+                                {para.split(/\*\*(.+?)\*\*/g).map((chunk, ci) =>
+                                  ci % 2 === 1 ? <strong key={ci} className="font-semibold text-pt-ink">{chunk}</strong> : chunk
+                                )}
+                              </p>
+                            ))}
+                          </div>
+                          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-pt-green-pale">
+                            <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:896px) 90vw, 800px" loading="lazy" />
+                          </div>
                           <div className="flex flex-wrap gap-2">
                             {day.tags.map((t) => (
                               <span key={t} className={`px-2.5 py-0.5 rounded-full text-[10px] font-display uppercase tracking-[0.18em] ${TAG_LABEL[t].color}`}>

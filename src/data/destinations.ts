@@ -241,7 +241,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Llegada a Bali",
     subtitle: "Aeropuerto, traslado al hotel y bienvenida",
     description:
-      "Aterrizaje en el aeropuerto de Denpasar. Recogida en transporte privado incluido y traslado al hotel en Canggu, tu hogar durante todo el viaje. Tarde para deshacer maletas, refrescarse y empezar a adaptarse al cambio horario. Bienvenida con el grupo y presentación del coordinador.",
+      "**¡Bienvenido a Bali!**\n\nAterrizas en el aeropuerto de Denpasar y te recogemos con **transporte privado incluido** para llevarte al hotel en **Canggu**, tu hogar durante todo el viaje. Los vuelos no están incluidos, así que eliges con total libertad horario, aerolínea y aeropuerto de salida.\n\nTarde para deshacer maletas, refrescarte y adaptarte al cambio horario. Después, **bienvenida con el grupo y presentación del coordinador**.\n\n**¡Que empiece la aventura!**",
     tags: ["social", "libre"],
     photo: "/photos/villa/1.jpg",
     highlights: [],
@@ -252,7 +252,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Partido de pádel + Tanah Lot",
     subtitle: "Introducción al viaje, primer partido en BPA y templo del atardecer",
     description:
-      "Por la mañana introducción al viaje y traslado a Bali Padel Academy para el primer partido por niveles — conoces el club, las pistas y al grupo. Comida en el restaurante Bandeja del club. Por la tarde, visita al templo de Tanah Lot: «Tierra en el Mar» en balinés, alzado sobre una gran roca rodeada por el océano. Con marea alta parece flotar sobre las olas. Atardecer sobre el templo en silueta — uno de los lugares más fotografiados de Bali.",
+      "**Primer día y primer partido.**\n\nPor la mañana, introducción al viaje y traslado a **Bali Padel Academy** para el **primer partido por niveles**: conoces el club, las pistas y al grupo. Comemos en **Bandeja**, el restaurante del club.\n\nPor la tarde, **Tanah Lot**, «Tierra en el Mar» en balinés: un templo alzado sobre una gran roca rodeada por el océano que, con marea alta, parece flotar sobre las olas.\n\n**Atardecer con el templo en silueta**, uno de los lugares más fotografiados de Bali.",
     tags: ["padel", "cultura"],
     photo: "/photos/bali/tanah-lot/1.jpg",
     highlights: [],
@@ -263,7 +263,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día en Ubud",
     subtitle: "Templo de purificación, arrozales y palacio real",
     description:
-      "Salimos hacia Ubud, centro cultural y artístico de la isla. Empezamos en uno de los templos más sagrados, donde quien quiera puede participar en el ritual tradicional balinés de purificación sumergiéndose en las aguas que fluyen de fuentes naturales. Después, las terrazas de arroz de Tegallalang — uno de los paisajes más icónicos de Bali. Visita al Palacio Real de Ubud, hogar histórico de la familia real, y tiempo libre en el Mercado de Arte Tradicional («Pasar Seni Ubud») para llevarte algún recuerdo.",
+      "**Un día entero en el corazón cultural de Bali.**\n\nEmpezamos en uno de los **templos más sagrados** de la isla, donde quien quiera puede vivir el **ritual balinés de purificación** sumergiéndose en las aguas que brotan de sus fuentes naturales.\n\nDespués, las **terrazas de arroz de Tegallalang**, uno de los paisajes más icónicos de Bali, y el **Palacio Real de Ubud**, hogar histórico de la familia real.\n\nCerramos con tiempo libre en el **Mercado de Arte Tradicional** («Pasar Seni Ubud») para llevarte algún recuerdo.",
     tags: ["cultura", "naturaleza"],
     photo: "/photos/extra/arrozales/1.jpg",
     highlights: [],
@@ -274,7 +274,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Clase de pádel + surf",
     subtitle: "Mañana en BPA, tarde en las olas de Canggu",
     description:
-      "Por la mañana, primera clase de pádel en BPA con los coaches de NOX para trabajar técnica y posicionamiento, descanso y comida en el club. Por la tarde, clase de surf en una de las playas de Canggu — entre las mejores del mundo para iniciarse. Dos horas con instructor experimentado que adapta la sesión a tu nivel, tabla y traje incluidos. Terminamos el día en la misma playa contemplando la puesta de sol.",
+      "**Pádel por la mañana, olas por la tarde.**\n\nPrimera **clase de pádel en BPA** con los coaches de NOX para trabajar técnica y posicionamiento. Descanso y comida en el club.\n\nPor la tarde, **clase de surf en Canggu**, una de las mejores playas del mundo para iniciarse: **2 horas con instructor** que adapta la sesión a tu nivel, con **tabla y traje incluidos**.\n\n**Terminamos en la misma playa viendo la puesta de sol.**",
     tags: ["padel", "playa", "naturaleza"],
     photo: "/photos/extra/surf-extra/1.jpg",
     highlights: [],
@@ -285,7 +285,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día en Uluwatu",
     subtitle: "Playas, templo y atardecer",
     description:
-      "Salida al sur de la isla, zona famosa por sus acantilados, playas de arena blanca y olas desafiantes. Empezamos la mañana relajándonos en una de las playas con baño en aguas cristalinas. Después, comida en zona de acantilados contemplando a los mejores surfistas desafiando las olas. Por la tarde, paseo por el templo de Pura Luhur Uluwatu, en lo alto del acantilado con vistas espectaculares al océano Índico. Última parada en otra playa cercana de regreso a Canggu para disfrutar de uno de los atardeceres más impresionantes de la isla.",
+      "**Acantilados, playas de arena blanca y uno de los mejores atardeceres de la isla.**\n\nBajamos al sur de Bali. Mañana de playa con **baño en aguas cristalinas** y comida en la zona de acantilados, viendo a los **mejores surfistas** desafiar las olas.\n\nPor la tarde, paseo por el **templo de Pura Luhur Uluwatu**, en lo alto del acantilado y con vistas espectaculares al océano Índico.\n\nDe vuelta a Canggu, última parada en una playa cercana para disfrutar de **uno de los atardeceres más impresionantes de Bali**.",
     tags: ["playa", "cultura"],
     photo: "/photos/bali/uluwatu/1.jpg",
     highlights: [],
@@ -296,7 +296,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Partido de pádel + tarde libre",
     subtitle: "Pádel por la mañana, tarde a tu ritmo",
     description:
-      "Partido de pádel matinal en BPA por niveles con descanso y comida en el club. Tarde libre: spa balinés, sesión de yoga, otra ronda de surf, beach club frente al mar, o pádel libre con jugadores internacionales del club. El coordinador te orienta con recomendaciones según lo que te apetezca.",
+      "**Pádel por la mañana y tarde a tu ritmo.**\n\n**Partido por niveles en BPA**, descanso y comida en el club.\n\nLa tarde es tuya: **spa balinés, yoga, otra ronda de surf, beach club** frente al mar o **pádel libre** con jugadores internacionales del club.\n\nEl coordinador te recomienda planes según lo que te apetezca.",
     tags: ["padel", "libre"],
     photo: "/photos/extra/bpa/piscina-atardecer.jpg",
     highlights: [],
@@ -307,7 +307,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día libre — Nusa Penida",
     subtitle: "Isla de ensueño a 40 minutos en ferry",
     description:
-      "Excursión a Nusa Penida. Salida temprano desde el puerto de Sanur en ferry. Al llegar, un conductor local nos acompaña por los rincones más bellos: Angel's Billabong (piscina natural entre acantilados con aguas turquesa) y Broken Beach (bahía con espectacular arco de roca abierto al océano), Kelingking Beach (la playa más fotografiada en Instagram, con el icónico acantilado en forma de dinosaurio sobre arena blanca) y Crystal Bay (ideal para relajarse, nadar y snorkel). A las 17:00h ferry de vuelta a Bali.",
+      "**Excursión a Nusa Penida, la isla de las postales.**\n\nSalimos temprano en **ferry desde el puerto de Sanur**. Al llegar, un **conductor local** nos lleva por los rincones más bonitos de la isla.\n\n**Angel's Billabong**, una piscina natural de agua turquesa entre acantilados. **Broken Beach**, una bahía con un espectacular arco de roca abierto al océano. **Kelingking Beach**, la playa más fotografiada de Instagram, con su acantilado en forma de dinosaurio. Y **Crystal Bay**, para nadar, hacer snorkel o simplemente relajarte.\n\n**A las 17:00 h, ferry de vuelta a Bali.**",
     tags: ["playa", "naturaleza"],
     photo: "/photos/nusa-penida/1.jpg",
     highlights: [],
@@ -318,9 +318,9 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día libre — tú eliges",
     subtitle: "Domingo libre: Nusa Penida o quads + Cretya",
     description:
-      "Segundo día del primer fin de semana, totalmente libre. Puedes ampliar Nusa Penida a un segundo día, o montar la aventura de quads por los arrozales de Ubud y rematar en las piscinas infinitas de Cretya. Y si prefieres ir a tu aire, Bali tiene mil planes: playa, spa balinés, surf, beach club o pádel libre en el club. El coordinador te ayuda con lo que elijas.",
+      "**Domingo libre: tú eliges el plan.**\n\nPuedes **alargar Nusa Penida** un segundo día o apuntarte a la aventura en **quad por los arrozales de Ubud** y rematar en las **piscinas infinitas de Cretya**.\n\nY si prefieres ir a tu aire, Bali tiene mil planes: **playa, spa balinés, surf, beach club** o pádel libre en el club.\n\nEl coordinador te ayuda con lo que elijas.",
     tags: ["libre", "naturaleza"],
-    photo: "/photos/nusa-penida/1.jpg",
+    photo: "/photos/extra/la-brisa/2.jpg",
     highlights: [],
   },
   {
@@ -329,7 +329,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Partido de pádel + Taman Ayun + Coffee Plantation",
     subtitle: "Mañana en BPA, tarde cultural",
     description:
-      "Por la mañana, partido de pádel en BPA con el grupo, y comida en el club. Por la tarde, visita al templo Taman Ayun, construido en el siglo XVII por la dinastía real de Mengwi — Patrimonio de la Humanidad por la UNESCO, con arquitectura balinesa tradicional, jardines extensos y canales que crean un ambiente sereno. Después, parada en una plantación tradicional de café: conoces el proceso del famoso café Luwak — seleccionado y digerido por la civeta asiática antes del tueste — y cata de cafés y tés balineses con vistas a los campos.",
+      "**Pádel, templo real y café balinés.**\n\nPor la mañana, **partido en BPA** con el grupo y comida en el club.\n\nPor la tarde, el **templo de Taman Ayun**, construido en el siglo XVII por la dinastía real de Mengwi y **Patrimonio de la Humanidad por la UNESCO**, rodeado de jardines y canales que crean un ambiente sereno.\n\nTerminamos en una **plantación tradicional de café**: descubres el proceso del famoso **café Luwak** y haces una **cata de cafés y tés balineses** con vistas a los campos.",
     tags: ["padel", "cultura"],
     photo: "/photos/bali/cafe/1.jpg",
     highlights: [],
@@ -340,7 +340,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día en Ubud Norte",
     subtitle: "Pura Ulun Danu, cascada y Jatiluwih",
     description:
-      "Día completo en la zona oeste y norte de Bali, descubriendo paisajes increíbles. Visita al templo Pura Ulun Danu Bratan, construido en el siglo XVII y dedicado a Dewi Danu, la diosa del agua — parece flotar sobre el lago cuando sube el nivel del agua. Después, cascada en Tabanan tras una caminata entre vegetación y puentes, con baño en la piscina natural en su base. Finalmente, los arrozales de Jatiluwih: Patrimonio de la Humanidad por la UNESCO con el sistema de irrigación tradicional «subak» y el volcán Gunung Batularu al fondo.",
+      "**Templos, cascadas y arrozales en el norte de Bali.**\n\nVisitamos **Pura Ulun Danu Bratan**, templo del siglo XVII dedicado a Dewi Danu, la diosa del agua, que **parece flotar sobre el lago** cuando sube el nivel del agua.\n\nDespués, caminata entre vegetación y puentes hasta una **cascada en Tabanan**, con **baño en la piscina natural** de su base.\n\nY para cerrar, los **arrozales de Jatiluwih**, Patrimonio de la Humanidad por la UNESCO, con su sistema de riego tradicional «subak» y el volcán Batukaru al fondo.",
     tags: ["cultura", "naturaleza"],
     photo: "/photos/bali/ubud-norte/1.jpg",
     highlights: [],
@@ -351,7 +351,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Clase de pádel + tarde libre",
     subtitle: "Mañana en BPA, tarde a tu ritmo",
     description:
-      "Segunda clase de pádel en BPA con los coaches, descanso y comida en el club. Tarde libre para que cada uno haga lo que más le apetezca: spa, masaje balinés, yoga, scooter por la costa, mercados, cafés especializados o simplemente piscina y desconexión.",
+      "**Segunda clase de pádel y tarde de desconexión.**\n\n**Clase en BPA con los coaches**, descanso y comida en el club.\n\nTarde libre para lo que más te apetezca: **spa, masaje balinés, yoga**, scooter por la costa, mercados, cafés de especialidad o simplemente **piscina y desconexión**.",
     tags: ["padel", "libre"],
     photo: "/photos/extra/padel-action/2.jpg",
     highlights: [],
@@ -362,7 +362,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día en Amed",
     subtitle: "Puertas del Cielo + snorkel en Amed",
     description:
-      "Salimos al este de la isla. Empezamos en Pura Lempuyang, uno de los templos más antiguos y sagrados de Bali, conocido por sus famosas «Puertas del Cielo» con vista enmarcada al volcán Agung — uno de los lugares más fotografiados de la isla. Ruta panorámica de miradores con paisajes increíbles. Finalizamos en Amed, pueblo costero de arena negra volcánica y ambiente relajado, donde haremos una actividad de snorkel sobre los arrecifes de coral. Opcional: submarinismo con centros locales (coste aparte, sujeto a disponibilidad).",
+      "**Las Puertas del Cielo y snorkel en el este de Bali.**\n\nEmpezamos en **Pura Lempuyang**, uno de los templos más antiguos y sagrados de la isla, famoso por sus **«Puertas del Cielo»** con el **volcán Agung** enmarcado al fondo.\n\nRuta panorámica de miradores y llegada a **Amed**, pueblo costero de arena negra volcánica y ambiente relajado, donde hacemos **snorkel sobre los arrecifes de coral**.\n\nOpcional: **submarinismo** con centros locales (coste aparte y sujeto a disponibilidad).",
     tags: ["cultura", "playa", "naturaleza"],
     photo: "/photos/bali/amed/1.jpg",
     highlights: [],
@@ -373,7 +373,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Último partido + cena de despedida",
     subtitle: "Cierre del viaje con el grupo",
     description:
-      "Cuarto y último partido de pádel en BPA por niveles con tu pareja, comida en el club y tarde libre para descansar o aprovechar la isla. Por la noche, cena de despedida del grupo en un restaurante especial — brindis, fotos, recuerdos y el cierre de dos semanas inolvidables.",
+      "**Último partido y cena de despedida.**\n\n**Cuarto y último partido en BPA** por niveles con tu pareja, comida en el club y tarde libre para descansar o aprovechar la isla.\n\nPor la noche, **cena de despedida del grupo** en un restaurante especial: brindis, fotos, recuerdos y el cierre de dos semanas inolvidables.",
     tags: ["padel", "social"],
     photo: "/photos/bali/partidos/1.jpg",
     highlights: [],
@@ -384,9 +384,9 @@ const baliItinerary: ItineraryDay[] = [
     title: "Regreso",
     subtitle: "Hasta la próxima",
     description:
-      "Traslado privado al aeropuerto según el horario de tu vuelo de regreso. El coordinador organiza los shuttles para que cada uno salga a su hora. Muchos del grupo aprovechan para alargar la estancia unos días por su cuenta o combinar Bali con otro destino — te ayudamos con cualquier reserva extra si te quieres quedar más tiempo.",
+      "**Hasta la próxima, Bali.**\n\n**Traslado privado al aeropuerto** según el horario de tu vuelo de regreso. El coordinador organiza los traslados para que cada uno salga a su hora.\n\nMuchos aprovechan para **alargar la estancia** unos días o combinar Bali con otro destino. Si te quieres quedar más tiempo, **te ayudamos con cualquier reserva extra**.",
     tags: ["libre"],
-    photo: "/photos/extra/arrozales/3.jpg",
+    photo: "/photos/extra/atardecer/6.jpg",
     highlights: [],
   },
 ];
