@@ -168,10 +168,10 @@ export const notIncluded = [
 ];
 
 export const pricing = {
-  base: "1.525€",
+  base: "1.490€",
   baseNote: "por persona si vais 2 compartiendo habitación",
-  solo: "1.750€",
-  soloNote: "si viajas en solitario (suplemento individual 225€)",
+  solo: "1.690€",
+  soloNote: "si viajas en solitario (suplemento individual 200€)",
   deposit: "100€",
   depositNote: "reserva reembolsable. El resto en dos plazos: 1.000€ al confirmar el grupo y el importe restante antes del viaje.",
 };

@@ -35,7 +35,7 @@ const GROUP_LABEL = {
 export const metadata = {
   title: "Bali · 14 días",
   description:
-    "14 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2027, desde 1.525€. Itinerario completo día a día.",
+    "14 días en Bali. Pádel en BPA con coaches NOX, alojamiento privado con desayuno, cultura, surf y aventura. 8 salidas en 2027, desde 1.490€. Itinerario completo día a día.",
   openGraph: {
     images: [{ url: "https://padeltravellers.com/og/bali.jpg", width: 1200, height: 630, alt: "Bali con Padel Travellers — piscina del club sobre los arrozales" }],
   },
@@ -442,7 +442,7 @@ export default function BaliPage() {
                   <span className="font-display font-bold text-6xl text-pt-green">{d.solo}</span>
                   <span className="text-pt-muted">/ persona</span>
                 </div>
-                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 225€. Tu habitación, tu llave.</p>
+                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 200€. Tu habitación, tu llave.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
                   Solicitar plaza
                 </Link>

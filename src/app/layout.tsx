@@ -113,7 +113,7 @@ const productJsonLd = {
   brand: { "@type": "Brand", name: "Padel Travellers" },
   offers: {
     "@type": "Offer",
-    price: "1525",
+    price: "1490",
     priceCurrency: "EUR",
     availability: "https://schema.org/InStock",
     url: `${SITE_URL}/bali/`,
