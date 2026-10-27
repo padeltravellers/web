@@ -124,7 +124,7 @@ export default function BaliPage() {
               </p>
               <p className="text-pt-muted text-lg leading-relaxed">
                 Canggu es nuestro hogar durante el viaje: comunidad internacional, playas a 5 minutos, los
-                arrozales detrás. Y entre ellos, el club Bali Padel Academy donde jugamos cada día.
+                arrozales detrás. Y entre ellos, el club Bali Padel Academy, donde jugamos los partidos y las clases.
               </p>
             </div>
             <div className="lg:col-span-7 order-1 lg:order-2">

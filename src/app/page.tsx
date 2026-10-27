@@ -126,7 +126,7 @@ export default function Home() {
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Padel Travellers nació como la unión de dos pasiones: viajar y el pádel. Diseñamos viajes en
-                grupo a destinos pensados, donde cada día combina pista, cultura y descubrimiento.
+                grupo a destinos pensados, donde se combinan pista, cultura y descubrimiento.
               </p>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Somos viajeros, jugadores y apasionados de los sitios que elegimos. Nuestra misión es abrir
