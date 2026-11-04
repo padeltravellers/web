@@ -127,6 +127,7 @@ html { scroll-behavior: smooth; }
 .prose-legal a:hover { color: var(--pt-clay); }
 .prose-legal table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.875rem; }
 .prose-legal th, .prose-legal td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid rgba(14,59,45,0.12); }
+.prose-legal .small { font-size: 0.8rem; color: var(--pt-muted); }
 .prose-legal th { background: rgba(217,228,220,0.5); font-family: var(--font-jost); font-weight: 600; color: var(--pt-green); }
 
 /* Hero carousel — fade between background images (5 slides) */
