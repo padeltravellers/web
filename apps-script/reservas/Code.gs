@@ -45,19 +45,32 @@ function doPost(e) {
 // ---------- reserva ----------
 
 function crearReserva_(p) {
-  const required = ['salida', 'habitacion', 'nombre', 'apellidos', 'email', 'telefono', 'nacimiento', 'nacionalidad', 'docTipo', 'docNumero', 'ciudad', 'nivel', 'emergenciaNombre', 'emergenciaTelefono'];
-  const missing = required.filter((k) => !String(p[k] || '').trim());
-  if (missing.length) return { ok: false, error: 'faltan_datos', campos: missing };
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)) return { ok: false, error: 'email' };
   if (p.acepta !== 'si') return { ok: false, error: 'contrato' };
-  const hab = String(p.habitacion).toLowerCase();
+  const hab = String(p.habitacion || '').toLowerCase();
   if (hab !== 'compartida' && hab !== 'individual') return { ok: false, error: 'habitacion' };
-  if (hab === 'compartida' && !String(p.acompanante || '').trim()) return { ok: false, error: 'acompanante' };
+  const pax = hab === 'compartida' ? 2 : 1;
+
+  let viajeros;
+  try {
+    viajeros = JSON.parse(p.viajeros || '[]');
+  } catch (err) {
+    return { ok: false, error: 'faltan_datos' };
+  }
+  if (!Array.isArray(viajeros) || viajeros.length !== pax) return { ok: false, error: 'viajeros' };
+
+  const required = ['nombre', 'apellidos', 'email', 'telefono', 'nacimiento', 'nacionalidad', 'docTipo', 'docNumero', 'ciudad', 'nivel', 'emergenciaNombre', 'emergenciaTelefono'];
+  for (let i = 0; i < viajeros.length; i++) {
+    const v = viajeros[i];
+    const missing = required.filter((k) => !String(v[k] || '').trim());
+    if (missing.length) return { ok: false, error: 'faltan_datos', viajero: i + 1, campos: missing };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v.email).trim())) return { ok: false, error: 'email', viajero: i + 1 };
+    if (edad_(v.nacimiento) < 18) return { ok: false, error: 'menor', viajero: i + 1 };
+  }
 
   const cfg = config_();
   const salida = salidas_().find((s) => s.codigo === String(p.salida));
   if (!salida) return { ok: false, error: 'salida' };
-  if (salida.libres <= 0) return { ok: false, error: 'completo' };
+  if (salida.libres < pax) return { ok: false, error: 'completo', libres: salida.libres };
 
   const precio = hab === 'compartida' ? num_(cfg.precio_compartida) : num_(cfg.precio_individual);
   const honorarios = num_(cfg.honorarios);
@@ -69,92 +82,106 @@ function crearReserva_(p) {
   const ids = sh.getRange(2, 1, Math.max(sh.getMaxRows() - 1, 1), 1).getValues().map((r) => r[0]);
   let last = 0;
   ids.forEach((v, i) => { if (v !== '' && v !== null) last = i + 1; });
-  const rowIndex = last + 2;
-  const id = 'PT27-' + ('000' + (last + 1)).slice(-3);
 
-  const nombreCompleto = clean_(p.nombre) + ' ' + clean_(p.apellidos);
-  const habTexto = hab === 'compartida' ? 'Compartida con ' + clean_(p.acompanante) : 'Individual';
+  const nombres = viajeros.map((v) => clean_(v.nombre) + ' ' + clean_(v.apellidos));
+  const creados = [];
 
-  const pdf = generarContrato_(cfg, {
-    VIAJE: String(salida.viaje),
-    INICIO: fechaLarga_(salida.inicio),
-    FIN: fechaLarga_(salida.fin),
-    FECHA_RESERVA: fechaLarga_(ahora),
-    NOMBRE: nombreCompleto,
-    NACIONALIDAD: clean_(p.nacionalidad),
-    DOC_TIPO: clean_(p.docTipo),
-    DOC_NUM: clean_(p.docNumero).toUpperCase(),
-    DOCUMENTO: clean_(p.docTipo) + ' ' + clean_(p.docNumero).toUpperCase(),
-    EMAIL: clean_(p.email),
-    TELEFONO: clean_(p.telefono),
-    NACIMIENTO: fechaCorta_(p.nacimiento),
-    CIUDAD: clean_(p.ciudad),
-    HABITACION: habTexto,
-    PRECIO: eur_(precio),
-    HONORARIOS: eur_(honorarios),
-    PRESUPUESTO: eur_(presupuesto),
-    NIVEL: clean_(p.nivel),
-    SALUD: clean_(p.salud) || 'Nada que destacar',
-    EMERGENCIA: clean_(p.emergenciaNombre) + ' · ' + clean_(p.emergenciaTelefono),
-    PAGO_RESERVA_FECHA: 'pendiente de pago',
-    PAGO_RESERVA_METODO: 'transferencia',
-    IBAN: cfg.iban || 'Se indica en el email de confirmación',
-    BIC: cfg.bic || 'Se indica en el email de confirmación',
-    ACEPTACION: Utilities.formatDate(ahora, 'Europe/Madrid', 'dd/MM/yyyy HH:mm') + ' (hora de España), en padeltravellers.com',
-  }, id + ' · ' + salida.codigo + ' · ' + nombreCompleto);
+  viajeros.forEach((v, i) => {
+    const rowIndex = last + 2 + i;
+    const id = 'PT27-' + ('000' + (last + 1 + i)).slice(-3);
+    const nombreCompleto = nombres[i];
+    const acompanante = pax === 2 ? nombres[1 - i] : '';
+    const habTexto = pax === 2 ? 'Compartida con ' + acompanante : 'Individual';
+    const doc = clean_(v.docNumero).toUpperCase();
 
-  const values = {
-    'ID': id,
-    'Fecha reserva': ahora,
-    'Estado': 'Pre-reserva',
-    'Salida': salida.codigo,
-    'Fechas': salida.etiqueta,
-    'Habitación': hab === 'compartida' ? 'Compartida' : 'Individual',
-    'Acompañante': clean_(p.acompanante),
-    'Nombre': clean_(p.nombre),
-    'Apellidos': clean_(p.apellidos),
-    'Email': clean_(p.email),
-    'Teléfono': clean_(p.telefono),
-    'Fecha nacimiento': fechaCorta_(p.nacimiento),
-    'Nacionalidad': clean_(p.nacionalidad),
-    'Tipo doc.': clean_(p.docTipo),
-    'Nº documento': clean_(p.docNumero).toUpperCase(),
-    'Ciudad': clean_(p.ciudad),
-    'Nivel pádel': clean_(p.nivel),
-    'Salud / alergias': clean_(p.salud),
-    'Emergencia: nombre': clean_(p.emergenciaNombre),
-    'Emergencia: teléfono': clean_(p.emergenciaTelefono),
-    'Precio': precio,
-    'Honorarios': honorarios,
-    'Presupuesto': presupuesto,
-    'Seguro recibido': false,
-    'Vuelos recibidos': false,
-    'Contrato PDF': pdf.getUrl(),
-    'Aceptación contrato': ahora,
-    'Origen': 'Web',
-  };
-  // Nunca escribimos en "Pendiente": la calcula una ARRAYFORMULA de la cabecera
-  // y cualquier valor en esa columna la rompería. Escribimos a ambos lados.
+    const pdf = generarContrato_(cfg, {
+      VIAJE: String(salida.viaje),
+      INICIO: fechaLarga_(salida.inicio),
+      FIN: fechaLarga_(salida.fin),
+      FECHA_RESERVA: fechaLarga_(ahora),
+      NOMBRE: nombreCompleto,
+      NACIONALIDAD: clean_(v.nacionalidad),
+      DOC_TIPO: clean_(v.docTipo),
+      DOC_NUM: doc,
+      DOCUMENTO: clean_(v.docTipo) + ' ' + doc,
+      EMAIL: clean_(v.email),
+      TELEFONO: clean_(v.telefono),
+      NACIMIENTO: fechaCorta_(v.nacimiento),
+      CIUDAD: clean_(v.ciudad),
+      HABITACION: habTexto,
+      PRECIO: eur_(precio),
+      HONORARIOS: eur_(honorarios),
+      PRESUPUESTO: eur_(presupuesto),
+      NIVEL: clean_(v.nivel),
+      SALUD: clean_(v.salud) || 'Nada que destacar',
+      EMERGENCIA: clean_(v.emergenciaNombre) + ' · ' + clean_(v.emergenciaTelefono),
+      PAGO_RESERVA_FECHA: 'pendiente de pago',
+      PAGO_RESERVA_METODO: 'transferencia',
+      IBAN: cfg.iban || 'Se indica en el email de confirmación',
+      BIC: cfg.bic || 'Se indica en el email de confirmación',
+      ACEPTACION: Utilities.formatDate(ahora, 'Europe/Madrid', 'dd/MM/yyyy HH:mm') + ' (hora de España), en padeltravellers.com' + (pax === 2 && i === 1 ? ', reserva hecha junto a ' + nombres[0] : ''),
+    }, id + ' · ' + salida.codigo + ' · ' + nombreCompleto);
+
+    const values = {
+      'ID': id,
+      'Fecha reserva': ahora,
+      'Estado': 'Pre-reserva',
+      'Salida': salida.codigo,
+      'Fechas': salida.etiqueta,
+      'Habitación': pax === 2 ? 'Compartida' : 'Individual',
+      'Acompañante': acompanante,
+      'Nombre': clean_(v.nombre),
+      'Apellidos': clean_(v.apellidos),
+      'Email': clean_(v.email),
+      'Teléfono': clean_(v.telefono),
+      'Fecha nacimiento': fechaCorta_(v.nacimiento),
+      'Nacionalidad': clean_(v.nacionalidad),
+      'Tipo doc.': clean_(v.docTipo),
+      'Nº documento': doc,
+      'Ciudad': clean_(v.ciudad),
+      'Nivel pádel': clean_(v.nivel),
+      'Salud / alergias': clean_(v.salud),
+      'Emergencia: nombre': clean_(v.emergenciaNombre),
+      'Emergencia: teléfono': clean_(v.emergenciaTelefono),
+      'Precio': precio,
+      'Honorarios': honorarios,
+      'Presupuesto': presupuesto,
+      'Seguro recibido': false,
+      'Vuelos recibidos': false,
+      'Contrato PDF': pdf.getUrl(),
+      'Aceptación contrato': ahora,
+      'Origen': 'Web',
+      'Notas': pax === 2 ? 'Reserva conjunta con ' + acompanante : '',
+    };
+    escribirFila_(sh, header, rowIndex, values);
+    creados.push({ id: id, email: clean_(v.email), nombre: clean_(v.nombre), habTexto: habTexto, pdf: pdf });
+  });
+
+  creados.forEach((c) => enviarEmail_(cfg, Object.assign({ salida: salida, precio: precio }, c)));
+
+  return { ok: true, ids: creados.map((c) => c.id), libres: salida.libres - pax };
+}
+
+/** Escribe la fila sin tocar la columna "Pendiente" (ARRAYFORMULA de la cabecera). */
+function escribirFila_(sh, header, rowIndex, values) {
   const row = header.map((h) => (values.hasOwnProperty(h) ? values[h] : ''));
   const pIdx = header.indexOf('Pendiente');
   if (pIdx < 0) {
     sh.getRange(rowIndex, 1, 1, row.length).setValues([row]);
-  } else {
-    if (pIdx > 0) sh.getRange(rowIndex, 1, 1, pIdx).setValues([row.slice(0, pIdx)]);
-    if (pIdx < row.length - 1) sh.getRange(rowIndex, pIdx + 2, 1, row.length - pIdx - 1).setValues([row.slice(pIdx + 1)]);
+    return;
   }
+  if (pIdx > 0) sh.getRange(rowIndex, 1, 1, pIdx).setValues([row.slice(0, pIdx)]);
+  if (pIdx < row.length - 1) sh.getRange(rowIndex, pIdx + 2, 1, row.length - pIdx - 1).setValues([row.slice(pIdx + 1)]);
+}
 
-  enviarEmail_(cfg, {
-    id: id,
-    email: clean_(p.email),
-    nombre: clean_(p.nombre),
-    salida: salida,
-    habTexto: habTexto,
-    precio: precio,
-    pdf: pdf,
-  });
-
-  return { ok: true, id: id, libres: salida.libres - 1 };
+function edad_(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
+  if (!m) return -1;
+  const hoy = new Date();
+  let a = hoy.getFullYear() - Number(m[1]);
+  const mm = hoy.getMonth() + 1 - Number(m[2]);
+  if (mm < 0 || (mm === 0 && hoy.getDate() < Number(m[3]))) a--;
+  return a;
 }
 
 // ---------- contrato ----------

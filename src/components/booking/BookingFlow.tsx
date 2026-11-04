@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import Img from "@/components/Img";
+import { destinations } from "@/data/destinations";
 import {
   departures2027,
   rooms,
@@ -10,40 +11,48 @@ import {
   padelLevels,
   finalPaymentDate,
   eur,
+  phonePrefixes,
+  nationalities,
+  docError,
+  ageOn,
+  maxBirthDateISO,
 } from "@/data/booking";
 
 // Web app de Google Apps Script (apps-script/reservas): guarda la reserva en el
-// Sheet "Reservas PT 2027", genera el contrato y lo envía desde reservas@.
+// Sheet "Reservas PT 2027", genera los contratos y los envía desde reservas@.
 // GET ?action=plazas devuelve las plazas libres de cada salida.
 // Sin URL, el formulario funciona en modo prototipo (simula el envío).
 const ENDPOINT = process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || "";
 
+const STEPS = ["Destino", "Fecha", "Viajeros", "Confirmar"] as const;
+const BOOKABLE = ["bali"];
+
 type Plaza = { codigo: string; libres: number; estado: string };
 const code = (n: number) => `BALI-${n}`;
-
-const STEPS = ["Salida", "Habitación", "Tus datos", "Confirmar"] as const;
 
 type Traveller = {
   nombre: string;
   apellidos: string;
   email: string;
+  prefijo: string;
   telefono: string;
   nacimiento: string;
   nacionalidad: string;
-  docTipo: "DNI" | "Pasaporte";
+  docTipo: "DNI" | "NIE" | "Pasaporte";
   docNumero: string;
   ciudad: string;
   nivel: string;
   salud: string;
   emergenciaNombre: string;
+  emergenciaPrefijo: string;
   emergenciaTelefono: string;
-  acompanante: string;
 };
 
-const emptyTraveller: Traveller = {
+const emptyTraveller = (): Traveller => ({
   nombre: "",
   apellidos: "",
   email: "",
+  prefijo: "+34",
   telefono: "",
   nacimiento: "",
   nacionalidad: "Española",
@@ -53,29 +62,38 @@ const emptyTraveller: Traveller = {
   nivel: "",
   salud: "",
   emergenciaNombre: "",
+  emergenciaPrefijo: "+34",
   emergenciaTelefono: "",
-  acompanante: "",
-};
+});
 
-const required: (keyof Traveller)[] = [
-  "nombre",
-  "apellidos",
-  "email",
-  "telefono",
-  "nacimiento",
-  "nacionalidad",
-  "docNumero",
-  "ciudad",
-  "nivel",
-  "emergenciaNombre",
-  "emergenciaTelefono",
-];
+type Errors = Partial<Record<keyof Traveller, string>>;
+
+function validate(t: Traveller): Errors {
+  const e: Errors = {};
+  const req: (keyof Traveller)[] = ["nombre", "apellidos", "email", "telefono", "nacimiento", "nacionalidad", "ciudad", "nivel", "emergenciaNombre", "emergenciaTelefono"];
+  req.forEach((k) => {
+    if (!String(t[k]).trim()) e[k] = "Obligatorio";
+  });
+  if (t.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t.email.trim())) e.email = "Revisa el email";
+  const digits = (s: string) => s.replace(/\D/g, "").length;
+  if (t.telefono && digits(t.telefono) < 6) e.telefono = "Número demasiado corto";
+  if (t.emergenciaTelefono && digits(t.emergenciaTelefono) < 6) e.emergenciaTelefono = "Número demasiado corto";
+  if (t.nacimiento) {
+    const a = ageOn(t.nacimiento);
+    if (a < 0 || a > 100) e.nacimiento = "Revisa la fecha";
+    else if (a < 18) e.nacimiento = "Tienes que ser mayor de edad para reservar";
+  }
+  const d = docError(t.docTipo, t.docNumero);
+  if (d) e.docNumero = d;
+  return e;
+}
 
 export default function BookingFlow() {
   const [step, setStep] = useState(0);
+  const [dest, setDest] = useState<string | null>(null);
   const [tripN, setTripN] = useState<number | null>(null);
   const [room, setRoom] = useState<RoomKey | null>(null);
-  const [t, setT] = useState<Traveller>(emptyTraveller);
+  const [travellers, setTravellers] = useState<Traveller[]>([emptyTraveller()]);
   const [accepted, setAccepted] = useState(false);
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "err">("idle");
@@ -88,39 +106,48 @@ export default function BookingFlow() {
     fetch(`${ENDPOINT}?action=plazas`)
       .then((r) => r.json())
       .then((d: { ok: boolean; salidas?: Plaza[] }) => {
-        if (!d.ok || !d.salidas) return;
-        setPlazas(Object.fromEntries(d.salidas.map((s) => [s.codigo, s])));
+        if (d.ok && d.salidas) setPlazas(Object.fromEntries(d.salidas.map((s) => [s.codigo, s])));
       })
       .catch(() => {});
   }, []);
 
-  const full = (n: number) => plazas[code(n)]?.libres === 0;
+  // Habitación compartida = 2 viajeros obligatorios.
+  useEffect(() => {
+    setTravellers((tv) => {
+      const n = room === "compartida" ? 2 : 1;
+      if (tv.length === n) return tv;
+      return n === 2 ? [tv[0], tv[1] || emptyTraveller()] : [tv[0]];
+    });
+  }, [room]);
 
   const trip = departures2027.find((d) => d.n === tripN) || null;
+  const destination = destinations.find((d) => d.slug === dest) || null;
+  const pax = room === "compartida" ? 2 : 1;
   const price = room ? rooms[room].price : null;
+  const libres = (n: number) => plazas[code(n)]?.libres;
+  const fits = (n: number) => libres(n) === undefined || (libres(n) as number) >= pax;
 
-  const missing = useMemo(() => {
-    const m = required.filter((k) => !String(t[k]).trim());
-    if (t.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t.email)) m.push("email");
-    return new Set(m);
-  }, [t]);
+  const errors = useMemo(() => travellers.map(validate), [travellers]);
+  const travellersOk = errors.every((e) => Object.keys(e).length === 0);
+  const tripOk = tripN !== null && room !== null && fits(tripN);
+  const canNext = [dest !== null, tripOk, travellersOk, accepted][step];
 
-  const roomOk = room !== null && (room !== "compartida" || t.acompanante.trim() !== "");
-  const canNext = [tripN !== null, roomOk, missing.size === 0, accepted][step];
+  function setField<K extends keyof Traveller>(i: number, k: K, v: Traveller[K]) {
+    setTravellers((tv) => tv.map((t, j) => (j === i ? { ...t, [k]: v } : t)));
+  }
 
-  function set<K extends keyof Traveller>(k: K, v: Traveller[K]) {
-    setT((p) => ({ ...p, [k]: v }));
+  function go(to: number) {
+    setTouched(false);
+    setStep(to);
+    document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function next() {
-    if ((step === 2 && missing.size > 0) || (step === 1 && room === "compartida" && !roomOk)) {
+    if (!canNext) {
       setTouched(true);
       return;
     }
-    if (!canNext) return;
-    setTouched(false);
-    setStep((s) => Math.min(s + 1, STEPS.length - 1));
-    document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    go(Math.min(step + 1, STEPS.length - 1));
   }
 
   async function submit() {
@@ -128,9 +155,17 @@ export default function BookingFlow() {
     setStatus("sending");
     setErrMsg("");
     const body = new URLSearchParams({
+      destino: "Bali",
       salida: code(trip.n),
       habitacion: room,
-      ...t,
+      viajeros: JSON.stringify(
+        travellers.map((t) => ({
+          ...t,
+          telefono: `${t.prefijo} ${t.telefono.trim()}`,
+          emergenciaTelefono: `${t.emergenciaPrefijo} ${t.emergenciaTelefono.trim()}`,
+          docNumero: t.docNumero.replace(/[\s-]/g, "").toUpperCase(),
+        })),
+      ),
       acepta: "si",
       website: hp,
     });
@@ -141,8 +176,8 @@ export default function BookingFlow() {
         const d = (await r.json()) as { ok: boolean; error?: string; libres?: number };
         if (!d.ok) {
           if (d.error === "completo") {
-            setPlazas((p) => ({ ...p, [code(trip.n)]: { codigo: code(trip.n), libres: 0, estado: "Completa" } }));
-            setErrMsg("Justo se acaba de completar esta salida. Elige otra fecha o escríbenos por WhatsApp para la lista de espera.");
+            setPlazas((p) => ({ ...p, [code(trip.n)]: { codigo: code(trip.n), libres: d.libres ?? 0, estado: "Completa" } }));
+            setErrMsg("Justo se han ocupado las últimas plazas de esta salida. Elige otra fecha o escríbenos por WhatsApp para la lista de espera.");
           } else {
             setErrMsg("No hemos podido registrar tu reserva. Revisa los datos o escríbenos por WhatsApp.");
           }
@@ -150,7 +185,6 @@ export default function BookingFlow() {
           return;
         }
       } else {
-        // Prototipo: simulamos el envío.
         await new Promise((res) => setTimeout(res, 900));
         console.info("[reserva prototipo]", Object.fromEntries(body));
       }
@@ -163,49 +197,48 @@ export default function BookingFlow() {
   }
 
   if (status === "done" && trip && room) {
-    return <Confirmation name={t.nombre} email={t.email} tripN={trip.n} range={trip.range} start={trip.start} price={rooms[room].price} />;
+    return <Confirmation travellers={travellers} trip={trip} price={rooms[room].price} />;
   }
 
   return (
     <div id="reserva" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 pb-28 lg:pb-20 scroll-mt-24">
-      <Stepper step={step} onJump={(i) => i < step && setStep(i)} />
+      <Stepper step={step} onJump={(i) => i < step && go(i)} />
 
-      <div className="grid lg:grid-cols-[1fr_360px] gap-8 lg:gap-12 mt-8">
-        <div className="min-w-0">
+      <div className={`grid gap-8 lg:gap-12 mt-8 ${step === 1 || step === 2 ? "lg:grid-cols-[1fr_360px]" : ""}`}>
+        <div className={`min-w-0 ${step === 3 ? "max-w-3xl w-full mx-auto" : ""}`}>
+          {/* PASO 1 · DESTINO */}
           {step === 0 && (
             <section>
-              <StepTitle eyebrow="Paso 1" title="Elige tu salida" text="Ocho salidas de 14 días entre junio y octubre de 2027. Cada viajero vuela desde su ciudad y nos juntamos en Bali." />
-              <div className="grid sm:grid-cols-2 gap-4">
-                {departures2027.map((d) => {
-                  const active = d.n === tripN;
-                  const p = plazas[code(d.n)];
-                  const isFull = full(d.n);
+              <StepTitle eyebrow="Paso 1" title="¿A dónde te vienes?" text="Elige destino. En el siguiente paso eliges la fecha y la habitación." />
+              <div className="grid md:grid-cols-3 gap-5">
+                {destinations.map((d) => {
+                  const open = BOOKABLE.includes(d.slug);
                   return (
                     <button
-                      key={d.n}
+                      key={d.slug}
                       type="button"
-                      onClick={() => !isFull && setTripN(d.n)}
-                      disabled={isFull}
-                      aria-pressed={active}
-                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[16/10] transition ring-offset-2 disabled:cursor-not-allowed ${active ? "ring-4 ring-pt-clay" : "ring-0 hover:shadow-xl"} ${isFull ? "grayscale opacity-70" : ""}`}
+                      disabled={!open}
+                      onClick={() => {
+                        setDest(d.slug);
+                        go(1);
+                      }}
+                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[4/5] md:aspect-[3/4] transition ${open ? "hover:shadow-2xl hover:-translate-y-1" : "cursor-not-allowed"}`}
                     >
-                      <Img src={d.photo} alt="" fill sizes="(max-width:640px) 100vw, 40vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                      <div className={`absolute inset-0 transition ${active ? "bg-pt-green/70" : "bg-gradient-to-t from-pt-ink/85 via-pt-ink/30 to-transparent"}`} />
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white text-[10px] font-display uppercase tracking-[0.22em]">Viaje {d.n}</span>
-                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white text-[10px] font-display uppercase tracking-[0.22em]">{d.month}</span>
-                      </div>
-                      {active && (
-                        <span className="absolute top-4 right-4 w-8 h-8 rounded-full bg-pt-clay text-white grid place-items-center text-sm" aria-hidden>✓</span>
-                      )}
-                      {!active && p && (isFull || p.libres <= 4) && (
-                        <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.18em] text-white ${isFull ? "bg-pt-ink/80" : "bg-pt-clay"}`}>
-                          {isFull ? "Completo" : p.libres === 1 ? "Última plaza" : `Quedan ${p.libres} plazas`}
-                        </span>
-                      )}
-                      <div className="absolute left-5 right-5 bottom-4 text-white">
-                        <p className="font-display font-medium text-2xl md:text-3xl leading-tight">{d.range}</p>
-                        <p className="text-white/80 text-sm mt-1">14 días · 13 noches</p>
+                      <Img src={d.hero} alt={d.name} fill sizes="(max-width:768px) 100vw, 33vw" className={`object-cover transition-transform duration-700 ${open ? "group-hover:scale-105" : "grayscale-[60%]"}`} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-pt-ink/90 via-pt-ink/25 to-transparent" />
+                      <span className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-[10px] font-display uppercase tracking-[0.22em] ${open ? "bg-white text-pt-green" : "bg-white/20 backdrop-blur text-white"}`}>
+                        {open ? "Reserva abierta 2027" : "Próximamente"}
+                      </span>
+                      <div className="absolute left-6 right-6 bottom-6 text-white">
+                        <h3 className="font-display font-medium text-5xl leading-none">{d.name}</h3>
+                        <p className="text-white/85 text-sm mt-3 leading-relaxed">{d.shortPitch}</p>
+                        {open ? (
+                          <span className="inline-flex items-center gap-2 mt-5 font-display font-semibold text-sm bg-pt-clay text-white px-5 py-2.5 rounded-full group-hover:gap-3 transition-all">
+                            Reservar {d.name} <span aria-hidden>→</span>
+                          </span>
+                        ) : (
+                          <span className="inline-block mt-5 font-display font-semibold text-sm text-white/75">Lista de espera en su página</span>
+                        )}
                       </div>
                     </button>
                   );
@@ -214,220 +247,325 @@ export default function BookingFlow() {
             </section>
           )}
 
+          {/* PASO 2 · FECHA + HABITACIÓN */}
           {step === 1 && (
-            <section>
-              <StepTitle eyebrow="Paso 2" title="¿Cómo duermes?" text="Siempre en habitación privada, con desayuno, en villas u hoteles con piscina." />
-              <div className="grid md:grid-cols-2 gap-4">
-                {(Object.keys(rooms) as RoomKey[]).map((k) => {
-                  const r = rooms[k];
-                  const active = room === k;
-                  return (
-                    <button
-                      key={k}
-                      type="button"
-                      onClick={() => setRoom(k)}
-                      aria-pressed={active}
-                      className={`text-left rounded-3xl p-7 border-2 transition ${active ? "border-pt-clay bg-pt-cream/60" : "border-pt-green/10 bg-white hover:border-pt-green/30"}`}
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="font-display font-bold text-xl text-pt-green">{r.label}</h3>
-                        <span className={`w-6 h-6 rounded-full border-2 grid place-items-center shrink-0 ${active ? "border-pt-clay bg-pt-clay text-white" : "border-pt-green/25"}`}>
-                          {active && <span className="text-xs">✓</span>}
+            <section className="space-y-10">
+              <div>
+                <StepTitle eyebrow="Paso 2" title="Elige tu fecha" text="14 días y 13 noches. Cada viajero vuela desde su ciudad y nos juntamos en Bali." />
+                <div className="bg-white border border-pt-green/10 rounded-3xl divide-y divide-pt-green/8 overflow-hidden">
+                  {departures2027.map((d) => {
+                    const active = d.n === tripN;
+                    const l = libres(d.n);
+                    const isFull = l === 0;
+                    return (
+                      <button
+                        key={d.n}
+                        type="button"
+                        disabled={isFull}
+                        onClick={() => setTripN(d.n)}
+                        aria-pressed={active}
+                        className={`w-full flex items-center gap-4 px-5 sm:px-6 py-4 text-left transition ${active ? "bg-pt-cream/70" : "hover:bg-pt-green/[0.03]"} disabled:opacity-50 disabled:cursor-not-allowed`}
+                      >
+                        <span className={`w-5 h-5 rounded-full border-2 shrink-0 grid place-items-center ${active ? "border-pt-clay" : "border-pt-green/25"}`}>
+                          {active && <span className="w-2.5 h-2.5 rounded-full bg-pt-clay" />}
                         </span>
-                      </div>
-                      <p className="font-display font-medium text-4xl text-pt-green mt-5">{eur(r.price)}</p>
-                      <p className="text-sm text-pt-muted mt-1">por persona</p>
-                      <p className="text-sm text-pt-ink/80 mt-5 leading-relaxed">{r.note}</p>
-                    </button>
-                  );
-                })}
-              </div>
-              {room === "compartida" && (
-                <div className="mt-6 bg-white border border-pt-green/10 rounded-3xl p-6">
-                  <Field label="¿Con quién compartes habitación?" hint="Nombre y apellidos. Tu acompañante hace su propia reserva." error={touched && !t.acompanante.trim()}>
-                    <input className={inputCls} value={t.acompanante} onChange={(e) => set("acompanante", e.target.value)} placeholder="Nombre de tu acompañante" />
-                  </Field>
+                        <span className="w-16 shrink-0 font-display uppercase tracking-[0.16em] text-[11px] text-pt-muted">Viaje {d.n}</span>
+                        <span className="flex-1 min-w-0 font-display font-semibold text-lg sm:text-xl text-pt-green">{d.range}</span>
+                        {l !== undefined && (isFull || l <= 4) && (
+                          <span className={`shrink-0 px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.16em] ${isFull ? "bg-pt-ink/10 text-pt-ink/60" : "bg-pt-clay/15 text-pt-clay"}`}>
+                            {isFull ? "Completo" : l === 1 ? "Última plaza" : `Quedan ${l}`}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
+              </div>
+
+              <div>
+                <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green mb-2">¿Cómo dormís?</h3>
+                <p className="text-pt-muted mb-5">Siempre habitación privada con desayuno, en villas u hoteles con piscina.</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {(Object.keys(rooms) as RoomKey[]).map((k) => {
+                    const r = rooms[k];
+                    const active = room === k;
+                    return (
+                      <button
+                        key={k}
+                        type="button"
+                        onClick={() => setRoom(k)}
+                        aria-pressed={active}
+                        className={`text-left rounded-3xl p-6 border-2 transition ${active ? "border-pt-clay bg-pt-cream/60" : "border-pt-green/10 bg-white hover:border-pt-green/30"}`}
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h4 className="font-display font-bold text-lg text-pt-green">{k === "compartida" ? "Compartida · 2 personas" : "Individual · 1 persona"}</h4>
+                            <p className="text-sm text-pt-muted mt-1">{k === "compartida" ? "Reserváis los dos a la vez." : "Tu propia habitación."}</p>
+                          </div>
+                          <span className={`w-6 h-6 rounded-full border-2 grid place-items-center shrink-0 ${active ? "border-pt-clay bg-pt-clay text-white" : "border-pt-green/25"}`}>
+                            {active && <span className="text-xs">✓</span>}
+                          </span>
+                        </div>
+                        <p className="font-display font-medium text-3xl text-pt-green mt-5">
+                          {eur(r.price)} <span className="text-sm font-body text-pt-muted">/ persona</span>
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+                {tripN !== null && room === "compartida" && !fits(tripN) && (
+                  <p className="text-sm text-red-700 mt-4" role="alert">En esta salida solo queda 1 plaza. Elige habitación individual u otra fecha.</p>
+                )}
+              </div>
+              {touched && !tripOk && (
+                <p className="text-sm text-red-700" role="alert">Elige una fecha y el tipo de habitación.</p>
               )}
             </section>
           )}
 
+          {/* PASO 3 · VIAJEROS */}
           {step === 2 && (
             <section>
-              <StepTitle eyebrow="Paso 3" title="Tus datos" text="Los usamos para tu contrato y para reservar alojamiento, pádel y traslados a tu nombre." />
-              <div className="bg-white border border-pt-green/10 rounded-3xl p-6 md:p-8 space-y-8">
-                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] w-px h-px opacity-0" value={hp} onChange={(e) => setHp(e.target.value)} />
-                <Group title="Sobre ti">
-                  <Field label="Nombre" error={touched && missing.has("nombre")}>
-                    <input className={inputCls} value={t.nombre} onChange={(e) => set("nombre", e.target.value)} autoComplete="given-name" />
-                  </Field>
-                  <Field label="Apellidos" error={touched && missing.has("apellidos")}>
-                    <input className={inputCls} value={t.apellidos} onChange={(e) => set("apellidos", e.target.value)} autoComplete="family-name" />
-                  </Field>
-                  <Field label="Email" hint="Aquí te enviamos el contrato." error={touched && missing.has("email")}>
-                    <input type="email" className={inputCls} value={t.email} onChange={(e) => set("email", e.target.value)} autoComplete="email" />
-                  </Field>
-                  <Field label="Teléfono (WhatsApp)" error={touched && missing.has("telefono")}>
-                    <input type="tel" className={inputCls} value={t.telefono} onChange={(e) => set("telefono", e.target.value)} placeholder="+34 600 000 000" autoComplete="tel" />
-                  </Field>
-                  <Field label="Fecha de nacimiento" error={touched && missing.has("nacimiento")}>
-                    <input type="date" className={inputCls} value={t.nacimiento} onChange={(e) => set("nacimiento", e.target.value)} autoComplete="bday" />
-                  </Field>
-                  <Field label="Ciudad desde la que viajas" error={touched && missing.has("ciudad")}>
-                    <input className={inputCls} value={t.ciudad} onChange={(e) => set("ciudad", e.target.value)} placeholder="Barcelona, Madrid…" />
-                  </Field>
-                </Group>
-
-                <Group title="Documento">
-                  <Field label="Nacionalidad" error={touched && missing.has("nacionalidad")}>
-                    <input className={inputCls} value={t.nacionalidad} onChange={(e) => set("nacionalidad", e.target.value)} />
-                  </Field>
-                  <Field label="Tipo y número" hint="Para el viaje necesitarás pasaporte con 6 meses de validez." error={touched && missing.has("docNumero")}>
-                    <div className="flex gap-2">
-                      <select className={`${inputCls} w-36 shrink-0`} value={t.docTipo} onChange={(e) => set("docTipo", e.target.value as Traveller["docTipo"])}>
-                        <option>DNI</option>
-                        <option>Pasaporte</option>
-                      </select>
-                      <input className={inputCls} value={t.docNumero} onChange={(e) => set("docNumero", e.target.value.toUpperCase())} />
-                    </div>
-                  </Field>
-                </Group>
-
-                <Group title="Pádel y salud">
-                  <Field label="Tu nivel de pádel" hint="Para hacer parejas equilibradas." error={touched && missing.has("nivel")}>
-                    <select className={inputCls} value={t.nivel} onChange={(e) => set("nivel", e.target.value)}>
-                      <option value="">Elige tu nivel</option>
-                      {padelLevels.map((l) => (
-                        <option key={l}>{l}</option>
-                      ))}
-                    </select>
-                  </Field>
-                  <Field label="Lesiones, alergias o algo que debamos saber" hint="Opcional. Solo lo usamos para tu seguridad.">
-                    <input className={inputCls} value={t.salud} onChange={(e) => set("salud", e.target.value)} placeholder="Nada que destacar" />
-                  </Field>
-                </Group>
-
-                <Group title="Contacto de emergencia">
-                  <Field label="Nombre" error={touched && missing.has("emergenciaNombre")}>
-                    <input className={inputCls} value={t.emergenciaNombre} onChange={(e) => set("emergenciaNombre", e.target.value)} />
-                  </Field>
-                  <Field label="Teléfono" error={touched && missing.has("emergenciaTelefono")}>
-                    <input type="tel" className={inputCls} value={t.emergenciaTelefono} onChange={(e) => set("emergenciaTelefono", e.target.value)} />
-                  </Field>
-                </Group>
+              <StepTitle
+                eyebrow="Paso 3"
+                title={pax === 2 ? "Vuestros datos" : "Tus datos"}
+                text="Los usamos para el contrato y para reservar alojamiento, pádel y traslados a vuestro nombre. Tienen que coincidir con el pasaporte."
+              />
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] w-px h-px opacity-0" value={hp} onChange={(e) => setHp(e.target.value)} />
+              <div className="space-y-6">
+                {travellers.map((t, i) => (
+                  <TravellerForm
+                    key={i}
+                    index={i}
+                    total={travellers.length}
+                    t={t}
+                    errors={touched ? errors[i] : {}}
+                    onChange={(k, v) => setField(i, k, v)}
+                  />
+                ))}
               </div>
-              {touched && missing.size > 0 && (
+              {touched && !travellersOk && (
                 <p className="text-sm text-red-700 mt-4" role="alert">Revisa los campos marcados en rojo.</p>
               )}
             </section>
           )}
 
-          {step === 3 && trip && room && (
+          {/* PASO 4 · CONFIRMAR */}
+          {step === 3 && trip && room && destination && (
             <section>
-              <StepTitle eyebrow="Paso 4" title="Revisa y confirma" text="Lo esencial del contrato, en claro. El contrato completo te llega por email al confirmar." />
-              <div className="space-y-4">
-                <Card title="Tu viaje">
-                  <Row k="Salida" v={`Viaje ${trip.n} · ${trip.range} 2027`} />
-                  <Row k="Habitación" v={room === "compartida" ? `Compartida con ${t.acompanante}` : "Individual"} />
-                  <Row k="Viajero" v={`${t.nombre} ${t.apellidos}`} />
-                  <Row k="Email" v={t.email} />
-                </Card>
+              <StepTitle eyebrow="Paso 4" title="Tu viaje, en un vistazo" text="Revisa que todo esté bien. El contrato con vuestros datos llega por email al confirmar." />
+              <Ticket destinationName={destination.name} hero={destination.hero} trip={trip} room={room} travellers={travellers} />
+              <div className="grid md:grid-cols-2 gap-4 mt-6">
                 <Card title="Qué incluye">
-                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-pt-ink/85">
+                  <ul className="space-y-2 text-sm text-pt-ink/85">
                     {[
-                      "13 noches en habitación privada con desayuno",
-                      "4 partidos del grupo + 2 h semanales de clase",
-                      "Ubud, Uluwatu, norte de Bali, Amed, Tanah Lot…",
-                      "Clase de surf, Taman Ayun y plantación de café",
-                      "Traslados del aeropuerto y a las actividades",
-                      "Coordinador local con el grupo todo el viaje",
-                    ].map((x) => (
-                      <li key={x} className="flex gap-2"><span className="text-pt-clay">●</span>{x}</li>
+                      ["🏝", "13 noches en habitación privada con desayuno"],
+                      ["🎾", "4 partidos del grupo + 2 h semanales de clase"],
+                      ["🛕", "Ubud, Uluwatu, norte de Bali, Amed, Tanah Lot"],
+                      ["🏄", "Clase de surf, Taman Ayun y plantación de café"],
+                      ["🚐", "Traslados del aeropuerto y a las actividades"],
+                      ["🧭", "Coordinador local con el grupo todo el viaje"],
+                    ].map(([i, x]) => (
+                      <li key={x} className="flex gap-3"><span aria-hidden>{i}</span>{x}</li>
                     ))}
                   </ul>
                   <p className="text-xs text-pt-muted mt-4">No incluye vuelos, comidas y cenas, seguro de viaje (obligatorio, que cubra pádel) ni visado (aprox. 30 €).</p>
                 </Card>
-                <Card title="Si tienes que cancelar">
-                  <ul className="space-y-2 text-sm text-pt-ink/85">
-                    <li><strong>Antes de confirmarse el grupo:</strong> te devolvemos todo, también la reserva.</li>
-                    <li><strong>Grupo confirmado, más de 90 días antes:</strong> pierdes los 100 € de reserva y te devolvemos el resto menos los gastos ya comprometidos con proveedores.</li>
-                    <li><strong>90 días o menos:</strong> no hay devolución, salvo lo que recuperemos de proveedores.</li>
-                    <li><strong>Si el grupo no llega a 8 personas:</strong> te devolvemos el 100 % o te pasamos a otra salida.</li>
+                <Card title="Si hay que cancelar">
+                  <ul className="space-y-2.5 text-sm text-pt-ink/85">
+                    <li><strong className="text-pt-green">Antes de confirmarse el grupo:</strong> devolvemos todo, también la reserva.</li>
+                    <li><strong className="text-pt-green">Grupo confirmado, más de 90 días antes:</strong> se pierde la reserva y devolvemos el resto menos lo ya comprometido con proveedores.</li>
+                    <li><strong className="text-pt-green">90 días o menos:</strong> sin devolución, salvo lo que recuperemos de proveedores.</li>
+                    <li><strong className="text-pt-green">Si no llegamos a 8 viajeros:</strong> devolvemos el 100 % o te pasamos a otra salida.</li>
                   </ul>
                 </Card>
-                <label className="flex gap-4 items-start bg-pt-cream/60 border border-pt-clay/30 rounded-3xl p-6 cursor-pointer">
-                  <input type="checkbox" className="mt-1 w-5 h-5 accent-[var(--pt-green)] shrink-0" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
-                  <span className="text-sm text-pt-ink/90 leading-relaxed">
-                    He leído y acepto el <a href="/condiciones-de-contratacion/" target="_blank" className="underline underline-offset-2 text-pt-green font-medium">contrato de organización y coordinación del viaje</a> y la{" "}
-                    <a href="/politica-de-privacidad-y-proteccion-de-datos/" target="_blank" className="underline underline-offset-2 text-pt-green font-medium">política de privacidad</a>. Marcar esta casilla y confirmar la reserva equivale a firmar el contrato.
-                  </span>
-                </label>
-                {status === "err" && (
-                  <p className="text-sm text-red-700" role="alert">{errMsg}</p>
-                )}
               </div>
+              <label className="flex gap-4 items-start bg-pt-cream/60 border border-pt-clay/30 rounded-3xl p-6 cursor-pointer mt-6">
+                <input type="checkbox" className="mt-1 w-5 h-5 accent-[var(--pt-green)] shrink-0" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
+                <span className="text-sm text-pt-ink/90 leading-relaxed">
+                  {pax === 2 ? "Los dos hemos leído y aceptamos" : "He leído y acepto"} el{" "}
+                  <a href="/condiciones-de-contratacion/" target="_blank" className="underline underline-offset-2 text-pt-green font-medium">contrato de organización y coordinación del viaje</a> y la{" "}
+                  <a href="/politica-de-privacidad-y-proteccion-de-datos/" target="_blank" className="underline underline-offset-2 text-pt-green font-medium">política de privacidad</a>. Marcar esta casilla y confirmar la reserva equivale a firmar el contrato.
+                </span>
+              </label>
+              {touched && !accepted && <p className="text-sm text-red-700 mt-3" role="alert">Tienes que aceptar el contrato para reservar.</p>}
+              {status === "err" && <p className="text-sm text-red-700 mt-3" role="alert">{errMsg}</p>}
             </section>
           )}
 
           {/* Navegación */}
-          <div className="flex items-center justify-between gap-4 mt-10">
-            {step > 0 ? (
-              <button type="button" onClick={() => setStep((s) => s - 1)} className="font-display font-semibold text-pt-green px-5 py-3 rounded-full hover:bg-pt-green/5">
+          {step > 0 && (
+            <div className="flex items-center justify-between gap-4 mt-10">
+              <button type="button" onClick={() => go(step - 1)} className="font-display font-semibold text-pt-green px-5 py-3 rounded-full hover:bg-pt-green/5">
                 ← Atrás
               </button>
-            ) : (
-              <span />
-            )}
-            {step < STEPS.length - 1 ? (
-              <button
-                type="button"
-                onClick={next}
-                disabled={step !== 2 && !(step === 1 && room === "compartida") && !canNext}
-                className="hidden lg:inline-flex font-display font-semibold bg-pt-green text-white px-8 py-4 rounded-full disabled:opacity-35 disabled:cursor-not-allowed hover:bg-pt-ink transition"
-              >
-                Continuar →
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={submit}
-                disabled={!accepted || status === "sending"}
-                className="hidden lg:inline-flex font-display font-semibold bg-pt-clay text-white px-8 py-4 rounded-full disabled:opacity-35 disabled:cursor-not-allowed hover:brightness-95 transition"
-              >
-                {status === "sending" ? "Registrando…" : `Reservar mi plaza · ${eur(DEPOSIT)}`}
-              </button>
-            )}
-          </div>
+              {step < STEPS.length - 1 ? (
+                <button type="button" onClick={next} className={`hidden lg:inline-flex font-display font-semibold bg-pt-green text-white px-8 py-4 rounded-full hover:bg-pt-ink transition ${canNext ? "" : "opacity-50"}`}>
+                  Continuar →
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => (accepted ? submit() : setTouched(true))}
+                  disabled={status === "sending"}
+                  className={`hidden lg:inline-flex font-display font-semibold bg-pt-clay text-white px-8 py-4 rounded-full hover:brightness-95 transition disabled:opacity-50 ${accepted ? "" : "opacity-50"}`}
+                >
+                  {status === "sending" ? "Reservando…" : `Reservar ${pax === 2 ? "2 plazas" : "mi plaza"} · ${eur(DEPOSIT * pax)}`}
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Resumen */}
-        <aside className="hidden lg:block">
-          <Summary trip={trip} room={room} price={price} />
-        </aside>
+        {(step === 1 || step === 2) && (
+          <aside className="hidden lg:block">
+            <Summary destinationName={destination?.name || "Bali"} trip={trip} room={room} price={price} pax={pax} />
+          </aside>
+        )}
       </div>
 
       {/* Barra móvil */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-pt-green/10 pl-4 pr-24 py-3 flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-pt-muted font-display">{trip ? `Viaje ${trip.n} · ${trip.range}` : "Bali 2027"}</p>
-          <p className="font-display font-bold text-pt-green truncate">{price ? `${eur(price)} · reserva ${eur(DEPOSIT)}` : `Reserva con ${eur(DEPOSIT)}`}</p>
+      {step > 0 && (
+        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-pt-green/10 pl-4 pr-24 py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-pt-muted font-display truncate">{trip ? `Bali · ${trip.range}` : "Bali 2027"}</p>
+            <p className="font-display font-bold text-pt-green truncate">{price ? `${eur(price * pax)} · hoy ${eur(DEPOSIT * pax)}` : `Reserva con ${eur(DEPOSIT)}`}</p>
+          </div>
+          {step < STEPS.length - 1 ? (
+            <button type="button" onClick={next} className={`shrink-0 font-display font-semibold bg-pt-green text-white px-5 py-3 rounded-full ${canNext ? "" : "opacity-50"}`}>
+              Continuar
+            </button>
+          ) : (
+            <button type="button" onClick={() => (accepted ? submit() : setTouched(true))} disabled={status === "sending"} className={`shrink-0 font-display font-semibold bg-pt-clay text-white px-5 py-3 rounded-full ${accepted ? "" : "opacity-50"}`}>
+              {status === "sending" ? "…" : "Reservar"}
+            </button>
+          )}
         </div>
-        {step < STEPS.length - 1 ? (
-          <button type="button" onClick={next} disabled={step !== 2 && !(step === 1 && room === "compartida") && !canNext} className="shrink-0 font-display font-semibold bg-pt-green text-white px-5 py-3 rounded-full disabled:opacity-35">
-            Continuar
-          </button>
-        ) : (
-          <button type="button" onClick={submit} disabled={!accepted || status === "sending"} className="shrink-0 font-display font-semibold bg-pt-clay text-white px-5 py-3 rounded-full disabled:opacity-35">
-            {status === "sending" ? "…" : "Reservar"}
-          </button>
-        )}
-      </div>
+      )}
     </div>
   );
 }
 
+// ---------- Formulario de un viajero ----------
+
 const inputCls =
-  "w-full rounded-2xl border border-pt-green/15 bg-white px-4 py-3 text-[15px] text-pt-ink placeholder:text-pt-muted/60 focus:border-pt-green focus:outline-none focus:ring-2 focus:ring-pt-green/15";
+  "block w-full min-w-0 rounded-2xl border bg-white px-4 py-3 text-[15px] text-pt-ink placeholder:text-pt-muted/60 focus:outline-none focus:ring-2 transition";
+const okCls = "border-pt-green/15 focus:border-pt-green focus:ring-pt-green/15";
+const errCls = "border-red-400 focus:border-red-500 focus:ring-red-200";
+
+function TravellerForm({
+  index,
+  total,
+  t,
+  errors,
+  onChange,
+}: {
+  index: number;
+  total: number;
+  t: Traveller;
+  errors: Errors;
+  onChange: <K extends keyof Traveller>(k: K, v: Traveller[K]) => void;
+}) {
+  const cls = (k: keyof Traveller) => `${inputCls} ${errors[k] ? errCls : okCls}`;
+  const title = total === 1 ? "Tus datos" : index === 0 ? "Viajero 1 · quien reserva" : "Viajero 2 · con quien compartes habitación";
+  return (
+    <div className="bg-white border border-pt-green/10 rounded-3xl p-6 md:p-8">
+      <div className="flex items-center gap-3 mb-7">
+        <span className="w-9 h-9 rounded-full bg-pt-green text-white grid place-items-center font-display font-bold">{index + 1}</span>
+        <h3 className="font-display font-bold text-xl text-pt-green">{title}</h3>
+      </div>
+
+      <div className="space-y-8">
+        <Group title="Datos personales">
+          <Field label="Nombre" error={errors.nombre}>
+            <input className={cls("nombre")} value={t.nombre} onChange={(e) => onChange("nombre", e.target.value)} autoComplete={index === 0 ? "given-name" : "off"} />
+          </Field>
+          <Field label="Apellidos" error={errors.apellidos}>
+            <input className={cls("apellidos")} value={t.apellidos} onChange={(e) => onChange("apellidos", e.target.value)} autoComplete={index === 0 ? "family-name" : "off"} />
+          </Field>
+          <Field label="Email" hint={index === 0 ? "Aquí recibes el contrato." : "También recibe su contrato."} error={errors.email}>
+            <input type="email" inputMode="email" className={cls("email")} value={t.email} onChange={(e) => onChange("email", e.target.value)} autoComplete={index === 0 ? "email" : "off"} />
+          </Field>
+          <Field label="Teléfono (WhatsApp)" error={errors.telefono}>
+            <PhoneInput prefix={t.prefijo} number={t.telefono} invalid={!!errors.telefono} onPrefix={(v) => onChange("prefijo", v)} onNumber={(v) => onChange("telefono", v)} />
+          </Field>
+          <Field label="Fecha de nacimiento" hint="Hay que ser mayor de edad." error={errors.nacimiento}>
+            <input type="date" max={maxBirthDateISO()} min="1930-01-01" className={cls("nacimiento")} value={t.nacimiento} onChange={(e) => onChange("nacimiento", e.target.value)} autoComplete={index === 0 ? "bday" : "off"} />
+          </Field>
+          <Field label="Ciudad desde la que viajas" error={errors.ciudad}>
+            <input className={cls("ciudad")} value={t.ciudad} onChange={(e) => onChange("ciudad", e.target.value)} placeholder="Barcelona, Madrid…" />
+          </Field>
+        </Group>
+
+        <Group title="Documento">
+          <Field label="Nacionalidad" error={errors.nacionalidad}>
+            <input className={cls("nacionalidad")} list="pt-nacionalidades" value={t.nacionalidad} onChange={(e) => onChange("nacionalidad", e.target.value)} />
+          </Field>
+          <Field label="Tipo de documento">
+            <select className={`${inputCls} ${okCls}`} value={t.docTipo} onChange={(e) => onChange("docTipo", e.target.value as Traveller["docTipo"])}>
+              <option value="DNI">DNI</option>
+              <option value="NIE">NIE</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </Field>
+          <Field label={`Número de ${t.docTipo}`} hint="Para viajar necesitarás pasaporte con 6 meses de validez." error={errors.docNumero}>
+            <input
+              className={`${cls("docNumero")} uppercase tracking-wide`}
+              value={t.docNumero}
+              onChange={(e) => onChange("docNumero", e.target.value.toUpperCase())}
+              placeholder={t.docTipo === "DNI" ? "12345678Z" : t.docTipo === "NIE" ? "X1234567L" : "PAA123456"}
+              autoComplete="off"
+              spellCheck={false}
+            />
+          </Field>
+        </Group>
+
+        <Group title="Pádel y salud">
+          <Field label="Nivel de pádel" hint="Para hacer parejas equilibradas." error={errors.nivel}>
+            <select className={cls("nivel")} value={t.nivel} onChange={(e) => onChange("nivel", e.target.value)}>
+              <option value="">Elige nivel</option>
+              {padelLevels.map((l) => (
+                <option key={l}>{l}</option>
+              ))}
+            </select>
+          </Field>
+          <Field label="Lesiones, alergias o algo a tener en cuenta" hint="Opcional. Solo para la seguridad del viaje.">
+            <input className={`${inputCls} ${okCls}`} value={t.salud} onChange={(e) => onChange("salud", e.target.value)} placeholder="Nada que destacar" />
+          </Field>
+        </Group>
+
+        <Group title="Contacto de emergencia">
+          <Field label="Nombre" error={errors.emergenciaNombre}>
+            <input className={cls("emergenciaNombre")} value={t.emergenciaNombre} onChange={(e) => onChange("emergenciaNombre", e.target.value)} />
+          </Field>
+          <Field label="Teléfono" error={errors.emergenciaTelefono}>
+            <PhoneInput prefix={t.emergenciaPrefijo} number={t.emergenciaTelefono} invalid={!!errors.emergenciaTelefono} onPrefix={(v) => onChange("emergenciaPrefijo", v)} onNumber={(v) => onChange("emergenciaTelefono", v)} />
+          </Field>
+        </Group>
+      </div>
+      <datalist id="pt-nacionalidades">
+        {nationalities.map((n) => (
+          <option key={n} value={n} />
+        ))}
+      </datalist>
+    </div>
+  );
+}
+
+function PhoneInput({ prefix, number, invalid, onPrefix, onNumber }: { prefix: string; number: string; invalid: boolean; onPrefix: (v: string) => void; onNumber: (v: string) => void }) {
+  return (
+    <div className={`flex rounded-2xl border bg-white focus-within:ring-2 transition ${invalid ? "border-red-400 focus-within:ring-red-200" : "border-pt-green/15 focus-within:border-pt-green focus-within:ring-pt-green/15"}`}>
+      <select aria-label="Prefijo" value={prefix} onChange={(e) => onPrefix(e.target.value)} className="shrink-0 w-[104px] bg-transparent pl-3 pr-1 py-3 text-[15px] rounded-l-2xl border-r border-pt-green/10 focus:outline-none">
+        {phonePrefixes.map((p) => (
+          <option key={p.code + p.label} value={p.code}>{p.label}</option>
+        ))}
+      </select>
+      <input type="tel" inputMode="tel" value={number} onChange={(e) => onNumber(e.target.value.replace(/[^\d\s]/g, ""))} placeholder="600 000 000" className="flex-1 min-w-0 bg-transparent px-3 py-3 text-[15px] text-pt-ink placeholder:text-pt-muted/60 rounded-r-2xl focus:outline-none" />
+    </div>
+  );
+}
+
+// ---------- Piezas ----------
 
 function Stepper({ step, onJump }: { step: number; onJump: (i: number) => void }) {
   return (
@@ -437,14 +575,8 @@ function Stepper({ step, onJump }: { step: number; onJump: (i: number) => void }
         const active = i === step;
         return (
           <li key={s} className="flex items-center gap-2 sm:gap-3 flex-1 last:flex-none">
-            <button
-              type="button"
-              onClick={() => onJump(i)}
-              disabled={!done}
-              aria-current={active ? "step" : undefined}
-              className="flex items-center gap-2 shrink-0 disabled:cursor-default"
-            >
-              <span className={`w-8 h-8 rounded-full grid place-items-center text-sm font-display font-bold transition ${active ? "bg-pt-green text-white" : done ? "bg-pt-clay text-white" : "bg-pt-green/8 text-pt-green/50 border border-pt-green/15"}`}>
+            <button type="button" onClick={() => onJump(i)} disabled={!done} aria-current={active ? "step" : undefined} className="flex items-center gap-2 shrink-0 disabled:cursor-default">
+              <span className={`w-8 h-8 rounded-full grid place-items-center text-sm font-display font-bold transition ${active ? "bg-pt-green text-white" : done ? "bg-pt-clay text-white" : "bg-white text-pt-green/50 border border-pt-green/15"}`}>
                 {done ? "✓" : i + 1}
               </span>
               <span className={`hidden sm:inline font-display text-sm font-semibold ${active ? "text-pt-green" : "text-pt-muted"}`}>{s}</span>
@@ -469,20 +601,22 @@ function StepTitle({ eyebrow, title, text }: { eyebrow: string; title: string; t
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <fieldset>
-      <legend className="font-display font-bold text-pt-green mb-4">{title}</legend>
-      <div className="grid sm:grid-cols-2 gap-x-5 gap-y-5">{children}</div>
+    <fieldset className="min-w-0">
+      <legend className="font-display uppercase tracking-[0.14em] text-xs font-semibold text-pt-clay mb-4">{title}</legend>
+      <div className="grid sm:grid-cols-2 gap-x-5 gap-y-5 items-start">{children}</div>
     </fieldset>
   );
 }
 
-function Field({ label, hint, error, children }: { label: string; hint?: string; error?: boolean; children: React.ReactNode }) {
+function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: React.ReactNode }) {
   return (
-    <label className={`block ${error ? "[&_input]:border-red-400 [&_select]:border-red-400" : ""}`}>
-      <span className="block text-sm font-medium text-pt-ink mb-1.5">{label}</span>
-      {children}
-      {hint && <span className="block text-xs text-pt-muted mt-1.5">{hint}</span>}
-    </label>
+    <div className="min-w-0">
+      <label className="block">
+        <span className="block text-sm font-medium text-pt-ink mb-1.5">{label}</span>
+        {children}
+      </label>
+      {error ? <p className="text-xs text-red-700 mt-1.5">{error}</p> : hint ? <p className="text-xs text-pt-muted mt-1.5">{hint}</p> : null}
+    </div>
   );
 }
 
@@ -495,33 +629,111 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   );
 }
 
-function Row({ k, v }: { k: string; v: string }) {
+type Trip = (typeof departures2027)[number];
+
+/** Resumen final en formato "billete". */
+function Ticket({ destinationName, hero, trip, room, travellers }: { destinationName: string; hero: string; trip: Trip; room: RoomKey; travellers: Traveller[] }) {
+  const pax = travellers.length;
+  const price = rooms[room].price;
+  const total = price * pax;
+  const resto = price - DEPOSIT - SECOND_PAYMENT;
   return (
-    <div className="flex justify-between gap-4 py-2 border-b border-pt-green/8 last:border-0 text-sm">
-      <span className="text-pt-muted">{k}</span>
-      <span className="text-pt-ink font-medium text-right">{v}</span>
+    <div className="rounded-[28px] overflow-hidden shadow-[0_30px_60px_-25px_rgba(14,59,45,0.45)] bg-white">
+      <div className="relative h-64">
+        <Img src={hero} alt="" fill sizes="(max-width:1024px) 100vw, 700px" className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-pt-green via-pt-green/40 to-transparent" />
+        <div className="absolute top-5 left-6 right-6 flex justify-between text-white/90 font-display uppercase tracking-[0.22em] text-[10px]">
+          <span>Padel Travellers</span>
+          <span>Viaje {trip.n} · 2027</span>
+        </div>
+        <div className="absolute left-6 right-6 bottom-5 text-white flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+          <div>
+            <p className="font-display font-medium text-5xl sm:text-6xl md:text-7xl leading-none">{destinationName}</p>
+            <p className="font-script italic text-pt-cream text-xl sm:text-2xl mt-1 whitespace-nowrap">pádel y aventura</p>
+          </div>
+          <div className="sm:text-right">
+            <p className="font-display font-semibold text-xl md:text-2xl leading-tight">{trip.range}</p>
+            <p className="text-white/80 text-sm">14 días · 13 noches</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-6 md:px-8 py-6 grid sm:grid-cols-3 gap-5 bg-pt-green text-white">
+        <TicketItem k={pax === 2 ? "Viajeros" : "Viajero"} v={travellers.map((t) => `${t.nombre} ${t.apellidos}`.trim()).join(" y ")} />
+        <TicketItem k="Habitación" v={room === "compartida" ? "Compartida (2)" : "Individual"} />
+        <TicketItem k="Total" v={pax === 2 ? `${eur(total)} · ${eur(price)} c/u` : eur(total)} />
+      </div>
+
+      {/* perforado */}
+      <div className="relative h-0 border-t-2 border-dashed border-pt-green/15">
+        <span className="absolute -left-4 -top-4 w-8 h-8 rounded-full bg-[#FBFAF5]" />
+        <span className="absolute -right-4 -top-4 w-8 h-8 rounded-full bg-[#FBFAF5]" />
+      </div>
+
+      <div className="px-6 md:px-8 py-7">
+        <p className="font-display uppercase tracking-[0.2em] text-[10px] text-pt-muted mb-5">Calendario de pagos {pax === 2 ? "(por persona)" : ""}</p>
+        <ol className="grid grid-cols-3 gap-3 relative">
+          <span className="absolute left-[16%] right-[16%] top-4 h-px bg-pt-green/15" aria-hidden />
+          {[
+            { t: "Hoy", a: eur(DEPOSIT), n: "Reserva reembolsable hasta confirmar grupo", on: true },
+            { t: "Grupo confirmado", a: eur(SECOND_PAYMENT), n: "Al llegar a 8 viajeros" },
+            { t: `Antes del ${finalPaymentDate(trip.start).replace(/ de 2027$/, "")}`, a: eur(resto), n: "Pago final" },
+          ].map((p) => (
+            <li key={p.t} className="relative text-center">
+              <span className={`relative z-10 mx-auto w-8 h-8 rounded-full grid place-items-center text-xs font-bold ${p.on ? "bg-pt-clay text-white ring-4 ring-pt-clay/20" : "bg-white border-2 border-pt-green/20 text-pt-green"}`}>
+                {p.on ? "✓" : "·"}
+              </span>
+              <p className="font-display font-bold text-xl md:text-2xl text-pt-green mt-3">{p.a}</p>
+              <p className="text-xs font-semibold text-pt-ink mt-1">{p.t}</p>
+              <p className="text-[11px] text-pt-muted mt-1 leading-snug hidden sm:block">{p.n}</p>
+            </li>
+          ))}
+        </ol>
+        {pax === 2 && (
+          <p className="text-sm text-pt-ink/80 mt-6 text-center">
+            Hoy reserváis los dos: <strong className="text-pt-green">{eur(DEPOSIT * 2)}</strong> en total.
+          </p>
+        )}
+      </div>
     </div>
   );
 }
 
-function Summary({ trip, room, price }: { trip: (typeof departures2027)[number] | null; room: RoomKey | null; price: number | null }) {
+function TicketItem({ k, v }: { k: string; v: string }) {
+  return (
+    <div className="min-w-0">
+      <p className="font-display uppercase tracking-[0.2em] text-[10px] text-pt-cream/70">{k}</p>
+      <p className="font-display font-semibold mt-1 leading-snug break-words">{v}</p>
+    </div>
+  );
+}
+
+function Summary({ destinationName, trip, room, price, pax }: { destinationName: string; trip: Trip | null; room: RoomKey | null; price: number | null; pax: number }) {
   return (
     <div className="sticky top-24 bg-pt-green text-white rounded-3xl overflow-hidden">
-      <div className="relative h-36">
+      <div className="relative h-32">
         <Img src={trip?.photo || "/photos/extra/atardecer/1.jpg"} alt="" fill sizes="360px" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-pt-green to-pt-green/10" />
         <div className="absolute left-6 bottom-4">
-          <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/80">Pádel y Bali 2027</p>
-          <p className="font-display font-medium text-2xl leading-tight">{trip ? trip.range : "Elige tu salida"}</p>
+          <p className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/80">{destinationName} 2027</p>
+          <p className="font-display font-medium text-2xl leading-tight">{trip ? trip.range : "Elige fecha"}</p>
         </div>
       </div>
       <div className="p-6 space-y-5">
-        <div className="flex justify-between text-sm">
-          <span className="text-pt-cream/75">{room ? rooms[room].label : "Habitación"}</span>
-          <span className="font-display font-bold">{price ? eur(price) : "—"}</span>
+        <div className="space-y-2 text-sm">
+          <div className="flex justify-between">
+            <span className="text-pt-cream/75">{room ? (room === "compartida" ? "Compartida · 2 personas" : "Individual") : "Habitación"}</span>
+            <span className="font-display font-bold">{price ? `${eur(price)}${pax === 2 ? " c/u" : ""}` : "—"}</span>
+          </div>
+          {price && pax === 2 && (
+            <div className="flex justify-between border-t border-white/15 pt-2">
+              <span className="text-pt-cream/75">Total (2)</span>
+              <span className="font-display font-bold">{eur(price * 2)}</span>
+            </div>
+          )}
         </div>
         <div>
-          <p className="font-display uppercase tracking-[0.2em] text-[10px] text-pt-cream/70 mb-3">Cómo pagas</p>
+          <p className="font-display uppercase tracking-[0.2em] text-[10px] text-pt-cream/70 mb-3">Cómo pagas {pax === 2 ? "(por persona)" : ""}</p>
           <ol className="relative border-l border-white/20 ml-1.5 space-y-4">
             <Pay title="Hoy, para reservar" amount={eur(DEPOSIT)} note="Reembolsable hasta que se confirme el grupo" highlight />
             <Pay title="Al confirmarse el grupo" amount={eur(SECOND_PAYMENT)} note="Mínimo 8 viajeros" />
@@ -547,21 +759,25 @@ function Pay({ title, amount, note, highlight }: { title: string; amount: string
   );
 }
 
-function Confirmation({ name, email, tripN, range, start, price }: { name: string; email: string; tripN: number; range: string; start: string; price: number }) {
+function Confirmation({ travellers, trip, price }: { travellers: Traveller[]; trip: Trip; price: number }) {
+  const pax = travellers.length;
+  const names = travellers.map((t) => t.nombre).join(" y ");
   return (
     <div id="reserva" className="max-w-3xl mx-auto px-4 sm:px-6 pb-20 text-center fade-up scroll-mt-24">
       <span className="inline-grid place-items-center w-16 h-16 rounded-full bg-pt-clay text-white text-2xl mb-6" aria-hidden>✓</span>
       <h2 className="font-display font-medium text-4xl md:text-5xl text-pt-green leading-tight">
-        ¡Hecho, {name}!
+        ¡Hecho, {names}!
         <br />
         <span className="font-script italic font-normal text-pt-clay text-3xl md:text-4xl">nos vemos en Bali</span>
       </h2>
-      <p className="text-pt-muted mt-6 text-lg">Tenemos tu plaza para el Viaje {tripN} · {range}.</p>
+      <p className="text-pt-muted mt-6 text-lg">
+        {pax === 2 ? "Tenéis vuestras plazas" : "Tenemos tu plaza"} para el Viaje {trip.n} · {trip.range}.
+      </p>
       <ol className="text-left mt-10 space-y-4">
         {[
-          ["Revisa tu email", `Te hemos enviado el contrato y los datos de tu reserva a ${email}.`],
-          ["Paga la reserva de 100 €", "En el mismo email tienes cómo pagarla. Hasta que se confirme el grupo, es 100 % reembolsable."],
-          ["Te avisamos al confirmarse el grupo", `Entonces se abonan 1.000 € y el resto (${eur(price - DEPOSIT - SECOND_PAYMENT)}) antes del ${finalPaymentDate(start)}.`],
+          ["Revisa tu email", pax === 2 ? `Cada uno recibe su contrato y los datos de la reserva (${travellers.map((t) => t.email).join(" y ")}).` : `Te hemos enviado el contrato y los datos de tu reserva a ${travellers[0].email}.`],
+          [`Paga la reserva de ${eur(DEPOSIT)}${pax === 2 ? " por persona" : ""}`, "En el mismo email tienes cómo pagarla. Hasta que se confirme el grupo, es 100 % reembolsable."],
+          ["Te avisamos al confirmarse el grupo", `Entonces se abonan ${eur(SECOND_PAYMENT)} y el resto (${eur(price - DEPOSIT - SECOND_PAYMENT)}) antes del ${finalPaymentDate(trip.start)}${pax === 2 ? ", por persona" : ""}.`],
           ["Compra tus vuelos", "Cuando el grupo esté confirmado. Te diremos la ventana ideal de llegada y salida."],
           ["Contrata tu seguro de viaje", "Es obligatorio y tiene que cubrir la práctica de pádel. Envíanos una copia al menos 15 días antes de salir."],
         ].map(([title, text], i) => (
