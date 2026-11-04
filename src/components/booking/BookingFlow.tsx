@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Img from "@/components/Img";
 import {
   departures2027,
@@ -12,10 +12,14 @@ import {
   eur,
 } from "@/data/booking";
 
-// Prototipo: sin backend. Cuando exista /api/reservas (Pages Function que
-// guarda la reserva, genera el contrato y lo envía desde reservas@), se
-// define NEXT_PUBLIC_BOOKING_ENDPOINT y el envío pasa a ser real.
+// Web app de Google Apps Script (apps-script/reservas): guarda la reserva en el
+// Sheet "Reservas PT 2027", genera el contrato y lo envía desde reservas@.
+// GET ?action=plazas devuelve las plazas libres de cada salida.
+// Sin URL, el formulario funciona en modo prototipo (simula el envío).
 const ENDPOINT = process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || "";
+
+type Plaza = { codigo: string; libres: number; estado: string };
+const code = (n: number) => `BALI-${n}`;
 
 const STEPS = ["Salida", "Habitación", "Tus datos", "Confirmar"] as const;
 
@@ -75,6 +79,22 @@ export default function BookingFlow() {
   const [accepted, setAccepted] = useState(false);
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "err">("idle");
+  const [errMsg, setErrMsg] = useState("");
+  const [plazas, setPlazas] = useState<Record<string, Plaza>>({});
+  const [hp, setHp] = useState(""); // honeypot anti-bots
+
+  useEffect(() => {
+    if (!ENDPOINT) return;
+    fetch(`${ENDPOINT}?action=plazas`)
+      .then((r) => r.json())
+      .then((d: { ok: boolean; salidas?: Plaza[] }) => {
+        if (!d.ok || !d.salidas) return;
+        setPlazas(Object.fromEntries(d.salidas.map((s) => [s.codigo, s])));
+      })
+      .catch(() => {});
+  }, []);
+
+  const full = (n: number) => plazas[code(n)]?.libres === 0;
 
   const trip = departures2027.find((d) => d.n === tripN) || null;
   const price = room ? rooms[room].price : null;
@@ -106,30 +126,38 @@ export default function BookingFlow() {
   async function submit() {
     if (!accepted || !trip || !room) return;
     setStatus("sending");
-    const payload = {
-      viaje: trip.n,
-      fechas: trip.range,
+    setErrMsg("");
+    const body = new URLSearchParams({
+      salida: code(trip.n),
       habitacion: room,
-      precio: rooms[room].price,
       ...t,
-      aceptaContrato: new Date().toISOString(),
-    };
+      acepta: "si",
+      website: hp,
+    });
     try {
       if (ENDPOINT) {
-        const r = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!r.ok) throw new Error(String(r.status));
+        // form-urlencoded: Apps Script no admite preflight CORS.
+        const r = await fetch(ENDPOINT, { method: "POST", body });
+        const d = (await r.json()) as { ok: boolean; error?: string; libres?: number };
+        if (!d.ok) {
+          if (d.error === "completo") {
+            setPlazas((p) => ({ ...p, [code(trip.n)]: { codigo: code(trip.n), libres: 0, estado: "Completa" } }));
+            setErrMsg("Justo se acaba de completar esta salida. Elige otra fecha o escríbenos por WhatsApp para la lista de espera.");
+          } else {
+            setErrMsg("No hemos podido registrar tu reserva. Revisa los datos o escríbenos por WhatsApp.");
+          }
+          setStatus("err");
+          return;
+        }
       } else {
         // Prototipo: simulamos el envío.
         await new Promise((res) => setTimeout(res, 900));
-        console.info("[reserva prototipo]", payload);
+        console.info("[reserva prototipo]", Object.fromEntries(body));
       }
       setStatus("done");
       document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch {
+      setErrMsg("No hemos podido registrar tu reserva. Prueba de nuevo o escríbenos por WhatsApp.");
       setStatus("err");
     }
   }
@@ -150,13 +178,16 @@ export default function BookingFlow() {
               <div className="grid sm:grid-cols-2 gap-4">
                 {departures2027.map((d) => {
                   const active = d.n === tripN;
+                  const p = plazas[code(d.n)];
+                  const isFull = full(d.n);
                   return (
                     <button
                       key={d.n}
                       type="button"
-                      onClick={() => setTripN(d.n)}
+                      onClick={() => !isFull && setTripN(d.n)}
+                      disabled={isFull}
                       aria-pressed={active}
-                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[16/10] transition ring-offset-2 ${active ? "ring-4 ring-pt-clay" : "ring-0 hover:shadow-xl"}`}
+                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[16/10] transition ring-offset-2 disabled:cursor-not-allowed ${active ? "ring-4 ring-pt-clay" : "ring-0 hover:shadow-xl"} ${isFull ? "grayscale opacity-70" : ""}`}
                     >
                       <Img src={d.photo} alt="" fill sizes="(max-width:640px) 100vw, 40vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className={`absolute inset-0 transition ${active ? "bg-pt-green/70" : "bg-gradient-to-t from-pt-ink/85 via-pt-ink/30 to-transparent"}`} />
@@ -166,6 +197,11 @@ export default function BookingFlow() {
                       </div>
                       {active && (
                         <span className="absolute top-4 right-4 w-8 h-8 rounded-full bg-pt-clay text-white grid place-items-center text-sm" aria-hidden>✓</span>
+                      )}
+                      {!active && p && (isFull || p.libres <= 4) && (
+                        <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.18em] text-white ${isFull ? "bg-pt-ink/80" : "bg-pt-clay"}`}>
+                          {isFull ? "Completo" : p.libres === 1 ? "Última plaza" : `Quedan ${p.libres} plazas`}
+                        </span>
                       )}
                       <div className="absolute left-5 right-5 bottom-4 text-white">
                         <p className="font-display font-medium text-2xl md:text-3xl leading-tight">{d.range}</p>
@@ -220,6 +256,7 @@ export default function BookingFlow() {
             <section>
               <StepTitle eyebrow="Paso 3" title="Tus datos" text="Los usamos para tu contrato y para reservar alojamiento, pádel y traslados a tu nombre." />
               <div className="bg-white border border-pt-green/10 rounded-3xl p-6 md:p-8 space-y-8">
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] w-px h-px opacity-0" value={hp} onChange={(e) => setHp(e.target.value)} />
                 <Group title="Sobre ti">
                   <Field label="Nombre" error={touched && missing.has("nombre")}>
                     <input className={inputCls} value={t.nombre} onChange={(e) => set("nombre", e.target.value)} autoComplete="given-name" />
@@ -326,7 +363,7 @@ export default function BookingFlow() {
                   </span>
                 </label>
                 {status === "err" && (
-                  <p className="text-sm text-red-700" role="alert">No hemos podido registrar tu reserva. Prueba de nuevo o escríbenos por WhatsApp.</p>
+                  <p className="text-sm text-red-700" role="alert">{errMsg}</p>
                 )}
               </div>
             </section>
