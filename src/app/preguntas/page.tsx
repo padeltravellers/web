@@ -74,11 +74,11 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Cómo reservo?",
-        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y aceptas el contrato. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email con los datos para pagar. También puedes escribirnos por WhatsApp y te ayudamos.",
+        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos, aceptas el contrato y pagas la reserva de 100 € con tarjeta. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
       },
       {
         q: "¿Cómo se paga?",
-        a: "En tres pagos: 100 € para reservar, 1.000 € cuando se confirma el grupo y el resto 30 días antes del viaje. Se paga por transferencia bancaria; te enviamos los datos por email al reservar.",
+        a: "En tres pagos: 100 € para reservar, 1.000 € cuando se confirma el grupo y el resto 30 días antes del viaje. La reserva se paga con tarjeta en la web, con la pasarela segura de Stripe. Los otros dos pagos, por transferencia bancaria a la cuenta que te indicamos por email.",
       },
       {
         q: "¿Y si el grupo no llega a 8 personas?",
