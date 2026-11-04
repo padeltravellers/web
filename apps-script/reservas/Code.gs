@@ -77,7 +77,7 @@ function crearReserva_(p) {
   const presupuesto = precio - honorarios;
   const ahora = new Date();
 
-  const sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Reservas');
+  const sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Viajeros');
   const header = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
   const ids = sh.getRange(2, 1, Math.max(sh.getMaxRows() - 1, 1), 1).getValues().map((r) => r[0]);
   let last = 0;
@@ -126,6 +126,7 @@ function crearReserva_(p) {
       'ID': id,
       'Fecha reserva': ahora,
       'Estado': 'Pre-reserva',
+      'Destino': salida.destino,
       'Salida': salida.codigo,
       'Fechas': salida.etiqueta,
       'Habitación': pax === 2 ? 'Compartida' : 'Individual',
@@ -134,7 +135,7 @@ function crearReserva_(p) {
       'Apellidos': clean_(v.apellidos),
       'Email': clean_(v.email),
       'Teléfono': clean_(v.telefono),
-      'Fecha nacimiento': fechaCorta_(v.nacimiento),
+      'Fecha nacimiento': fechaDate_(v.nacimiento),
       'Nacionalidad': clean_(v.nacionalidad),
       'Tipo doc.': clean_(v.docTipo),
       'Nº documento': doc,
@@ -146,12 +147,14 @@ function crearReserva_(p) {
       'Precio': precio,
       'Honorarios': honorarios,
       'Presupuesto': presupuesto,
-      'Seguro recibido': false,
-      'Vuelos recibidos': false,
+      'Seguro': false,
+      'Visado': false,
+      'RC': false,
+      'Vídeos': false,
       'Contrato PDF': pdf.getUrl(),
       'Aceptación contrato': ahora,
       'Origen': 'Web',
-      'Notas': pax === 2 ? 'Reserva conjunta con ' + acompanante : '',
+      'Comentarios': pax === 2 ? 'Reserva conjunta con ' + acompanante : '',
     };
     escribirFila_(sh, header, rowIndex, values);
     creados.push({ id: id, email: clean_(v.email), nombre: clean_(v.nombre), habTexto: habTexto, pdf: pdf });
@@ -219,12 +222,12 @@ function enviarEmail_(cfg, r) {
   const html =
     '<div style="font-family:Helvetica,Arial,sans-serif;color:#0B1F19;max-width:560px;margin:0 auto;line-height:1.55">' +
     '<div style="background:#0E3B2D;color:#FEFAE0;padding:28px 28px 22px;border-radius:18px 18px 0 0">' +
-    '<div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.8">Padel Travellers · Bali 2027</div>' +
+    '<div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.8">Padel Travellers · ' + esc_(r.salida.destino) + ' 2027</div>' +
     '<div style="font-size:26px;font-weight:bold;margin-top:6px">¡Tu plaza está reservada, ' + esc_(r.nombre) + '!</div></div>' +
     '<div style="border:1px solid #E3E8E5;border-top:0;border-radius:0 0 18px 18px;padding:24px 28px">' +
     '<p style="margin:0 0 16px">Gracias por reservar. Te dejamos aquí el resumen y, adjunto, tu contrato con todos los datos.</p>' +
     '<table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 18px">' +
-    fila_('Reserva', r.id) + fila_('Viaje', 'Bali 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta) +
+    fila_('Reserva', r.id) + fila_('Viaje', r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta) +
     fila_('Habitación', r.habTexto) + fila_('Precio', eur_(r.precio)) + '</table>' +
     '<div style="font-weight:bold;color:#0E3B2D;margin:0 0 6px">Cómo pagas</div>' +
     '<table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 14px">' +
@@ -239,13 +242,13 @@ function enviarEmail_(cfg, r) {
     '<li>Contrata tu seguro de viaje (obligatorio, que cubra la práctica de pádel) y envíanos una copia al menos 15 días antes de salir. Nuestros viajeros suelen ir con <a href="https://www.iatiseguros.com/" style="color:#0E3B2D">IATI</a> o <a href="https://heymondo.es/" style="color:#0E3B2D">Heymondo</a>.</li>' +
     '</ol>' +
     '<p style="margin:0 0 4px;font-size:14px">Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.</p>' +
-    '<p style="margin:18px 0 0;font-size:14px">Nos vemos en Bali,<br><b>Equipo Padel Travellers</b></p>' +
+    '<p style="margin:18px 0 0;font-size:14px">Nos vemos en ' + esc_(r.salida.destino) + ',<br><b>Equipo Padel Travellers</b></p>' +
     '<p style="margin:18px 0 0;font-size:11px;color:#6B7570">Has aceptado el contrato de organización y coordinación de viaje en grupo al reservar en padeltravellers.com. Lo tienes adjunto en PDF.</p>' +
     '</div></div>';
 
   const texto =
     '¡Tu plaza está reservada, ' + r.nombre + '!\n\n' +
-    'Reserva ' + r.id + ' · Bali 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta + '\n' +
+    'Reserva ' + r.id + ' · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta + '\n' +
     'Habitación: ' + r.habTexto + ' · Precio: ' + eur_(r.precio) + '\n\n' +
     'Pagos: ' + eur_(reserva) + ' ahora, ' + eur_(segundo) + ' al confirmarse el grupo y ' + eur_(resto) + ' antes del ' + fechaLarga_(finalFecha) + '.\n' +
     (cfg.iban ? 'IBAN: ' + cfg.iban + ' (concepto: ' + r.id + ' ' + r.nombre + ')\n' : (cfg.instrucciones_pago || '') + '\n') +
@@ -258,7 +261,7 @@ function enviarEmail_(cfg, r) {
     replyTo: cfg.remitente || undefined,
     bcc: cfg.copia_a || undefined,
   };
-  const asunto = 'Reserva confirmada · Bali 2027 · Viaje ' + r.salida.viaje + ' (' + r.id + ')';
+  const asunto = 'Reserva confirmada · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' (' + r.id + ')';
   try {
     GmailApp.sendEmail(r.email, asunto, texto, Object.assign({ from: cfg.remitente }, opts));
   } catch (err) {
@@ -273,7 +276,8 @@ function enviarEmail_(cfg, r) {
 function salidas_() {
   const sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName('Salidas');
   const v = sh.getRange(2, 1, Math.max(sh.getLastRow() - 1, 1), 11).getValues();
-  return v.filter((r) => r[0]).map((r) => ({
+  // Solo salidas con fechas (p. ej. IND-1 sin fechas todavía no se puede reservar).
+  return v.filter((r) => r[0] && r[3] instanceof Date && r[4] instanceof Date).map((r) => ({
     codigo: String(r[0]),
     destino: String(r[1]),
     viaje: r[2],
@@ -287,7 +291,7 @@ function salidas_() {
 }
 
 function publicSalida_(s) {
-  return { codigo: s.codigo, viaje: s.viaje, libres: s.libres, estado: s.estado };
+  return { codigo: s.codigo, destino: s.destino, viaje: s.viaje, libres: s.libres, estado: s.estado };
 }
 
 function config_() {
@@ -318,6 +322,10 @@ function clean_(v) { return String(v || '').replace(/\s+/g, ' ').trim().slice(0,
 function esc_(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 function eur_(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; }
 function fechaLarga_(d) { return d.getDate() + ' de ' + MONTHS[d.getMonth()] + ' de ' + d.getFullYear(); }
+function fechaDate_(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
+  return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : clean_(iso);
+}
 function fechaCorta_(iso) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
   return m ? m[3] + '/' + m[2] + '/' + m[1] : clean_(iso);
