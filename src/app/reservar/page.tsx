@@ -36,16 +36,16 @@ const steps = [
 
 const cancellationRules = [
   {
-    label: "Sin viaje confirmado",
-    detail: "Devolución del importe completo de la reserva.",
+    label: "Antes de confirmar el grupo",
+    detail: "Te devolvemos todo lo pagado, también la reserva.",
   },
   {
-    label: "Confirmado · más de 90 días",
-    detail: "Reembolso parcial.",
+    label: "Grupo confirmado",
+    detail: "No hay devolución. Aun así, intentamos recuperar lo posible de los proveedores y estudiamos cada caso.",
   },
   {
-    label: "Confirmado · menos de 90 días",
-    detail: "No se realizan reembolsos.",
+    label: "Si no llegamos a 8 viajeros",
+    detail: "Te devolvemos el 100 % o te pasamos a otra salida.",
   },
 ];
 

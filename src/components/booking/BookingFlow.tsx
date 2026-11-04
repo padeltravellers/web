@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Img from "@/components/Img";
 import { destinations } from "@/data/destinations";
 import {
@@ -11,7 +11,8 @@ import {
   padelLevels,
   finalPaymentDate,
   eur,
-  phonePrefixes,
+  countries,
+  flag,
   nationalities,
   docError,
   ageOn,
@@ -29,6 +30,7 @@ const BOOKABLE = ["bali"];
 
 type Plaza = { codigo: string; libres: number; estado: string };
 const code = (n: number) => `BALI-${n}`;
+const dial = (iso: string) => countries.find((c) => c.iso === iso)?.code || "";
 
 type Traveller = {
   nombre: string;
@@ -52,7 +54,7 @@ const emptyTraveller = (): Traveller => ({
   nombre: "",
   apellidos: "",
   email: "",
-  prefijo: "+34",
+  prefijo: "ES",
   telefono: "",
   nacimiento: "",
   nacionalidad: "Española",
@@ -62,7 +64,7 @@ const emptyTraveller = (): Traveller => ({
   nivel: "",
   salud: "",
   emergenciaNombre: "",
-  emergenciaPrefijo: "+34",
+  emergenciaPrefijo: "ES",
   emergenciaTelefono: "",
 });
 
@@ -161,8 +163,8 @@ export default function BookingFlow() {
       viajeros: JSON.stringify(
         travellers.map((t) => ({
           ...t,
-          telefono: `${t.prefijo} ${t.telefono.trim()}`,
-          emergenciaTelefono: `${t.emergenciaPrefijo} ${t.emergenciaTelefono.trim()}`,
+          telefono: `${dial(t.prefijo)} ${t.telefono.trim()}`,
+          emergenciaTelefono: `${dial(t.emergenciaPrefijo)} ${t.emergenciaTelefono.trim()}`,
           docNumero: t.docNumero.replace(/[\s-]/g, "").toUpperCase(),
         })),
       ),
@@ -374,8 +376,7 @@ export default function BookingFlow() {
                 <Card title="Si hay que cancelar">
                   <ul className="space-y-2.5 text-sm text-pt-ink/85">
                     <li><strong className="text-pt-green">Antes de confirmarse el grupo:</strong> devolvemos todo, también la reserva.</li>
-                    <li><strong className="text-pt-green">Grupo confirmado, más de 90 días antes:</strong> se pierde la reserva y devolvemos el resto menos lo ya comprometido con proveedores.</li>
-                    <li><strong className="text-pt-green">90 días o menos:</strong> sin devolución, salvo lo que recuperemos de proveedores.</li>
+                    <li><strong className="text-pt-green">Una vez confirmado el grupo:</strong> no hay devolución. Aun así, intentamos recuperar lo posible de los proveedores y estudiamos cada caso.</li>
                     <li><strong className="text-pt-green">Si no llegamos a 8 viajeros:</strong> devolvemos el 100 % o te pasamos a otra salida.</li>
                   </ul>
                 </Card>
@@ -473,6 +474,7 @@ function TravellerForm({
       <div className="flex items-center gap-3 mb-7">
         <span className="w-9 h-9 rounded-full bg-pt-green text-white grid place-items-center font-display font-bold">{index + 1}</span>
         <h3 className="font-display font-bold text-xl text-pt-green">{title}</h3>
+        {index === 0 && <span className="ml-auto text-xs text-pt-muted"><span className="text-pt-clay font-bold">*</span> obligatorio</span>}
       </div>
 
       <div className="space-y-8">
@@ -529,7 +531,7 @@ function TravellerForm({
               ))}
             </select>
           </Field>
-          <Field label="Lesiones, alergias o algo a tener en cuenta" hint="Opcional. Solo para la seguridad del viaje.">
+          <Field label="Lesiones, alergias o algo a tener en cuenta" hint="Solo para la seguridad del viaje." optional>
             <input className={`${inputCls} ${okCls}`} value={t.salud} onChange={(e) => onChange("salud", e.target.value)} placeholder="Nada que destacar" />
           </Field>
         </Group>
@@ -554,13 +556,108 @@ function TravellerForm({
 
 function PhoneInput({ prefix, number, invalid, onPrefix, onNumber }: { prefix: string; number: string; invalid: boolean; onPrefix: (v: string) => void; onNumber: (v: string) => void }) {
   return (
-    <div className={`flex rounded-2xl border bg-white focus-within:ring-2 transition ${invalid ? "border-red-400 focus-within:ring-red-200" : "border-pt-green/15 focus-within:border-pt-green focus-within:ring-pt-green/15"}`}>
-      <select aria-label="Prefijo" value={prefix} onChange={(e) => onPrefix(e.target.value)} className="shrink-0 w-[104px] bg-transparent pl-3 pr-1 py-3 text-[15px] rounded-l-2xl border-r border-pt-green/10 focus:outline-none">
-        {phonePrefixes.map((p) => (
-          <option key={p.code + p.label} value={p.code}>{p.label}</option>
-        ))}
-      </select>
+    <div className={`relative flex rounded-2xl border bg-white focus-within:ring-2 transition ${invalid ? "border-red-400 focus-within:ring-red-200" : "border-pt-green/15 focus-within:border-pt-green focus-within:ring-pt-green/15"}`}>
+      <CountryPicker iso={prefix} onChange={onPrefix} />
       <input type="tel" inputMode="tel" value={number} onChange={(e) => onNumber(e.target.value.replace(/[^\d\s]/g, ""))} placeholder="600 000 000" className="flex-1 min-w-0 bg-transparent px-3 py-3 text-[15px] text-pt-ink placeholder:text-pt-muted/60 rounded-r-2xl focus:outline-none" />
+    </div>
+  );
+}
+
+const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/** Selector de prefijo con buscador: acepta "+34", "34", "esp", "españa"… */
+function CountryPicker({ iso, onChange }: { iso: string; onChange: (iso: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const [hi, setHi] = useState(0);
+  const box = useRef<HTMLDivElement>(null);
+  const current = countries.find((c) => c.iso === iso) || countries[0];
+
+  const list = useMemo(() => {
+    const n = norm(q.trim()).replace(/^\+/, "");
+    if (!n) return countries;
+    return countries.filter((c) => norm(c.name).includes(n) || c.code.replace("+", "").startsWith(n) || c.iso.toLowerCase() === n);
+  }, [q]);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => {
+      if (box.current && !box.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
+
+  function pick(c: { iso: string }) {
+    onChange(c.iso);
+    setOpen(false);
+    setQ("");
+  }
+
+  return (
+    <div ref={box} className="relative shrink-0">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`Prefijo: ${current.name} ${current.code}`}
+        onClick={() => {
+          setOpen((o) => !o);
+          setHi(0);
+        }}
+        className="h-full flex items-center gap-1.5 pl-3 pr-2 py-3 text-[15px] rounded-l-2xl border-r border-pt-green/10 hover:bg-pt-green/[0.03] focus:outline-none"
+      >
+        <span aria-hidden>{flag(current.iso)}</span>
+        <span className="text-pt-ink">{current.code}</span>
+        <span className="text-pt-muted text-xs" aria-hidden>▾</span>
+      </button>
+      {open && (
+        <div className="absolute z-50 left-0 top-full mt-2 w-72 bg-white border border-pt-green/15 rounded-2xl shadow-2xl overflow-hidden">
+          <div className="p-2 border-b border-pt-green/10">
+            <input
+              autoFocus
+              value={q}
+              onChange={(e) => {
+                setQ(e.target.value);
+                setHi(0);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown") {
+                  e.preventDefault();
+                  setHi((h) => Math.min(h + 1, list.length - 1));
+                } else if (e.key === "ArrowUp") {
+                  e.preventDefault();
+                  setHi((h) => Math.max(h - 1, 0));
+                } else if (e.key === "Enter") {
+                  e.preventDefault();
+                  if (list[hi]) pick(list[hi]);
+                } else if (e.key === "Escape") {
+                  setOpen(false);
+                }
+              }}
+              placeholder="Busca país o prefijo (Esp, +34…)"
+              className="w-full rounded-xl border border-pt-green/15 px-3 py-2 text-sm focus:outline-none focus:border-pt-green"
+            />
+          </div>
+          <ul role="listbox" className="max-h-64 overflow-y-auto py-1">
+            {list.length === 0 && <li className="px-4 py-3 text-sm text-pt-muted">Sin resultados</li>}
+            {list.map((c, i) => (
+              <li key={c.iso} role="option" aria-selected={c.iso === iso}>
+                <button
+                  type="button"
+                  onMouseEnter={() => setHi(i)}
+                  onClick={() => pick(c)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 text-sm text-left ${i === hi ? "bg-pt-cream" : ""} ${c.iso === iso ? "font-semibold text-pt-green" : "text-pt-ink"}`}
+                >
+                  <span aria-hidden>{flag(c.iso)}</span>
+                  <span className="flex-1 truncate">{c.name}</span>
+                  <span className="text-pt-muted">{c.code}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
@@ -608,11 +705,14 @@ function Group({ title, children }: { title: string; children: React.ReactNode }
   );
 }
 
-function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: React.ReactNode }) {
+function Field({ label, hint, error, optional, children }: { label: string; hint?: string; error?: string; optional?: boolean; children: React.ReactNode }) {
   return (
     <div className="min-w-0">
       <label className="block">
-        <span className="block text-sm font-medium text-pt-ink mb-1.5">{label}</span>
+        <span className="block text-sm font-medium text-pt-ink mb-1.5">
+          {label}
+          {optional ? <span className="font-normal text-pt-muted"> (opcional)</span> : <span className="text-pt-clay font-bold" aria-hidden> *</span>}
+        </span>
         {children}
       </label>
       {error ? <p className="text-xs text-red-700 mt-1.5">{error}</p> : hint ? <p className="text-xs text-pt-muted mt-1.5">{hint}</p> : null}
