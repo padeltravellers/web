@@ -203,7 +203,7 @@ export const faqs = [
   },
   {
     q: "¿Cuánto se paga para reservar?",
-    a: "100€ reembolsables y plaza confirmada. Al confirmar el grupo se abona un segundo pago de 1.000€ y el importe restante antes del viaje. La reserva se devuelve según la política de cancelación.",
+    a: "100€ para reservar tu plaza, que te devolvemos si cancelas antes de que se confirme el grupo. Al confirmarse el grupo se pagan 1.000€ y el resto, 30 días antes del viaje.",
   },
   {
     q: "¿Quién organiza esto?",
