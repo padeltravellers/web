@@ -74,7 +74,7 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Cómo reservo?",
-        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos, aceptas el contrato y pagas la reserva de 100 € con tarjeta. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
+        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y pagas la reserva de 100 € con tarjeta. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
       },
       {
         q: "¿Cómo se paga?",
