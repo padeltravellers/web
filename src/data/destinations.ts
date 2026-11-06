@@ -120,7 +120,7 @@ const baliExperiences: Experience[] = [
     title: "Uluwatu — Acantilados del sur",
     short: "Playa, acantilados y el templo Pura Luhur",
     text:
-      "Uluwatu es famoso por sus impresionantes acantilados, su templo y sus olas desafiantes. Mañana de playa, comida con vistas a los surfistas, paseo por el templo y atardecer con vistas al Índico de regreso a Canggu.",
+      "Uluwatu es famoso por sus impresionantes acantilados, su templo y sus olas desafiantes. Mañana de playa, comida con vistas a los surfistas, paseo por el templo y puesta de sol en Jimbaran de regreso a Canggu.",
     photos: [
       "/photos/bali/uluwatu/1.jpg",
       "/photos/bali/uluwatu/2.jpg",
@@ -285,7 +285,7 @@ const baliItinerary: ItineraryDay[] = [
     title: "Día en Uluwatu",
     subtitle: "Playas, templo y atardecer",
     description:
-      "**Acantilados, playas de arena blanca y uno de los mejores atardeceres de la isla.**\n\nBajamos al sur de Bali. Mañana de playa con **baño en aguas cristalinas** y comida en la zona de acantilados, viendo a los **mejores surfistas** desafiar las olas.\n\nPor la tarde, paseo por el **templo de Pura Luhur Uluwatu**, en lo alto del acantilado y con vistas espectaculares al océano Índico.\n\nDe vuelta a Canggu, última parada en una playa cercana para disfrutar de **uno de los atardeceres más impresionantes de Bali**.",
+      "**Acantilados, playas de arena blanca y uno de los mejores atardeceres de la isla.**\n\nBajamos al sur de Bali. Mañana de playa con **baño en aguas cristalinas** y comida en la zona de acantilados, viendo a los **mejores surfistas** desafiar las olas.\n\nPor la tarde, paseo por el **templo de Pura Luhur Uluwatu**, en lo alto del acantilado y con vistas espectaculares al océano Índico.\n\nDe vuelta a Canggu, última parada en la playa de **Jimbaran** para ver **uno de los atardeceres más impresionantes de Bali**.",
     tags: ["playa", "cultura"],
     photo: "/photos/bali/uluwatu/1.jpg",
     highlights: [],

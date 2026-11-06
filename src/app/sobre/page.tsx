@@ -20,7 +20,7 @@ const principles = [
     n: "02",
     title: "Sin bote común. Sin sorpresas en destino.",
     text:
-      "Un precio cerrado, sin bote común ni sorpresas al llegar. Los vuelos y las comidas van por libre: cada uno vuela desde su ciudad y come donde más le apetezca.",
+      "Un precio cerrado, sin bote común ni sorpresas al llegar.",
   },
   {
     n: "03",

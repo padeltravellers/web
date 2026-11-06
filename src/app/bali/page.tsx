@@ -108,6 +108,23 @@ export default function BaliPage() {
           </div>
         </section>
 
+        {/* DATOS CLAVE */}
+        <section className="bg-pt-green text-white">
+          <div className="max-w-6xl mx-auto px-6 lg:px-12 py-5 grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6 text-center">
+            {[
+              ["14 días", "13 noches en Canggu"],
+              ["8 salidas", "de junio a octubre"],
+              ["Grupos de 8 a 12", "viajeros"],
+              ["Coordinador", "local, todo el viaje"],
+            ].map(([a, b]) => (
+              <div key={a}>
+                <p className="font-display font-semibold text-xl md:text-2xl leading-tight">{a}</p>
+                <p className="text-pt-cream/75 text-sm mt-0.5">{b}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* NUESTRA ISLA FAVORITA */}
         <section className="px-6 lg:px-12 py-12 lg:py-12 max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -140,18 +157,14 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* EXPERIENCIAS POR GRUPO */}
-        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/30">
+        {/* EXPERIENCIAS: EL PÁDEL */}
+        <section className="py-12 lg:py-14 px-6 lg:px-12 bg-pt-cream/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Experiencias</p>
-              <p className="text-pt-muted text-lg leading-relaxed">
-                Experiencias incluidas en el viaje, repartidas en pádel, turismo y aventura. Todas pensadas
-                para que vivas Bali a fondo.
-              </p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">El pádel</p>
+              <p className="text-pt-muted text-lg leading-relaxed">Jugamos en Bali Padel Academy, entre arrozales: partidos con el grupo, clases con coach y el mejor ambiente de la isla.</p>
             </div>
-
-            {groups.map((g, gi) => (
+            {groups.filter((g) => ["padel"].includes(g.key)).map((g, gi) => (
               <div key={g.key} className={gi > 0 ? "mt-12" : ""}>
                 <div className="mb-6 flex items-baseline justify-between border-b border-pt-green/15 pb-3">
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
@@ -250,10 +263,31 @@ export default function BaliPage() {
             </div>
 
             <div className="mt-12 text-center">
-              <Link href="/reservar" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
-                Quiero reservar plaza Bali
+              <Link href="/reservar/bali/" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+                Reservar plaza
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* EXPERIENCIAS: ADEMÁS DEL PÁDEL */}
+        <section className="py-12 lg:py-14 px-6 lg:px-12 bg-pt-cream/30">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-10 max-w-2xl mx-auto">
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Además del pádel</p>
+              <p className="text-pt-muted text-lg leading-relaxed">Templos, arrozales, playas y aventura: lo mejor de Bali, incluido en el viaje.</p>
+            </div>
+            {groups.filter((g) => ["turismo", "actividades"].includes(g.key)).map((g, gi) => (
+              <div key={g.key} className={gi > 0 ? "mt-12" : ""}>
+                <div className="mb-6 flex items-baseline justify-between border-b border-pt-green/15 pb-3">
+                  <h3 className="font-display font-bold text-2xl md:text-3xl text-pt-green">{g.label.title}</h3>
+                  <span className="font-display font-semibold text-pt-clay text-base md:text-xl">{g.label.kicker}</span>
+                </div>
+                <div className={`grid gap-5 lg:gap-6 ${g.items.length <= 2 ? "sm:grid-cols-2 max-w-3xl mx-auto" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+                  {g.items.map((e) => <ExperienceCard key={e.slug} e={e} />)}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -268,7 +302,7 @@ export default function BaliPage() {
                 <span className="font-script font-normal text-pt-clay">en Canggu</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-4">
-                Hotel pequeño, seleccionado a mano, en el corazón de Canggu. Piscina, terrazas, ambiente
+                Hotel seleccionado a mano, en el corazón de Canggu. Piscina, terrazas, ambiente
                 tranquilo. Habitaciones privadas siempre — nunca compartirás con desconocidos. Si vienes en
                 pareja o grupo, compartís entre vosotros; si vienes solo, habitación individual.
               </p>
@@ -297,13 +331,6 @@ export default function BaliPage() {
                 <Img src="/photos/villa/4.jpg" alt="Desayuno" fill className="object-cover" sizes="(max-width:1024px) 50vw, 30vw" />
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* PDF LEAD MAGNET — compacto tras día a día */}
-        <section className="px-6 lg:px-12 py-6 lg:py-8">
-          <div className="max-w-6xl mx-auto">
-            <PdfLeadMagnet variant="dark" kicker="¿Quieres todo el detalle? · PDF" />
           </div>
         </section>
 
@@ -339,7 +366,7 @@ export default function BaliPage() {
                   <div className="w-11 h-11 rounded-2xl bg-pt-clay text-white flex items-center justify-center">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </div>
-                  <h3 className="font-display font-bold text-2xl text-pt-cream">Por tu cuenta</h3>
+                  <h3 className="font-display font-bold text-2xl text-pt-cream">No incluido</h3>
                 </div>
                 <ul className="space-y-4">
                   {d.notIncluded.map((i) => (
@@ -350,6 +377,51 @@ export default function BaliPage() {
                   ))}
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PRECIO */}
+        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
+          <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-pt-clay/20 blur-3xl" />
+          <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
+          <div className="relative max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
+              <h2 className="font-display font-extralight text-3xl md:text-5xl mt-2 leading-tight">
+                Un precio cerrado, sin sorpresas
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur rounded-3xl p-9 border border-white/20 flex flex-col">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-pt-cream/80 text-sm">En pareja / compartiendo</span>
+                  <span className="text-xs px-3 py-1 rounded-full bg-pt-cream/20">Recomendado</span>
+                </div>
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="font-display font-bold text-6xl">{d.basePrice}</span>
+                  <span className="text-pt-cream/70">/ persona</span>
+                </div>
+                <p className="text-pt-cream/80 text-sm mb-6 flex-1">Compartiendo habitación con tu pareja, amigo o familiar.</p>
+                <Link href="/reservar/bali/" className="block text-center px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-sm hover:bg-white transition">
+                  Reservar plaza
+                </Link>
+              </div>
+              <div className="bg-white text-pt-ink rounded-3xl p-9">
+                <span className="text-pt-clay text-sm">Habitación individual</span>
+                <div className="flex items-baseline gap-2 mb-3 mt-6">
+                  <span className="font-display font-bold text-6xl text-pt-green">{d.solo}</span>
+                  <span className="text-pt-muted">/ persona</span>
+                </div>
+                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 200€. Tu habitación, tu llave.</p>
+                <Link href="/reservar/bali/" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
+                  Reservar plaza
+                </Link>
+              </div>
+            </div>
+            <div className="mt-10 text-center text-pt-cream/85">
+              <span className="font-script text-2xl text-pt-cream">{d.deposit}</span>
+              <span> reserva reembolsable. El resto en dos plazos. Sin bote común, sin recargos.</span>
             </div>
           </div>
         </section>
@@ -374,7 +446,7 @@ export default function BaliPage() {
                 return (
                   <Link
                     key={t.n}
-                    href="/reservar"
+                    href={`/reservar/bali/?viaje=${t.n}`}
                     className={`group flex flex-col rounded-2xl border p-5 hover:-translate-y-0.5 transition-all duration-300 ${
                       urgent
                         ? "bg-pt-clay/5 border-pt-clay/30 hover:border-pt-clay hover:shadow-xl"
@@ -410,48 +482,10 @@ export default function BaliPage() {
           </div>
         </section>
 
-        {/* PRECIO */}
-        <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
-          <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-pt-clay/20 blur-3xl" />
-          <div className="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-pt-green-soft/40 blur-3xl" />
-          <div className="relative max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
-              <h2 className="font-display font-extralight text-3xl md:text-5xl mt-2 leading-tight">
-                Un precio cerrado, sin sorpresas
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur rounded-3xl p-9 border border-white/20 flex flex-col">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-pt-cream/80 text-sm">En pareja / compartiendo</span>
-                  <span className="text-xs px-3 py-1 rounded-full bg-pt-cream/20">Recomendado</span>
-                </div>
-                <div className="flex items-baseline gap-2 mb-3">
-                  <span className="font-display font-bold text-6xl">{d.basePrice}</span>
-                  <span className="text-pt-cream/70">/ persona</span>
-                </div>
-                <p className="text-pt-cream/80 text-sm mb-6 flex-1">Compartiendo habitación con tu pareja, amigo o familiar.</p>
-                <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-sm hover:bg-white transition">
-                  Reservar plaza
-                </Link>
-              </div>
-              <div className="bg-white text-pt-ink rounded-3xl p-9">
-                <span className="text-pt-clay text-sm">Habitación individual</span>
-                <div className="flex items-baseline gap-2 mb-3 mt-6">
-                  <span className="font-display font-bold text-6xl text-pt-green">{d.solo}</span>
-                  <span className="text-pt-muted">/ persona</span>
-                </div>
-                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 200€. Tu habitación, tu llave.</p>
-                <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
-                  Reservar plaza
-                </Link>
-              </div>
-            </div>
-            <div className="mt-10 text-center text-pt-cream/85">
-              <span className="font-script text-2xl text-pt-cream">{d.deposit}</span>
-              <span> reserva reembolsable. El resto en dos plazos. Sin bote común, sin recargos.</span>
-            </div>
+        {/* PDF LEAD MAGNET */}
+        <section className="px-6 lg:px-12 py-6 lg:py-8">
+          <div className="max-w-6xl mx-auto">
+            <PdfLeadMagnet variant="dark" kicker="¿Quieres todo el detalle? · PDF" />
           </div>
         </section>
 
@@ -465,7 +499,7 @@ export default function BaliPage() {
               Reserva online en unos minutos con 100 € reembolsables. Y si antes quieres hablar, escríbenos por WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/reservar" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+              <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Empezar reserva · 100€
               </Link>
               <a href={contact.whatsappLink} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-sm hover:bg-pt-green hover:text-white transition">

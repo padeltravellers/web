@@ -86,7 +86,7 @@ export const baliExperiences = [
     title: "Uluwatu — acantilados al sur",
     short: "Templo en el borde del mar",
     text:
-      "Atardecer en el templo de Uluwatu, espectáculo de danza kecak con el océano de fondo y cena en chiringuito de pies en la arena. Una de las tardes que más recordarás.",
+      "El templo de Uluwatu sobre los acantilados, la danza kecak con el océano de fondo y la puesta de sol en Jimbaran. Una de las tardes que más recordarás.",
     photos: ["/photos/bali/uluwatu/1.jpg", "/photos/bali/uluwatu/2.jpg"],
   },
   {
@@ -148,7 +148,7 @@ export const baliExperiences = [
 ];
 
 export const included = [
-  "13 noches de alojamiento en habitación privada",
+  "Alojamiento en el hotel del pack seleccionado durante 13 noches",
   "Todos los desayunos",
   "4 partidos con el grupo de 1,5 h y 2 h semanales de clase de pádel",
   "Traslados aeropuerto – hotel – aeropuerto",
@@ -164,7 +164,7 @@ export const notIncluded = [
   "Comidas, cenas y consumiciones",
   "Seguro de viaje (obligatorio)",
   "Visado de Indonesia (30€)",
-  "Planes opcionales de los días libres y gastos personales",
+  "Todo lo que no se mencione en «Incluye»",
 ];
 
 export const pricing = {
@@ -191,11 +191,11 @@ export const faqs = [
   },
   {
     q: "¿Cómo es el alojamiento?",
-    a: "Villas u hoteles con piscina y desayuno. Habitación privada siempre. Si venís en pareja o grupo cerrado, compartís entre vosotros; si vienes solo, habitación individual.",
+    a: "Hotel con piscina y desayuno. Habitación privada siempre. Si venís en pareja o grupo cerrado, compartís entre vosotros; si vienes solo, habitación individual.",
   },
   {
     q: "¿Y la comida y cena?",
-    a: "Libres. Bali tiene una escena de comida brutal y barata. El coordinador propone planes cada noche y vas con quien quieras. Cenamos juntos cuando hay actividad nocturna programada.",
+    a: "No están incluidas, pero solemos comer y cenar juntos: el coordinador propone el sitio y cada uno paga lo suyo. Bali tiene una escena de comida brutal y barata.",
   },
   {
     q: "¿Los días libres son realmente libres?",

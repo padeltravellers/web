@@ -114,6 +114,16 @@ export default function BookingFlow() {
       .catch(() => {});
   }, []);
 
+  // Viene de una fecha concreta (/reservar/bali/?viaje=3): Bali y esa salida ya elegidas.
+  useEffect(() => {
+    const n = Number(new URLSearchParams(window.location.search).get("viaje"));
+    if (departures2027.some((d) => d.n === n)) {
+      setDest("bali");
+      setTripN(n);
+      setStep(1);
+    }
+  }, []);
+
   // Habitación compartida = 2 viajeros obligatorios.
   useEffect(() => {
     setTravellers((tv) => {

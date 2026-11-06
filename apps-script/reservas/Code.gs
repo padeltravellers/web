@@ -97,8 +97,8 @@ function crearReserva_(p) {
     // Todo lo que depende del régimen de habitación va resuelto: el contrato es único para cada viajero.
     const regimen = pax === 2 ? 'Habitación doble compartida con ' + acompanante : 'Habitación individual, de uso exclusivo del Viajero';
     const alojamiento = pax === 2
-      ? 'Alojamiento durante 13 noches en villas u hoteles con desayuno, en habitación doble compartida únicamente con ' + acompanante + ', con quien el Viajero ha hecho la reserva conjunta. Nunca se comparte habitación con otros viajeros.'
-      : 'Alojamiento durante 13 noches en villas u hoteles con desayuno, en habitación individual de uso exclusivo del Viajero.';
+      ? 'Alojamiento durante 13 noches en hotel con desayuno, en habitación doble compartida únicamente con ' + acompanante + ', con quien el Viajero ha hecho la reserva conjunta. Nunca se comparte habitación con otros viajeros.'
+      : 'Alojamiento durante 13 noches en hotel con desayuno, en habitación individual de uso exclusivo del Viajero.';
     const precioTexto = 'El precio total del Viaje para el Viajero (el «Precio») es de ' + eur_(precio) + ', impuestos incluidos, en régimen de ' +
       (pax === 2 ? 'habitación doble compartida con ' + acompanante : 'habitación individual') + '. ' +
       'El Precio se compone de ' + eur_(honorarios) + ' de Honorarios de Padel Travellers y ' + eur_(presupuesto) + ' de Presupuesto del Viaje, tal como se detalla en el Anexo I.';
