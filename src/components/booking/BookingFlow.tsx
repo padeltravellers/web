@@ -289,8 +289,8 @@ export default function BookingFlow() {
                           <span className="text-pt-clay text-lg" aria-hidden>→</span>
                           <DateMark iso={d.end} />
                         </span>
-                        {l !== undefined && (isFull || l <= 4) && (
-                          <span className={`shrink-0 px-3 py-1 rounded-full text-xs font-display font-semibold ${isFull ? "bg-pt-ink/10 text-pt-ink/60" : "bg-pt-clay/15 text-pt-clay"}`}>
+                        {l !== undefined && (isFull || l <= 8) && (
+                          <span className={`shrink-0 px-3 py-1 rounded-full text-xs font-display font-semibold ${isFull ? "bg-pt-ink/10 text-pt-ink/60" : l <= 4 ? "bg-pt-clay/15 text-pt-clay" : "bg-pt-green/10 text-pt-green"}`}>
                             {isFull ? "Completo" : l === 1 ? "Última plaza" : `Quedan ${l}`}
                           </span>
                         )}

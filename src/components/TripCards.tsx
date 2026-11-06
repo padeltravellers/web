@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 // Plazas reales de cada salida, leídas del Sheet "Reservas PT 2027" a través del Apps Script.
-// Solo se enseña el contador cuando quedan 4 o menos (o está completo); si no, "Plazas disponibles".
+// El contador aparece cuando ya hay 4 reservas (quedan 8 o menos); en color tierra cuando quedan 4 o menos.
 // Sin endpoint (o si falla), las tarjetas se muestran sin contador.
 const ENDPOINT = process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || "";
 const MAX = 12;
@@ -31,7 +31,8 @@ export default function TripCards({ trips, prefix = "BALI", bookHref = "/reserva
         const left = p ? Math.max(0, p.libres) : undefined;
         const full = left === 0;
         const urgent = left !== undefined && left > 0 && left <= 4;
-        const fillPct = left === undefined ? 0 : ((MAX - left) / MAX) * 100;
+        const counted = left !== undefined && left > 0 && left <= MAX - 4;
+        const fillPct = left === undefined || left > MAX - 4 ? 0 : ((MAX - left) / MAX) * 100;
         const body = (
           <>
             <div className="flex items-baseline justify-between mb-3">
@@ -47,7 +48,7 @@ export default function TripCards({ trips, prefix = "BALI", bookHref = "/reserva
                 </div>
               )}
               <div className={`text-xs font-display font-semibold ${full ? "text-pt-ink/50" : urgent ? "text-pt-clay" : "text-pt-green"}`}>
-                {full ? "Completo" : urgent ? (left === 1 ? "Última plaza" : `Quedan ${left} plazas`) : "Plazas disponibles"}
+                {full ? "Completo" : counted ? (left === 1 ? "Última plaza" : `Quedan ${left} plazas`) : "Plazas disponibles"}
               </div>
             </div>
           </>

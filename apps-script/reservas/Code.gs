@@ -18,6 +18,8 @@ const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 
 function doGet(e) {
   const action = (e && e.parameter && e.parameter.action) || '';
   if (action === 'plazas') return json_({ ok: true, salidas: salidas_().map(publicSalida_) });
+  if (action === 'baja') return baja_(e.parameter);
+  if (action === 'campana_prueba') return campanaPrueba_(e.parameter);
   return json_({ ok: true, service: 'pt-reservas' });
 }
 
