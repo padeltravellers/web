@@ -5,7 +5,7 @@ import { contact } from "@/data/content";
 
 export const metadata = {
   title: "Contacto",
-  description: "Déjanos tus datos y te llamamos. Resolvemos cualquier duda sobre los viajes a Bali y Filipinas.",
+  description: "Escríbenos y te ayudamos. Resolvemos cualquier duda sobre los viajes a Bali, Indonesia y Filipinas.",
 };
 
 export default function ContactoPage() {
@@ -20,7 +20,7 @@ export default function ContactoPage() {
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[1.05]">
             Cuéntanos
             <br />
-            <span className="accent text-pt-clay">y te llamamos</span>
+            <span className="accent text-pt-clay">y te ayudamos</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-xl mx-auto mt-7 leading-relaxed">
             Sin compromiso. Te contestamos en menos de 24h por WhatsApp o email para resolver tus dudas

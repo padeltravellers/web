@@ -176,7 +176,7 @@ export default function ReservarPage() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[1.05] mb-6">
                 Déjanos tus datos
                 <br />
-                <span className="accent text-pt-clay">y nosotros te llamamos</span>
+                <span className="accent text-pt-clay">y te escribimos</span>
               </h2>
               <p className="text-pt-muted text-lg max-w-xl mx-auto leading-relaxed">
                 Si prefieres ir más rápido, escríbenos por WhatsApp y respondemos el mismo día.
