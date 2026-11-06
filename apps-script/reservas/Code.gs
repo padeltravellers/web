@@ -94,6 +94,23 @@ function crearReserva_(p) {
     const habTexto = pax === 2 ? 'Compartida con ' + acompanante : 'Individual';
     const doc = clean_(v.docNumero).toUpperCase();
 
+    // Todo lo que depende del régimen de habitación va resuelto: el contrato es único para cada viajero.
+    const regimen = pax === 2 ? 'Habitación doble compartida con ' + acompanante : 'Habitación individual, de uso exclusivo del Viajero';
+    const alojamiento = pax === 2
+      ? 'Alojamiento durante 13 noches en villas u hoteles con desayuno, en habitación doble compartida únicamente con ' + acompanante + ', con quien el Viajero ha hecho la reserva conjunta. Nunca se comparte habitación con otros viajeros.'
+      : 'Alojamiento durante 13 noches en villas u hoteles con desayuno, en habitación individual de uso exclusivo del Viajero.';
+    const precioTexto = 'El precio total del Viaje para el Viajero (el «Precio») es de ' + eur_(precio) + ', impuestos incluidos, en régimen de ' +
+      (pax === 2 ? 'habitación doble compartida con ' + acompanante : 'habitación individual') + '. ' +
+      'El Precio se compone de ' + eur_(honorarios) + ' de Honorarios de Padel Travellers y ' + eur_(presupuesto) + ' de Presupuesto del Viaje, tal como se detalla en el Anexo I.';
+    const pagoReserva = num_(cfg.pago_reserva);
+    const segundoPago = num_(cfg.segundo_pago);
+    const pagoFinal = precio - pagoReserva - segundoPago;
+    const fechaFinal = new Date(salida.inicio.getTime());
+    fechaFinal.setDate(fechaFinal.getDate() - num_(cfg.dias_pago_final));
+    const finalVencido = fechaFinal.getTime() <= ahora.getTime();
+    const finalCuando = finalVencido ? 'Al confirmarse el grupo, junto con el segundo pago.' : 'Antes del ' + fechaLarga_(fechaFinal) + ' (' + num_(cfg.dias_pago_final) + ' días antes del inicio del Viaje).';
+    const finalCorto = finalVencido ? 'al confirmarse el grupo' : 'antes del ' + fechaLarga_(fechaFinal);
+
     const pdf = generarContrato_(cfg, {
       VIAJE: String(salida.viaje),
       INICIO: fechaLarga_(salida.inicio),
@@ -108,17 +125,24 @@ function crearReserva_(p) {
       TELEFONO: clean_(v.telefono),
       NACIMIENTO: fechaCorta_(v.nacimiento),
       CIUDAD: clean_(v.ciudad),
-      HABITACION: habTexto,
+      REGIMEN: regimen,
+      ALOJAMIENTO: alojamiento,
+      PRECIO_TEXTO: precioTexto,
       PRECIO: eur_(precio),
       HONORARIOS: eur_(honorarios),
       PRESUPUESTO: eur_(presupuesto),
+      PAGO_RESERVA: eur_(pagoReserva),
+      PAGO_RESERVA_ESTADO: 'pendiente de pago',
+      SEGUNDO_PAGO: eur_(segundoPago),
+      PAGO_FINAL: eur_(pagoFinal),
+      PAGO_FINAL_CUANDO: finalCuando,
+      PAGO_FINAL_CUANDO_CORTO: finalCorto,
       NIVEL: clean_(v.nivel),
       SALUD: clean_(v.salud) || 'Nada que destacar',
       EMERGENCIA: clean_(v.emergenciaNombre) + ' · ' + clean_(v.emergenciaTelefono),
-      PAGO_RESERVA_FECHA: 'pendiente de pago',
-      PAGO_RESERVA_METODO: 'transferencia',
       IBAN: cfg.iban || 'Se indica en el email de confirmación',
       BIC: cfg.bic || 'Se indica en el email de confirmación',
+      CONCEPTO: id + ' · ' + nombreCompleto + ' · Bali 2027 Viaje ' + salida.viaje,
       ACEPTACION: Utilities.formatDate(ahora, 'Europe/Madrid', 'dd/MM/yyyy HH:mm') + ' (hora de España), en padeltravellers.com' + (pax === 2 && i === 1 ? ', reserva hecha junto a ' + nombres[0] : ''),
     }, id + ' · ' + salida.codigo + ' · ' + nombreCompleto);
 
@@ -201,6 +225,8 @@ function generarContrato_(cfg, campos, nombre) {
   Object.keys(campos).forEach((k) => {
     body.replaceText('\\{\\{' + k + '\\}\\}', String(campos[k]).replace(/\$/g, ''));
   });
+  const sinRellenar = body.getText().match(/\{\{[A-Z_]+\}\}/g);
+  if (sinRellenar) console.warn('Campos sin rellenar en el contrato ' + nombre + ': ' + sinRellenar.join(', '));
   doc.saveAndClose();
   const pdf = carpeta.createFile(copia.getAs(MimeType.PDF)).setName('Contrato ' + nombre + '.pdf');
   copia.setTrashed(true);
