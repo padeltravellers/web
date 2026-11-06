@@ -47,10 +47,23 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Todo lo que se puede pulsar enseña la mano (Tailwind 4 ya no lo pone por defecto en los botones). */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  select,
+  summary,
+  label:has(> input[type="checkbox"]),
+  label:has(> input[type="radio"]) {
+    cursor: pointer;
+  }
+  button:disabled { cursor: not-allowed; }
+}
+
 /* Display utilities */
 .font-display { font-family: var(--font-display), system-ui, sans-serif; letter-spacing: -0.01em; }
 .font-body    { font-family: var(--font-body), system-ui, sans-serif; }
-.font-script  { font-family: var(--font-script), cursive; }
+.font-script  { font-family: var(--font-script), cursive; font-style: normal; font-synthesis: none; }
 .font-serif   { font-family: var(--font-serif), Georgia, serif; }
 
 /* Smooth scroll */

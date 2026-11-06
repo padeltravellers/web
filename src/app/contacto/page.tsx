@@ -20,7 +20,7 @@ export default function ContactoPage() {
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.95]">
             Cuéntanos
             <br />
-            <span className="font-script italic font-normal text-pt-clay">y te llamamos</span>
+            <span className="font-script font-normal text-pt-clay">y te llamamos</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-xl mx-auto mt-7 leading-relaxed">
             Sin compromiso. Te contestamos en menos de 24h por WhatsApp o email para resolver tus dudas

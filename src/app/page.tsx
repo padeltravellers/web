@@ -80,7 +80,7 @@ export default function Home() {
               <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.15] tracking-tight">
                 Viajes en Grupo
                 <br />
-                <span className="font-script font-normal italic">Pádel y Aventura</span>
+                <span className="font-script font-normal">Pádel y Aventura</span>
               </h1>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
                 <Link href="/reservar" className="px-9 py-4 rounded-full border border-white/50 text-white font-display font-semibold text-base hover:bg-white/10 transition">
@@ -122,7 +122,7 @@ export default function Home() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-8">
                 Viajes que combinan
                 <br />
-                <span className="font-script italic font-normal text-pt-clay">pádel y aventura</span>
+                <span className="font-script font-normal text-pt-clay">pádel y aventura</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Padel Travellers nació como la unión de dos pasiones: viajar y el pádel. Diseñamos viajes en
@@ -206,7 +206,7 @@ export default function Home() {
             <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95] text-pt-green">
               Cuatro razones
               <br />
-              <span className="font-script italic font-normal text-pt-clay">que cambian el viaje</span>
+              <span className="font-script font-normal text-pt-clay">que cambian el viaje</span>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -230,7 +230,7 @@ export default function Home() {
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95]">
-                Cuatro pasos <span className="font-script italic font-normal text-pt-cream">sin sorpresas</span>
+                Cuatro pasos <span className="font-script font-normal text-pt-cream">sin sorpresas</span>
               </h2>
             </div>
             <ol className="grid md:grid-cols-4 gap-8">
@@ -263,7 +263,7 @@ export default function Home() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[0.95]">
                 Lo que dicen los que
                 <br />
-                <span className="font-script italic font-normal text-pt-clay">ya volvieron</span>
+                <span className="font-script font-normal text-pt-clay">ya volvieron</span>
               </h2>
               <div className="mt-7 flex justify-center"><RatingSummary /></div>
             </div>
@@ -295,7 +295,7 @@ export default function Home() {
             <h2 className="font-display font-medium text-5xl md:text-7xl leading-[0.95] mb-10">
               Ocho salidas
               <br />
-              <span className="font-script italic font-normal text-pt-cream">elige la tuya</span>
+              <span className="font-script font-normal text-pt-cream">elige la tuya</span>
             </h2>
             <p className="text-lg text-pt-cream/85 max-w-2xl mx-auto mb-12 leading-relaxed">
               De junio a octubre. Cada quincena, un viaje. Los del verano se llenan antes — si te encaja agosto,

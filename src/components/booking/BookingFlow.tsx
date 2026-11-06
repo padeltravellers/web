@@ -13,7 +13,8 @@ import {
   eur,
   countries,
   flag,
-  nationalities,
+  nationalitiesTop,
+  nationalitiesAll,
   docError,
   ageOn,
   maxBirthDateISO,
@@ -57,7 +58,7 @@ const emptyTraveller = (): Traveller => ({
   prefijo: "ES",
   telefono: "",
   nacimiento: "",
-  nacionalidad: "Española",
+  nacionalidad: "España",
   docTipo: "DNI",
   docNumero: "",
   ciudad: "",
@@ -207,11 +208,11 @@ export default function BookingFlow() {
       <Stepper step={step} onJump={(i) => i < step && go(i)} />
 
       <div className={`grid gap-8 lg:gap-12 mt-8 ${step === 1 || step === 2 ? "lg:grid-cols-[1fr_360px]" : ""}`}>
-        <div className={`min-w-0 ${step === 3 ? "max-w-3xl w-full mx-auto" : ""}`}>
+        <div className={`min-w-0 ${step === 3 ? "max-w-5xl w-full mx-auto" : ""}`}>
           {/* PASO 1 · DESTINO */}
           {step === 0 && (
             <section>
-              <StepTitle eyebrow="Paso 1" title="¿A dónde te vienes?" text="Elige destino. En el siguiente paso eliges la fecha y la habitación." />
+              <StepTitle eyebrow="Paso 1" title="Elige destino" />
               <div className="grid md:grid-cols-3 gap-5">
                 {destinations.map((d) => {
                   const open = BOOKABLE.includes(d.slug);
@@ -224,7 +225,7 @@ export default function BookingFlow() {
                         setDest(d.slug);
                         go(1);
                       }}
-                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[4/5] md:aspect-[3/4] transition ${open ? "hover:shadow-2xl hover:-translate-y-1" : "cursor-not-allowed"}`}
+                      className={`group relative text-left rounded-3xl overflow-hidden aspect-[4/5] md:aspect-[3/4] transition ${open ? "cursor-pointer hover:shadow-2xl hover:-translate-y-1 focus-visible:ring-4 focus-visible:ring-pt-clay/40 outline-none" : "cursor-not-allowed"}`}
                     >
                       <Img src={d.hero} alt={d.name} fill sizes="(max-width:768px) 100vw, 33vw" className={`object-cover transition-transform duration-700 ${open ? "group-hover:scale-105" : "grayscale-[60%]"}`} />
                       <div className="absolute inset-0 bg-gradient-to-t from-pt-ink/90 via-pt-ink/25 to-transparent" />
@@ -233,13 +234,13 @@ export default function BookingFlow() {
                       </span>
                       <div className="absolute left-6 right-6 bottom-6 text-white">
                         <h3 className="font-display font-medium text-5xl leading-none">{d.name}</h3>
-                        <p className="text-white/85 text-sm mt-3 leading-relaxed">{d.shortPitch}</p>
+                        <p className="text-white/90 text-base mt-3 leading-relaxed">{d.shortPitch}</p>
                         {open ? (
-                          <span className="inline-flex items-center gap-2 mt-5 font-display font-semibold text-sm bg-pt-clay text-white px-5 py-2.5 rounded-full group-hover:gap-3 transition-all">
+                          <span className="inline-flex items-center gap-2 mt-6 font-display font-semibold text-lg bg-pt-clay text-white px-7 py-3.5 rounded-full shadow-lg group-hover:gap-3 group-hover:brightness-105 transition-all">
                             Reservar {d.name} <span aria-hidden>→</span>
                           </span>
                         ) : (
-                          <span className="inline-block mt-5 font-display font-semibold text-sm text-white/75">Lista de espera en su página</span>
+                          <span className="inline-block mt-6 font-display font-semibold text-base text-white/80">Lista de espera en su página</span>
                         )}
                       </div>
                     </button>
@@ -266,15 +267,19 @@ export default function BookingFlow() {
                         disabled={isFull}
                         onClick={() => setTripN(d.n)}
                         aria-pressed={active}
-                        className={`w-full flex items-center gap-4 px-5 sm:px-6 py-4 text-left transition ${active ? "bg-pt-cream/70" : "hover:bg-pt-green/[0.03]"} disabled:opacity-50 disabled:cursor-not-allowed`}
+                        className={`w-full flex items-center gap-4 sm:gap-6 px-5 sm:px-7 py-4 sm:py-5 text-left transition ${active ? "bg-pt-cream/70" : "hover:bg-pt-green/[0.03]"} disabled:opacity-50 disabled:cursor-not-allowed`}
                       >
-                        <span className={`w-5 h-5 rounded-full border-2 shrink-0 grid place-items-center ${active ? "border-pt-clay" : "border-pt-green/25"}`}>
-                          {active && <span className="w-2.5 h-2.5 rounded-full bg-pt-clay" />}
+                        <span className={`w-6 h-6 rounded-full border-2 shrink-0 grid place-items-center ${active ? "border-pt-clay" : "border-pt-green/25"}`}>
+                          {active && <span className="w-3 h-3 rounded-full bg-pt-clay" />}
                         </span>
-                        <span className="w-16 shrink-0 font-display uppercase tracking-[0.16em] text-[11px] text-pt-muted">Viaje {d.n}</span>
-                        <span className="flex-1 min-w-0 font-display font-semibold text-lg sm:text-xl text-pt-green">{d.range}</span>
+                        <span className={`shrink-0 w-[84px] text-center rounded-full py-1.5 font-display font-semibold text-sm ${active ? "bg-pt-clay text-white" : "bg-pt-green/[0.07] text-pt-green"}`}>Viaje {d.n}</span>
+                        <span className="flex-1 min-w-0 flex items-center gap-3 sm:gap-4">
+                          <DateMark iso={d.start} />
+                          <span className="text-pt-clay text-lg" aria-hidden>→</span>
+                          <DateMark iso={d.end} />
+                        </span>
                         {l !== undefined && (isFull || l <= 4) && (
-                          <span className={`shrink-0 px-3 py-1 rounded-full text-[10px] font-display uppercase tracking-[0.16em] ${isFull ? "bg-pt-ink/10 text-pt-ink/60" : "bg-pt-clay/15 text-pt-clay"}`}>
+                          <span className={`shrink-0 px-3 py-1 rounded-full text-xs font-display font-semibold ${isFull ? "bg-pt-ink/10 text-pt-ink/60" : "bg-pt-clay/15 text-pt-clay"}`}>
                             {isFull ? "Completo" : l === 1 ? "Última plaza" : `Quedan ${l}`}
                           </span>
                         )}
@@ -285,7 +290,7 @@ export default function BookingFlow() {
               </div>
 
               <div>
-                <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green mb-2">¿Cómo dormís?</h3>
+                <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green mb-2">Elige tu habitación</h3>
                 <p className="text-pt-muted mb-5">Siempre habitación privada con desayuno, en villas u hoteles con piscina.</p>
                 <div className="grid md:grid-cols-2 gap-4">
                   {(Object.keys(rooms) as RoomKey[]).map((k) => {
@@ -297,12 +302,12 @@ export default function BookingFlow() {
                         type="button"
                         onClick={() => setRoom(k)}
                         aria-pressed={active}
-                        className={`text-left rounded-3xl p-6 border-2 transition ${active ? "border-pt-clay bg-pt-cream/60" : "border-pt-green/10 bg-white hover:border-pt-green/30"}`}
+                        className={`text-left rounded-3xl p-6 border-2 transition hover:shadow-lg ${active ? "border-pt-clay bg-pt-cream/60" : "border-pt-green/10 bg-white hover:border-pt-green/30"}`}
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div>
                             <h4 className="font-display font-bold text-lg text-pt-green">{k === "compartida" ? "Compartida · 2 personas" : "Individual · 1 persona"}</h4>
-                            <p className="text-sm text-pt-muted mt-1">{k === "compartida" ? "Reserváis los dos a la vez." : "Tu propia habitación."}</p>
+                            <p className="text-sm text-pt-muted mt-1">{k === "compartida" ? "Para dos personas que viajan juntas." : "Una habitación solo para ti."}</p>
                           </div>
                           <span className={`w-6 h-6 rounded-full border-2 grid place-items-center shrink-0 ${active ? "border-pt-clay bg-pt-clay text-white" : "border-pt-green/25"}`}>
                             {active && <span className="text-xs">✓</span>}
@@ -331,7 +336,7 @@ export default function BookingFlow() {
               <StepTitle
                 eyebrow="Paso 3"
                 title={pax === 2 ? "Vuestros datos" : "Tus datos"}
-                text="Los usamos para el contrato y para reservar alojamiento, pádel y traslados a vuestro nombre. Tienen que coincidir con el pasaporte."
+                text={`Tal como aparecen en el pasaporte: con ellos se hacen el contrato y las reservas a ${pax === 2 ? "vuestro" : "tu"} nombre.`}
               />
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] w-px h-px opacity-0" value={hp} onChange={(e) => setHp(e.target.value)} />
               <div className="space-y-6">
@@ -355,26 +360,26 @@ export default function BookingFlow() {
           {/* PASO 4 · CONFIRMAR */}
           {step === 3 && trip && room && destination && (
             <section>
-              <StepTitle eyebrow="Paso 4" title="Tu viaje, en un vistazo" text="Revisa que todo esté bien. El contrato con vuestros datos llega por email al confirmar." />
+              <StepTitle eyebrow="Paso 4" title={pax === 2 ? "Vuestro viaje, en un vistazo" : "Tu viaje, en un vistazo"} text={`Revisa que todo esté bien. Al confirmar, ${pax === 2 ? "cada uno recibe su contrato" : "recibes tu contrato"} por email.`} />
               <Ticket destinationName={destination.name} hero={destination.hero} trip={trip} room={room} travellers={travellers} />
               <div className="grid md:grid-cols-2 gap-4 mt-6">
                 <Card title="Qué incluye">
-                  <ul className="space-y-2 text-sm text-pt-ink/85">
+                  <ul className="space-y-2.5 text-[15px] text-pt-ink/85">
                     {[
                       ["🏝", "13 noches en habitación privada con desayuno"],
-                      ["🎾", "4 partidos del grupo + 2 h semanales de clase"],
+                      ["🎾", "4 partidos con el grupo y 2 h de clase a la semana"],
                       ["🛕", "Ubud, Uluwatu, norte de Bali, Amed, Tanah Lot"],
                       ["🏄", "Clase de surf, Taman Ayun y plantación de café"],
                       ["🚐", "Traslados del aeropuerto y a las actividades"],
                       ["🧭", "Coordinador local con el grupo todo el viaje"],
                     ].map(([i, x]) => (
-                      <li key={x} className="flex gap-3"><span aria-hidden>{i}</span>{x}</li>
+                      <li key={x} className="flex gap-3 sm:whitespace-nowrap"><span aria-hidden>{i}</span>{x}</li>
                     ))}
                   </ul>
-                  <p className="text-xs text-pt-muted mt-4">No incluye vuelos, comidas y cenas, seguro de viaje (obligatorio, que cubra pádel) ni visado (aprox. 30 €).</p>
+                  <p className="text-sm text-pt-muted mt-4">No incluye vuelos, comidas y cenas, seguro (obligatorio, con pádel) ni visado (aprox. 30 €).</p>
                 </Card>
                 <Card title="Si hay que cancelar">
-                  <ul className="space-y-2.5 text-sm text-pt-ink/85">
+                  <ul className="space-y-2.5 text-[15px] text-pt-ink/85">
                     <li><strong className="text-pt-green">Antes de confirmarse el grupo:</strong> devolvemos todo, también la reserva.</li>
                     <li><strong className="text-pt-green">Una vez confirmado el grupo:</strong> no hay devolución. Aun así, intentamos recuperar lo posible de los proveedores y estudiamos cada caso.</li>
                     <li><strong className="text-pt-green">Si no llegamos a 8 viajeros:</strong> devolvemos el 100 % o te pasamos a otra salida.</li>
@@ -397,11 +402,11 @@ export default function BookingFlow() {
           {/* Navegación */}
           {step > 0 && (
             <div className="flex items-center justify-between gap-4 mt-10">
-              <button type="button" onClick={() => go(step - 1)} className="font-display font-semibold text-pt-green px-5 py-3 rounded-full hover:bg-pt-green/5">
+              <button type="button" onClick={() => go(step - 1)} className="font-display font-semibold text-pt-green px-6 py-3.5 rounded-full border border-pt-green/20 hover:bg-pt-green/5 hover:border-pt-green/40 transition">
                 ← Atrás
               </button>
               {step < STEPS.length - 1 ? (
-                <button type="button" onClick={next} className={`hidden lg:inline-flex font-display font-semibold bg-pt-green text-white px-8 py-4 rounded-full hover:bg-pt-ink transition ${canNext ? "" : "opacity-50"}`}>
+                <button type="button" onClick={next} className={`hidden lg:inline-flex font-display font-semibold text-lg bg-pt-green text-white px-9 py-4 rounded-full shadow-md hover:bg-pt-ink hover:shadow-lg transition ${canNext ? "" : "opacity-50"}`}>
                   Continuar →
                 </button>
               ) : (
@@ -409,7 +414,7 @@ export default function BookingFlow() {
                   type="button"
                   onClick={() => (accepted ? submit() : setTouched(true))}
                   disabled={status === "sending"}
-                  className={`hidden lg:inline-flex font-display font-semibold bg-pt-clay text-white px-8 py-4 rounded-full hover:brightness-95 transition disabled:opacity-50 ${accepted ? "" : "opacity-50"}`}
+                  className={`hidden lg:inline-flex font-display font-semibold text-lg bg-pt-clay text-white px-9 py-4 rounded-full shadow-md hover:brightness-95 hover:shadow-lg transition disabled:opacity-50 ${accepted ? "" : "opacity-50"}`}
                 >
                   {status === "sending" ? "Reservando…" : `Reservar ${pax === 2 ? "2 plazas" : "mi plaza"} · ${eur(DEPOSIT * pax)}`}
                 </button>
@@ -468,7 +473,7 @@ function TravellerForm({
   onChange: <K extends keyof Traveller>(k: K, v: Traveller[K]) => void;
 }) {
   const cls = (k: keyof Traveller) => `${inputCls} ${errors[k] ? errCls : okCls}`;
-  const title = total === 1 ? "Tus datos" : index === 0 ? "Viajero 1 · quien reserva" : "Viajero 2 · con quien compartes habitación";
+  const title = total === 1 ? "Tus datos" : `Viajero ${index + 1}`;
   return (
     <div className="bg-white border border-pt-green/10 rounded-3xl p-6 md:p-8">
       <div className="flex items-center gap-3 mb-7">
@@ -501,7 +506,19 @@ function TravellerForm({
 
         <Group title="Documento">
           <Field label="Nacionalidad" error={errors.nacionalidad}>
-            <input className={cls("nacionalidad")} list="pt-nacionalidades" value={t.nacionalidad} onChange={(e) => onChange("nacionalidad", e.target.value)} />
+            <select className={cls("nacionalidad")} value={t.nacionalidad} onChange={(e) => onChange("nacionalidad", e.target.value)}>
+              <option value="">Elige país</option>
+              <optgroup label="Más habituales">
+                {nationalitiesTop.map((n) => (
+                  <option key={`top-${n}`} value={n}>{n}</option>
+                ))}
+              </optgroup>
+              <optgroup label="Todos los países">
+                {nationalitiesAll.map((n) => (
+                  <option key={n} value={n}>{n}</option>
+                ))}
+              </optgroup>
+            </select>
           </Field>
           <Field label="Tipo de documento">
             <select className={`${inputCls} ${okCls}`} value={t.docTipo} onChange={(e) => onChange("docTipo", e.target.value as Traveller["docTipo"])}>
@@ -523,7 +540,7 @@ function TravellerForm({
         </Group>
 
         <Group title="Pádel y salud">
-          <Field label="Nivel de pádel" hint="Para hacer parejas equilibradas." error={errors.nivel}>
+          <Field label="Nivel de pádel" hint="Para organizar los partidos." error={errors.nivel}>
             <select className={cls("nivel")} value={t.nivel} onChange={(e) => onChange("nivel", e.target.value)}>
               <option value="">Elige nivel</option>
               {padelLevels.map((l) => (
@@ -531,7 +548,7 @@ function TravellerForm({
               ))}
             </select>
           </Field>
-          <Field label="Lesiones, alergias o algo a tener en cuenta" hint="Solo para la seguridad del viaje." optional>
+          <Field label="Lesiones o alergias" hint="Solo para tu seguridad durante el viaje." optional>
             <input className={`${inputCls} ${okCls}`} value={t.salud} onChange={(e) => onChange("salud", e.target.value)} placeholder="Nada que destacar" />
           </Field>
         </Group>
@@ -545,11 +562,6 @@ function TravellerForm({
           </Field>
         </Group>
       </div>
-      <datalist id="pt-nacionalidades">
-        {nationalities.map((n) => (
-          <option key={n} value={n} />
-        ))}
-      </datalist>
     </div>
   );
 }
@@ -686,13 +698,30 @@ function Stepper({ step, onJump }: { step: number; onJump: (i: number) => void }
   );
 }
 
-function StepTitle({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
+function StepTitle({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
     <header className="mb-7">
       <p className="font-display uppercase tracking-[0.14em] text-sm font-semibold text-pt-clay mb-2">{eyebrow}</p>
       <h2 className="font-display font-medium text-3xl md:text-4xl text-pt-green leading-tight">{title}</h2>
-      <p className="text-pt-muted mt-3 max-w-xl leading-relaxed">{text}</p>
+      {text && <p className="text-pt-muted text-[17px] mt-3 leading-relaxed">{text}</p>}
     </header>
+  );
+}
+
+const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const DIAS = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
+
+/** Fecha en bloque: día grande, mes y día de la semana debajo. */
+function DateMark({ iso }: { iso: string }) {
+  const d = new Date(iso + "T12:00:00Z");
+  return (
+    <span className="flex items-baseline gap-1.5">
+      <span className="font-display font-semibold text-2xl sm:text-[28px] leading-none text-pt-green tabular-nums">{d.getUTCDate()}</span>
+      <span className="flex flex-col leading-tight">
+        <span className="font-display font-semibold text-sm text-pt-green">{MESES[d.getUTCMonth()]}</span>
+        <span className="text-[11px] text-pt-muted">{DIAS[d.getUTCDay()]}</span>
+      </span>
+    </span>
   );
 }
 
@@ -749,7 +778,7 @@ function Ticket({ destinationName, hero, trip, room, travellers }: { destination
         <div className="absolute left-6 right-6 bottom-5 text-white flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
           <div>
             <p className="font-display font-medium text-5xl sm:text-6xl md:text-7xl leading-none">{destinationName}</p>
-            <p className="font-script italic text-pt-cream text-xl sm:text-2xl mt-1 whitespace-nowrap">pádel y aventura</p>
+            <p className="font-script text-pt-cream text-xl sm:text-2xl mt-1 whitespace-nowrap">pádel y aventura</p>
           </div>
           <div className="sm:text-right">
             <p className="font-display font-semibold text-xl md:text-2xl leading-tight">{trip.range}</p>
@@ -760,8 +789,8 @@ function Ticket({ destinationName, hero, trip, room, travellers }: { destination
 
       <div className="px-6 md:px-8 py-6 grid sm:grid-cols-3 gap-5 bg-pt-green text-white">
         <TicketItem k={pax === 2 ? "Viajeros" : "Viajero"} v={travellers.map((t) => `${t.nombre} ${t.apellidos}`.trim()).join(" y ")} />
-        <TicketItem k="Habitación" v={room === "compartida" ? "Compartida (2)" : "Individual"} />
-        <TicketItem k="Total" v={pax === 2 ? `${eur(total)} · ${eur(price)} c/u` : eur(total)} />
+        <TicketItem k="Habitación" v={room === "compartida" ? "Compartida, 2 personas" : "Individual"} />
+        <TicketItem k="Total" v={pax === 2 ? `${eur(total)} (${eur(price)} por persona)` : eur(total)} />
       </div>
 
       {/* perforado */}
@@ -823,11 +852,11 @@ function Summary({ destinationName, trip, room, price, pax }: { destinationName:
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-pt-cream/75">{room ? (room === "compartida" ? "Compartida · 2 personas" : "Individual") : "Habitación"}</span>
-            <span className="font-display font-bold">{price ? `${eur(price)}${pax === 2 ? " c/u" : ""}` : "—"}</span>
+            <span className="font-display font-bold">{price ? `${eur(price)}${pax === 2 ? " por persona" : ""}` : "—"}</span>
           </div>
           {price && pax === 2 && (
             <div className="flex justify-between border-t border-white/15 pt-2">
-              <span className="text-pt-cream/75">Total (2)</span>
+              <span className="text-pt-cream/75">Total, 2 personas</span>
               <span className="font-display font-bold">{eur(price * 2)}</span>
             </div>
           )}
@@ -868,7 +897,7 @@ function Confirmation({ travellers, trip, price }: { travellers: Traveller[]; tr
       <h2 className="font-display font-medium text-4xl md:text-5xl text-pt-green leading-tight">
         ¡Hecho, {names}!
         <br />
-        <span className="font-script italic font-normal text-pt-clay text-3xl md:text-4xl">nos vemos en Bali</span>
+        <span className="font-script font-normal text-pt-clay text-3xl md:text-4xl">nos vemos en Bali</span>
       </h2>
       <p className="text-pt-muted mt-6 text-lg">
         {pax === 2 ? "Tenéis vuestras plazas" : "Tenemos tu plaza"} para el Viaje {trip.n} · {trip.range}.

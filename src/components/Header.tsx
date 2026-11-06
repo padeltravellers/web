@@ -10,7 +10,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
     ? "w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center transition"
     : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";
   // Misma geometría en todas las páginas (con o sin foto detrás): solo cambian los colores.
-  // logo-header.png es el logo recortado a su contenido (332×116), así el tamaño es predecible.
+  // logo-header.png es el logo PADEL TRAVELLERS con la P, recortado a su contenido (703×232), así el tamaño es predecible.
   const containerClass = "max-w-[1600px] mx-auto px-5 lg:px-10 py-4 lg:py-5 flex items-center justify-between gap-6";
   const logoClass = `object-contain h-12 md:h-14 lg:h-[72px] w-auto ${transparent ? "brightness-0 invert" : ""}`;
 
@@ -21,8 +21,8 @@ export default function Header({ transparent = false }: { transparent?: boolean 
           <Img
             src="/logos/logo-header.png"
             alt="Padel Travellers"
-            width={332}
-            height={116}
+            width={703}
+            height={232}
             priority
             className={logoClass}
           />

@@ -32,7 +32,7 @@ export default function PdfLeadMagnet({
             </p>
             <h3 className="font-display font-medium text-xl md:text-2xl leading-snug">
               {title || (
-                <>Recibe el dossier completo del viaje <span className="font-script italic font-normal text-pt-cream">al instante</span></>
+                <>Recibe el dossier completo del viaje <span className="font-script font-normal text-pt-cream">al instante</span></>
               )}
             </h3>
           </div>
@@ -84,7 +84,7 @@ export default function PdfLeadMagnet({
               <>
                 Recibe el dossier de Bali 2027
                 <br />
-                <span className="font-script italic font-normal text-pt-clay">en tu email</span>
+                <span className="font-script font-normal text-pt-clay">en tu email</span>
               </>
             )}
           </h3>

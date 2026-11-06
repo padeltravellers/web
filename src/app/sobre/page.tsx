@@ -51,7 +51,7 @@ export default function SobrePage() {
                 <br />
                 cuidadosos,
                 <br />
-                <span className="font-script italic font-normal text-pt-clay">honestos</span>
+                <span className="font-script font-normal text-pt-clay">honestos</span>
               </h1>
             </div>
             <div className="lg:col-span-5 space-y-5 text-lg leading-relaxed text-pt-ink/85">
@@ -73,7 +73,7 @@ export default function SobrePage() {
             <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green max-w-3xl">
               Cuatro decisiones
               <br />
-              <span className="font-script italic font-normal text-pt-clay">que no negociamos</span>
+              <span className="font-script font-normal text-pt-clay">que no negociamos</span>
             </h2>
           </div>
           <ol className="space-y-10">

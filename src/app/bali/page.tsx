@@ -116,7 +116,7 @@ export default function BaliPage() {
               <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
                 Donde empezó
                 <br />
-                <span className="font-script italic text-pt-clay inline-block mt-1">Padel Travellers</span>
+                <span className="font-script text-pt-clay inline-block mt-1">Padel Travellers</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Bali entró en nuestra vida y ya no la dejó. Es el sitio donde el clima permite jugar todo el año,
@@ -265,7 +265,7 @@ export default function BaliPage() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
                 Hotel
                 <br />
-                <span className="font-script italic font-normal text-pt-clay">en Canggu</span>
+                <span className="font-script font-normal text-pt-clay">en Canggu</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-4">
                 Hotel pequeño, seleccionado a mano, en el corazón de Canggu. Piscina, terrazas, ambiente
@@ -362,7 +362,7 @@ export default function BaliPage() {
               <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
-                <span className="font-script italic text-pt-clay">Elige la tuya</span>
+                <span className="font-script text-pt-clay">Elige la tuya</span>
               </h2>
             </div>
 
@@ -449,7 +449,7 @@ export default function BaliPage() {
               </div>
             </div>
             <div className="mt-10 text-center text-pt-cream/85">
-              <span className="font-script italic text-2xl text-pt-cream">{d.deposit}</span>
+              <span className="font-script text-2xl text-pt-cream">{d.deposit}</span>
               <span> reserva reembolsable. El resto en dos plazos. Sin bote común, sin recargos.</span>
             </div>
           </div>

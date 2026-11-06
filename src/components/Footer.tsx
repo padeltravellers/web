@@ -7,10 +7,7 @@ export default function Footer() {
     <footer className="bg-pt-ink text-pt-cream/75 pt-14 pb-10 px-5 lg:px-10 mt-14">
       <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10">
         <div className="md:col-span-3">
-          <div className="flex items-center gap-3">
-            <Img src="/logos/monogram.png" alt="PT" width={40} height={40} className="object-contain" />
-            <span className="font-display font-semibold text-pt-cream text-lg">Padel Travellers</span>
-          </div>
+          <Img src="/logos/logo-white.png" alt="Padel Travellers" width={703} height={232} className="object-contain h-12 w-auto opacity-95" />
         </div>
 
         <div className="md:col-span-3">

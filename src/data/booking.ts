@@ -123,10 +123,37 @@ export function flag(iso: string): string {
   return iso.toUpperCase().replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
 }
 
-export const nationalities = [
-  "Española", "Portuguesa", "Francesa", "Italiana", "Alemana", "Británica", "Irlandesa", "Neerlandesa", "Belga", "Suiza",
-  "Andorrana", "Estadounidense", "Mexicana", "Argentina", "Brasileña", "Chilena", "Colombiana", "Peruana", "Venezolana",
-  "Uruguaya", "Paraguaya", "Ecuatoriana",
+/** Nacionalidad = país (todos los del mundo). Los más habituales primero; el resto, por orden alfabético. */
+export const nationalitiesTop = [
+  "España", "Portugal", "Francia", "Italia", "Andorra", "Alemania", "Reino Unido", "Países Bajos", "Bélgica",
+  "Suiza", "Estados Unidos", "México", "Argentina",
+];
+
+export const nationalitiesAll = [
+  "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudí", "Argelia",
+  "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin",
+  "Bélgica", "Belice", "Benín", "Bielorrusia", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi",
+  "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad",
+  "Chequia", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Congo", "Corea del Norte",
+  "Corea del Sur", "Costa Rica", "Côte d’Ivoire", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto",
+  "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos",
+  "Estonia", "Esuatini", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia",
+  "Ghana", "Granada", "Grecia", "Guatemala", "Guinea", "Guinea Ecuatorial", "Guinea-Bisáu", "Guyana", "Haití",
+  "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Israel",
+  "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kosovo", "Kuwait",
+  "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo",
+  "Macedonia del Norte", "Madagascar", "Malasia", "Malaui", "Maldivas", "Mali", "Malta", "Marruecos", "Mauricio",
+  "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique",
+  "Myanmar (Birmania)", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda",
+  "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia",
+  "Portugal", "Puerto Rico", "RAE de Hong Kong (China)", "RAE de Macao (China)", "Reino Unido",
+  "República Centroafricana", "República Democrática del Congo", "República Dominicana", "Ruanda", "Rumanía",
+  "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía",
+  "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia",
+  "Sri Lanka", "Sudáfrica", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Taiwán",
+  "Tanzania", "Tayikistán", "Territorios Palestinos", "Timor-Leste", "Togo", "Tonga", "Trinidad y Tobago", "Túnez",
+  "Turkmenistán", "Turquía", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela",
+  "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue",
 ];
 
 const DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";

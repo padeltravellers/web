@@ -153,7 +153,7 @@ export default function PreguntasPage() {
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
             Lo que nos
             <br />
-            <span className="font-script italic font-normal text-pt-clay">preguntáis</span>
+            <span className="font-script font-normal text-pt-clay">preguntáis</span>
           </h1>
         </section>
 
