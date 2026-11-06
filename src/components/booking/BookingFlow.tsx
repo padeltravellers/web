@@ -115,7 +115,7 @@ export default function BookingFlow() {
       .catch(() => {});
   }, []);
 
-  // Viene de una fecha concreta (/reservar/bali/?viaje=3): Bali y esa salida ya elegidas.
+  // Viene de una fecha concreta (/reservar/?viaje=3): Bali y esa salida ya elegidas.
   useEffect(() => {
     const n = Number(new URLSearchParams(window.location.search).get("viaje"));
     if (departures2027.some((d) => d.n === n)) {

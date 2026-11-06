@@ -4,7 +4,7 @@ export default function StickyMobileCta({ label = "Reservar plaza", price = "100
   return (
     <div className="md:hidden fixed bottom-4 inset-x-4 z-40">
       <Link
-        href="/reservar/bali/"
+        href="/reservar/"
         className="flex items-center justify-between gap-3 bg-pt-green text-white px-5 py-3.5 rounded-full shadow-2xl shadow-pt-green/40"
       >
         <div>

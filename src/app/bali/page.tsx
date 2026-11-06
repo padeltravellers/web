@@ -104,7 +104,7 @@ export default function BaliPage() {
                 <Link href="#fechas" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Fechas y plazas
                 </Link>
-                <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
+                <Link href="/reservar/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -244,7 +244,7 @@ export default function BaliPage() {
             </div>
 
             <div className="mt-10 text-center">
-              <Link href="/reservar/bali/" className="inline-block px-10 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-lg md:text-xl hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+              <Link href="/reservar/" className="inline-block px-10 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-lg md:text-xl hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Reservar plaza
               </Link>
             </div>
@@ -412,7 +412,7 @@ export default function BaliPage() {
                   <span className="text-pt-cream/70">/ persona</span>
                 </div>
                 <p className="text-pt-cream/80 text-[15px] mb-7 whitespace-nowrap">Para dos personas que viajan juntas.</p>
-                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition">
+                <Link href="/reservar/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -425,7 +425,7 @@ export default function BaliPage() {
                   <span className="text-pt-muted">/ persona</span>
                 </div>
                 <p className="text-pt-muted text-[15px] mb-7 whitespace-nowrap">Una habitación solo para ti.</p>
-                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-green text-white font-display font-semibold text-lg hover:bg-pt-green-soft transition">
+                <Link href="/reservar/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-green text-white font-display font-semibold text-lg hover:bg-pt-green-soft transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -474,7 +474,7 @@ export default function BaliPage() {
               Reserva online en unos minutos con 100 € reembolsables. Y si antes quieres hablar, escríbenos por WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/reservar/bali/" className="px-10 py-4 rounded-full bg-pt-green text-white font-display font-bold text-lg hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+              <Link href="/reservar/" className="px-10 py-4 rounded-full bg-pt-green text-white font-display font-bold text-lg hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Empezar reserva · 100€
               </Link>
               <a href={contact.whatsappLink} className="px-10 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-lg hover:bg-pt-green hover:text-white transition">

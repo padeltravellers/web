@@ -79,7 +79,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
               <SocialIcons tone={light ? "light" : "dark"} size={scrolled ? "sm" : "md"} />
             </div>
             <Link
-              href="/reservar/bali/"
+              href="/reservar/"
               className={`ml-1 hidden sm:inline-flex items-center gap-1.5 font-display font-semibold rounded-full transition ${
                 scrolled ? "text-sm px-5 py-2.5" : "text-sm md:text-base px-5 md:px-6 py-2.5 md:py-3"
               } ${light ? "bg-white text-pt-green hover:bg-pt-cream" : "bg-pt-clay text-white hover:brightness-105"}`}
@@ -129,7 +129,7 @@ export default function Header({ transparent = false }: { transparent?: boolean 
             </nav>
             <div className="px-6 pb-6 pt-2 flex flex-col gap-5">
               <Link
-                href="/reservar/bali/"
+                href="/reservar/"
                 onClick={() => setOpen(false)}
                 className="block text-center font-display font-semibold text-lg bg-pt-clay text-white px-6 py-4 rounded-full"
               >

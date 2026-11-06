@@ -28,3 +28,7 @@
 /feed             /  301
 /feed/            /  301
 /comments/feed/   /  301
+
+# La reserva online vive en /reservar (elige destino en el paso 1). "Cómo reservar" pasó a /como-reservar.
+/reservar/bali            /reservar/  301
+/reservar/bali/           /reservar/  301

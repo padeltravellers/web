@@ -11,7 +11,7 @@ const MAX = 12;
 type Trip = { n: number; range: string; month: string };
 type Plaza = { codigo: string; libres: number; estado: string };
 
-export default function TripCards({ trips, prefix = "BALI", bookHref = "/reservar/bali/" }: { trips: Trip[]; prefix?: string; bookHref?: string }) {
+export default function TripCards({ trips, prefix = "BALI", bookHref = "/reservar/" }: { trips: Trip[]; prefix?: string; bookHref?: string }) {
   const [plazas, setPlazas] = useState<Record<string, Plaza>>({});
 
   useEffect(() => {

@@ -86,7 +86,7 @@ export default function Home() {
                 <Link href="/bali/" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Descubre Bali 2027
                 </Link>
-                <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
+                <Link href="/reservar/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -254,7 +254,7 @@ export default function Home() {
               ))}
             </ol>
             <div className="mt-14 text-center">
-              <Link href="/reservar/bali/" className="inline-block px-10 py-4 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition shadow-2xl shadow-pt-cream/20">
+              <Link href="/reservar/" className="inline-block px-10 py-4 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition shadow-2xl shadow-pt-cream/20">
                 Reservar plaza
               </Link>
             </div>
