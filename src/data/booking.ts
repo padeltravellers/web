@@ -41,11 +41,13 @@ export const SECOND_PAYMENT = 1000;
 export const FINAL_DAYS_BEFORE = 30;
 
 export const padelLevels = [
-  "Empiezo ahora",
-  "Nivel 2 · juego de vez en cuando",
-  "Nivel 3 · juego habitualmente",
-  "Nivel 4 · nivel medio-alto",
-  "Nivel 5 o más · compito",
+  "0 - Iniciación",
+  "1 - Bajo",
+  "2 - Intermedio",
+  "3 - Medio",
+  "4 - Avanzado",
+  "5 - Competitivo",
+  "6 - Pro",
 ];
 
 const MONTHS = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
