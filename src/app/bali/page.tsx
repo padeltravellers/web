@@ -131,7 +131,7 @@ export default function BaliPage() {
 
         {/* NUESTRA ISLA FAVORITA */}
         <section className="px-6 lg:px-12 py-12 lg:py-12 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestra isla favorita</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
@@ -195,8 +195,8 @@ export default function BaliPage() {
 
             <div className="grid md:grid-cols-2 gap-x-6 gap-y-8 items-start">
               {([
-                ["Semana 1", d.itinerary.slice(0, 8)],
-                ["Semana 2", d.itinerary.slice(8, 14)],
+                ["Semana 1", d.itinerary.slice(0, 7)],
+                ["Semana 2", d.itinerary.slice(7, 14)],
               ] as const).map(([label, days]) => (
                 <div key={label}>
                   <p className="font-display font-semibold text-pt-green mb-3">{label}</p>
@@ -274,7 +274,7 @@ export default function BaliPage() {
 
         {/* NUESTRO HOGAR */}
         <section className="py-12 lg:py-12 px-6 lg:px-12 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestro hogar</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
@@ -372,7 +372,18 @@ export default function BaliPage() {
                 <br />
                 <span className="accent text-pt-clay">ya volvieron</span>
               </h2>
-              <p className="text-pt-muted mt-5">4 años · 8 viajes · +61 viajeros</p>
+              <div className="mt-8 flex justify-center divide-x divide-pt-green/15">
+                {[
+                  ["4", "años"],
+                  ["8", "viajes"],
+                  ["+61", "viajeros"],
+                ].map(([n, l]) => (
+                  <div key={l} className="px-6 md:px-10">
+                    <p className="font-display font-semibold text-4xl md:text-5xl text-pt-green leading-none">{n}</p>
+                    <p className="font-display uppercase tracking-[0.18em] text-xs text-pt-clay mt-2">{l}</p>
+                  </div>
+                ))}
+              </div>
               <div className="mt-5 flex justify-center"><RatingSummary /></div>
             </div>
             <GoogleReviews />
