@@ -254,7 +254,7 @@ export default function BookingFlow() {
           {step === 1 && (
             <section className="space-y-10">
               <div>
-                <StepTitle eyebrow="Paso 2" title="Elige tu fecha" text="14 días y 13 noches. Cada viajero vuela desde su ciudad y nos juntamos en Bali." />
+                <StepTitle eyebrow="Paso 2" title="Elige tu fecha" />
                 <div className="bg-white border border-pt-green/10 rounded-3xl divide-y divide-pt-green/8 overflow-hidden">
                   {departures2027.map((d) => {
                     const active = d.n === tripN;
@@ -290,8 +290,7 @@ export default function BookingFlow() {
               </div>
 
               <div>
-                <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green mb-2">Elige tu habitación</h3>
-                <p className="text-pt-muted mb-5">Siempre habitación privada con desayuno, en villas u hoteles con piscina.</p>
+                <h3 className="font-display font-medium text-2xl md:text-3xl text-pt-green mb-5">Elige tu habitación</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   {(Object.keys(rooms) as RoomKey[]).map((k) => {
                     const r = rooms[k];
@@ -336,7 +335,7 @@ export default function BookingFlow() {
               <StepTitle
                 eyebrow="Paso 3"
                 title={pax === 2 ? "Vuestros datos" : "Tus datos"}
-                text={`Tal como aparecen en el pasaporte: con ellos se hacen el contrato y las reservas a ${pax === 2 ? "vuestro" : "tu"} nombre.`}
+                text="Tal como aparecen en el pasaporte."
               />
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] w-px h-px opacity-0" value={hp} onChange={(e) => setHp(e.target.value)} />
               <div className="space-y-6">
@@ -360,7 +359,7 @@ export default function BookingFlow() {
           {/* PASO 4 · CONFIRMAR */}
           {step === 3 && trip && room && destination && (
             <section>
-              <StepTitle eyebrow="Paso 4" title={pax === 2 ? "Vuestro viaje, en un vistazo" : "Tu viaje, en un vistazo"} text={`Revisa que todo esté bien. Al confirmar, ${pax === 2 ? "cada uno recibe su contrato" : "recibes tu contrato"} por email.`} />
+              <StepTitle eyebrow="Paso 4" title={pax === 2 ? "Vuestro viaje, en un vistazo" : "Tu viaje, en un vistazo"} text={pax === 2 ? "Revisad los datos y confirmad la reserva." : "Revisa los datos y confirma tu reserva."} />
               <Ticket destinationName={destination.name} hero={destination.hero} trip={trip} room={room} travellers={travellers} />
               <div className="grid md:grid-cols-2 gap-4 mt-6">
                 <Card title="Qué incluye">
@@ -496,7 +495,7 @@ function TravellerForm({
           <Field label="Teléfono (WhatsApp)" error={errors.telefono}>
             <PhoneInput prefix={t.prefijo} number={t.telefono} invalid={!!errors.telefono} onPrefix={(v) => onChange("prefijo", v)} onNumber={(v) => onChange("telefono", v)} />
           </Field>
-          <Field label="Fecha de nacimiento" hint="Hay que ser mayor de edad." error={errors.nacimiento}>
+          <Field label="Fecha de nacimiento" error={errors.nacimiento}>
             <input type="date" max={maxBirthDateISO()} min="1930-01-01" className={cls("nacimiento")} value={t.nacimiento} onChange={(e) => onChange("nacimiento", e.target.value)} autoComplete={index === 0 ? "bday" : "off"} />
           </Field>
           <Field label="Ciudad desde la que viajas" error={errors.ciudad}>
@@ -527,7 +526,7 @@ function TravellerForm({
               <option value="Pasaporte">Pasaporte</option>
             </select>
           </Field>
-          <Field label={`Número de ${t.docTipo}`} hint="Para viajar necesitarás pasaporte con 6 meses de validez." error={errors.docNumero}>
+          <Field label={`Número de ${t.docTipo}`} error={errors.docNumero}>
             <input
               className={`${cls("docNumero")} uppercase tracking-wide`}
               value={t.docNumero}
@@ -540,7 +539,7 @@ function TravellerForm({
         </Group>
 
         <Group title="Pádel y salud">
-          <Field label="Nivel de pádel" hint="Para organizar los partidos." error={errors.nivel}>
+          <Field label="Nivel de pádel" error={errors.nivel}>
             <select className={cls("nivel")} value={t.nivel} onChange={(e) => onChange("nivel", e.target.value)}>
               <option value="">Elige nivel</option>
               {padelLevels.map((l) => (
@@ -548,7 +547,7 @@ function TravellerForm({
               ))}
             </select>
           </Field>
-          <Field label="Lesiones o alergias" hint="Solo para tu seguridad durante el viaje." optional>
+          <Field label="Lesiones o alergias" optional>
             <input className={`${inputCls} ${okCls}`} value={t.salud} onChange={(e) => onChange("salud", e.target.value)} placeholder="Nada que destacar" />
           </Field>
         </Group>
@@ -869,7 +868,6 @@ function Summary({ destinationName, trip, room, price, pax }: { destinationName:
             <Pay title={trip ? `Antes del ${finalPaymentDate(trip.start)}` : "30 días antes del viaje"} amount={price ? eur(price - DEPOSIT - SECOND_PAYMENT) : "Resto"} note="Pago final" />
           </ol>
         </div>
-        <p className="text-xs text-pt-cream/65 leading-relaxed border-t border-white/15 pt-4">Vuelos desde tu ciudad, comidas y cenas, seguro y visado van aparte.</p>
       </div>
     </div>
   );
