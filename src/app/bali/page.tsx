@@ -4,10 +4,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhotoCarousel from "@/components/PhotoCarousel";
 import PdfLeadMagnet from "@/components/PdfLeadMagnet";
+import TripCards from "@/components/TripCards";
+import GoogleReviews, { RatingSummary } from "@/components/GoogleReviews";
 import { contact } from "@/data/content";
 import { getDestination, Experience } from "@/data/destinations";
 
-const liveAvailability: Record<number, number> = {};
 
 const TAG_LABEL: Record<string, { label: string; color: string }> = {
   padel:      { label: "Pádel",       color: "bg-pt-green text-white" },
@@ -103,6 +104,9 @@ export default function BaliPage() {
                 <Link href="#fechas" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Fechas y plazas
                 </Link>
+                <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
+                  Reservar plaza
+                </Link>
               </div>
             </div>
           </div>
@@ -114,7 +118,7 @@ export default function BaliPage() {
             {[
               ["14 días", "13 noches en Canggu"],
               ["8 salidas", "de junio a octubre"],
-              ["Grupos de 8 a 12", "viajeros"],
+              ["8 a 12", "viajeros por grupo"],
               ["Coordinador", "local, todo el viaje"],
             ].map(([a, b]) => (
               <div key={a}>
@@ -240,7 +244,7 @@ export default function BaliPage() {
             </div>
 
             <div className="mt-10 text-center">
-              <Link href="/reservar/bali/" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+              <Link href="/reservar/bali/" className="inline-block px-10 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-lg md:text-xl hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Reservar plaza
               </Link>
             </div>
@@ -358,6 +362,23 @@ export default function BaliPage() {
           </div>
         </section>
 
+        {/* RESEÑAS */}
+        <section className="py-12 lg:py-14 px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[0.95]">
+                Lo que dicen los que
+                <br />
+                <span className="accent text-pt-clay">ya volvieron</span>
+              </h2>
+              <p className="text-pt-muted mt-5">4 años · 8 viajes · +61 viajeros</p>
+              <div className="mt-5 flex justify-center"><RatingSummary /></div>
+            </div>
+            <GoogleReviews />
+          </div>
+        </section>
+
         {/* PRECIO */}
         <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green text-white relative overflow-hidden">
           <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-pt-clay/20 blur-3xl" />
@@ -380,7 +401,7 @@ export default function BaliPage() {
                   <span className="text-pt-cream/70">/ persona</span>
                 </div>
                 <p className="text-pt-cream/80 text-[15px] mb-7 whitespace-nowrap">Para dos personas que viajan juntas.</p>
-                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-semibold hover:bg-white transition">
+                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -393,7 +414,7 @@ export default function BaliPage() {
                   <span className="text-pt-muted">/ persona</span>
                 </div>
                 <p className="text-pt-muted text-[15px] mb-7 whitespace-nowrap">Una habitación solo para ti.</p>
-                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-green text-white font-display font-semibold hover:bg-pt-green-soft transition">
+                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-green text-white font-display font-semibold text-lg hover:bg-pt-green-soft transition">
                   Reservar plaza
                 </Link>
               </div>
@@ -417,43 +438,7 @@ export default function BaliPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-              {d.trips.map((t) => {
-                const left = liveAvailability[t.n] ?? 12;
-                const fillPct = ((12 - left) / 12) * 100;
-                const urgent = left <= 6;
-                return (
-                  <Link
-                    key={t.n}
-                    href={`/reservar/bali/?viaje=${t.n}`}
-                    className={`group flex flex-col rounded-2xl border p-5 hover:-translate-y-0.5 transition-all duration-300 ${
-                      urgent
-                        ? "bg-pt-clay/5 border-pt-clay/30 hover:border-pt-clay hover:shadow-xl"
-                        : "bg-white border-pt-green/10 hover:border-pt-green hover:shadow-xl"
-                    }`}
-                  >
-                    <div className="flex items-baseline justify-between mb-3">
-                      <span className={`font-display font-extralight text-4xl ${urgent ? "text-pt-clay" : "text-pt-green"}`}>
-                        {String(t.n).padStart(2, "0")}
-                      </span>
-                      <span className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-muted">{t.month}</span>
-                    </div>
-                    <div className="font-display font-semibold text-pt-ink leading-tight">{t.range}</div>
-                    <div className="text-xs text-pt-muted mt-1 mb-4">14 días</div>
-                    <div className="mt-auto">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="flex-1 h-1.5 bg-pt-green-pale rounded-full overflow-hidden">
-                          <div className={`h-full ${urgent ? "bg-pt-clay" : "bg-pt-green"}`} style={{ width: `${fillPct}%` }} />
-                        </div>
-                      </div>
-                      <div className={`text-[11px] font-display font-semibold ${urgent ? "text-pt-clay" : "text-pt-green"}`}>
-                        {urgent ? `🔥 Quedan ${left}` : "Disponible"}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <TripCards trips={d.trips} />
 
             <p className="mt-8 text-sm text-pt-muted text-center">
               ¿No sabes cuál te encaja? <a href={contact.whatsappLink} className="text-pt-green font-medium hover:underline">Pregúntanos por WhatsApp</a>.
@@ -478,10 +463,10 @@ export default function BaliPage() {
               Reserva online en unos minutos con 100 € reembolsables. Y si antes quieres hablar, escríbenos por WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+              <Link href="/reservar/bali/" className="px-10 py-4 rounded-full bg-pt-green text-white font-display font-bold text-lg hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Empezar reserva · 100€
               </Link>
-              <a href={contact.whatsappLink} className="px-9 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-sm hover:bg-pt-green hover:text-white transition">
+              <a href={contact.whatsappLink} className="px-10 py-4 rounded-full border-2 border-pt-green text-pt-green font-display font-bold text-lg hover:bg-pt-green hover:text-white transition">
                 Hablar por WhatsApp
               </a>
             </div>
