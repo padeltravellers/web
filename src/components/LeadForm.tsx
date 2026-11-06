@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/path";
+import CountryPicker from "@/components/CountryPicker";
+import { countries } from "@/data/booking";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_LEAD_FORM_URL ||
@@ -12,6 +14,8 @@ export default function LeadForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
   const [errMsg, setErrMsg] = useState<string>("");
   const [wantsPdf, setWantsPdf] = useState<boolean>(false);
+  const [prefix, setPrefix] = useState("ES");
+  const [phone, setPhone] = useState("");
 
   // Si la URL trae ?wants=pdf, pre-marcamos el checkbox del programa
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function LeadForm() {
 
       setStatus("ok");
       form.reset();
+      setPhone("");
     } catch {
       setStatus("err");
       setErrMsg("No se ha podido enviar. Inténtalo en un momento o escríbenos por WhatsApp.");
@@ -118,16 +123,23 @@ export default function LeadForm() {
             className="w-full rounded-xl border border-pt-green/20 px-4 py-3 text-base text-pt-ink placeholder:text-pt-muted/60 focus:border-pt-green focus:outline-none transition"
           />
         </label>
-        <label className="block">
+        <div className="block">
           <span className="block font-display font-medium text-sm text-pt-ink mb-1.5">Teléfono*</span>
-          <input
-            required
-            name="phone"
-            type="tel"
-            placeholder="+34 ..."
-            className="w-full rounded-xl border border-pt-green/20 px-4 py-3 text-base text-pt-ink placeholder:text-pt-muted/60 focus:border-pt-green focus:outline-none transition"
-          />
-        </label>
+          <div className="relative flex rounded-xl border border-pt-green/20 focus-within:border-pt-green transition">
+            <CountryPicker iso={prefix} onChange={setPrefix} />
+            <input
+              required
+              type="tel"
+              inputMode="tel"
+              aria-label="Teléfono"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.replace(/[^\d\s]/g, ""))}
+              placeholder="600 000 000"
+              className="flex-1 min-w-0 bg-transparent px-3 py-3 text-base text-pt-ink placeholder:text-pt-muted/60 rounded-r-xl focus:outline-none"
+            />
+          </div>
+          <input type="hidden" name="phone" value={`${countries.find((c) => c.iso === prefix)?.code || ""} ${phone.trim()}`} />
+        </div>
         <label className="block">
           <span className="block font-display font-medium text-sm text-pt-ink mb-1.5">Destino</span>
           <select

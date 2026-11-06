@@ -20,7 +20,7 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Qué no incluye?",
-        a: "Los vuelos, las comidas y cenas, el seguro de viaje (obligatorio), el visado (unos 30 €) y los planes opcionales de los días libres. No hay bote común ni recargos: lo que no está incluido lo pagas tú directamente, solo si lo quieres.",
+        a: "Los vuelos, las comidas y cenas, el seguro de viaje (obligatorio), el visado (unos 30 €) y los planes opcionales de los días libres. No hay bote común ni recargos.",
       },
       {
         q: "¿Cuánto cuesta?",
@@ -48,7 +48,7 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Los días libres son realmente libres?",
-        a: "Sí. Hay varios días libres para ir a tu aire. Te proponemos planes (Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf…), pero no son obligatorios y se pagan aparte si los haces.",
+        a: "Sí. Son para que disfrutes de lo que más te apetece: Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf… Al final el grupo siempre se acaba organizando y los planes se hacen juntos. Los opcionales se pagan aparte.",
       },
       {
         q: "¿Organizáis viajes a otros destinos?",
@@ -61,11 +61,11 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Necesito un nivel concreto?",
-        a: "No. Vienen jugadores de todos los niveles. Hacemos las parejas por nivel para que los partidos estén equilibrados y todo el mundo disfrute.",
+        a: "Es para todos los niveles, aunque pedimos haber jugado algo antes al pádel. Te pediremos un vídeo corto jugando para organizar los partidos y las clases de antemano.",
       },
       {
         q: "¿Cómo es el pádel durante el viaje?",
-        a: "4 partidos con el grupo de 1,5 h y 2 h de clase a la semana con los entrenadores del club, en Bali Padel Academy. Las clases son en grupos de máximo 4 jugadores del mismo nivel.",
+        a: "4 partidos con el grupo de 1,5 h y 2 h de clase a la semana con los entrenadores del club, en Bali Padel Academy. Las clases son en grupos de máximo 4, con los otros participantes del viaje.",
       },
     ],
   },
@@ -74,7 +74,7 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Cómo reservo?",
-        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y reservas con 100 €. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
+        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y reservas con 100 €. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega la confirmación de la reserva por email. También puedes escribirnos por WhatsApp y te ayudamos.",
       },
       {
         q: "¿Cómo se paga?",
@@ -87,10 +87,6 @@ const groups: { title: string; items: Faq[] }[] = [
       {
         q: "¿Qué pasa si tengo que cancelar?",
         a: "Si cancelas antes de que se confirme el grupo, te devolvemos todo, también la reserva. Una vez confirmado el grupo no hay devolución, aunque intentamos recuperar lo posible de los proveedores y estudiamos cada caso.",
-      },
-      {
-        q: "¿Firmo algún contrato?",
-        a: "Sí. Al reservar aceptas el contrato de organización y coordinación del viaje y te lo enviamos por email. Puedes leerlo antes en las condiciones de contratación.",
       },
       {
         q: "¿Quién organiza el viaje?",
@@ -192,7 +188,7 @@ export default function PreguntasPage() {
             ))}
           </div>
           <p className="text-center text-sm text-pt-muted mt-12">
-            ¿Quieres leer el contrato completo? Está en las <Link href="/condiciones-de-contratacion" className="underline underline-offset-2 text-pt-green">condiciones de contratación</Link>.
+            Todas las condiciones del viaje están en <Link href="/condiciones-de-contratacion/" className="underline underline-offset-2 text-pt-green">condiciones de contratación</Link>.
           </p>
         </section>
 

@@ -20,7 +20,7 @@ const steps = [
   {
     n: "02",
     title: "Reservas online",
-    text: "En unos minutos: eliges habitación, rellenas tus datos y te llega el contrato por email.",
+    text: "En unos minutos: eliges habitación, rellenas tus datos y te llega la confirmación por email.",
   },
   {
     n: "03",

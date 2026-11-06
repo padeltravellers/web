@@ -76,13 +76,13 @@ export default function Home() {
           ))}
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-12 lg:pb-10">
-            <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
+            <div className="w-full px-6 sm:pr-6 sm:pl-10 md:pl-16 lg:pl-24 max-w-6xl text-white text-center sm:text-left fade-up">
               <h1 className="font-display font-medium text-[40px] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl md:leading-[1.15] tracking-tight">
                 Viajes en Grupo
                 <br />
                 <span className="accent">Pádel y Aventura</span>
               </h1>
-              <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto sm:mx-0">
                 <Link href="/bali/" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Descubre Bali 2027
                 </Link>
@@ -240,7 +240,7 @@ export default function Home() {
               <span className="md:hidden absolute left-5 top-6 bottom-6 w-px bg-pt-cream/25" aria-hidden />
               {[
                 { n: "01", title: "Eliges fecha", text: "8 salidas a Bali de junio a octubre. Si dudas, te ayudamos por WhatsApp." },
-                { n: "02", title: "Reservas online", text: "En unos minutos: eliges habitación, rellenas tus datos y te llega el contrato por email." },
+                { n: "02", title: "Reservas online", text: "En unos minutos: eliges habitación, rellenas tus datos y te llega la confirmación por email." },
                 { n: "03", title: "100 € reembolsables", text: "Aseguran tu plaza hasta que se confirma el grupo. El resto, en dos pagos." },
                 { n: "04", title: "Vives el viaje", text: "El coordinador te espera al aterrizar y no te suelta hasta volver." },
               ].map((s) => (

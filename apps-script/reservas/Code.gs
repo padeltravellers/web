@@ -228,7 +228,7 @@ function generarContrato_(cfg, campos, nombre) {
   const sinRellenar = body.getText().match(/\{\{[A-Z_]+\}\}/g);
   if (sinRellenar) console.warn('Campos sin rellenar en el contrato ' + nombre + ': ' + sinRellenar.join(', '));
   doc.saveAndClose();
-  const pdf = carpeta.createFile(copia.getAs(MimeType.PDF)).setName('Contrato ' + nombre + '.pdf');
+  const pdf = carpeta.createFile(copia.getAs(MimeType.PDF)).setName('Reserva ' + nombre + '.pdf');
   copia.setTrashed(true);
   return pdf;
 }
@@ -255,7 +255,7 @@ function enviarEmail_(cfg, r) {
     '<div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.8">Padel Travellers · ' + esc_(r.salida.destino) + ' 2027</div>' +
     '<div style="font-size:26px;font-weight:bold;margin-top:6px">¡Tu plaza está reservada, ' + esc_(r.nombre) + '!</div></div>' +
     '<div style="border:1px solid #E3E8E5;border-top:0;border-radius:0 0 18px 18px;padding:24px 28px">' +
-    '<p style="margin:0 0 16px">Gracias por reservar. Te dejamos aquí el resumen y, adjunto, tu contrato con todos los datos.</p>' +
+    '<p style="margin:0 0 16px">Gracias por reservar. Te dejamos aquí el resumen y, adjunta, la confirmación de tu reserva con todas las condiciones del viaje.</p>' +
     '<table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 18px">' +
     fila_('Reserva', r.id) + fila_('Viaje', r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta) +
     fila_('Habitación', r.habTexto) + fila_('Precio', eur_(r.precio)) + '</table>' +
@@ -273,7 +273,7 @@ function enviarEmail_(cfg, r) {
     '</ol>' +
     '<p style="margin:0 0 4px;font-size:14px">Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.</p>' +
     '<p style="margin:18px 0 0;font-size:14px">Nos vemos en ' + esc_(r.salida.destino) + ',<br><b>Equipo Padel Travellers</b></p>' +
-    '<p style="margin:18px 0 0;font-size:11px;color:#6B7570">Has aceptado el contrato de organización y coordinación de viaje en grupo al reservar en padeltravellers.com. Lo tienes adjunto en PDF.</p>' +
+    '<p style="margin:18px 0 0;font-size:11px;color:#6B7570">Al reservar en padeltravellers.com has aceptado las condiciones del viaje. Las tienes adjuntas en PDF.</p>' +
     '</div></div>';
 
   const texto =
@@ -282,7 +282,7 @@ function enviarEmail_(cfg, r) {
     'Habitación: ' + r.habTexto + ' · Precio: ' + eur_(r.precio) + '\n\n' +
     'Pagos: ' + eur_(reserva) + ' ahora, ' + eur_(segundo) + ' al confirmarse el grupo y ' + eur_(resto) + ' antes del ' + fechaLarga_(finalFecha) + '.\n' +
     (cfg.iban ? 'IBAN: ' + cfg.iban + ' (concepto: ' + r.id + ' ' + r.nombre + ')\n' : (cfg.instrucciones_pago || '') + '\n') +
-    '\nTe adjuntamos tu contrato. Cualquier duda, responde a este email.\n\nEquipo Padel Travellers';
+    '\nTe adjuntamos la confirmación de tu reserva con las condiciones del viaje. Cualquier duda, responde a este email.\n\nEquipo Padel Travellers';
 
   const opts = {
     htmlBody: html,

@@ -179,7 +179,7 @@ export const pricing = {
 export const faqs = [
   {
     q: "¿Hace falta un nivel concreto de pádel?",
-    a: "No. Tenemos viajeros desde nivel 2 hasta nivel 5. Formamos parejas rotando para que siempre juegues con gente de tu nivel y al final de la semana ya os conocéis todos.",
+    a: "Es para todos los niveles, aunque pedimos haber jugado algo antes al pádel. Te pediremos un vídeo corto jugando para organizar los partidos y las clases de antemano.",
   },
   {
     q: "Vengo sola/o, ¿es raro?",
@@ -199,7 +199,7 @@ export const faqs = [
   },
   {
     q: "¿Los días libres son realmente libres?",
-    a: "Sí. Hay varios días libres para que vayas a tu aire. Nosotros te proponemos planes (Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf…), pero no es obligatorio: Bali tiene mil cosas por hacer y el coordinador te orienta según lo que te apetezca.",
+    a: "Sí. Son para que disfrutes de lo que más te apetece: Nusa Penida, quads por Ubud, Cretya, beach clubs, spa, surf… Al final el grupo siempre se acaba organizando y los planes se hacen juntos. Los opcionales se pagan aparte.",
   },
   {
     q: "¿Cuánto se paga para reservar?",

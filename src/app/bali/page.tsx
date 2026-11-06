@@ -88,16 +88,16 @@ export default function BaliPage() {
               />
             </div>
           ))}
-          <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/20 to-pt-ink/90" />
           <div className="absolute inset-0 flex items-end pb-12 lg:pb-12">
-            <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
+            <div className="w-full px-6 sm:pr-6 sm:pl-10 md:pl-16 lg:pl-24 max-w-6xl text-white text-center sm:text-left fade-up">
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Bali
               </h1>
-              <p className="mt-8 max-w-2xl text-lg md:text-xl font-light leading-relaxed text-white/95">
+              <p className="mt-6 md:mt-8 max-w-2xl text-lg md:text-2xl font-medium leading-snug text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
                 {d.shortPitch}
               </p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto sm:mx-0">
                 <Link href="#itinerario" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
                   Ver itinerario
                 </Link>
