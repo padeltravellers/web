@@ -1,58 +1,25 @@
 import Link from "next/link";
 import Img from "@/components/Img";
-import { contact } from "@/data/content";
+import SocialIcons from "@/components/SocialIcons";
 
 export default function Footer() {
   return (
-    <footer className="bg-pt-ink text-pt-cream/75 pt-14 pb-10 px-5 lg:px-10 mt-14">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-10">
-        <div className="md:col-span-3">
+    <footer className="bg-pt-ink text-pt-cream/60 px-5 lg:px-10 pt-10 pb-8 mt-14">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <Link href="/" aria-label="Padel Travellers">
           <Img src="/logos/logo-white.png" alt="Padel Travellers" width={703} height={232} className="object-contain h-12 w-auto opacity-95" />
-        </div>
-
-        <div className="md:col-span-3">
-          <div className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/60 mb-4">
-            Destinos
-          </div>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link href="/bali" className="hover:text-pt-cream">Bali · abierto 2027</Link></li>
-            <li><Link href="/indonesia" className="hover:text-pt-cream">Indonesia · próximamente</Link></li>
-            <li><Link href="/filipinas" className="hover:text-pt-cream">Filipinas · próximamente</Link></li>
-          </ul>
-        </div>
-
-        <div className="md:col-span-3">
-          <div className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/60 mb-4">
-            La empresa
-          </div>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link href="/sobre" className="hover:text-pt-cream">Sobre nosotros</Link></li>
-            <li><Link href="/preguntas" className="hover:text-pt-cream">Preguntas frecuentes</Link></li>
-            <li><Link href="/reservar/bali/" className="hover:text-pt-cream">Reservar</Link></li>
-            <li><Link href="/reservar/" className="hover:text-pt-cream">Cómo reservar</Link></li>
-          </ul>
-        </div>
-
-        <div className="md:col-span-3">
-          <div className="font-display uppercase tracking-[0.22em] text-[10px] text-pt-cream/60 mb-4">
-            Contacto
-          </div>
-          <ul className="space-y-2.5 text-sm">
-            <li><a href={contact.whatsappLink} className="hover:text-pt-cream">WhatsApp</a></li>
-            <li><a href={`mailto:${contact.email}`} className="hover:text-pt-cream break-all">{contact.email}</a></li>
-            <li><a href={contact.instagram} target="_blank" rel="noreferrer" className="hover:text-pt-cream">Instagram</a></li>
-          </ul>
-        </div>
+        </Link>
+        <SocialIcons tone="light" />
       </div>
 
-      <div className="max-w-7xl mx-auto border-t border-white/10 mt-14 pt-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-pt-cream/50">
+      <div className="max-w-7xl mx-auto border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-center md:text-left">
         <span>© {new Date().getFullYear()} Padel World Experience LLC. Todos los derechos reservados.</span>
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <Link href="/aviso-legal" className="hover:text-pt-cream/80">Aviso legal</Link>
-          <Link href="/condiciones-de-contratacion" className="hover:text-pt-cream/80">Condiciones de contratación</Link>
-          <Link href="/politica-de-privacidad-y-proteccion-de-datos" className="hover:text-pt-cream/80">Privacidad</Link>
-          <Link href="/politica-de-cookies" className="hover:text-pt-cream/80">Cookies</Link>
-        </div>
+        <nav className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2">
+          <Link href="/aviso-legal/" className="hover:text-pt-cream/90">Aviso legal</Link>
+          <Link href="/condiciones-de-contratacion/" className="hover:text-pt-cream/90">Condiciones de contratación</Link>
+          <Link href="/politica-de-privacidad-y-proteccion-de-datos/" className="hover:text-pt-cream/90">Privacidad</Link>
+          <Link href="/politica-de-cookies/" className="hover:text-pt-cream/90">Cookies</Link>
+        </nav>
       </div>
     </footer>
   );

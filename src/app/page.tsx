@@ -83,8 +83,11 @@ export default function Home() {
                 <span className="accent">Pádel y Aventura</span>
               </h1>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
-                <Link href="/contacto/" className="px-9 py-4 rounded-full border border-white/50 text-white font-display font-semibold text-base hover:bg-white/10 transition">
-                  Contacto
+                <Link href="/bali/" className="px-9 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base md:text-lg text-center hover:bg-pt-cream transition">
+                  Descubre Bali 2027
+                </Link>
+                <Link href="/reservar/bali/" className="px-9 py-4 rounded-full bg-pt-clay text-white font-display font-semibold text-base md:text-lg text-center hover:brightness-105 shadow-lg shadow-pt-ink/30 transition">
+                  Reservar plaza
                 </Link>
               </div>
             </div>

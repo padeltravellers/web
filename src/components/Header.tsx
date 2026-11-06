@@ -1,70 +1,147 @@
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Img from "@/components/Img";
-import { contact } from "@/data/content";
+import SocialIcons from "@/components/SocialIcons";
 
+const NAV = [
+  { href: "/bali/", label: "Bali" },
+  { href: "/indonesia/", label: "Indonesia" },
+  { href: "/filipinas/", label: "Filipinas" },
+  { href: "/sobre/", label: "Sobre nosotros" },
+  { href: "/preguntas/", label: "Preguntas" },
+  { href: "/contacto/", label: "Contacto" },
+];
+
+/**
+ * Cabecera fija en todas las páginas.
+ * - transparent: empieza sobre la foto de portada (texto blanco) y al bajar pasa a fondo blanco.
+ * - Al bajar se compacta (menos alto y logo más pequeño).
+ * - En móvil, botón de menú con desplegable.
+ */
 export default function Header({ transparent = false }: { transparent?: boolean }) {
-  const base = transparent
-    ? "absolute inset-x-0 top-0 z-30 text-white"
-    : "relative z-30 bg-white border-b border-pt-green/10 text-pt-ink";
-  const iconBtn = transparent
-    ? "w-11 h-11 rounded-full border border-white/40 hover:bg-white/10 flex items-center justify-center transition"
-    : "w-11 h-11 rounded-full border border-pt-green/20 text-pt-green hover:bg-pt-green-pale flex items-center justify-center transition";
-  // Misma geometría en todas las páginas (con o sin foto detrás): solo cambian los colores.
-  // logo-header.png es el logo PADEL TRAVELLERS con la P, recortado a su contenido (703×232), así el tamaño es predecible.
-  const containerClass = "max-w-[1600px] mx-auto px-5 lg:px-10 py-4 lg:py-5 flex items-center justify-between gap-6";
-  const logoClass = `object-contain h-12 md:h-14 lg:h-[72px] w-auto ${transparent ? "brightness-0 invert" : ""}`;
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setScrolled(window.scrollY > 24));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const light = transparent && !scrolled && !open; // texto blanco sobre la foto
+  const position = transparent ? "fixed" : "sticky";
 
   return (
-    <header className={base}>
-      <div className={containerClass}>
-        <Link href="/" className="flex items-center shrink-0 group no-tap-highlight">
-          <Img
-            src="/logos/logo-header.png"
-            alt="Padel Travellers"
-            width={703}
-            height={232}
-            priority
-            className={logoClass}
-          />
-        </Link>
-        <nav className="hidden lg:flex items-center gap-12 text-xl font-display font-semibold">
-          <Link href="/bali" className="hover:opacity-70 transition">Bali</Link>
-          <Link href="/indonesia" className="hover:opacity-70 transition">Indonesia</Link>
-          <Link href="/filipinas" className="hover:opacity-70 transition">Filipinas</Link>
-          <Link href="/sobre" className="hover:opacity-70 transition">Sobre nosotros</Link>
-          <Link href="/preguntas" className="hover:opacity-70 transition">Preguntas</Link>
-        </nav>
-        <div className="flex items-center gap-2">
-          {/* Social icons */}
-          <a href={contact.whatsappLink} aria-label="WhatsApp" className={iconBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={transparent ? "text-white" : "text-pt-green"}>
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/>
-            </svg>
-          </a>
-          <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className={iconBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className={transparent ? "text-white" : "text-pt-green"}>
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-          </a>
-          <a href={`mailto:${contact.email}`} aria-label="Email" className={iconBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={transparent ? "text-white" : "text-pt-green"}>
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </a>
-          <Link
-            href="/contacto"
-            className={`ml-2 inline-flex items-center gap-1.5 text-sm md:text-base font-display font-semibold px-5 md:px-6 py-2.5 md:py-3 rounded-full transition ${
-              transparent
-                ? "bg-white text-pt-green hover:bg-pt-cream"
-                : "bg-pt-green text-white hover:bg-pt-green-soft"
-            }`}
-          >
-            Contacto
-            <span aria-hidden>→</span>
+    <>
+      <header
+        className={`${position} top-0 inset-x-0 z-50 transition-all duration-300 ${
+          light ? "bg-transparent text-white" : "bg-white/95 backdrop-blur text-pt-ink border-b border-pt-green/10"
+        } ${scrolled ? "shadow-[0_6px_24px_-12px_rgba(14,59,45,0.35)]" : ""}`}
+      >
+        <div className={`max-w-[1600px] mx-auto px-5 lg:px-10 flex items-center justify-between gap-6 transition-all duration-300 ${scrolled ? "py-2.5" : "py-4 lg:py-5"}`}>
+          <Link href="/" className="flex items-center shrink-0 no-tap-highlight" onClick={() => setOpen(false)}>
+            <Img
+              src="/logos/logo-header.png"
+              alt="Padel Travellers"
+              width={703}
+              height={232}
+              priority
+              className={`object-contain w-auto transition-all duration-300 ${scrolled ? "h-10 lg:h-12" : "h-12 md:h-14 lg:h-[72px]"} ${light ? "brightness-0 invert" : ""}`}
+            />
           </Link>
+
+          <nav className="hidden lg:flex items-center gap-10 text-lg font-display font-semibold">
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href} className="hover:opacity-70 transition">
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <div className="hidden md:block">
+              <SocialIcons tone={light ? "light" : "dark"} size={scrolled ? "sm" : "md"} />
+            </div>
+            <Link
+              href="/reservar/bali/"
+              className={`ml-1 hidden sm:inline-flex items-center gap-1.5 font-display font-semibold rounded-full transition ${
+                scrolled ? "text-sm px-5 py-2.5" : "text-sm md:text-base px-5 md:px-6 py-2.5 md:py-3"
+              } ${light ? "bg-white text-pt-green hover:bg-pt-cream" : "bg-pt-clay text-white hover:brightness-105"}`}
+            >
+              Reservar
+            </Link>
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              className={`lg:hidden w-11 h-11 rounded-full grid place-items-center border transition ${
+                light ? "border-white/40 text-white hover:bg-white/10" : "border-pt-green/20 text-pt-green hover:bg-pt-green-pale"
+              }`}
+            >
+              {open ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+                  <line x1="4" y1="7" x2="20" y2="7" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="17" x2="20" y2="17" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+
+        {/* Menú móvil */}
+        {open && (
+          <div className="lg:hidden border-t border-pt-green/10 bg-white text-pt-ink max-h-[calc(100svh-72px)] overflow-y-auto">
+            <nav className="px-6 py-4 flex flex-col">
+              {NAV.map((n) => (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="py-3.5 border-b border-pt-green/10 font-display font-semibold text-xl text-pt-green flex items-center justify-between"
+                >
+                  {n.label}
+                  <span className="text-pt-clay" aria-hidden>→</span>
+                </Link>
+              ))}
+            </nav>
+            <div className="px-6 pb-6 pt-2 flex flex-col gap-5">
+              <Link
+                href="/reservar/bali/"
+                onClick={() => setOpen(false)}
+                className="block text-center font-display font-semibold text-lg bg-pt-clay text-white px-6 py-4 rounded-full"
+              >
+                Reservar plaza
+              </Link>
+              <div className="flex justify-center">
+                <SocialIcons />
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+    </>
   );
 }
