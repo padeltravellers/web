@@ -64,6 +64,8 @@ body {
 .font-display { font-family: var(--font-display), system-ui, sans-serif; letter-spacing: -0.01em; }
 .font-body    { font-family: var(--font-body), system-ui, sans-serif; }
 .font-script  { font-family: var(--font-script), cursive; font-style: normal; font-synthesis: none; }
+/* Acento de los títulos: la letra de la marca en semibold (como «Padel Travellers»). Para volver a la manuscrita, cambiar aquí. */
+.accent { font-family: var(--font-display), system-ui, sans-serif; font-weight: 600; font-style: normal; letter-spacing: -0.01em; }
 .font-serif   { font-family: var(--font-serif), Georgia, serif; }
 
 /* Smooth scroll */

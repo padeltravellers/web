@@ -25,7 +25,7 @@ export default function ReservarBaliPage() {
             <h1 className="font-display font-medium text-5xl md:text-7xl leading-[0.92]">
               Reserva tu plaza,
               <br />
-              <span className="font-script font-normal text-pt-cream">en cuatro pasos</span>
+              <span className="accent text-pt-cream">en cuatro pasos</span>
             </h1>
             <p className="text-white/85 text-lg max-w-xl mt-6 leading-relaxed">
               Reservas con 100 €, reembolsables hasta que se confirma el grupo. Sin pagar nada más hasta entonces.

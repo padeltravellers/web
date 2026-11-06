@@ -32,7 +32,7 @@ export default function PdfLeadMagnet({
             </p>
             <h3 className="font-display font-medium text-xl md:text-2xl leading-snug">
               {title || (
-                <>Recibe el dossier completo del viaje <span className="font-script font-normal text-pt-cream">al instante</span></>
+                <>Recibe el dossier completo del viaje <span className="accent text-pt-cream">al instante</span></>
               )}
             </h3>
           </div>
@@ -84,7 +84,7 @@ export default function PdfLeadMagnet({
               <>
                 Recibe el dossier de Bali 2027
                 <br />
-                <span className="font-script font-normal text-pt-clay">en tu email</span>
+                <span className="accent text-pt-clay">en tu email</span>
               </>
             )}
           </h3>
@@ -109,7 +109,7 @@ export default function PdfLeadMagnet({
           <div className="relative w-44 lg:w-52 aspect-[3/4] bg-pt-cream rounded-xl shadow-2xl shadow-pt-green/20 overflow-hidden rotate-3 border border-pt-green/10">
             <div className="absolute inset-0 bg-gradient-to-br from-pt-green via-pt-green-soft to-pt-ink" />
             <div className="absolute inset-5 flex flex-col text-pt-cream">
-              <p className="font-script text-xl mb-1">Padel & Bali</p>
+              <p className="accent text-xl mb-1">Padel & Bali</p>
               <p className="font-display font-bold text-lg leading-tight">Programa<br/>2027</p>
               <div className="mt-auto">
                 <div className="h-0.5 bg-pt-cream/40 w-12 mb-2" />

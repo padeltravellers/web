@@ -130,10 +130,10 @@ export default function BaliPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-5 order-2 lg:order-1">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestra isla favorita</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
                 Donde empezó
                 <br />
-                <span className="font-display font-semibold text-pt-clay inline-block mt-1">Padel Travellers</span>
+                <span className="accent text-pt-clay inline-block mt-1">Padel Travellers</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
                 Bali fue nuestro primer destino y sigue siendo el favorito. Aquí se juega al pádel todo el año,
@@ -179,63 +179,40 @@ export default function BaliPage() {
         </section>
 
         {/* ITINERARIO DÍA A DÍA */}
-        <section id="itinerario" className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-green-pale/40">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-10">
+        <section id="itinerario" className="py-12 lg:py-14 px-6 lg:px-12 bg-pt-green-pale/40 scroll-mt-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-8 text-center">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Itinerario</p>
-              <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-tight mb-6">
+              <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-tight">
                 14 días. Día a día.
               </h2>
-              <p className="text-pt-muted text-lg max-w-2xl leading-relaxed">
-                El viaje está diseñado al detalle. Cada día tiene su sitio: pádel, cultura, naturaleza,
-                gastronomía y descanso, en el orden que mejor funciona. Esto es lo que vivirás.
-              </p>
+              <p className="text-pt-muted mt-3">Pulsa cada día para ver el detalle.</p>
             </div>
 
-            <input type="radio" name="itin-tabs" id="tab-w1" defaultChecked className="hidden" />
-            <input type="radio" name="itin-tabs" id="tab-w2" className="hidden" />
-
-            <div className="itin-tabs grid grid-cols-2 gap-2 bg-white p-2 rounded-full shadow-sm border border-pt-green/10 mb-10 max-w-xl">
-              <label htmlFor="tab-w1" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 1 · Días 0–7
-              </label>
-              <label htmlFor="tab-w2" className="cursor-pointer text-center py-3 px-5 rounded-full font-display font-semibold text-sm transition-all">
-                Semana 2 · Días 8–13
-              </label>
-            </div>
-
-            <div className="itin-panels">
-              {(["w1", "w2"] as const).map((wk) => {
-                const slice = wk === "w1" ? d.itinerary.slice(0, 8) : d.itinerary.slice(8, 14);
-                return (
-                  <div key={wk} id={`panel-${wk}`} className="itin-tab-panel space-y-3">
-                    {slice.map((day, i) => (
-                      <details
-                        key={day.day}
-                        className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 transition-all overflow-hidden shadow-sm rounded-3xl"
-                      >
-                        <summary className="day-summary cursor-pointer p-3 md:p-4 pr-5 md:pr-7 flex items-center justify-between gap-4">
-                          <div className="flex items-center gap-4 md:gap-5 flex-1 min-w-0">
-                            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shrink-0 bg-pt-green-pale">
-                              <Img src={day.photo} alt="" fill className="object-cover" sizes="80px" loading="lazy" />
-                            </div>
-                            <div className="min-w-0">
-                              <span className="block font-display font-bold uppercase tracking-[0.12em] text-xs md:text-sm text-pt-green">
-                                Día {day.day}
-                              </span>
-                              <span className="block font-display font-medium text-pt-ink/85 text-base md:text-lg leading-snug">
-                                {day.title}
-                              </span>
-                            </div>
+            <div className="grid md:grid-cols-2 gap-x-6 gap-y-8 items-start">
+              {([
+                ["Semana 1", d.itinerary.slice(0, 8)],
+                ["Semana 2", d.itinerary.slice(8, 14)],
+              ] as const).map(([label, days]) => (
+                <div key={label}>
+                  <p className="font-display font-semibold text-pt-green mb-3">{label}</p>
+                  <div className="space-y-2">
+                    {days.map((day) => (
+                      <details key={day.day} className="day-card bg-white border border-pt-green/10 hover:border-pt-green/30 rounded-2xl overflow-hidden">
+                        <summary className="day-summary cursor-pointer p-2 pr-4 flex items-center gap-3">
+                          <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 bg-pt-green-pale">
+                            <Img src={day.photo} alt="" fill className="object-cover" sizes="44px" loading="lazy" />
                           </div>
-                          <span className="day-arrow w-9 h-9 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0" aria-hidden>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <span className="font-display font-bold text-xs uppercase tracking-[0.1em] text-pt-clay w-12 shrink-0">Día {day.day}</span>
+                          <span className="flex-1 min-w-0 font-display font-medium text-pt-ink/90 leading-snug">{day.title}</span>
+                          <span className="day-arrow w-7 h-7 rounded-full bg-pt-green-pale text-pt-green flex items-center justify-center transition-transform duration-300 shrink-0" aria-hidden>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                               <polyline points="6 9 12 15 18 9" />
                             </svg>
                           </span>
                         </summary>
-                        <div className="border-t border-pt-green/10 p-6 md:p-8 flex flex-col">
-                          <div className="space-y-4 text-sm md:text-base text-pt-ink/85 leading-relaxed mb-6">
+                        <div className="border-t border-pt-green/10 p-5">
+                          <div className="space-y-3 text-[15px] text-pt-ink/85 leading-relaxed mb-4">
                             {day.description.split("\n\n").map((para, pi) => (
                               <p key={pi}>
                                 {para.split(/\*\*(.+?)\*\*/g).map((chunk, ci) =>
@@ -244,8 +221,8 @@ export default function BaliPage() {
                               </p>
                             ))}
                           </div>
-                          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-pt-green-pale">
-                            <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:896px) 90vw, 800px" loading="lazy" />
+                          <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-4 bg-pt-green-pale">
+                            <Img src={day.photo} alt={day.title} fill className="object-cover" sizes="(max-width:768px) 90vw, 560px" loading="lazy" />
                           </div>
                           <div className="flex flex-wrap gap-2">
                             {day.tags.map((t) => (
@@ -258,12 +235,12 @@ export default function BaliPage() {
                       </details>
                     ))}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
 
-            <div className="mt-12 text-center">
-              <Link href="/reservar/bali/" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
+            <div className="mt-10 text-center">
+              <Link href="/reservar/bali/" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-semibold hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
                 Reservar plaza
               </Link>
             </div>
@@ -299,7 +276,7 @@ export default function BaliPage() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
                 Hotel
                 <br />
-                <span className="font-script font-normal text-pt-clay">en Canggu</span>
+                <span className="accent text-pt-clay">en Canggu</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-4">
                 Hotel seleccionado a mano, en el corazón de Canggu. Piscina, terrazas, ambiente
@@ -311,7 +288,7 @@ export default function BaliPage() {
                 pádel y a 5 minutos de la playa.
               </p>
               <ul className="mt-7 space-y-2.5 text-sm text-pt-ink/85">
-                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Habitación privada</li>
+                <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Nunca compartes con desconocidos</li>
                 <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Desayuno incluido</li>
                 <li className="flex gap-2.5"><span className="text-pt-green">✓</span>Piscina y terraza</li>
                 <li className="flex gap-2.5"><span className="text-pt-green">✓</span>2 min del club de pádel · 5 min de la playa</li>
@@ -339,7 +316,7 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Qué incluye</p>
-              <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
                 Todo lo que incluye tu viaje
               </h2>
             </div>
@@ -388,40 +365,42 @@ export default function BaliPage() {
           <div className="relative max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
-              <h2 className="font-display font-extralight text-3xl md:text-5xl mt-2 leading-tight">
+              <h2 className="font-display font-medium text-3xl md:text-5xl mt-2 leading-tight">
                 Un precio cerrado, sin sorpresas
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur rounded-3xl p-9 border border-white/20 flex flex-col">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-pt-cream/80 text-sm">En pareja / compartiendo</span>
+              <div className="bg-white/10 backdrop-blur rounded-3xl p-8 md:p-9 border border-white/20 flex flex-col">
+                <div className="flex items-center justify-between h-7 mb-5">
+                  <span className="text-pt-cream/85 text-sm font-display font-semibold uppercase tracking-[0.12em]">Habitación compartida</span>
                   <span className="text-xs px-3 py-1 rounded-full bg-pt-cream/20">Recomendado</span>
                 </div>
                 <div className="flex items-baseline gap-2 mb-3">
                   <span className="font-display font-bold text-6xl">{d.basePrice}</span>
                   <span className="text-pt-cream/70">/ persona</span>
                 </div>
-                <p className="text-pt-cream/80 text-sm mb-6 flex-1">Compartiendo habitación con tu pareja, amigo o familiar.</p>
-                <Link href="/reservar/bali/" className="block text-center px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-sm hover:bg-white transition">
+                <p className="text-pt-cream/80 text-[15px] mb-7 whitespace-nowrap">Para dos personas que viajan juntas.</p>
+                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-cream text-pt-green font-display font-semibold hover:bg-white transition">
                   Reservar plaza
                 </Link>
               </div>
-              <div className="bg-white text-pt-ink rounded-3xl p-9">
-                <span className="text-pt-clay text-sm">Habitación individual</span>
-                <div className="flex items-baseline gap-2 mb-3 mt-6">
+              <div className="bg-white text-pt-ink rounded-3xl p-8 md:p-9 flex flex-col">
+                <div className="flex items-center h-7 mb-5">
+                  <span className="text-pt-clay text-sm font-display font-semibold uppercase tracking-[0.12em]">Habitación individual</span>
+                </div>
+                <div className="flex items-baseline gap-2 mb-3">
                   <span className="font-display font-bold text-6xl text-pt-green">{d.solo}</span>
                   <span className="text-pt-muted">/ persona</span>
                 </div>
-                <p className="text-pt-muted text-sm mb-6">Suplemento individual de 200€. Tu habitación, tu llave.</p>
-                <Link href="/reservar/bali/" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
+                <p className="text-pt-muted text-[15px] mb-7 whitespace-nowrap">Una habitación solo para ti.</p>
+                <Link href="/reservar/bali/" className="mt-auto block text-center px-6 py-3.5 rounded-full bg-pt-green text-white font-display font-semibold hover:bg-pt-green-soft transition">
                   Reservar plaza
                 </Link>
               </div>
             </div>
             <div className="mt-10 text-center text-pt-cream/85">
-              <span className="font-script text-2xl text-pt-cream">{d.deposit}</span>
-              <span> reserva reembolsable. El resto en dos plazos. Sin bote común, sin recargos.</span>
+              <span className="accent text-2xl text-pt-cream">{d.deposit}</span>
+              <span> de reserva, reembolsables hasta que se confirma el grupo. El resto, en dos pagos.</span>
             </div>
           </div>
         </section>
@@ -431,10 +410,10 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Calendario 2027</p>
-              <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[0.95]">
                 Ocho salidas.
                 <br />
-                <span className="font-script text-pt-clay">Elige la tuya</span>
+                <span className="accent text-pt-clay">Elige la tuya</span>
               </h2>
             </div>
 
@@ -492,7 +471,7 @@ export default function BaliPage() {
         {/* CTA FINAL */}
         <section className="py-10 lg:py-12 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display font-light text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">
+            <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">
               ¿Vamos a Bali?
             </h2>
             <p className="text-pt-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed">

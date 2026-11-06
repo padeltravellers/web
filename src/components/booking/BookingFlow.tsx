@@ -787,7 +787,7 @@ function Ticket({ destinationName, hero, trip, room, travellers }: { destination
         <div className="absolute left-6 right-6 bottom-5 text-white flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
           <div>
             <p className="font-display font-medium text-5xl sm:text-6xl md:text-7xl leading-none">{destinationName}</p>
-            <p className="font-script text-pt-cream text-xl sm:text-2xl mt-1 whitespace-nowrap">pádel y aventura</p>
+            <p className="accent text-pt-cream text-xl sm:text-2xl mt-1 whitespace-nowrap">pádel y aventura</p>
           </div>
           <div className="sm:text-right">
             <p className="font-display font-semibold text-xl md:text-2xl leading-tight">{trip.range}</p>
@@ -905,7 +905,7 @@ function Confirmation({ travellers, trip, price }: { travellers: Traveller[]; tr
       <h2 className="font-display font-medium text-4xl md:text-5xl text-pt-green leading-tight">
         ¡Hecho, {names}!
         <br />
-        <span className="font-script font-normal text-pt-clay text-3xl md:text-4xl">nos vemos en Bali</span>
+        <span className="accent text-pt-clay text-3xl md:text-4xl">nos vemos en Bali</span>
       </h2>
       <p className="text-pt-muted mt-6 text-lg">
         {pax === 2 ? "Tenéis vuestras plazas" : "Tenemos tu plaza"} para el Viaje {trip.n} · {trip.range}.

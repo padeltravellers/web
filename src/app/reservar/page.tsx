@@ -59,7 +59,7 @@ export default function ReservarPage() {
           <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
             Cuatro pasos
             <br />
-            <span className="font-script font-normal text-pt-clay">sin sorpresas</span>
+            <span className="accent text-pt-clay">sin sorpresas</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-2xl mx-auto mt-7 leading-relaxed">
             Sin sorpresas y a tu ritmo. Reserva con 100€ reembolsables y el resto se paga en plazos antes del viaje.
@@ -122,7 +122,7 @@ export default function ReservarPage() {
                 <p className="font-display uppercase tracking-[0.26em] text-xs font-semibold text-pt-cream/70 mb-5">Pagos</p>
                 <h2 className="font-display font-medium text-3xl md:text-4xl leading-tight mb-7">
                   Tres plazos.<br/>
-                  <span className="font-script font-normal text-pt-cream">Sin sorpresas</span>
+                  <span className="accent text-pt-cream">Sin sorpresas</span>
                 </h2>
                 <ul className="space-y-3 text-pt-cream/90">
                   <li className="flex justify-between gap-4 border-b border-white/15 pb-3">
@@ -173,7 +173,7 @@ export default function ReservarPage() {
               <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95] mb-6">
                 Déjanos tus datos
                 <br />
-                <span className="font-script font-normal text-pt-clay">y nosotros te llamamos</span>
+                <span className="accent text-pt-clay">y nosotros te llamamos</span>
               </h2>
               <p className="text-pt-muted text-lg max-w-xl mx-auto leading-relaxed">
                 Si prefieres ir más rápido, escríbenos por WhatsApp y respondemos el mismo día.
