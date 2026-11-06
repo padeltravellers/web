@@ -167,8 +167,12 @@ function crearReserva_(p) {
 
 /** Escribe la fila sin tocar la columna "Pendiente" (ARRAYFORMULA de la cabecera). */
 function escribirFila_(sh, header, rowIndex, values) {
-  const row = header.map((h) => (values.hasOwnProperty(h) ? values[h] : ''));
-  const pIdx = header.indexOf('Pendiente');
+  // Las cabeceras del Sheet pueden venir con los acentos descompuestos (NFD): se comparan normalizadas.
+  const norm = (s) => String(s).normalize('NFC').trim();
+  const byKey = {};
+  Object.keys(values).forEach((k) => { byKey[norm(k)] = values[k]; });
+  const row = header.map((h) => (byKey.hasOwnProperty(norm(h)) ? byKey[norm(h)] : ''));
+  const pIdx = header.map(norm).indexOf('Pendiente');
   if (pIdx < 0) {
     sh.getRange(rowIndex, 1, 1, row.length).setValues([row]);
     return;
