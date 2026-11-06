@@ -13,7 +13,7 @@ export const hero = {
   kicker: "Bali · 14 días · 8–12 personas",
   title: "Donde el pádel se vuelve viaje.",
   subtitle:
-    "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y una persona del equipo PT contigo de principio a fin.",
+    "Catorce días en Bali con un grupo afín. Pádel real, alojamiento premium con desayuno, cultura, surf, aventura y un coordinador local con el grupo de principio a fin.",
   ctaPrimary: { label: "Solicitar plaza (100€)", href: "#reservar" },
   ctaSecondary: { label: "Ver fechas 2027", href: "#fechas" },
 };
@@ -35,7 +35,7 @@ export const valuePillars = [
     icon: "🧭",
     title: "Coordinador local",
     text:
-      "Un coordinador balinés y jugador de pádel viaja con el grupo todo el viaje. Mucha experiencia: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y detrás, el equipo español de Padel Travellers, que también vive en Bali: disponible para lo que necesites y con el grupo en algún momento del viaje.",
+      "Un coordinador balinés y jugador de pádel viaja con el grupo todo el viaje. Mucha experiencia: conoce la isla como nadie y te la enseña desde dentro, la Bali auténtica. Y con él, el equipo español de Padel Travellers, que también vive en Bali: siempre disponible y compartiendo con el grupo pista y planes durante el viaje.",
   },
   {
     icon: "🌴",
@@ -148,15 +148,15 @@ export const baliExperiences = [
 ];
 
 export const included = [
-  "Alojamiento en el hotel del pack seleccionado durante 13 noches",
+  "13 noches de alojamiento en habitación privada",
   "Todos los desayunos",
-  "2 h semanales de clases de pádel + partidos del grupo",
-  "4 partidos con el grupo de 1,5 h",
+  "4 partidos con el grupo de 1,5 h y 2 h semanales de clase de pádel",
   "Traslados aeropuerto – hotel – aeropuerto",
   "Traslados días de pádel: hotel ↔ Bali Padel Academy",
   "Traslados hasta el final de cada actividad diaria",
-  "Todas las actividades y entradas del pack",
+  "Todas las actividades y entradas del itinerario",
   "Coordinador local acompañando al grupo en todas las actividades",
+  "Asistencia del equipo español de Padel Travellers en Bali",
 ];
 
 export const notIncluded = [
@@ -164,7 +164,7 @@ export const notIncluded = [
   "Comidas, cenas y consumiciones",
   "Seguro de viaje (obligatorio)",
   "Visado de Indonesia (30€)",
-  "Todo lo que no se mencione en «Incluye»",
+  "Planes opcionales de los días libres y gastos personales",
 ];
 
 export const pricing = {

@@ -151,8 +151,7 @@ export default function ReservarPage() {
                 Flexibles cuando podemos
               </h2>
               <p className="text-pt-muted text-sm leading-relaxed mb-5">
-                Si el grupo mínimo de 4 personas no se forma, te devolvemos el 100% del dinero o te damos
-                opción de cambiar de fecha.
+                Si no llegamos al grupo mínimo de 8 viajeros, te devolvemos el 100 % o te pasamos a otra salida.
               </p>
               <ul className="space-y-3">
                 {cancellationRules.map((r) => (

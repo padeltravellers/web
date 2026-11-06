@@ -20,19 +20,19 @@ const principles = [
     n: "02",
     title: "Sin bote común. Sin sorpresas en destino.",
     text:
-      "Lo que pagas es lo que vale el viaje. No hay segunda factura en el aeropuerto. Las comidas y vuelos los pagas tú porque queremos que cada uno mantenga su libertad.",
+      "Un precio cerrado, sin bote común ni sorpresas al llegar. Los vuelos y las comidas van por libre: cada uno vuela desde su ciudad y come donde más le apetezca.",
   },
   {
     n: "03",
     title: "Grupos pequeños siempre",
     text:
-      "Máximo 12 personas por viaje. Es el número que nos permite mantener calidad: alojamiento, transporte, pista, atención. Más no.",
+      "Máximo 12 personas por viaje. Es el tamaño que nos permite cuidar cada detalle: alojamiento, transporte, pista y atención.",
   },
   {
     n: "04",
     title: "Un coordinador local que vive el viaje contigo",
     text:
-      "Es balinés, vive en la isla y juega al pádel. Viaja con el grupo de principio a fin: te enseña Bali desde dentro, comparte pista contigo y está para lo que necesites, día y noche. Y detrás, el equipo español de Padel Travellers, que también vive en Bali: siempre disponible y con el grupo en algún momento del viaje.",
+      "Es balinés, vive en la isla y juega al pádel. Viaja con el grupo de principio a fin: te enseña Bali desde dentro, comparte pista contigo y está para lo que necesites. Y con él, el equipo español de Padel Travellers, que también vive en Bali: siempre disponible y compartiendo con el grupo pista y planes durante el viaje.",
   },
 ];
 

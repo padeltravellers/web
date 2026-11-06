@@ -116,15 +116,15 @@ export default function BaliPage() {
               <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-7">
                 Donde empezó
                 <br />
-                <span className="font-script text-pt-clay inline-block mt-1">Padel Travellers</span>
+                <span className="font-display font-semibold text-pt-clay inline-block mt-1">Padel Travellers</span>
               </h2>
               <p className="text-pt-muted text-lg leading-relaxed mb-5">
-                Bali entró en nuestra vida y ya no la dejó. Es el sitio donde el clima permite jugar todo el año,
-                la cultura tiene profundidad real, y dos semanas no son suficientes pero ya cambian algo.
+                Bali fue nuestro primer destino y sigue siendo el favorito. Aquí se juega al pádel todo el año,
+                la cultura se vive en cada rincón y en dos semanas da tiempo a enamorarse de la isla.
               </p>
               <p className="text-pt-muted text-lg leading-relaxed">
-                Canggu es nuestro hogar durante el viaje: comunidad internacional, playas a 5 minutos, los
-                arrozales detrás. Y entre ellos, el club Bali Padel Academy, donde jugamos los partidos y las clases.
+                Durante el viaje vivimos en Canggu, entre arrozales y a pocos minutos de la playa. Muy cerca está
+                Bali Padel Academy, el club donde jugamos los partidos y las clases.
               </p>
             </div>
             <div className="lg:col-span-7 order-1 lg:order-2">
@@ -311,9 +311,9 @@ export default function BaliPage() {
         <section className="py-12 lg:py-12 px-6 lg:px-12 bg-pt-cream/40">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">El precio incluye</p>
+              <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Qué incluye</p>
               <h2 className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
-                Lo que pagas, lo que no.
+                Todo lo que incluye tu viaje
               </h2>
             </div>
             <div className="grid md:grid-cols-5 gap-5">
@@ -339,7 +339,7 @@ export default function BaliPage() {
                   <div className="w-11 h-11 rounded-2xl bg-pt-clay text-white flex items-center justify-center">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                   </div>
-                  <h3 className="font-display font-bold text-2xl text-pt-cream">No incluido</h3>
+                  <h3 className="font-display font-bold text-2xl text-pt-cream">Por tu cuenta</h3>
                 </div>
                 <ul className="space-y-4">
                   {d.notIncluded.map((i) => (
@@ -418,7 +418,7 @@ export default function BaliPage() {
             <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/70">Precio Bali 2027</span>
               <h2 className="font-display font-extralight text-3xl md:text-5xl mt-2 leading-tight">
-                Un precio. Todo incluido
+                Un precio cerrado, sin sorpresas
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
@@ -433,7 +433,7 @@ export default function BaliPage() {
                 </div>
                 <p className="text-pt-cream/80 text-sm mb-6 flex-1">Compartiendo habitación con tu pareja, amigo o familiar.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-sm hover:bg-white transition">
-                  Solicitar plaza
+                  Reservar plaza
                 </Link>
               </div>
               <div className="bg-white text-pt-ink rounded-3xl p-9">
@@ -444,7 +444,7 @@ export default function BaliPage() {
                 </div>
                 <p className="text-pt-muted text-sm mb-6">Suplemento individual de 200€. Tu habitación, tu llave.</p>
                 <Link href="/reservar" className="block text-center px-6 py-3 rounded-full bg-pt-green text-white font-display font-semibold text-sm hover:bg-pt-green-soft transition">
-                  Solicitar plaza
+                  Reservar plaza
                 </Link>
               </div>
             </div>
@@ -462,7 +462,7 @@ export default function BaliPage() {
               ¿Vamos a Bali?
             </h2>
             <p className="text-pt-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-              Antes de reservar, hablamos. Una llamada corta y vemos si encaja. Si no, sin compromiso.
+              Reserva online en unos minutos con 100 € reembolsables. Y si antes quieres hablar, escríbenos por WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/reservar" className="px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-sm hover:bg-pt-green-soft transition shadow-xl shadow-pt-green/20">
