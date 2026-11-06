@@ -83,7 +83,7 @@ export default function Home() {
                 <span className="accent">Pádel y Aventura</span>
               </h1>
               <div className="mt-12 flex flex-col sm:flex-row gap-4">
-                <Link href="/reservar" className="px-9 py-4 rounded-full border border-white/50 text-white font-display font-semibold text-base hover:bg-white/10 transition">
+                <Link href="/contacto/" className="px-9 py-4 rounded-full border border-white/50 text-white font-display font-semibold text-base hover:bg-white/10 transition">
                   Contacto
                 </Link>
               </div>
@@ -235,9 +235,9 @@ export default function Home() {
             </div>
             <ol className="grid md:grid-cols-4 gap-8">
               {[
-                { n: "01", title: "Eliges destino", text: "Bali abierto, Filipinas en lista de espera. Si dudas, te ayudamos a elegir." },
-                { n: "02", title: "Hablamos contigo", text: "Videollamada para entender qué buscas, explicarte el viaje en detalle y resolver dudas." },
-                { n: "03", title: "Reserva 100€", text: "Plaza confirmada con contrato y pago inicial reembolsable de 100€. El resto se abona en plazos." },
+                { n: "01", title: "Eliges fecha", text: "8 salidas a Bali de junio a octubre. Si dudas, te ayudamos por WhatsApp." },
+                { n: "02", title: "Reservas online", text: "En unos minutos: eliges habitación, rellenas tus datos y te llega el contrato por email." },
+                { n: "03", title: "100 € reembolsables", text: "Aseguran tu plaza hasta que se confirma el grupo. El resto, en dos pagos." },
                 { n: "04", title: "Vives el viaje", text: "El coordinador te espera al aterrizar y no te suelta hasta volver." },
               ].map((s) => (
                 <li key={s.n}>
@@ -248,8 +248,8 @@ export default function Home() {
               ))}
             </ol>
             <div className="mt-14 text-center">
-              <Link href="/reservar" className="inline-block px-10 py-4 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-base hover:bg-white transition shadow-2xl shadow-pt-cream/20">
-                Empezar el proceso de reserva
+              <Link href="/reservar/bali/" className="inline-block px-10 py-4 rounded-full bg-pt-cream text-pt-green font-display font-semibold text-lg hover:bg-white transition shadow-2xl shadow-pt-cream/20">
+                Reservar plaza
               </Link>
             </div>
           </div>

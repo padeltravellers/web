@@ -7,25 +7,25 @@ import { contact, pricing } from "@/data/content";
 import { destinations } from "@/data/destinations";
 
 export const metadata = {
-  title: "Solicitar plaza",
-  description: "Cómo reservar tu plaza paso a paso: llamada inicial, reserva 100€ reembolsable, confirmación del grupo, segundo pago y pago final.",
+  title: "Cómo reservar",
+  description: "Cómo reservar tu plaza paso a paso: reserva online con 100 € reembolsables, confirmación del grupo, segundo pago y pago final.",
 };
 
 const steps = [
   {
     n: "01",
-    title: "Eliges destino",
-    text: "Bali abierto, Filipinas en lista de espera. Si dudas, te ayudamos a elegir la fecha que mejor encaja.",
+    title: "Eliges fecha",
+    text: "8 salidas a Bali de junio a octubre. Si dudas, te ayudamos por WhatsApp a elegir la que mejor encaja.",
   },
   {
     n: "02",
-    title: "Hablamos contigo",
-    text: "Videollamada para conocernos, explicarte el viaje en detalle y resolver cualquier duda que tengas.",
+    title: "Reservas online",
+    text: "En unos minutos: eliges habitación, rellenas tus datos y te llega el contrato por email.",
   },
   {
     n: "03",
-    title: "Reserva 100€",
-    text: "Confirmas fecha, firmas el contrato y pagas 100€ (reembolsables) para asegurar tu plaza. El resto se abona en plazos.",
+    title: "100 € reembolsables",
+    text: "Aseguran tu plaza hasta que se confirma el grupo. El resto, en dos pagos.",
   },
   {
     n: "04",
@@ -62,7 +62,7 @@ export default function ReservarPage() {
             <span className="accent text-pt-clay">sin sorpresas</span>
           </h1>
           <p className="text-lg text-pt-muted max-w-2xl mx-auto mt-7 leading-relaxed">
-            Sin sorpresas y a tu ritmo. Reserva con 100€ reembolsables y el resto se paga en plazos antes del viaje.
+            Reserva con 100 € reembolsables y el resto, en dos pagos antes del viaje.
           </p>
         </section>
 
@@ -89,7 +89,7 @@ export default function ReservarPage() {
               {destinations.map((d) => (
                 <Link
                   key={d.slug}
-                  href={d.status === "open" ? `/${d.slug}#fechas` : `/${d.slug}`}
+                  href={d.status === "open" ? `/reservar/${d.slug}/` : `/${d.slug}`}
                   className={`group relative aspect-[4/3] rounded-3xl overflow-hidden ${d.status === "open" ? "" : "opacity-90"}`}
                 >
                   <Img src={d.hero} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw" />
@@ -103,7 +103,7 @@ export default function ReservarPage() {
                     <h3 className="font-display font-medium text-5xl mb-2">{d.name}</h3>
                     <p className="text-white/90 text-sm mb-4">{d.shortPitch}</p>
                     <span className="inline-flex items-center gap-2 font-display font-semibold text-sm group-hover:gap-3 transition-all">
-                      {d.status === "open" ? "Elegir fechas" : "Lista de espera"}
+                      {d.status === "open" ? "Reservar" : "Lista de espera"}
                       <span aria-hidden>→</span>
                     </span>
                   </div>

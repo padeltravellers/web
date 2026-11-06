@@ -28,7 +28,8 @@ export default function Footer() {
           <ul className="space-y-2.5 text-sm">
             <li><Link href="/sobre" className="hover:text-pt-cream">Sobre nosotros</Link></li>
             <li><Link href="/preguntas" className="hover:text-pt-cream">Preguntas frecuentes</Link></li>
-            <li><Link href="/reservar" className="hover:text-pt-cream">Reservar</Link></li>
+            <li><Link href="/reservar/bali/" className="hover:text-pt-cream">Reservar</Link></li>
+            <li><Link href="/reservar/" className="hover:text-pt-cream">Cómo reservar</Link></li>
           </ul>
         </div>
 

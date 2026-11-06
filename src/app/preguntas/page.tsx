@@ -36,7 +36,7 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Cómo son las habitaciones?",
-        a: "Villas u hoteles con piscina y desayuno, siempre en habitación privada. Si vienes con alguien, compartís habitación entre vosotros. Nunca te ponemos con alguien que no conoces.",
+        a: "Hotel con piscina y desayuno. Si vienes con alguien, compartís habitación entre vosotros; si vienes solo, habitación individual. Nunca te ponemos con alguien que no conoces.",
       },
       {
         q: "¿Quién nos acompaña?",
@@ -74,11 +74,11 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Cómo reservo?",
-        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y pagas la reserva de 100 € con tarjeta. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
+        a: "Desde la web: eliges destino, fecha y habitación, rellenas tus datos y reservas con 100 €. Si vienes con alguien en habitación compartida, reserváis los dos a la vez. Te llega el contrato por email. También puedes escribirnos por WhatsApp y te ayudamos.",
       },
       {
         q: "¿Cómo se paga?",
-        a: "En tres pagos: 100 € para reservar, 1.000 € cuando se confirma el grupo y el resto 30 días antes del viaje. La reserva se paga con tarjeta en la web, con la pasarela segura de Stripe. Los otros dos pagos, por transferencia bancaria a la cuenta que te indicamos por email.",
+        a: "En tres pagos: 100 € para reservar, 1.000 € cuando se confirma el grupo y el resto 30 días antes del viaje. Te indicamos cómo pagar cada plazo en el email de confirmación.",
       },
       {
         q: "¿Y si el grupo no llega a 8 personas?",
