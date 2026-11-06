@@ -40,11 +40,11 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Quién nos acompaña?",
-        a: "Un coordinador local balinés, que también juega al pádel, está con el grupo durante todo el viaje. Además, el equipo de Padel Travellers vive en Bali y está disponible por si necesitas algo.",
+        a: "Un coordinador local balinés, que también juega al pádel, está con el grupo durante todo el viaje. Y con él, el equipo español de Padel Travellers, que también vive en Bali: siempre disponible y compartiendo con el grupo pista y planes durante el viaje.",
       },
       {
         q: "¿Y las comidas y cenas?",
-        a: "Son libres. Bali tiene muchísima oferta y muy buen precio. El coordinador propone sitios y planes cada día, y vas con quien quieras.",
+        a: "No están incluidas, pero solemos comer y cenar juntos: el coordinador propone el sitio y cada uno paga lo suyo. Bali tiene muchísima oferta y a muy buen precio.",
       },
       {
         q: "¿Los días libres son realmente libres?",
@@ -150,7 +150,7 @@ export default function PreguntasPage() {
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-14 pb-10 lg:pt-14 lg:pb-12 max-w-4xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Preguntas frecuentes</p>
-          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
+          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[1.05]">
             Lo que nos
             <br />
             <span className="accent text-pt-clay">preguntáis</span>

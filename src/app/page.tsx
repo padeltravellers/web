@@ -22,8 +22,8 @@ const heroSlides = [
 
 const ptStats = [
   { value: "4", label: "Años organizando", suffix: "" },
-  { value: "8", label: "Viajes completados", suffix: "" },
-  { value: "61", label: "Viajeros", suffix: "+" },
+  { value: "9", label: "Viajes completados", suffix: "" },
+  { value: "61", label: "Viajeros", suffix: "" },
 ];
 
 const pillars = [
@@ -46,9 +46,9 @@ const pillars = [
     photo: "/photos/extra/la-brisa/2.jpg",
   },
   {
-    title: "Todo incluido",
+    title: "Sin bote común",
     text:
-      "Alojamiento, pádel, actividades, entradas, transporte interno y coordinador. Solo te ocupas de tus vuelos y comidas. Sin bote común. Sin sorpresas en destino.",
+      "Alojamiento, pádel, actividades, entradas, transporte interno y coordinador incluidos. Un precio cerrado, sin sorpresas en destino.",
     photo: "/photos/extra/comida/1.jpg",
   },
 ];
@@ -77,7 +77,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-pt-green/40 via-pt-green/15 to-pt-green/85" />
           <div className="absolute inset-0 flex items-end pb-12 lg:pb-10">
             <div className="pl-10 md:pl-16 lg:pl-24 pr-6 max-w-6xl text-white fade-up">
-              <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.15] tracking-tight">
+              <h1 className="font-display font-medium text-[40px] leading-[1.1] sm:text-5xl md:text-7xl lg:text-8xl md:leading-[1.15] tracking-tight">
                 Viajes en Grupo
                 <br />
                 <span className="accent">Pádel y Aventura</span>
@@ -122,7 +122,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">¿Qué es Padel Travellers?</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-8">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-8">
                 Viajes que combinan
                 <br />
                 <span className="accent text-pt-clay">pádel y aventura</span>
@@ -161,7 +161,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Viajes</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95] text-pt-green">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[1.05] text-pt-green">
                 Nuestros destinos
               </h2>
             </div>
@@ -206,7 +206,7 @@ export default function Home() {
         <section className="py-10 lg:py-10 px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">¿Por qué elegirnos?</span>
-            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95] text-pt-green">
+            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[1.05] text-pt-green">
               Cuatro razones
               <br />
               <span className="accent text-pt-clay">que cambian el viaje</span>
@@ -232,21 +232,24 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/80">Cómo reservar</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 leading-[1.05]">
                 Cuatro pasos <span className="accent text-pt-cream">sin sorpresas</span>
               </h2>
             </div>
-            <ol className="grid md:grid-cols-4 gap-8">
+            <ol className="relative grid md:grid-cols-4 gap-6 md:gap-8 max-w-md md:max-w-none mx-auto">
+              <span className="md:hidden absolute left-5 top-6 bottom-6 w-px bg-pt-cream/25" aria-hidden />
               {[
                 { n: "01", title: "Eliges fecha", text: "8 salidas a Bali de junio a octubre. Si dudas, te ayudamos por WhatsApp." },
                 { n: "02", title: "Reservas online", text: "En unos minutos: eliges habitación, rellenas tus datos y te llega el contrato por email." },
                 { n: "03", title: "100 € reembolsables", text: "Aseguran tu plaza hasta que se confirma el grupo. El resto, en dos pagos." },
                 { n: "04", title: "Vives el viaje", text: "El coordinador te espera al aterrizar y no te suelta hasta volver." },
               ].map((s) => (
-                <li key={s.n}>
-                  <div className="font-display font-medium text-6xl text-pt-cream/40 mb-4">{s.n}</div>
-                  <h3 className="font-display font-semibold text-xl mb-3">{s.title}</h3>
-                  <p className="text-pt-cream/85 leading-relaxed text-sm">{s.text}</p>
+                <li key={s.n} className="relative flex gap-4 md:block">
+                  <div className="relative z-10 shrink-0 w-10 h-10 md:w-auto md:h-auto rounded-full md:rounded-none bg-pt-clay md:bg-transparent grid place-items-center md:block font-display font-semibold md:font-medium text-sm md:text-6xl text-white md:text-pt-cream/40 md:mb-4">{s.n}</div>
+                  <div className="pt-1.5 md:pt-0">
+                  <h3 className="font-display font-semibold text-lg md:text-xl mb-1 md:mb-3">{s.title}</h3>
+                  <p className="text-pt-cream/85 leading-relaxed text-[15px] md:text-sm">{s.text}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -263,7 +266,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[1.05]">
                 Lo que dicen los que
                 <br />
                 <span className="accent text-pt-clay">ya volvieron</span>
@@ -295,7 +298,7 @@ export default function Home() {
           </div>
           <div className="relative px-6 lg:px-12 max-w-4xl mx-auto text-center">
             <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-cream/80 mb-3 inline-block">Próximas fechas 2027</span>
-            <h2 className="font-display font-medium text-5xl md:text-7xl leading-[0.95] mb-10">
+            <h2 className="font-display font-medium text-5xl md:text-7xl leading-[1.05] mb-10">
               Ocho salidas
               <br />
               <span className="accent text-pt-cream">elige la tuya</span>

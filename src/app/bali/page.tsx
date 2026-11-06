@@ -277,7 +277,7 @@ export default function BaliPage() {
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-5">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Nuestro hogar</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green mb-6">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green mb-6">
                 Hotel
                 <br />
                 <span className="accent text-pt-clay">en Canggu</span>
@@ -320,7 +320,7 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Qué incluye</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[1.05]">
                 Todo lo que incluye tu viaje
               </h2>
             </div>
@@ -367,7 +367,7 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <span className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay">Reseñas</span>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl mt-2 text-pt-green leading-[1.05]">
                 Lo que dicen los que
                 <br />
                 <span className="accent text-pt-clay">ya volvieron</span>
@@ -375,8 +375,8 @@ export default function BaliPage() {
               <div className="mt-8 flex justify-center divide-x divide-pt-green/15">
                 {[
                   ["4", "años"],
-                  ["8", "viajes"],
-                  ["+61", "viajeros"],
+                  ["9", "viajes"],
+                  ["61", "viajeros"],
                 ].map(([n, l]) => (
                   <div key={l} className="px-6 md:px-10">
                     <p className="font-display font-semibold text-4xl md:text-5xl text-pt-green leading-none">{n}</p>
@@ -442,7 +442,7 @@ export default function BaliPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Calendario 2027</p>
-              <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[0.95]">
+              <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[1.05]">
                 Ocho salidas.
                 <br />
                 <span className="accent text-pt-clay">Elige la tuya</span>
@@ -467,7 +467,7 @@ export default function BaliPage() {
         {/* CTA FINAL */}
         <section className="py-10 lg:py-12 px-6 lg:px-12 bg-pt-cream">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[0.95] mb-7">
+            <h2 className="font-display font-medium text-4xl md:text-6xl text-pt-green leading-[1.05] mb-7">
               ¿Vamos a Bali?
             </h2>
             <p className="text-pt-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed">

@@ -56,7 +56,7 @@ export default function ReservarPage() {
       <main className="text-pt-ink">
         <section className="px-6 lg:px-12 pt-14 pb-12 lg:pt-14 lg:pb-12 max-w-5xl mx-auto text-center">
           <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Cómo reservar</p>
-          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.92]">
+          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[1.05]">
             Cuatro pasos
             <br />
             <span className="accent text-pt-clay">sin sorpresas</span>
@@ -67,12 +67,18 @@ export default function ReservarPage() {
         </section>
 
         <section className="px-6 lg:px-12 pb-10 max-w-6xl mx-auto">
-          <ol className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-7">
+          {/* Móvil: línea de tiempo compacta. Escritorio: 4 tarjetas. */}
+          <ol className="relative md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 lg:gap-7 space-y-6 md:space-y-0 max-w-md md:max-w-none mx-auto">
+            <span className="md:hidden absolute left-5 top-6 bottom-6 w-px bg-pt-clay/30" aria-hidden />
             {steps.map((s) => (
-              <li key={s.n} className="bg-white border border-pt-green/10 rounded-3xl p-7 flex flex-col hover:shadow-xl transition">
-                <span className="font-display font-medium text-5xl text-pt-clay/80 mb-4">{s.n}</span>
-                <h3 className="font-display font-bold text-xl text-pt-green mb-3 leading-tight">{s.title}</h3>
-                <p className="text-sm text-pt-muted leading-relaxed flex-1">{s.text}</p>
+              <li key={s.n} className="relative flex gap-4 md:block md:bg-white md:border md:border-pt-green/10 md:rounded-3xl md:p-7 md:hover:shadow-xl md:transition">
+                <span className="relative z-10 shrink-0 w-10 h-10 md:w-auto md:h-auto rounded-full md:rounded-none bg-pt-clay md:bg-transparent text-white md:text-pt-clay/80 grid place-items-center md:block font-display font-semibold md:font-medium text-sm md:text-5xl md:mb-4">
+                  {s.n}
+                </span>
+                <div className="pt-1.5 md:pt-0">
+                  <h3 className="font-display font-bold text-lg md:text-xl text-pt-green mb-1 md:mb-3 leading-tight">{s.title}</h3>
+                  <p className="text-[15px] md:text-sm text-pt-muted leading-relaxed">{s.text}</p>
+                </div>
               </li>
             ))}
           </ol>
@@ -82,7 +88,7 @@ export default function ReservarPage() {
         <section className="bg-pt-cream/50 py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Elige destino</p>
-            <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green text-center leading-[0.95] mb-12">
+            <h2 className="font-display font-medium text-3xl md:text-5xl text-pt-green text-center leading-[1.05] mb-12">
               ¿A dónde quieres viajar?
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -116,7 +122,7 @@ export default function ReservarPage() {
         {/* PRECIO + Política de cancelación */}
         <section className="py-10 lg:py-10 px-6 lg:px-12">
           <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-5">
-            <div className="bg-pt-green text-white rounded-3xl p-9 md:p-12 relative overflow-hidden">
+            <div className="bg-pt-green text-white rounded-3xl p-7 md:p-12 relative overflow-hidden">
               <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-pt-clay/20 blur-3xl" />
               <div className="relative">
                 <p className="font-display uppercase tracking-[0.26em] text-xs font-semibold text-pt-cream/70 mb-5">Pagos</p>
@@ -145,14 +151,11 @@ export default function ReservarPage() {
               </div>
             </div>
 
-            <div className="bg-white border border-pt-green/10 rounded-3xl p-9 md:p-12">
+            <div className="bg-white border border-pt-green/10 rounded-3xl p-7 md:p-12">
               <p className="font-display uppercase tracking-[0.26em] text-xs font-semibold text-pt-clay mb-5">Política de cancelación</p>
               <h2 className="font-display font-medium text-3xl md:text-4xl text-pt-green leading-tight mb-7">
                 Flexibles cuando podemos
               </h2>
-              <p className="text-pt-muted text-sm leading-relaxed mb-5">
-                Si no llegamos al grupo mínimo de 8 viajeros, te devolvemos el 100 % o te pasamos a otra salida.
-              </p>
               <ul className="space-y-3">
                 {cancellationRules.map((r) => (
                   <li key={r.label} className="border-t border-pt-green/10 pt-3">
@@ -170,7 +173,7 @@ export default function ReservarPage() {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Empieza por aquí</p>
-              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[0.95] mb-6">
+              <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl text-pt-green leading-[1.05] mb-6">
                 Déjanos tus datos
                 <br />
                 <span className="accent text-pt-clay">y nosotros te llamamos</span>

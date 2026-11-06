@@ -22,7 +22,7 @@ export default function ReservarBaliPage() {
           </div>
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 pt-16 pb-14 lg:pt-20 lg:pb-16 text-white">
             <p className="font-display uppercase tracking-[0.16em] text-sm font-semibold text-pt-cream/85 mb-3">Reserva online · Temporada 2027</p>
-            <h1 className="font-display font-medium text-5xl md:text-7xl leading-[0.92]">
+            <h1 className="font-display font-medium text-5xl md:text-7xl leading-[1.05]">
               Reserva tu plaza,
               <br />
               <span className="accent text-pt-cream">en cuatro pasos</span>

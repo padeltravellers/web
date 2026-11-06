@@ -18,9 +18,9 @@ const principles = [
   },
   {
     n: "02",
-    title: "Sin bote común. Sin sorpresas en destino.",
+    title: "Sin bote común",
     text:
-      "Un precio cerrado, sin bote común ni sorpresas al llegar.",
+      "Un precio cerrado y sin sorpresas al llegar.",
   },
   {
     n: "03",
@@ -46,7 +46,7 @@ export default function SobrePage() {
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-7">
               <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Sobre nosotros</p>
-              <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight text-pt-green">
+              <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight text-pt-green">
                 Pequeños,
                 <br />
                 cuidadosos,
@@ -70,7 +70,7 @@ export default function SobrePage() {
         <section className="px-6 lg:px-12 py-10 lg:py-10 max-w-6xl mx-auto">
           <div className="mb-14">
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">Filosofía</p>
-            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-pt-green max-w-3xl">
+            <h2 className="font-display font-medium text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-pt-green max-w-3xl">
               Cuatro decisiones
               <br />
               <span className="accent text-pt-clay">que no negociamos</span>
@@ -78,7 +78,7 @@ export default function SobrePage() {
           </div>
           <ol className="space-y-10">
             {principles.map((p) => (
-              <li key={p.n} className="grid grid-cols-[64px_1fr] md:grid-cols-[100px_1fr] gap-5 md:gap-8 items-start border-t border-pt-green/15 pt-8">
+              <li key={p.n} className="grid grid-cols-1 sm:grid-cols-[64px_1fr] md:grid-cols-[100px_1fr] gap-2 sm:gap-5 md:gap-8 items-start border-t border-pt-green/15 pt-8">
                 <span className="font-display font-medium text-5xl md:text-7xl text-pt-clay leading-none">{p.n}</span>
                 <div>
                   <h3 className="font-display font-semibold text-2xl text-pt-green mb-3">{p.title}</h3>

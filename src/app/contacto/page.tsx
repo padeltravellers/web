@@ -17,7 +17,7 @@ export default function ContactoPage() {
           <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3">
             ¿Hablamos?
           </p>
-          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[0.95]">
+          <h1 className="font-display font-medium text-5xl md:text-7xl text-pt-green leading-[1.05]">
             Cuéntanos
             <br />
             <span className="accent text-pt-clay">y te llamamos</span>
