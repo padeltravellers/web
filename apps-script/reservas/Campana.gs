@@ -1,5 +1,5 @@
 /**
- * Campaña de email "Abrimos Bali 2027" y bajas de publicidad.
+ * Campaña de email "Fechas Bali 2027" y bajas de publicidad.
  *
  * - GET ?action=campana_prueba&k=CLAVE  → envía UNA prueba a oriol@ (no toca el CRM).
  * - GET ?action=baja&e=EMAIL&t=TOKEN    → marca ese email como "No publicidad" en el CRM y lo registra.
@@ -13,7 +13,7 @@ const CRM_TAB = 'PT Sin vuelos';
 const CRM_COL_MAIL = 11; // K
 const CRM_COL_PUBLICIDAD_HEADER = 'Publicidad';
 const PDF_BALI_2027 = '136Kp7cAN5UKorxIvVkYfSmQ7bernEYv1'; // "Viaje Padel y Bali 2027.pdf" (copia en Reservas 2027)
-const ASUNTO_BALI_2027 = 'Abrimos Bali 2027: 8 salidas de junio a octubre';
+const ASUNTO_BALI_2027 = 'Fechas Bali 2027: 8 salidas de junio a octubre';
 const PRUEBA_PARA = 'oriol@padeltravellers.com';
 
 function tokenBaja_(email) {
@@ -38,7 +38,7 @@ function campanaPrueba_(p) {
     name: 'Padel Travellers',
     attachments: [DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf')],
   };
-  const texto = 'Abrimos Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
+  const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
   GmailApp.sendEmail(PRUEBA_PARA, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, opts);
   return json_({ ok: true, enviado_a: PRUEBA_PARA });
 }
