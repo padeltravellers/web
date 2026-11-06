@@ -15,6 +15,7 @@ const CRM_COL_PUBLICIDAD_HEADER = 'Publicidad';
 const PDF_BALI_2027 = '136Kp7cAN5UKorxIvVkYfSmQ7bernEYv1'; // "Viaje Padel y Bali 2027.pdf" (copia en Reservas 2027)
 const ASUNTO_BALI_2027 = 'Fechas Bali 2027: 8 salidas de junio a octubre';
 const PRUEBA_PARA = 'oriol@padeltravellers.com';
+const PRUEBA_PERMITIDOS = ['oriol@padeltravellers.com', 'padeltravellers@gmail.com', 'miriam.padeltravellers@gmail.com'];
 
 function tokenBaja_(email) {
   const sig = Utilities.computeHmacSha256Signature(String(email).trim().toLowerCase(), CAMPANA_KEY);
@@ -32,15 +33,19 @@ function htmlCampana_(nombre, email) {
 
 function campanaPrueba_(p) {
   if (!p.k || p.k !== CAMPANA_KEY) return json_({ ok: false, error: 'clave' });
-  const html = htmlCampana_('Oriol', PRUEBA_PARA);
+  // Solo a direcciones del equipo (pruebas internas).
+  const para = String(p.para || PRUEBA_PARA).trim().toLowerCase();
+  if (PRUEBA_PERMITIDOS.indexOf(para) < 0) return json_({ ok: false, error: 'destinatario' });
+  const nombre = String(p.nombre || 'Oriol');
+  const html = htmlCampana_(nombre, para);
   const opts = {
     htmlBody: html,
     name: 'Padel Travellers',
     attachments: [DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf')],
   };
   const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
-  GmailApp.sendEmail(PRUEBA_PARA, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, opts);
-  return json_({ ok: true, enviado_a: PRUEBA_PARA });
+  GmailApp.sendEmail(para, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, opts);
+  return json_({ ok: true, enviado_a: para });
 }
 
 function baja_(p) {
