@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Viaje Pádel y Bali 2027 · Padel Travellers</title>
+</head>
+<body style="margin:0;background:#F3F1EA;color:#0B1F19;font-family:Helvetica,Arial,sans-serif;text-align:center;padding:72px 20px;">
+<p style="font-size:17px;margin:0 0 18px;">Abriendo el programa del viaje…</p>
+<p style="margin:0;"><a id="seguir" href="https://drive.google.com/file/d/1c57lIPf3O4TuDNQYyfeesi9t-zT5hrTk/view" style="color:#0E3B2D;font-weight:bold;">Ver el PDF</a></p>
+<script>
+/*
+ * Enlace con seguimiento al PDF del viaje (el que va en Linktree, bio, etc.).
+ * Apunta cada apertura en la pestaña "Folleto aperturas" del Sheet de Reservas
+ * (fecha, origen ?src=, dispositivo, de qué web llega) y abre el PDF del Drive.
+ * No guarda datos personales.
+ */
+(function () {
+  var EXEC = 'https://script.google.com/macros/s/AKfycbzsbb_HmKLSnk6MVKoSVfhkA-WLQQ7SPhrsFke19q_nwt99ulncsNYg62fM4zKz26xG/exec';
+  var PDF = document.getElementById('seguir').href;
+  var q = new URLSearchParams(location.search);
+  var src = (q.get('src') || 'directo').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 30) || 'directo';
+  var ua = navigator.userAgent || '';
+  var dev = /iPhone|iPad|iPod/.test(ua) ? 'iPhone' : /Android/.test(ua) ? 'Android' : /Mobi/.test(ua) ? 'Móvil' : 'Ordenador';
+  var app = /Instagram/.test(ua) ? 'Instagram' : /FBAN|FBAV/.test(ua) ? 'Facebook' : /TikTok|musical_ly|BytedanceWebview/.test(ua) ? 'TikTok' : /WhatsApp/.test(ua) ? 'WhatsApp' : '';
+  var ref = '';
+  try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+  try {
+    fetch(EXEC + '?action=folleto&src=' + encodeURIComponent(src) + '&dev=' + encodeURIComponent(dev) +
+      '&app=' + encodeURIComponent(app) + '&ref=' + encodeURIComponent(ref) +
+      '&lang=' + encodeURIComponent((navigator.language || '').slice(0, 5)), { mode: 'no-cors', keepalive: true });
+  } catch (e) {}
+  setTimeout(function () { location.replace(PDF); }, 400);
+})();
+</script>
+</body>
+</html>

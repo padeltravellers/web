@@ -171,3 +171,23 @@ function paginaBaja_(msg) {
     '<a href="https://padeltravellers.com" style="color:#0E3B2D;font-weight:bold;">padeltravellers.com</a></div></body></html>';
   return HtmlService.createHtmlOutput(html).setTitle('Padel Travellers').addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
+
+/**
+ * Aperturas del PDF del viaje desde padeltravellers.com/folleto/?src=ORIGEN
+ * (Linktree, bio, historias...). Una fila por apertura, sin datos personales.
+ */
+const FOLLETO_TAB = 'Folleto aperturas';
+const FOLLETO_HEAD = ['Fecha', 'Origen', 'Dispositivo', 'App', 'Llega desde', 'Idioma'];
+
+function registrarFolleto_(p) {
+  const limpio = (v, n) => String(v || '').replace(/[^\p{L}\p{N} ._-]/gu, '').slice(0, n);
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sh = ss.getSheetByName(FOLLETO_TAB);
+  if (!sh) {
+    sh = ss.insertSheet(FOLLETO_TAB);
+    sh.appendRow(FOLLETO_HEAD);
+    sh.setFrozenRows(1);
+    sh.getRange(1, 1, 1, FOLLETO_HEAD.length).setFontWeight('bold');
+  }
+  sh.appendRow([new Date(), limpio(p.src, 30) || 'directo', limpio(p.dev, 20), limpio(p.app, 20), limpio(p.ref, 60), limpio(p.lang, 5)]);
+}
