@@ -1,4 +1,8 @@
-name: Deploy to Cloudflare Pages
+name: Deploy web (GitHub Pages + copia en Cloudflare Pages)
+
+# padeltravellers.com se sirve desde GitHub Pages (DNS de Cloudflare en modo "solo DNS").
+# Motivo: en España los bloqueos de LaLiga cortan las IPs compartidas de Cloudflare en días de partido.
+# Cloudflare Pages se sigue publicando como copia de seguridad (web.pages.dev) para poder volver rápido.
 
 on:
   push:
@@ -8,13 +12,15 @@ on:
 permissions:
   contents: read
   deployments: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages-deploy
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,15 +36,43 @@ jobs:
         run: npm ci
 
       - name: Build (static export)
-        run: npm run build
+        # Reintenta: next/font descarga Google Fonts en el build y a veces falla por red.
+        run: |
+          for i in 1 2 3; do
+            npm run build && exit 0
+            echo "Build fallido (intento $i), reintento en 20 s..."; sleep 20
+          done
+          exit 1
         env:
           NODE_ENV: production
           # Web app de Apps Script (reservas → Sheet + contrato + email, y plazas libres). Pública por diseño.
           NEXT_PUBLIC_BOOKING_ENDPOINT: https://script.google.com/macros/s/AKfycbzsbb_HmKLSnk6MVKoSVfhkA-WLQQ7SPhrsFke19q_nwt99ulncsNYg62fM4zKz26xG/exec
 
-      - name: Publish to Cloudflare Pages
+      - name: Prepare GitHub Pages output
+        run: |
+          cp -R out out-gh
+          node scripts/gh-pages-postbuild.mjs out-gh
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out-gh
+
+      - name: Publish backup to Cloudflare Pages
+        continue-on-error: true
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy out --project-name=web --branch=main --commit-dirty=true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
