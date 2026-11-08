@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Padel Travellers</title>
+</head>
+<body style="margin:0;background:#F3F1EA;color:#0B1F19;font-family:Helvetica,Arial,sans-serif;text-align:center;padding:72px 20px;">
+<p style="font-size:17px;margin:0 0 18px;">Abriendo…</p>
+<p style="margin:0;"><a id="seguir" href="https://padeltravellers.com/" style="color:#0E3B2D;font-weight:bold;">Continuar</a></p>
+<script>
+/*
+ * Redirección de los enlaces de los emails de campaña.
+ * Cuenta el click (si trae un ID válido) y lleva al destino, solo si es
+ * padeltravellers.com, instagram.com o wa.me. Cualquier otro destino va a la portada.
+ */
+(function () {
+  var EXEC = 'https://script.google.com/macros/s/AKfycbzsbb_HmKLSnk6MVKoSVfhkA-WLQQ7SPhrsFke19q_nwt99ulncsNYg62fM4zKz26xG/exec';
+  var q = new URLSearchParams(location.search);
+  var u = q.get('u') || '';
+  var id = q.get('i') || '';
+  var dest = 'https://padeltravellers.com/';
+  try {
+    var x = new URL(u);
+    if (x.protocol === 'https:' && /(^|\.)(padeltravellers\.com|instagram\.com|wa\.me)$/.test(x.hostname)) dest = x.href;
+  } catch (e) {}
+  try {
+    var d = new URL(dest);
+    if (/(^|\.)padeltravellers\.com$/.test(d.hostname)) {
+      d.searchParams.set('utm_source', 'email');
+      d.searchParams.set('utm_medium', 'email');
+      d.searchParams.set('utm_campaign', 'bali2027');
+      dest = d.href;
+    }
+  } catch (e) {}
+  document.getElementById('seguir').href = dest;
+  if (/^[A-Za-z0-9_-]{16}$/.test(id)) {
+    try {
+      fetch(EXEC + '?action=clk&i=' + encodeURIComponent(id) + '&u=' + encodeURIComponent(dest.split('?')[0]), { mode: 'no-cors', keepalive: true });
+    } catch (e) {}
+  }
+  setTimeout(function () { location.replace(dest); }, 350);
+})();
+</script>
+</body>
+</html>

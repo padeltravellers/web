@@ -20,6 +20,14 @@ function doGet(e) {
   if (action === 'plazas') return json_({ ok: true, salidas: salidas_().map(publicSalida_) });
   if (action === 'baja') return baja_(e.parameter);
   if (action === 'campana_prueba') return campanaPrueba_(e.parameter);
+  if (action === 'px' || action === 'clk') {
+    try {
+      registrarEvento_(e.parameter.i, action === 'px' ? 'open' : 'click', e.parameter.u);
+    } catch (err) {
+      console.error('Seguimiento: ' + err);
+    }
+    return action === 'px' ? ContentService.createTextOutput('') : json_({ ok: true });
+  }
   return json_({ ok: true, service: 'pt-reservas' });
 }
 

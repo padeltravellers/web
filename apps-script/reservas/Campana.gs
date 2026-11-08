@@ -26,8 +26,85 @@ function urlBaja_(email) {
   return ScriptApp.getService().getUrl() + '?action=baja&e=' + encodeURIComponent(email) + '&t=' + tokenBaja_(email);
 }
 
-function htmlCampana_(nombre, email) {
-  const html = HtmlService.createHtmlOutputFromFile('email_bali_2027').getContent();
+/**
+ * Seguimiento de aperturas y clicks.
+ * - Cada destinatario tiene un ID opaco (HMAC del email), sin el email en las URLs.
+ * - Apertura: imagen de 1x1 que llama a ?action=px&i=ID (Gmail la carga al abrir el email).
+ * - Click: los enlaces pasan por padeltravellers.com/go/, que avisa a ?action=clk y redirige.
+ * - Todo se apunta en la pestaña TRACK_TAB del Sheet de Reservas, una fila por destinatario.
+ */
+const TRACK_TAB = 'Campaña Bali 2027';
+const TRACK_HEAD = ['Email', 'Nombre', 'ID', 'Enviado', 'Primera apertura', 'Aperturas', 'Primer click', 'Clicks', 'Último enlace', 'Última actividad'];
+
+function idSeguimiento_(email) {
+  const sig = Utilities.computeHmacSha256Signature('trk:' + String(email).trim().toLowerCase(), CAMPANA_KEY);
+  return Utilities.base64EncodeWebSafe(sig).replace(/=+$/, '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 16);
+}
+
+function hojaTracking_() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sh = ss.getSheetByName(TRACK_TAB);
+  if (!sh) {
+    sh = ss.insertSheet(TRACK_TAB);
+    sh.appendRow(TRACK_HEAD);
+    sh.setFrozenRows(1);
+    sh.getRange(1, 1, 1, TRACK_HEAD.length).setFontWeight('bold');
+  }
+  return sh;
+}
+
+function filaTracking_(sh, id) {
+  const f = sh.getRange('C:C').createTextFinder(id).matchEntireCell(true).findNext();
+  return f ? f.getRow() : 0;
+}
+
+function registrarEnvio_(email, nombre) {
+  const id = idSeguimiento_(email);
+  const sh = hojaTracking_();
+  const r = filaTracking_(sh, id);
+  if (r) sh.getRange(r, 4).setValue(new Date());
+  else sh.appendRow([String(email).trim().toLowerCase(), nombre || '', id, new Date(), '', 0, '', 0, '', '']);
+  return id;
+}
+
+function registrarEvento_(id, tipo, url) {
+  if (!/^[A-Za-z0-9_-]{16}$/.test(String(id || ''))) return;
+  const lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(10000);
+  } catch (err) {
+    return;
+  }
+  try {
+    const sh = hojaTracking_();
+    const r = filaTracking_(sh, id);
+    if (!r) return;
+    const ahora = new Date();
+    const fila = sh.getRange(r, 1, 1, TRACK_HEAD.length).getValues()[0];
+    if (!fila[4]) sh.getRange(r, 5).setValue(ahora); // un click también cuenta como apertura
+    if (tipo === 'open') {
+      sh.getRange(r, 6).setValue(Number(fila[5] || 0) + 1);
+    } else {
+      if (!fila[6]) sh.getRange(r, 7).setValue(ahora);
+      sh.getRange(r, 8).setValue(Number(fila[7] || 0) + 1);
+      sh.getRange(r, 9).setValue(String(url || '').slice(0, 200));
+    }
+    sh.getRange(r, 10).setValue(ahora);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function htmlCampana_(nombre, email, id) {
+  let html = HtmlService.createHtmlOutputFromFile('email_bali_2027').getContent();
+  if (id) {
+    // Enlaces a la web, Instagram y WhatsApp → pasan por /go/ para contar el click.
+    html = html.replace(/href="(https:\/\/(?:padeltravellers\.com|instagram\.com|wa\.me)[^"]*)"/g, (m, u) =>
+      'href="https://padeltravellers.com/go/?i=' + id + '&amp;u=' + encodeURIComponent(u) + '"');
+    html = html.split('{{PIXEL_URL}}').join(ScriptApp.getService().getUrl() + '?action=px&amp;i=' + id);
+  } else {
+    html = html.replace(/<img[^>]*\{\{PIXEL_URL\}\}[^>]*>/g, '');
+  }
   return html.split('{{NOMBRE}}').join(esc_(nombre || '')).split('{{BAJA_URL}}').join(urlBaja_(email));
 }
 
@@ -37,7 +114,7 @@ function campanaPrueba_(p) {
   const para = String(p.para || PRUEBA_PARA).trim().toLowerCase();
   if (PRUEBA_PERMITIDOS.indexOf(para) < 0) return json_({ ok: false, error: 'destinatario' });
   const nombre = String(p.nombre || 'Oriol');
-  const html = htmlCampana_(nombre, para);
+  const html = htmlCampana_(nombre, para, registrarEnvio_(para, nombre + ' (prueba)'));
   const opts = {
     htmlBody: html,
     name: 'Padel Travellers',
