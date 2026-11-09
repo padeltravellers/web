@@ -176,7 +176,7 @@ function crearReserva_(p) {
       'Nombre': clean_(v.nombre),
       'Apellidos': clean_(v.apellidos),
       'Email': clean_(v.email),
-      'Teléfono': clean_(v.telefono),
+      'Teléfono': texto_(v.telefono),
       'Fecha nacimiento': fechaDate_(v.nacimiento),
       'Nacionalidad': clean_(v.nacionalidad),
       'Tipo doc.': clean_(v.docTipo),
@@ -185,7 +185,7 @@ function crearReserva_(p) {
       'Nivel pádel': clean_(v.nivel),
       'Salud / alergias': clean_(v.salud),
       'Emergencia: nombre': clean_(v.emergenciaNombre),
-      'Emergencia: teléfono': clean_(v.emergenciaTelefono),
+      'Emergencia: teléfono': texto_(v.emergenciaTelefono),
       'Precio': precio,
       'Honorarios': honorarios,
       'Presupuesto': presupuesto,
@@ -366,6 +366,8 @@ function json_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 function num_(v) { const n = Number(String(v).replace(/[^\d.-]/g, '')); return isNaN(n) ? 0 : n; }
+/** Para el Sheet: un "+34 600…" se interpretaría como fórmula (#ERROR!). El apóstrofo lo fuerza a texto y no se ve. */
+function texto_(v) { const t = clean_(v); return t ? "'" + t : ''; }
 function clean_(v) { return String(v || '').replace(/\s+/g, ' ').trim().slice(0, 300); }
 function esc_(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 function eur_(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; }

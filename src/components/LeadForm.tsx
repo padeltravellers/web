@@ -138,7 +138,8 @@ export default function LeadForm() {
               className="flex-1 min-w-0 bg-transparent px-3 py-3 text-base text-pt-ink placeholder:text-pt-muted/60 rounded-r-xl focus:outline-none"
             />
           </div>
-          <input type="hidden" name="phone" value={`${countries.find((c) => c.iso === prefix)?.code || ""} ${phone.trim()}`} />
+          {/* Solo dígitos (34600000000): con "+34 600…" el Sheet lo lee como fórmula y guarda #ERROR! */}
+          <input type="hidden" name="phone" value={`${countries.find((c) => c.iso === prefix)?.code || ""}${phone}`.replace(/\D/g, "")} />
         </div>
         <label className="block">
           <span className="block font-display font-medium text-sm text-pt-ink mb-1.5">Destino</span>
