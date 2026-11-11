@@ -29,8 +29,8 @@ export const rooms = {
   },
   individual: {
     label: "Habitación individual",
-    price: 1690,
-    note: "Tu propia habitación privada. Suplemento de 200 €.",
+    price: 1725,
+    note: "Tu propia habitación privada. Suplemento de 235 €.",
   },
 } as const;
 

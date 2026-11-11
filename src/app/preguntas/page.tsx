@@ -24,7 +24,7 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Cuánto cuesta?",
-        a: "1.490 € por persona en habitación compartida y 1.690 € en habitación individual (suplemento de 200 €).",
+        a: "1.490 € por persona en habitación compartida y 1.725 € en habitación individual (suplemento de 235 €).",
       },
       {
         q: "¿Cuántas personas sois en cada grupo?",

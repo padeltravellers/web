@@ -431,7 +431,7 @@ export const destinations: Destination[] = [
     duration: "14 días",
     groupSize: "8–12 personas",
     basePrice: "1.490€",
-    solo: "1.690€",
+    solo: "1.725€",
     deposit: "100€",
     trips: bali2026,
     highlights: baliHighlights,
