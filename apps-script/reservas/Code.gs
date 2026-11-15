@@ -20,6 +20,7 @@ function doGet(e) {
   if (action === 'plazas') return json_({ ok: true, salidas: salidas_().map(publicSalida_) });
   if (action === 'baja') return baja_(e.parameter);
   if (action === 'campana_prueba') return campanaPrueba_(e.parameter);
+  if (action === 'campana_envio') return campanaEnvio_(e.parameter);
   if (action === 'folleto') {
     try {
       registrarFolleto_(e.parameter);

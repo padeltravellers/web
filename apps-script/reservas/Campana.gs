@@ -5,7 +5,9 @@
  * - GET ?action=baja&e=EMAIL&t=TOKEN    → marca ese email como "No publicidad" en el CRM y lo registra.
  *
  * La CLAVE (CAMPANA_KEY) está en Secreto.gs, que NO se sube al repo (el repo es público).
- * El envío masivo NO está implementado aquí a propósito: solo se activará con el OK de Oriol.
+ * - GET ?action=campana_envio&k=CLAVE&n=50 → envía la siguiente tanda (OK de Oriol 2026-11-15).
+ *   Lee la pestaña ENVIO_TAB del Sheet de Reservas (Email, Nombre, Fila CRM, Estado) y solo
+ *   envía a las filas con Estado vacío. Marca "enviando" ANTES de enviar (nunca dos veces).
  */
 
 const CRM_ID = '1IxTWD5RNc9m3LitTtkBKbKm72a-jR7yFNmrMop40vy4'; // Sheet "Clientes" · pestaña "PT Sin vuelos"
@@ -15,6 +17,16 @@ const CRM_COL_PUBLICIDAD_HEADER = 'Publicidad';
 const PDF_BALI_2027 = '136Kp7cAN5UKorxIvVkYfSmQ7bernEYv1'; // "Viaje Padel y Bali 2027.pdf" (copia en Reservas 2027)
 const ASUNTO_BALI_2027 = 'Fechas Bali 2027: 8 salidas de junio a octubre';
 const PRUEBA_PARA = 'oriol@padeltravellers.com';
+// Oriol (2026-11-15): la campaña SALE SIEMPRE de info@. Si el alias no está, no se envía nada.
+const CAMPANA_FROM = 'info@padeltravellers.com';
+
+function aliasCampanaOk_() {
+  return GmailApp.getAliases().map((a) => String(a).toLowerCase()).indexOf(CAMPANA_FROM) >= 0;
+}
+
+function optsCampana_(html, pdf) {
+  return { from: CAMPANA_FROM, replyTo: CAMPANA_FROM, name: 'Padel Travellers', htmlBody: html, attachments: [pdf] };
+}
 const PRUEBA_PERMITIDOS = ['oriol@padeltravellers.com', 'padeltravellers@gmail.com', 'miriam.padeltravellers@gmail.com'];
 
 function tokenBaja_(email) {
@@ -97,6 +109,7 @@ function registrarEvento_(id, tipo, url) {
 
 function htmlCampana_(nombre, email, id) {
   let html = HtmlService.createHtmlOutputFromFile('email_bali_2027').getContent();
+  if (!String(nombre || '').trim()) html = html.split('Hola {{NOMBRE}},').join('Hola,');
   if (id) {
     // Enlaces a la web, Instagram y WhatsApp → pasan por /go/ para contar el click.
     html = html.replace(/href="(https:\/\/(?:padeltravellers\.com|instagram\.com|wa\.me)[^"]*)"/g, (m, u) =>
@@ -110,19 +123,70 @@ function htmlCampana_(nombre, email, id) {
 
 function campanaPrueba_(p) {
   if (!p.k || p.k !== CAMPANA_KEY) return json_({ ok: false, error: 'clave' });
+  if (!aliasCampanaOk_()) return json_({ ok: false, error: 'alias ' + CAMPANA_FROM + ' no disponible', alias: GmailApp.getAliases() });
   // Solo a direcciones del equipo (pruebas internas).
   const para = String(p.para || PRUEBA_PARA).trim().toLowerCase();
   if (PRUEBA_PERMITIDOS.indexOf(para) < 0) return json_({ ok: false, error: 'destinatario' });
   const nombre = String(p.nombre || 'Oriol');
   const html = htmlCampana_(nombre, para, registrarEnvio_(para, nombre + ' (prueba)'));
-  const opts = {
-    htmlBody: html,
-    name: 'Padel Travellers',
-    attachments: [DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf')],
-  };
+  const pdf = DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf');
   const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
-  GmailApp.sendEmail(para, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, opts);
-  return json_({ ok: true, enviado_a: para });
+  GmailApp.sendEmail(para, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, optsCampana_(html, pdf));
+  return json_({ ok: true, enviado_a: para, desde: CAMPANA_FROM });
+}
+
+/**
+ * Envío real por tandas. Idempotente: cada fila pasa a "enviando" antes de enviar y a
+ * "enviado dd/mm/aaaa hh:mm" (o "error: …") después. Si una fila se queda en "enviando"
+ * (p. ej. timeout), NO se reintenta sola: se revisa a mano.
+ */
+const ENVIO_TAB = 'Envío Bali 2027';
+const ENVIO_MAX_MS = 4.5 * 60 * 1000; // margen bajo el límite de 6 min de Apps Script
+
+function campanaEnvio_(p) {
+  if (!p.k || p.k !== CAMPANA_KEY) return json_({ ok: false, error: 'clave' });
+  const n = Math.min(Math.max(parseInt(p.n, 10) || 0, 0), 100);
+  if (!n) return json_({ ok: false, error: 'n' });
+  if (!aliasCampanaOk_()) return json_({ ok: false, error: 'alias ' + CAMPANA_FROM + ' no disponible: no se envía nada' });
+  const lock = LockService.getScriptLock();
+  if (!lock.tryLock(5000)) return json_({ ok: false, error: 'ya hay un envío en marcha' });
+  const t0 = Date.now();
+  const res = { ok: true, enviados: 0, errores: 0, saltados_baja: 0, pendientes: 0 };
+  try {
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    const sh = ss.getSheetByName(ENVIO_TAB);
+    if (!sh) return json_({ ok: false, error: 'falta la pestaña ' + ENVIO_TAB });
+    const bajasSh = ss.getSheetByName('Bajas publicidad');
+    const bajas = new Set(bajasSh && bajasSh.getLastRow() > 1
+      ? bajasSh.getRange(2, 2, bajasSh.getLastRow() - 1, 1).getValues().map((r) => String(r[0]).trim().toLowerCase())
+      : []);
+    const filas = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues() : [];
+    const pdf = DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf');
+    const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
+    for (let i = 0; i < filas.length; i++) {
+      if (String(filas[i][3]).trim()) continue;
+      if (res.enviados + res.errores >= n || Date.now() - t0 > ENVIO_MAX_MS) { res.pendientes++; continue; }
+      const email = String(filas[i][0]).trim().toLowerCase();
+      const nombre = String(filas[i][1] || '').trim();
+      const celda = sh.getRange(i + 2, 4);
+      if (bajas.has(email)) { celda.setValue('baja: no se envía'); res.saltados_baja++; continue; }
+      celda.setValue('enviando'); SpreadsheetApp.flush(); // marcar ANTES de enviar
+      try {
+        const html = htmlCampana_(nombre, email, registrarEnvio_(email, nombre));
+        GmailApp.sendEmail(email, ASUNTO_BALI_2027, texto, optsCampana_(html, pdf)); // sin fallback: solo info@
+        celda.setValue('enviado ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy HH:mm'));
+        res.enviados++;
+      } catch (err) {
+        celda.setValue('error: ' + String(err).slice(0, 150));
+        res.errores++;
+      }
+      SpreadsheetApp.flush();
+    }
+    res.cuota_restante = MailApp.getRemainingDailyQuota();
+  } finally {
+    lock.releaseLock();
+  }
+  return json_(res);
 }
 
 function baja_(p) {
