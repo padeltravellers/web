@@ -254,62 +254,16 @@ function generarContrato_(cfg, campos, nombre) {
 // ---------- email ----------
 
 function enviarEmail_(cfg, r) {
-  const segundo = num_(cfg.segundo_pago);
-  const reserva = num_(cfg.pago_reserva);
-  const resto = r.precio - reserva - segundo;
-  const finalFecha = new Date(r.salida.inicio.getTime());
-  finalFecha.setDate(finalFecha.getDate() - num_(cfg.dias_pago_final));
-
-  const pago = cfg.iban
-    ? '<p style="margin:0 0 8px">Puedes pagar los <b>' + eur_(reserva) + '</b> de la reserva por transferencia:</p>' +
-      '<table style="border-collapse:collapse;font-size:14px;margin:0 0 8px">' +
-      fila_('Titular', 'PADEL WORLD EXPERIENCE LLC') + fila_('IBAN', cfg.iban) + (cfg.bic ? fila_('BIC', cfg.bic) : '') +
-      fila_('Concepto', r.id + ' ' + r.nombre) + '</table>'
-    : '<p style="margin:0 0 8px">' + esc_(cfg.instrucciones_pago || '') + '</p>';
-
-  const html =
-    '<div style="font-family:Helvetica,Arial,sans-serif;color:#0B1F19;max-width:560px;margin:0 auto;line-height:1.55">' +
-    '<div style="background:#0E3B2D;color:#FEFAE0;padding:28px 28px 22px;border-radius:18px 18px 0 0">' +
-    '<div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.8">Padel Travellers · ' + esc_(r.salida.destino) + ' 2027</div>' +
-    '<div style="font-size:26px;font-weight:bold;margin-top:6px">¡Tu plaza está reservada, ' + esc_(r.nombre) + '!</div></div>' +
-    '<div style="border:1px solid #E3E8E5;border-top:0;border-radius:0 0 18px 18px;padding:24px 28px">' +
-    '<p style="margin:0 0 16px">Gracias por reservar. Te dejamos aquí el resumen y, adjunta, la confirmación de tu reserva con todas las condiciones del viaje.</p>' +
-    '<table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 18px">' +
-    fila_('Reserva', r.id) + fila_('Viaje', r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta) +
-    fila_('Habitación', r.habTexto) + fila_('Precio', eur_(r.precio)) + '</table>' +
-    '<div style="font-weight:bold;color:#0E3B2D;margin:0 0 6px">Cómo pagas</div>' +
-    '<table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 14px">' +
-    fila_('Ahora, para reservar', eur_(reserva) + ' (reembolsable hasta que se confirme el grupo)') +
-    fila_('Al confirmarse el grupo', eur_(segundo)) +
-    fila_('Antes del ' + fechaLarga_(finalFecha), eur_(resto)) + '</table>' +
-    pago +
-    '<div style="font-weight:bold;color:#0E3B2D;margin:18px 0 6px">Próximos pasos</div>' +
-    '<ol style="padding-left:18px;margin:0 0 14px;font-size:14px">' +
-    '<li>Paga la reserva para asegurar tu plaza.</li>' +
-    '<li>Te avisamos en cuanto el grupo llegue a 8 viajeros. Entonces podrás comprar tus vuelos.</li>' +
-    '<li>Contrata tu seguro de viaje (obligatorio, que cubra la práctica de pádel) y envíanos una copia al menos 15 días antes de salir. Nuestros viajeros suelen ir con <a href="https://www.iatiseguros.com/" style="color:#0E3B2D">IATI</a> o <a href="https://heymondo.es/" style="color:#0E3B2D">Heymondo</a>.</li>' +
-    '</ol>' +
-    '<p style="margin:0 0 4px;font-size:14px">Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.</p>' +
-    '<p style="margin:18px 0 0;font-size:14px">Nos vemos en ' + esc_(r.salida.destino) + ',<br><b>Equipo Padel Travellers</b></p>' +
-    '<p style="margin:18px 0 0;font-size:11px;color:#6B7570">Al reservar en padeltravellers.com has aceptado las condiciones del viaje. Las tienes adjuntas en PDF.</p>' +
-    '</div></div>';
-
-  const texto =
-    '¡Tu plaza está reservada, ' + r.nombre + '!\n\n' +
-    'Reserva ' + r.id + ' · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' · ' + r.salida.etiqueta + '\n' +
-    'Habitación: ' + r.habTexto + ' · Precio: ' + eur_(r.precio) + '\n\n' +
-    'Pagos: ' + eur_(reserva) + ' ahora, ' + eur_(segundo) + ' al confirmarse el grupo y ' + eur_(resto) + ' antes del ' + fechaLarga_(finalFecha) + '.\n' +
-    (cfg.iban ? 'IBAN: ' + cfg.iban + ' (concepto: ' + r.id + ' ' + r.nombre + ')\n' : (cfg.instrucciones_pago || '') + '\n') +
-    '\nTe adjuntamos la confirmación de tu reserva con las condiciones del viaje. Cualquier duda, responde a este email.\n\nEquipo Padel Travellers';
-
+  const m = datosEmail_(cfg, r);
   const opts = {
-    htmlBody: html,
+    htmlBody: emailHtml_(cfg, r, m),
     attachments: [r.pdf.getAs(MimeType.PDF)],
     name: 'Padel Travellers',
     replyTo: cfg.remitente || undefined,
     bcc: cfg.copia_a || undefined,
   };
   const asunto = 'Reserva confirmada · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' (' + r.id + ')';
+  const texto = emailTexto_(cfg, r, m);
   try {
     GmailApp.sendEmail(r.email, asunto, texto, Object.assign({ from: cfg.remitente }, opts));
   } catch (err) {
@@ -317,6 +271,143 @@ function enviarEmail_(cfg, r) {
     console.warn('Envío desde alias falló, uso la cuenta principal: ' + err);
     GmailApp.sendEmail(r.email, asunto, texto, opts);
   }
+}
+
+/** Importes y fechas de los pagos de una reserva. */
+function datosEmail_(cfg, r) {
+  const reserva = num_(cfg.pago_reserva);
+  const segundo = num_(cfg.segundo_pago);
+  const finalFecha = new Date(r.salida.inicio.getTime());
+  finalFecha.setDate(finalFecha.getDate() - num_(cfg.dias_pago_final));
+  return {
+    reserva: reserva,
+    segundo: segundo,
+    resto: r.precio - reserva - segundo,
+    finalFecha: finalFecha,
+    concepto: r.id + ' ' + r.nombre,
+    viaje: r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje,
+  };
+}
+
+// Colores de marca
+const C_ = { verde: '#0E3B2D', crema: '#F5EFE6', arcilla: '#B8543A', tinta: '#0B1F19', gris: '#6B7570', linea: '#E7E1D6', palido: '#EEF3EF' };
+
+function emailHtml_(cfg, r, m) {
+  const logo = cfg.logo_email || 'https://padeltravellers.com/logos/logo-white.png';
+  const wa = 'https://wa.me/34686176386';
+  const h2 = (t) => '<div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:' + C_.arcilla + ';font-weight:bold;margin:30px 0 10px">' + t + '</div>';
+  const filaPago = (k, v, nota) =>
+    '<tr><td style="padding:9px 0;border-bottom:1px solid ' + C_.linea + ';font-size:14px;color:' + C_.tinta + '">' + esc_(k) +
+    (nota ? '<div style="font-size:12px;color:' + C_.gris + '">' + esc_(nota) + '</div>' : '') +
+    '</td><td style="padding:9px 0;border-bottom:1px solid ' + C_.linea + ';font-size:15px;font-weight:bold;text-align:right;white-space:nowrap;color:' + C_.verde + '">' + esc_(v) + '</td></tr>';
+  const dato = (k, v, copiar) =>
+    '<tr><td style="padding:5px 12px 5px 0;font-size:13px;color:' + C_.gris + ';white-space:nowrap;vertical-align:top">' + esc_(k) +
+    '</td><td style="padding:5px 0;font-size:14px;color:' + C_.tinta + ';font-weight:bold;word-break:break-word' + (copiar ? ';font-family:Menlo,Consolas,monospace;letter-spacing:.02em' : '') + '">' + esc_(v) + '</td></tr>';
+
+  const tieneBanco = cfg.banco_cuenta && cfg.banco_swift;
+  const pagoRevolut = cfg.revolut_revtag
+    ? '<div style="border:1px solid ' + C_.linea + ';border-radius:14px;padding:16px 18px;margin:0 0 12px">' +
+      '<div style="font-size:15px;font-weight:bold;color:' + C_.verde + '">Opción 1 · Con Revolut <span style="font-weight:normal;color:' + C_.gris + ';font-size:13px">(la más rápida)</span></div>' +
+      '<ol style="margin:10px 0 0;padding-left:20px;font-size:14px;line-height:1.6;color:' + C_.tinta + '">' +
+      '<li>Abre la app de Revolut y toca <b>Enviar</b>.</li>' +
+      '<li>Busca nuestra Revtag: <b style="font-family:Menlo,Consolas,monospace;color:' + C_.verde + '">' + esc_(cfg.revolut_revtag) + '</b> (Padel World Experience LLC).</li>' +
+      '<li>Envía <b>' + eur_(m.reserva) + '</b> y en la nota escribe <b>' + esc_(m.concepto) + '</b>.</li>' +
+      '</ol>' +
+      '<p style="margin:10px 0 0;font-size:13px;line-height:1.5;color:' + C_.gris + '">¿Aún no tienes Revolut? Puedes <a href="' + (cfg.revolut_referral || 'https://www.revolut.com/referral/?referral-code=josepojqv%21JUN2-24-AR') + '" style="color:' + C_.verde + ';font-weight:bold">crear tu cuenta aquí</a> en unos minutos desde el móvil.</p>' +
+      '</div>'
+    : '';
+  const pagoBanco = tieneBanco
+    ? '<div style="border:1px solid ' + C_.linea + ';border-radius:14px;padding:16px 18px;margin:0 0 12px">' +
+      '<div style="font-size:15px;font-weight:bold;color:' + C_.verde + '">' + (cfg.revolut_revtag ? 'Opción 2 · ' : '') + 'Transferencia desde tu banco</div>' +
+      '<p style="margin:8px 0 10px;font-size:13px;line-height:1.55;color:' + C_.gris + '">Es una <b style="color:' + C_.tinta + '">transferencia internacional en euros</b> (SWIFT) a nuestra cuenta de Estados Unidos. En tu banco elige «transferencia internacional» o «al extranjero», moneda EUR, y copia estos datos:</p>' +
+      '<table role="presentation" style="border-collapse:collapse;width:100%">' +
+      dato('Beneficiario', cfg.banco_titular || 'PADEL WORLD EXPERIENCE LLC') +
+      (cfg.banco_direccion ? dato('Dirección', cfg.banco_direccion) : '') +
+      dato('Nº de cuenta', cfg.banco_cuenta, true) +
+      (cfg.banco_ruta ? dato('Nº de ruta', cfg.banco_ruta, true) : '') +
+      dato('SWIFT / BIC', cfg.banco_swift, true) +
+      (cfg.banco_intermediario ? dato('BIC intermediario', cfg.banco_intermediario, true) : '') +
+      dato('Importe', eur_(m.reserva)) +
+      dato('Concepto', m.concepto) +
+      '</table>' +
+      '<p style="margin:10px 0 0;font-size:12px;line-height:1.5;color:' + C_.gris + '">Algunos bancos cobran una comisión por las transferencias internacionales. Si tienes Revolut, mejor usa la opción 1.</p>' +
+      '</div>'
+    : '';
+  const pagoIban = !tieneBanco && cfg.iban
+    ? '<table role="presentation" style="border-collapse:collapse;width:100%">' + dato('Titular', 'PADEL WORLD EXPERIENCE LLC') + dato('IBAN', cfg.iban, true) + (cfg.bic ? dato('BIC', cfg.bic, true) : '') + dato('Concepto', m.concepto) + '</table>'
+    : '';
+  const pago = pagoRevolut || pagoBanco || pagoIban
+    ? pagoRevolut + pagoBanco + pagoIban +
+      '<p style="margin:4px 0 0;font-size:14px;line-height:1.55;color:' + C_.tinta + '">Pon siempre el concepto <b>' + esc_(m.concepto) + '</b> para que sepamos de quién es el pago. Cuando lo recibamos, te lo confirmamos.</p>'
+    : '<p style="margin:0;font-size:14px;color:' + C_.tinta + '">' + esc_(cfg.instrucciones_pago || '') + '</p>';
+
+  return '' +
+    '<div style="background:' + C_.crema + ';padding:28px 12px;font-family:Helvetica,Arial,sans-serif;color:' + C_.tinta + '">' +
+    '<div style="max-width:580px;margin:0 auto;background:#ffffff;border-radius:22px;overflow:hidden">' +
+    // Cabecera con logo
+    '<div style="background:' + C_.verde + ';padding:30px 28px 26px;text-align:center">' +
+    '<img src="' + esc_(logo) + '" alt="Padel Travellers" width="190" style="display:block;margin:0 auto;width:190px;max-width:70%;height:auto;border:0">' +
+    '<div style="margin-top:18px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#FEFAE0;opacity:.75">' + esc_(m.viaje) + ' · ' + esc_(r.salida.etiqueta) + '</div>' +
+    '</div>' +
+    // Cuerpo
+    '<div style="padding:30px 28px 8px">' +
+    '<div style="font-size:26px;line-height:1.25;font-weight:bold;color:' + C_.verde + '">¡Tu plaza está reservada, ' + esc_(r.nombre) + '!</div>' +
+    '<p style="margin:12px 0 0;font-size:15px;line-height:1.6">Gracias por confiar en nosotros. Aquí tienes el resumen de tu reserva y cómo pagarla. Adjunta va la confirmación con todas las condiciones del viaje.</p>' +
+    // Resumen
+    '<div style="background:' + C_.palido + ';border-radius:16px;padding:16px 18px;margin:22px 0 0">' +
+    '<table role="presentation" style="border-collapse:collapse;width:100%">' +
+    dato('Código de reserva', r.id) + dato('Viaje', m.viaje) + dato('Fechas', r.salida.etiqueta) + dato('Habitación', r.habTexto) + dato('Precio total', eur_(r.precio)) +
+    '</table></div>' +
+    // Pago de la reserva
+    h2('El pago de la reserva') +
+    '<p style="margin:0 0 14px;font-size:15px;line-height:1.6">Para dejar tu plaza confirmada solo falta el pago de la reserva, de <b style="color:' + C_.arcilla + '">' + eur_(m.reserva) + '</b>. Es reembolsable hasta que se confirme el grupo. Puedes hacerlo de dos formas, la que te vaya mejor:</p>' +
+    pago +
+    // Calendario
+    h2('Calendario de pagos') +
+    '<table role="presentation" style="border-collapse:collapse;width:100%">' +
+    filaPago('Ahora, para reservar', eur_(m.reserva), 'Reembolsable hasta que se confirme el grupo') +
+    filaPago('Al confirmarse el grupo', eur_(m.segundo), 'Te avisamos cuando lleguemos a 8 viajeros') +
+    filaPago('Antes del ' + fechaLarga_(m.finalFecha), eur_(m.resto), 'Pago final') +
+    '</table>' +
+    // Próximos pasos
+    h2('Próximos pasos') +
+    '<ol style="padding-left:20px;margin:0;font-size:14px;line-height:1.65">' +
+    '<li>Realizar el pago de la reserva. Cuando lo recibamos, te lo confirmamos.</li>' +
+    '<li>Te avisamos en cuanto el grupo llegue a 8 viajeros. Entonces ya puedes comprar tus vuelos.</li>' +
+    '<li>Contrata tu seguro de viaje (obligatorio, que cubra la práctica de pádel) y envíanos una copia al menos 15 días antes de salir. Nuestros viajeros suelen ir con el <a href="' + (cfg.iati_url || 'https://www.iatiseguros.com/seguros-viaje/21841/seguro-de-viaje-mochilero/?r=09220966471371') + '" style="color:' + C_.verde + '">seguro Mochilero de IATI</a>.</li>' +
+    '</ol>' +
+    // Contacto
+    '<div style="text-align:center;margin:30px 0 6px">' +
+    '<a href="' + wa + '" style="display:inline-block;background:' + C_.verde + ';color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:13px 26px;border-radius:999px">¿Dudas? Escríbenos por WhatsApp</a>' +
+    '<div style="font-size:13px;color:' + C_.gris + ';margin-top:10px">o responde a este email</div></div>' +
+    '<p style="margin:26px 0 0;font-size:15px;line-height:1.5">Nos vemos en ' + esc_(r.salida.destino) + ',<br><b style="color:' + C_.verde + '">Equipo Padel Travellers</b></p>' +
+    '</div>' +
+    // Pie
+    '<div style="padding:20px 28px 24px;margin-top:22px;border-top:1px solid ' + C_.linea + ';font-size:11px;line-height:1.6;color:' + C_.gris + '">' +
+    'Al reservar en padeltravellers.com has aceptado las condiciones del viaje (las tienes adjuntas en PDF).<br>' +
+    'Padel Travellers · Padel World Experience LLC · <a href="https://padeltravellers.com" style="color:' + C_.gris + '">padeltravellers.com</a>' +
+    '</div>' +
+    '</div></div>';
+}
+
+function emailTexto_(cfg, r, m) {
+  const banco = cfg.banco_cuenta && cfg.banco_swift
+    ? 'Transferencia internacional en EUR (SWIFT) desde tu banco:\n' +
+      '  Beneficiario: ' + (cfg.banco_titular || 'PADEL WORLD EXPERIENCE LLC') + '\n' +
+      (cfg.banco_direccion ? '  Dirección: ' + cfg.banco_direccion + '\n' : '') +
+      '  Nº de cuenta: ' + cfg.banco_cuenta + '\n' +
+      (cfg.banco_ruta ? '  Nº de ruta: ' + cfg.banco_ruta + '\n' : '') +
+      '  SWIFT/BIC: ' + cfg.banco_swift + '\n' +
+      (cfg.banco_intermediario ? '  BIC intermediario: ' + cfg.banco_intermediario + '\n' : '')
+    : (cfg.iban ? 'IBAN: ' + cfg.iban + '\n' : '');
+  const revolut = cfg.revolut_revtag ? 'Con Revolut: envía ' + eur_(m.reserva) + ' a la Revtag ' + cfg.revolut_revtag + '. ¿No tienes Revolut? Crea tu cuenta aquí: ' + (cfg.revolut_referral || 'https://www.revolut.com/referral/?referral-code=josepojqv%21JUN2-24-AR') + '\n' : '';
+  return '¡Tu plaza está reservada, ' + r.nombre + '!\n\n' +
+    'Reserva ' + r.id + ' · ' + m.viaje + ' · ' + r.salida.etiqueta + '\n' +
+    'Habitación: ' + r.habTexto + ' · Precio total: ' + eur_(r.precio) + '\n\n' +
+    'PAGO DE LA RESERVA (' + eur_(m.reserva) + ', reembolsable hasta que se confirme el grupo)\n' +
+    (revolut || banco ? revolut + banco + 'Concepto: ' + m.concepto + '\n' : (cfg.instrucciones_pago || '') + '\n') +
+    '\nCalendario de pagos: ' + eur_(m.reserva) + ' ahora, ' + eur_(m.segundo) + ' al confirmarse el grupo y ' + eur_(m.resto) + ' antes del ' + fechaLarga_(m.finalFecha) + '.\n' +
+    '\nTe adjuntamos la confirmación de tu reserva con las condiciones del viaje. Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.\n\nEquipo Padel Travellers';
 }
 
 // ---------- datos ----------
