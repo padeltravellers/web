@@ -24,7 +24,14 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - name: Build (static export)
+        # Reintenta: next/font descarga Google Fonts en el build y a veces falla por red (igual que deploy.yml).
+        run: |
+          for i in 1 2 3; do
+            npm run build && exit 0
+            echo "Build fallido (intento $i), reintento en 20 s..."; sleep 20
+          done
+          exit 1
         env:
           NODE_ENV: production
           # Web app de Apps Script (reservas → Sheet + contrato + email). Es pública por diseño.
