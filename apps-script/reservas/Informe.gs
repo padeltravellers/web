@@ -60,7 +60,7 @@ function datosInforme_() {
     if (!email) return;
     personas[email] = {
       email, nombre: String(r[1] || ''), fila: r[2], estado: String(r[3] || ''),
-      enviado: /^enviado/.test(String(r[3] || '')), aperturas: 0, primeraApertura: null, ultima: null,
+      enviado: /enviado/.test(String(r[3] || '')) && !/^rebotado/.test(String(r[3] || '')), aperturas: 0, primeraApertura: null, ultima: null,
       clicks: 0, pdf: 0, web: 0, whatsapp: 0, instagram: 0, baja: bajas.has(email), reserva: reservas.has(email),
     };
   });
@@ -97,6 +97,8 @@ function datosInforme_() {
     lista: lista.length,
     enviados: enviados.length,
     errores: lista.filter((x) => /^error/.test(x.estado)).length,
+    rebotes: lista.filter((x) => /^rebotado/.test(x.estado)).length,
+    excluidos: lista.filter((x) => /^excluido/.test(x.estado)).length,
     pendientes: lista.filter((x) => !x.estado).length,
     abrieron: cuenta((x) => x.aperturas > 0 || x.clicks > 0),
     clicaron: cuenta((x) => x.clicks > 0),
@@ -176,7 +178,7 @@ function htmlInforme_(d) {
     '<p>Datos en directo · actualizado ' + d.actualizado + ' · recarga la página para ver lo último</p></div></header>' +
     '<main class="wrap">' +
     '<div class="grid">' +
-    tarjeta('Enviados', k.enviados, null, k.pendientes + ' pendientes' + (k.errores ? ' · ' + k.errores + ' errores' : '')) +
+    tarjeta('Enviados', k.enviados, null, k.pendientes + ' pendientes de ' + k.lista + (k.errores ? ' · ' + k.errores + ' errores' : '') + (k.excluidos ? ' · ' + k.excluidos + ' excluidos' : '')) +
     tarjeta('Abrieron el email', k.abrieron, k.enviados) +
     tarjeta('Clicaron algo', k.clicaron, k.enviados) +
     tarjeta('Vieron la web', k.web, k.enviados) +
@@ -185,6 +187,7 @@ function htmlInforme_(d) {
     tarjeta('Instagram', k.instagram, k.enviados) +
     tarjeta('Reservaron', k.reservas, k.enviados) +
     tarjeta('Bajas', k.bajas, k.enviados) +
+    tarjeta('Rebotados', k.rebotes, null, 'email no existe · no se les vuelve a enviar') +
     '</div>' +
     '<section><h2>Embudo</h2>' + barras + '</section>' +
     '<section><h2>Actividad por día</h2>' + dias + '<div class="ley"><i style="background:var(--verde)"></i>aperturas<b style="background:var(--clay)"></b>clicks</div></section>' +

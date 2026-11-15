@@ -162,7 +162,8 @@ function crmEnvio_() {
     const sh = SpreadsheetApp.openById(CRM_ID).getSheetByName(CRM_TAB);
     const header = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].map(String);
     const col = header.indexOf(CRM_COL_ENVIO_HEADER) + 1;
-    return col ? { sh, col } : null;
+    const colPub = header.indexOf(CRM_COL_PUBLICIDAD_HEADER) + 1;
+    return col ? { sh, col, colPub } : null;
   } catch (err) {
     console.error('CRM no accesible: ' + err);
     return null;
@@ -206,6 +207,8 @@ function campanaEnvio_(p) {
       const nombre = String(filas[i][1] || '').trim();
       const celda = sh.getRange(i + 2, 4);
       if (bajas.has(email)) { celda.setValue('baja: no se envía'); res.saltados_baja++; continue; }
+      const motivo = motivoNoEnviar_(crm, Number(filas[i][2]), email);
+      if (motivo) { celda.setValue(motivo); res.excluidos = (res.excluidos || 0) + 1; continue; }
       celda.setValue('enviando'); SpreadsheetApp.flush(); // marcar ANTES de enviar
       try {
         const html = htmlCampana_(nombre, email, registrarEnvio_(email, nombre));
