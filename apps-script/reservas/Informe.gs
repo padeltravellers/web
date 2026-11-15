@@ -18,6 +18,12 @@ function informe_(p) {
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 
+/** Lo mismo en JSON, para la página padeltravellers.com/informe/ (que pide la clave). */
+function informeJson_(p) {
+  if (!p.k || p.k !== CAMPANA_KEY) return json_({ ok: false, error: 'clave' });
+  return json_({ ok: true, html: htmlInforme_(datosInforme_()) });
+}
+
 function filas_(ss, nombre) {
   const sh = ss.getSheetByName(nombre);
   if (!sh || sh.getLastRow() < 2) return [];

@@ -22,6 +22,7 @@ function doGet(e) {
   if (action === 'campana_prueba') return campanaPrueba_(e.parameter);
   if (action === 'campana_envio') return campanaEnvio_(e.parameter);
   if (action === 'informe') return informe_(e.parameter);
+  if (action === 'informe_json') return informeJson_(e.parameter);
   if (action === 'programacion') {
     if (e.parameter.k !== CAMPANA_KEY) return json_({ ok: false });
     return json_({ ok: true, cuota: MailApp.getRemainingDailyQuota(), activadores: ScriptApp.getProjectTriggers().map((t) => ({ funcion: t.getHandlerFunction(), tipo: String(t.getEventType()) })) });
