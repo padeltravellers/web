@@ -199,10 +199,16 @@ function crearReserva_(p) {
       'Comentarios': pax === 2 ? 'Reserva conjunta con ' + acompanante : '',
     };
     escribirFila_(sh, header, rowIndex, values);
-    creados.push({ id: id, email: clean_(v.email), nombre: clean_(v.nombre), habTexto: habTexto, pdf: pdf });
+    creados.push({ id: id, email: clean_(v.email), nombre: clean_(v.nombre), habTexto: habTexto, pdf: pdf,
+      completo: nombreCompleto, telefono: clean_(v.telefono), nivel: clean_(v.nivel), ciudad: clean_(v.ciudad), salud: clean_(v.salud) });
   });
 
   creados.forEach((c) => enviarEmail_(cfg, Object.assign({ salida: salida, precio: precio }, c)));
+  try {
+    avisarReserva_(cfg, salida, creados, precio, salida.libres - pax);
+  } catch (err) {
+    console.error('Aviso de reserva a Oriol falló: ' + err);
+  }
 
   return { ok: true, ids: creados.map((c) => c.id), libres: salida.libres - pax };
 }
@@ -260,7 +266,6 @@ function enviarEmail_(cfg, r) {
     attachments: [r.pdf.getAs(MimeType.PDF)],
     name: 'Padel Travellers',
     replyTo: cfg.remitente || undefined,
-    bcc: cfg.copia_a || undefined,
   };
   const asunto = 'Reserva confirmada · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' (' + r.id + ')';
   const texto = emailTexto_(cfg, r, m);
@@ -408,6 +413,31 @@ function emailTexto_(cfg, r, m) {
     (revolut || banco ? revolut + banco + 'Concepto: ' + m.concepto + '\n' : (cfg.instrucciones_pago || '') + '\n') +
     '\nCalendario de pagos: ' + eur_(m.reserva) + ' ahora, ' + eur_(m.segundo) + ' al confirmarse el grupo y ' + eur_(m.resto) + ' antes del ' + fechaLarga_(m.finalFecha) + '.\n' +
     '\nTe adjuntamos la confirmación de tu reserva con las condiciones del viaje. Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.\n\nEquipo Padel Travellers';
+}
+
+/** Aviso interno a Oriol de cada reserva nueva (Oriol 2026-11-15). Sustituye a la copia oculta del email del cliente. */
+function avisarReserva_(cfg, salida, creados, precio, libres) {
+  const para = cfg.aviso_reserva_a || 'oriol@padeltravellers.com';
+  const nombres = creados.map((c) => c.completo).join(' y ');
+  const asunto = '🎉 Nueva reserva · ' + salida.destino + ' Viaje ' + salida.viaje + ' (' + salida.etiqueta + ') · ' + nombres;
+  const viajero = (c) =>
+    '<tr><td colspan="2" style="padding:14px 0 4px;font-size:16px;font-weight:bold;color:#0E3B2D">' + esc_(c.completo) + ' · ' + esc_(c.id) + '</td></tr>' +
+    fila_('Habitación', c.habTexto) + fila_('Teléfono', c.telefono) + fila_('Email', c.email) +
+    fila_('Ciudad', c.ciudad) + fila_('Nivel de pádel', c.nivel) + (c.salud ? fila_('Salud / alergias', c.salud) : '') +
+    '<tr><td style="padding:6px 10px 6px 0;color:#6B7570">Contrato</td><td style="padding:6px 0"><a href="' + esc_(c.pdf.getUrl()) + '" style="color:#0E3B2D">Ver PDF</a></td></tr>';
+  const html =
+    '<div style="font-family:Helvetica,Arial,sans-serif;color:#0B1F19;max-width:560px;line-height:1.5">' +
+    '<div style="font-size:20px;font-weight:bold;color:#0E3B2D;margin:0 0 6px">Nueva reserva en la web</div>' +
+    '<div style="font-size:14px;color:#6B7570;margin:0 0 12px">' + esc_(salida.destino) + ' 2027 · Viaje ' + esc_(salida.viaje) + ' · ' + esc_(salida.etiqueta) +
+    ' · ' + eur_(precio) + ' por persona · quedan ' + libres + ' plazas libres en esta salida</div>' +
+    '<table style="border-collapse:collapse;width:100%;font-size:14px">' + creados.map(viajero).join('') + '</table>' +
+    '<p style="margin:16px 0 0;font-size:14px">Estado: pre-reserva, pendiente del pago de ' + eur_(num_(cfg.pago_reserva)) + ' por persona. ' +
+    '<a href="https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit" style="color:#0E3B2D">Abrir el Sheet de reservas</a></p>' +
+    '</div>';
+  const texto = 'Nueva reserva: ' + nombres + ' · ' + salida.destino + ' Viaje ' + salida.viaje + ' (' + salida.etiqueta + ')\n' +
+    creados.map((c) => c.id + ' · ' + c.completo + ' · ' + c.habTexto + ' · ' + c.telefono + ' · ' + c.email).join('\n') +
+    '\nQuedan ' + libres + ' plazas libres.';
+  MailApp.sendEmail({ to: para, subject: asunto, htmlBody: html, body: texto, name: 'Reservas Padel Travellers' });
 }
 
 // ---------- datos ----------
