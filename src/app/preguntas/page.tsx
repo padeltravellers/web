@@ -99,7 +99,7 @@ const groups: { title: string; items: Faq[] }[] = [
     items: [
       {
         q: "¿Necesito seguro de viaje?",
-        a: "Sí, es obligatorio. Tiene que cubrir asistencia médica, repatriación y la práctica de pádel, y nos envías una copia al menos 15 días antes de salir. Nuestros viajeros suelen ir con IATI o Heymondo.",
+        a: "Sí, es obligatorio. Tiene que cubrir asistencia médica, repatriación y la práctica de pádel, y nos envías una copia al menos 15 días antes de salir. Nuestros viajeros suelen ir con el seguro Mochilero de IATI.",
       },
       {
         q: "¿Necesito visado?",

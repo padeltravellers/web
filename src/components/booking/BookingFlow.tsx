@@ -873,11 +873,10 @@ function Confirmation({ travellers, trip, price }: { travellers: Traveller[]; tr
       <div className="mt-6 bg-pt-green text-white rounded-3xl p-6 md:p-7 text-left">
         <p className="font-display font-bold text-lg">¿Aún sin seguro?</p>
         <p className="text-sm text-pt-cream/80 mt-1 leading-relaxed">
-          Nuestros viajeros suelen ir con IATI o Heymondo. Elige una modalidad que incluya deportes como el pádel, asistencia médica y repatriación.
+          Nuestros viajeros suelen ir con el seguro Mochilero de IATI. Comprueba que cubra deportes como el pádel, asistencia médica y repatriación.
         </p>
         <div className="flex flex-wrap gap-3 mt-5">
-          <a href="https://www.iatiseguros.com/" target="_blank" rel="noreferrer" className="font-display font-semibold bg-white text-pt-green px-5 py-2.5 rounded-full hover:bg-pt-cream transition">IATI Seguros →</a>
-          <a href="https://heymondo.es/" target="_blank" rel="noreferrer" className="font-display font-semibold bg-white/10 border border-white/30 text-white px-5 py-2.5 rounded-full hover:bg-white/20 transition">Heymondo →</a>
+          <a href="https://www.iatiseguros.com/seguros-viaje/21841/seguro-de-viaje-mochilero/?r=09220966471371" target="_blank" rel="noreferrer" className="font-display font-semibold bg-white text-pt-green px-5 py-2.5 rounded-full hover:bg-pt-cream transition">Contratar con IATI →</a>
         </div>
       </div>
     </div>
