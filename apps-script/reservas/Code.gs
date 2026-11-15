@@ -21,6 +21,7 @@ function doGet(e) {
   if (action === 'baja') return baja_(e.parameter);
   if (action === 'campana_prueba') return campanaPrueba_(e.parameter);
   if (action === 'campana_envio') return campanaEnvio_(e.parameter);
+  if (action === 'informe') return informe_(e.parameter);
   if (action === 'folleto') {
     try {
       registrarFolleto_(e.parameter);

@@ -79,6 +79,15 @@ function registrarEnvio_(email, nombre) {
   return id;
 }
 
+const EVENTOS_TAB = 'Campaña eventos';
+function crearHojaEventos_() {
+  const sh = SpreadsheetApp.openById(SHEET_ID).insertSheet(EVENTOS_TAB);
+  sh.appendRow(['Fecha', 'Email', 'Nombre', 'Tipo', 'Destino']);
+  sh.setFrozenRows(1);
+  sh.getRange(1, 1, 1, 5).setFontWeight('bold');
+  return sh;
+}
+
 function registrarEvento_(id, tipo, url) {
   if (!/^[A-Za-z0-9_-]{16}$/.test(String(id || ''))) return;
   const lock = LockService.getScriptLock();
@@ -102,6 +111,9 @@ function registrarEvento_(id, tipo, url) {
       sh.getRange(r, 9).setValue(String(url || '').slice(0, 200));
     }
     sh.getRange(r, 10).setValue(ahora);
+    // Registro de cada evento (para el informe): fecha, email, nombre, tipo, destino.
+    const ev = SpreadsheetApp.openById(SHEET_ID).getSheetByName(EVENTOS_TAB) || crearHojaEventos_();
+    ev.appendRow([ahora, fila[0], fila[1], tipo === 'open' ? 'apertura' : 'click', tipo === 'open' ? '' : String(url || '').slice(0, 200)]);
   } finally {
     lock.releaseLock();
   }
