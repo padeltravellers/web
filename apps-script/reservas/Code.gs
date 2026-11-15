@@ -204,7 +204,8 @@ function crearReserva_(p) {
   });
 
   creados.forEach((c) => enviarEmail_(cfg, Object.assign({ salida: salida, precio: precio }, c)));
-  try {
+  // Aviso interno opcional: solo si Config «aviso_reserva_a» tiene un email (Oriol prefiere la copia oculta).
+  if (cfg.aviso_reserva_a) try {
     avisarReserva_(cfg, salida, creados, precio, salida.libres - pax);
   } catch (err) {
     console.error('Aviso de reserva a Oriol falló: ' + err);
@@ -266,6 +267,7 @@ function enviarEmail_(cfg, r) {
     attachments: [r.pdf.getAs(MimeType.PDF)],
     name: 'Padel Travellers',
     replyTo: cfg.remitente || undefined,
+    bcc: cfg.copia_a || undefined,
   };
   const asunto = 'Reserva confirmada · ' + r.salida.destino + ' 2027 · Viaje ' + r.salida.viaje + ' (' + r.id + ')';
   const texto = emailTexto_(cfg, r, m);
@@ -415,9 +417,9 @@ function emailTexto_(cfg, r, m) {
     '\nTe adjuntamos la confirmación de tu reserva con las condiciones del viaje. Cualquier duda, responde a este email o escríbenos por WhatsApp al +34 686 17 63 86.\n\nEquipo Padel Travellers';
 }
 
-/** Aviso interno a Oriol de cada reserva nueva (Oriol 2026-11-15). Sustituye a la copia oculta del email del cliente. */
+/** Aviso interno opcional de cada reserva nueva. Desactivado por defecto: Oriol prefiere la copia oculta (bcc a copia_a). Se activa poniendo un email en Config «aviso_reserva_a». */
 function avisarReserva_(cfg, salida, creados, precio, libres) {
-  const para = cfg.aviso_reserva_a || 'oriol@padeltravellers.com';
+  const para = cfg.aviso_reserva_a;
   const nombres = creados.map((c) => c.completo).join(' y ');
   const asunto = '🎉 Nueva reserva · ' + salida.destino + ' Viaje ' + salida.viaje + ' (' + salida.etiqueta + ') · ' + nombres;
   const viajero = (c) =>
