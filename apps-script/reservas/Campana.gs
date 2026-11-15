@@ -155,6 +155,29 @@ function campanaPrueba_(p) {
 const ENVIO_TAB = 'Envío Bali 2027';
 const ENVIO_MAX_MS = 4.5 * 60 * 1000; // margen bajo el límite de 6 min de Apps Script
 
+// Marca en el CRM (columna "Email Bali 2027") la fecha de envío. Solo si el email de esa fila coincide.
+const CRM_COL_ENVIO_HEADER = 'Email Bali 2027';
+function crmEnvio_() {
+  try {
+    const sh = SpreadsheetApp.openById(CRM_ID).getSheetByName(CRM_TAB);
+    const header = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].map(String);
+    const col = header.indexOf(CRM_COL_ENVIO_HEADER) + 1;
+    return col ? { sh, col } : null;
+  } catch (err) {
+    console.error('CRM no accesible: ' + err);
+    return null;
+  }
+}
+function crmMarcarEnvio_(crm, fila, email) {
+  try {
+    if (!fila || fila < 2) return;
+    const m = String(crm.sh.getRange(fila, CRM_COL_MAIL).getValue()).trim().toLowerCase();
+    if (m === email) crm.sh.getRange(fila, crm.col).setValue('enviado ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy'));
+  } catch (err) {
+    console.error('CRM: no se pudo marcar el envío: ' + err);
+  }
+}
+
 function campanaEnvio_(p) {
   if (!p.k || p.k !== CAMPANA_KEY) return json_({ ok: false, error: 'clave' });
   const n = Math.min(Math.max(parseInt(p.n, 10) || 0, 0), 100);
@@ -174,6 +197,7 @@ function campanaEnvio_(p) {
       : []);
     const filas = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 4).getValues() : [];
     const pdf = DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf');
+    const crm = crmEnvio_();
     const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
     for (let i = 0; i < filas.length; i++) {
       if (String(filas[i][3]).trim()) continue;
@@ -188,6 +212,7 @@ function campanaEnvio_(p) {
         GmailApp.sendEmail(email, ASUNTO_BALI_2027, texto, optsCampana_(html, pdf)); // sin fallback: solo info@
         celda.setValue('enviado ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy HH:mm'));
         res.enviados++;
+        if (crm) crmMarcarEnvio_(crm, Number(filas[i][2]), email);
       } catch (err) {
         celda.setValue('error: ' + String(err).slice(0, 150));
         res.errores++;
