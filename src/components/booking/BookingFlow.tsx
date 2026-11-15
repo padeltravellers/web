@@ -164,8 +164,24 @@ export default function BookingFlow() {
     go(Math.min(step + 1, STEPS.length - 1));
   }
 
+  // Mientras se procesa: no dejar salir de la página ni hacer scroll detrás del aviso.
+  useEffect(() => {
+    if (status !== "sending") return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("beforeunload", warn);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("beforeunload", warn);
+    };
+  }, [status]);
+
   async function submit() {
-    if (!accepted || !trip || !room) return;
+    if (!accepted || !trip || !room || status === "sending") return;
     setStatus("sending");
     setErrMsg("");
     const body = new URLSearchParams({
@@ -440,6 +456,8 @@ export default function BookingFlow() {
         )}
       </div>
 
+      {status === "sending" && <ProcessingOverlay pax={pax} />}
+
       {/* Barra móvil */}
       {step > 0 && (
         <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-pt-green/10 pl-4 pr-24 py-3 flex items-center justify-between gap-3">
@@ -458,6 +476,29 @@ export default function BookingFlow() {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+// ---------- Aviso mientras se procesa la reserva ----------
+
+function ProcessingOverlay({ pax }: { pax: number }) {
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-pt-green/80 backdrop-blur-sm px-6 cursor-wait"
+      role="alertdialog"
+      aria-modal="true"
+      aria-live="assertive"
+      aria-label="Procesando tu reserva"
+    >
+      <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full px-8 py-10 text-center">
+        <div className="mx-auto h-12 w-12 rounded-full border-4 border-pt-green/15 border-t-pt-green animate-spin" aria-hidden="true" />
+        <p className="font-display font-bold text-pt-green text-xl mt-6">Procesando tu reserva…</p>
+        <p className="text-sm text-pt-muted mt-3 leading-relaxed">
+          Estamos guardando {pax === 2 ? "vuestras plazas" : "tu plaza"} y preparando la confirmación. Tarda unos segundos.
+        </p>
+        <p className="text-sm font-semibold text-pt-ink mt-4">No cierres ni recargues esta página.</p>
+      </div>
     </div>
   );
 }
