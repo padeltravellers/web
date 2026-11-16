@@ -53,7 +53,7 @@ export const trips2027 = [
   { n: 5, range: "15 – 28 agosto", month: "Agosto" },
   { n: 6, range: "29 agosto – 11 septiembre", month: "Septiembre" },
   { n: 7, range: "12 – 25 septiembre", month: "Septiembre" },
-  { n: 8, range: "25 septiembre – 9 octubre", month: "Octubre" },
+  { n: 8, range: "26 septiembre – 10 octubre", month: "Octubre" },
 ];
 
 export const baliExperiences = [

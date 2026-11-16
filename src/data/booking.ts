@@ -18,7 +18,7 @@ export const departures2027: Departure[] = [
   { n: 5, start: "2027-08-15", end: "2027-08-28", range: "15 – 28 agosto", month: "Agosto", photo: "/photos/bali/tanah-lot/1.jpg" },
   { n: 6, start: "2027-08-29", end: "2027-09-11", range: "29 agosto – 11 septiembre", month: "Septiembre", photo: "/photos/bali/ubud-norte/1.jpg" },
   { n: 7, start: "2027-09-12", end: "2027-09-25", range: "12 – 25 septiembre", month: "Septiembre", photo: "/photos/bali/surf/1.jpg" },
-  { n: 8, start: "2027-09-25", end: "2027-10-09", range: "25 septiembre – 9 octubre", month: "Octubre", photo: "/photos/bali/partidos/1.jpg" },
+  { n: 8, start: "2027-09-26", end: "2027-10-10", range: "26 septiembre – 10 octubre", month: "Octubre", photo: "/photos/bali/partidos/1.jpg" },
 ];
 
 export const rooms = {
