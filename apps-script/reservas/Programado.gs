@@ -37,16 +37,41 @@ function tandaProgramada() {
   try { log.rebotes = procesarRebotes_(); } catch (err) { console.error('Rebotes: ' + err); }
   try { log.nuevos_en_lista = ampliarLista_(); } catch (err) { console.error('Ampliar lista: ' + err); }
   const cuota = MailApp.getRemainingDailyQuota();
-  const n = Math.min(TANDA_MAX, cuota - RESERVA_CUOTA);
+  const objetivo = Math.max(0, Math.min(TANDA_MAX, cuota - RESERVA_CUOTA));
+  PropertiesService.getScriptProperties().setProperty('tanda_restante', String(objetivo));
   log.cuota = cuota;
-  if (n > 0) {
-    const out = JSON.parse(campanaEnvio_({ k: CAMPANA_KEY, n: n }).getContent());
-    Object.assign(log, out);
-  } else {
-    log.aviso = 'sin cuota suficiente: no se envía en esta tanda';
+  if (!objetivo) { log.aviso = 'sin cuota suficiente: no se envía en esta tanda'; registrarTanda_(log); return log; }
+  return enviarTramo_(log);
+}
+
+/**
+ * Envía lo que queda de la tanda en tramos de ~4,5 min (límite de Apps Script). Si no le da
+ * tiempo a enviar toda la tanda, se reprograma solo 1 minuto después (tandaContinuar).
+ * Fix 2026-11-16: la tanda de las 10:00 solo envió 37 de 45 por el límite de tiempo.
+ */
+function enviarTramo_(log) {
+  log = log || {};
+  const props = PropertiesService.getScriptProperties();
+  const restante = parseInt(props.getProperty('tanda_restante') || '0', 10);
+  if (restante <= 0) return log;
+  const out = JSON.parse(campanaEnvio_({ k: CAMPANA_KEY, n: restante }).getContent());
+  Object.assign(log, out);
+  const hechos = (out.enviados || 0) + (out.errores || 0);
+  const queda = out.ok ? Math.max(0, restante - hechos) : 0;
+  props.setProperty('tanda_restante', String(queda));
+  if (queda > 0 && (out.pendientes || 0) > 0 && hechos > 0) {
+    ScriptApp.newTrigger('tandaContinuar').timeBased().after(60 * 1000).create();
+    log.aviso = 'continúa en 1 min: quedan ' + queda;
   }
   registrarTanda_(log);
   return log;
+}
+
+function tandaContinuar() {
+  ScriptApp.getProjectTriggers()
+    .filter((t) => t.getHandlerFunction() === 'tandaContinuar')
+    .forEach((t) => ScriptApp.deleteTrigger(t));
+  enviarTramo_({ aviso: 'continuación' });
 }
 
 function registrarTanda_(log) {
