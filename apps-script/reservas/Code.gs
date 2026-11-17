@@ -52,6 +52,7 @@ function doGet(e) {
 
 function doPost(e) {
   const p = (e && e.parameter) || {};
+  if (p.action === 'log') { registrarWeb_(String(p.evento || 'log').slice(0, 40), p.detalle || '', p); return json_({ ok: true }); }
   if (p.website) return json_({ ok: true }); // honeypot anti-bots
 
   const lock = LockService.getScriptLock();
@@ -64,9 +65,11 @@ function doPost(e) {
   try {
     const r = crearReserva_(p);
     if (!r.ok) registrarRechazo_(r, p);
+    else registrarWeb_('reserva_ok', JSON.stringify({ ids: r.ids || r.id || '' }), p);
     return json_(r);
   } catch (err) {
     console.error(err && err.stack ? err.stack : err);
+    registrarWeb_('error_interno', String(err && err.stack ? err.stack : err).slice(0, 1500), p);
     notificarError_(err, p);
     return json_({ ok: false, error: 'interno' });
   } finally {
@@ -487,29 +490,44 @@ function config_() {
   return c;
 }
 
-/** 2026-11-17: una reserva rechazada por validación no dejaba rastro (una viajera andorrana vio
- * «No hemos podido registrar tu reserva» y no había forma de saber por qué). Ahora se apunta en la
- * pestaña «Errores web» y se avisa por email con el motivo. No se guarda el número de documento. */
-function registrarRechazo_(r, p) {
+/** 2026-11-17 (Oriol: «si los clientes se quejan, poder identificarlo rápido»): pestaña «Registro web»
+ * del Sheet de reservas con cada intento (reserva_ok, rechazada, error_interno, ocupado) y las incidencias
+ * que manda el navegador del cliente (validacion, fallo_envio, error_js). Busca por email, nombre o «Sesión».
+ * Nunca se guarda el número de documento. */
+function registrarWeb_(evento, detalle, p) {
   try {
     let v1 = {};
     try { v1 = (JSON.parse(p.viajeros || '[]')[0]) || {}; } catch (e) {}
     const ss = SpreadsheetApp.openById(SHEET_ID);
-    let sh = ss.getSheetByName('Errores web');
+    let sh = ss.getSheetByName('Registro web');
     if (!sh) {
-      sh = ss.insertSheet('Errores web');
-      sh.appendRow(['Fecha', 'Motivo', 'Viajero', 'Campos', 'Salida', 'Plazas', 'Habitación', 'Nombre', 'Email', 'Teléfono', 'Nacionalidad']);
+      sh = ss.insertSheet('Registro web');
+      sh.appendRow(['Fecha', 'Evento', 'Detalle', 'Sesión', 'Salida', 'Habitación', 'Nombre', 'Email', 'Teléfono', 'Nacionalidad', 'Página', 'Navegador']);
+      sh.setFrozenRows(1);
     }
-    const fila = [new Date(), r.error || '', r.viajero || '', (r.campos || []).join(', '), p.salida || '', String(p.habitacion || '').toLowerCase() === 'compartida' ? 2 : 1, p.habitacion || '',
-      clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')), clean_(v1.email || ''), clean_(v1.telefono || ''), clean_(v1.nacionalidad || '')];
-    sh.appendRow(fila);
+    if (sh.getLastRow() > 20000) return; // tope de seguridad
+    sh.appendRow([new Date(), evento, String(detalle || '').slice(0, 1500), clean_(p.sid), clean_(p.salida), clean_(p.habitacion),
+      clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')), clean_(v1.email), clean_(v1.telefono), clean_(v1.nacionalidad),
+      clean_(p.pagina), clean_(p.ua)]);
+  } catch (e) {
+    console.error('No se pudo escribir en Registro web: ' + e);
+  }
+}
+
+/** Reserva rechazada por validación: al registro y email a Oriol con el motivo. */
+function registrarRechazo_(r, p) {
+  const motivo = (r.error || 'motivo desconocido') + (r.viajero ? ' (viajero ' + r.viajero + ')' : '') + (r.campos ? ' · campos: ' + r.campos.join(', ') : '') + (r.libres !== undefined ? ' · libres: ' + r.libres : '');
+  registrarWeb_('rechazada', motivo, p);
+  try {
+    let v1 = {};
+    try { v1 = (JSON.parse(p.viajeros || '[]')[0]) || {}; } catch (e) {}
     const cfg = config_();
     MailApp.sendEmail(cfg.copia_a || Session.getEffectiveUser().getEmail(), '⚠️ Reserva web rechazada: ' + (r.error || 'motivo desconocido'),
-      'La web no ha podido registrar una reserva.\n\nMotivo: ' + (r.error || '') + (r.viajero ? ' (viajero ' + r.viajero + ')' : '') +
-      (r.campos ? '\nCampos: ' + r.campos.join(', ') : '') + '\nSalida: ' + (p.salida || '') + ' · habitación: ' + (p.habitacion || '') +
-      '\n\nViajero 1: ' + fila[7] + ' · ' + fila[8] + ' · ' + fila[9] + ' · ' + fila[10] + '\n\nEstá apuntado en la pestaña «Errores web» del Sheet de reservas.');
+      'La web no ha podido registrar una reserva.\n\nMotivo: ' + motivo + '\nSalida: ' + (p.salida || '') + ' · habitación: ' + (p.habitacion || '') +
+      '\n\nViajero 1: ' + clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')) + ' · ' + clean_(v1.email) + ' · ' + clean_(v1.telefono) + ' · ' + clean_(v1.nacionalidad) +
+      '\n\nTodo el historial de ese intento está en la pestaña «Registro web» del Sheet de reservas (sesión ' + clean_(p.sid) + ').');
   } catch (e) {
-    console.error('No se pudo registrar el rechazo: ' + e);
+    console.error('No se pudo avisar del rechazo: ' + e);
   }
 }
 

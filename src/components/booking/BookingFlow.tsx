@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Img from "@/components/Img";
 import CountryPicker from "@/components/CountryPicker";
 import { destinations } from "@/data/destinations";
+import { contact } from "@/data/content";
 import {
   departures2027,
   rooms,
@@ -26,6 +27,25 @@ import {
 // GET ?action=plazas devuelve las plazas libres de cada salida.
 // Sin URL, el formulario funciona en modo prototipo (simula el envío).
 const ENDPOINT = process.env.NEXT_PUBLIC_BOOKING_ENDPOINT || "";
+
+/** 2026-11-17: registro de incidencias de la reserva (Oriol: «si los clientes se quejan, poder identificarlo rápido»).
+ * Se manda al Apps Script con sendBeacon (no bloquea ni falla aunque el usuario cierre la página).
+ * Nunca se envían números de documento ni datos de salud: solo qué falló, en qué paso y el navegador. */
+const SID = typeof window !== "undefined" ? Math.random().toString(36).slice(2, 10) : "";
+function logReserva(evento: string, detalle: Record<string, unknown> = {}) {
+  if (!ENDPOINT || typeof navigator === "undefined") return;
+  try {
+    const body = new URLSearchParams({
+      action: "log",
+      evento,
+      sid: SID,
+      detalle: JSON.stringify(detalle).slice(0, 1500),
+      pagina: window.location.pathname + window.location.search,
+      ua: navigator.userAgent.slice(0, 300),
+    });
+    if (!navigator.sendBeacon?.(ENDPOINT, body)) fetch(ENDPOINT, { method: "POST", body, keepalive: true }).catch(() => {});
+  } catch {}
+}
 
 const STEPS = ["Destino", "Fecha", "Viajeros", "Confirmar"] as const;
 const BOOKABLE = ["bali"];
@@ -156,13 +176,34 @@ export default function BookingFlow() {
     document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  const lastValLog = useRef("");
   function next() {
     if (!canNext) {
       setTouched(true);
+      if (step === 2) {
+        // Qué campos impiden avanzar (sin sus valores), una vez por combinación
+        const resumen = errors.map((e, i) => ({ viajero: i + 1, errores: e, nacionalidad: travellers[i]?.nacionalidad, doc: travellers[i]?.docTipo }));
+        const key = JSON.stringify(resumen);
+        if (key !== lastValLog.current) { lastValLog.current = key; logReserva("validacion", { paso: step, viajeros: resumen }); }
+      }
       return;
     }
     go(Math.min(step + 1, STEPS.length - 1));
   }
+
+  // Errores de JavaScript mientras se reserva → al registro
+  useEffect(() => {
+    const onErr = (e: ErrorEvent) => logReserva("error_js", { msg: String(e.message).slice(0, 300), src: `${e.filename}:${e.lineno}` });
+    const onRej = (e: PromiseRejectionEvent) => logReserva("error_js", { msg: String((e.reason as Error)?.message || e.reason).slice(0, 300) });
+    window.addEventListener("error", onErr);
+    window.addEventListener("unhandledrejection", onRej);
+    return () => { window.removeEventListener("error", onErr); window.removeEventListener("unhandledrejection", onRej); };
+  }, []);
+
+  // El aviso de error se ve siempre: se lleva a la vista
+  useEffect(() => {
+    if (status === "err") document.getElementById("reserva-error")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [status]);
 
   // Mientras se procesa: no dejar salir de la página ni hacer scroll detrás del aviso.
   useEffect(() => {
@@ -198,6 +239,8 @@ export default function BookingFlow() {
       ),
       acepta: "si",
       website: hp,
+      sid: SID,
+      ua: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : "",
     });
     try {
       if (ENDPOINT) {
@@ -230,8 +273,9 @@ export default function BookingFlow() {
       }
       setStatus("done");
       document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch {
-      setErrMsg("No hemos podido registrar tu reserva. Prueba de nuevo o escríbenos por WhatsApp.");
+    } catch (e) {
+      logReserva("fallo_envio", { error: String((e as Error)?.message || e).slice(0, 300), salida: trip ? code(trip.n) : "", habitacion: room });
+      setErrMsg("No hemos podido conectar para registrar tu reserva. Comprueba tu conexión y vuelve a pulsar «Reservar mi plaza».");
       setStatus("err");
     }
   }
@@ -431,7 +475,20 @@ export default function BookingFlow() {
                 </span>
               </label>
               {touched && !accepted && <p className="text-sm text-red-700 mt-3" role="alert">Acepta las condiciones para confirmar la reserva.</p>}
-              {status === "err" && <p className="text-sm text-red-700 mt-3" role="alert">{errMsg}</p>}
+              {status === "err" && (
+                <div id="reserva-error" role="alert" className="mt-5 flex gap-3 items-start rounded-2xl border-2 border-red-300 bg-red-50 px-5 py-4">
+                  <span aria-hidden className="text-xl leading-none mt-0.5">⚠️</span>
+                  <div className="text-sm leading-relaxed">
+                    <p className="font-display font-semibold text-red-800 text-base">No hemos podido completar la reserva</p>
+                    <p className="text-red-800 mt-1">{errMsg}</p>
+                    <p className="text-pt-ink/80 mt-2">
+                      Si sigue sin funcionar, escríbenos por{" "}
+                      <a href={contact.whatsappLink} target="_blank" rel="noopener" className="underline underline-offset-2 font-medium text-pt-green">WhatsApp ({contact.whatsapp})</a>{" "}
+                      y te reservamos la plaza nosotros.
+                    </p>
+                  </div>
+                </div>
+              )}
             </section>
           )}
 
