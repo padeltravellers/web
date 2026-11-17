@@ -62,9 +62,29 @@ function enviarTramo_(log) {
   if (queda > 0 && (out.pendientes || 0) > 0 && hechos > 0) {
     ScriptApp.newTrigger('tandaContinuar').timeBased().after(60 * 1000).create();
     log.aviso = 'continúa en 1 min: quedan ' + queda;
+  } else if (hechos > 0) {
+    // Tanda terminada: revisar rebotes 2 min después y anotarlos en el CRM (Oriol, 2026-11-16).
+    programarRevisionRebotes_();
   }
   registrarTanda_(log);
   return log;
+}
+
+function programarRevisionRebotes_() {
+  ScriptApp.getProjectTriggers()
+    .filter((t) => t.getHandlerFunction() === 'revisarRebotes')
+    .forEach((t) => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('revisarRebotes').timeBased().after(2 * 60 * 1000).create();
+}
+
+function revisarRebotes() {
+  ScriptApp.getProjectTriggers()
+    .filter((t) => t.getHandlerFunction() === 'revisarRebotes')
+    .forEach((t) => ScriptApp.deleteTrigger(t));
+  const lista = [];
+  const n = procesarRebotes_(lista);
+  registrarTanda_({ rebotes: n, aviso: 'revisión de rebotes' + (n ? ': ' + lista.join(', ') : ': ninguno nuevo') });
+  return { rebotes: n, emails: lista };
 }
 
 function tandaContinuar() {
@@ -142,7 +162,7 @@ function ampliarLista_() {
 }
 
 /** Busca rebotes de "dirección no existe" y los marca en el CRM (Publicidad) y en la lista. Devuelve cuántos nuevos. */
-function procesarRebotes_() {
+function procesarRebotes_(lista) {
   const env = SpreadsheetApp.openById(SHEET_ID).getSheetByName(ENVIO_TAB);
   if (!env || env.getLastRow() < 2) return 0;
   const filas = env.getRange(2, 1, env.getLastRow() - 1, 4).getValues();
@@ -152,7 +172,7 @@ function procesarRebotes_() {
   GmailApp.search('from:mailer-daemon newer_than:4d', 0, 100).forEach((th) => {
     th.getMessages().forEach((m) => {
       const body = m.getPlainBody() || '';
-      if (!/address not found|couldn't be found|no se ha encontrado|no existe|550 5\.1\.1|user unknown|does not exist/i.test(body)) return;
+      if (!/address not found|couldn't be found|no se ha encontrado|no existe|550 5\.1\.1|5\.1\.10|user unknown|does not exist|no such user|recipient address rejected|mailbox unavailable|invalid recipient/i.test(body)) return;
       const re = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
       let x;
       while ((x = re.exec(body))) { const e = x[0].toLowerCase(); if (idx[e] !== undefined) rebotados.add(e); }
@@ -167,6 +187,7 @@ function procesarRebotes_() {
     if (/rebotado/.test(estado)) return;
     env.getRange(i + 2, 4).setValue('rebotado · email no existe (' + estado + ')');
     nuevos++;
+    if (lista) lista.push(e);
     if (!crm) {
       crm = SpreadsheetApp.openById(CRM_ID).getSheetByName(CRM_TAB);
       const head = crm.getRange(1, 1, 1, crm.getLastColumn()).getValues()[0].map(String);

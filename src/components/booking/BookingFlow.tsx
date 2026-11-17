@@ -203,13 +203,23 @@ export default function BookingFlow() {
       if (ENDPOINT) {
         // form-urlencoded: Apps Script no admite preflight CORS.
         const r = await fetch(ENDPOINT, { method: "POST", body });
-        const d = (await r.json()) as { ok: boolean; error?: string; libres?: number };
+        const d = (await r.json()) as { ok: boolean; error?: string; libres?: number; viajero?: number; campos?: string[] };
         if (!d.ok) {
           if (d.error === "completo") {
             setPlazas((p) => ({ ...p, [code(trip.n)]: { codigo: code(trip.n), libres: d.libres ?? 0, estado: "Completa" } }));
             setErrMsg("Justo se han ocupado las últimas plazas de esta salida. Elige otra fecha o escríbenos por WhatsApp para la lista de espera.");
           } else {
-            setErrMsg("No hemos podido registrar tu reserva. Revisa los datos o escríbenos por WhatsApp.");
+            // 2026-11-17: motivo concreto en vez de un error genérico
+            const quien = d.viajero ? ` del viajero ${d.viajero}` : "";
+            const NOMBRES: Record<string, string> = { nombre: "nombre", apellidos: "apellidos", email: "email", telefono: "teléfono", nacimiento: "fecha de nacimiento", nacionalidad: "nacionalidad", docTipo: "tipo de documento", docNumero: "número de documento", ciudad: "ciudad", nivel: "nivel de pádel", emergenciaNombre: "contacto de emergencia", emergenciaTelefono: "teléfono de emergencia" };
+            const msgs: Record<string, string> = {
+              faltan_datos: d.campos?.length ? `Falta completar ${d.campos.map((c) => NOMBRES[c] || c).join(", ")}${quien}.` : `Faltan datos${quien}. Revisa el formulario.`,
+              email: `El email${quien} no es válido.`,
+              menor: `Para reservar hay que ser mayor de edad (revisa la fecha de nacimiento${quien}).`,
+              contrato: "Tienes que aceptar las condiciones del viaje y la política de privacidad.",
+              ocupado: "Ahora mismo hay varias reservas a la vez. Espera unos segundos y vuelve a pulsar «Reservar mi plaza».",
+            };
+            setErrMsg((d.error && msgs[d.error]) || "No hemos podido registrar tu reserva. Recarga la página y prueba de nuevo, o escríbenos por WhatsApp.");
           }
           setStatus("err");
           return;
