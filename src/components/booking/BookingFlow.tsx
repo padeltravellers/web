@@ -87,7 +87,7 @@ function validate(t: Traveller): Errors {
     if (a < 0 || a > 100) e.nacimiento = "Revisa la fecha";
     else if (a < 18) e.nacimiento = "Tienes que ser mayor de edad para reservar";
   }
-  const d = docError(t.docTipo, t.docNumero);
+  const d = docError(t.docTipo, t.docNumero, t.nacionalidad);
   if (d) e.docNumero = d;
   return e;
 }
@@ -573,7 +573,7 @@ function TravellerForm({
           </Field>
           <Field label="Tipo de documento">
             <select className={`${inputCls} ${okCls}`} value={t.docTipo} onChange={(e) => onChange("docTipo", e.target.value as Traveller["docTipo"])}>
-              <option value="DNI">DNI</option>
+              <option value="DNI">{t.nacionalidad && t.nacionalidad !== "España" ? "DNI / documento de identidad" : "DNI"}</option>
               <option value="NIE">NIE</option>
               <option value="Pasaporte">Pasaporte</option>
             </select>
@@ -583,7 +583,7 @@ function TravellerForm({
               className={`${cls("docNumero")} uppercase tracking-wide`}
               value={t.docNumero}
               onChange={(e) => onChange("docNumero", e.target.value.toUpperCase())}
-              placeholder={t.docTipo === "DNI" ? "12345678Z" : t.docTipo === "NIE" ? "X1234567L" : "PAA123456"}
+              placeholder={t.docTipo === "DNI" ? (t.nacionalidad && t.nacionalidad !== "España" ? "Número del documento" : "12345678Z") : t.docTipo === "NIE" ? "X1234567L" : "PAA123456"}
               autoComplete="off"
               spellCheck={false}
             />

@@ -160,10 +160,15 @@ export const nationalitiesAll = [
 
 const DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-/** Valida DNI/NIE españoles (con letra de control) o un pasaporte genérico. Devuelve un mensaje de error o "". */
-export function docError(tipo: string, raw: string): string {
+/** Valida DNI/NIE españoles (con letra de control) o un pasaporte genérico. Devuelve un mensaje de error o "".
+ * El formato español del DNI solo se exige si la nacionalidad es España: un DNI de Andorra u otro país
+ * se valida como documento genérico (2026-11-17, una viajera andorrana no podía reservar). */
+export function docError(tipo: string, raw: string, nacionalidad = "España"): string {
   const v = raw.replace(/[\s-]/g, "").toUpperCase();
   if (!v) return "Obligatorio";
+  if (tipo === "DNI" && nacionalidad && nacionalidad !== "España") {
+    return /^[A-Z0-9]{5,15}$/.test(v) ? "" : "Entre 5 y 15 letras o números";
+  }
   if (tipo === "DNI") {
     if (!/^\d{8}[A-Z]$/.test(v)) return "8 números y una letra, p. ej. 12345678Z";
     return DNI_LETTERS[Number(v.slice(0, 8)) % 23] === v[8] ? "" : "La letra no corresponde a ese número";
