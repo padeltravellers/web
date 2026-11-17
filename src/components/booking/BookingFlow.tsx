@@ -142,7 +142,24 @@ export default function BookingFlow() {
       setDest("bali");
       setTripN(n);
       setStep(1);
+      window.history.replaceState({ ...(window.history.state || {}), ptStep: 1 }, "");
     }
+  }, []);
+
+  // 2026-11-17: el botón «atrás» del navegador (o el gesto del móvil) vuelve al paso anterior del formulario
+  // en vez de salir de la página. Cada paso se apunta en el historial; los datos ya escritos se mantienen.
+  useEffect(() => {
+    if (window.history.state?.ptStep === undefined) window.history.replaceState({ ...(window.history.state || {}), ptStep: 0 }, "");
+    const onPop = (e: PopStateEvent) => {
+      const st = e.state?.ptStep;
+      if (typeof st === "number") {
+        setTouched(false);
+        setStep(st);
+        document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
   }, []);
 
   // Habitación compartida = 2 viajeros obligatorios.
@@ -171,8 +188,15 @@ export default function BookingFlow() {
   }
 
   function go(to: number) {
+    // Atrás del formulario = atrás del navegador (así el historial y la pantalla nunca se descuadran)
+    const cur = window.history.state?.ptStep;
+    if (typeof cur === "number" && to === cur - 1 && to >= 0) {
+      window.history.back();
+      return;
+    }
     setTouched(false);
     setStep(to);
+    if (to !== cur) window.history.pushState({ ...(window.history.state || {}), ptStep: to }, "");
     document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
