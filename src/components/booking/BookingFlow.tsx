@@ -38,7 +38,7 @@ function logReserva(evento: string, detalle: Record<string, unknown> = {}) {
     const body = new URLSearchParams({
       action: "log",
       evento,
-      sid: SID,
+      sesion: SID, // ¡no llamarlo «sid»! Google rechaza las peticiones con ese parámetro (2026-11-17)
       detalle: JSON.stringify(detalle).slice(0, 1500),
       pagina: window.location.pathname + window.location.search,
       ua: navigator.userAgent.slice(0, 300),
@@ -263,7 +263,7 @@ export default function BookingFlow() {
       ),
       acepta: "si",
       website: hp,
-      sid: SID,
+      sesion: SID, // ¡no llamarlo «sid»! Google rechaza las peticiones con ese parámetro (2026-11-17)
       ua: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : "",
     });
     try {

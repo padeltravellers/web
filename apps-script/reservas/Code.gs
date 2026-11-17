@@ -506,7 +506,7 @@ function registrarWeb_(evento, detalle, p) {
       sh.setFrozenRows(1);
     }
     if (sh.getLastRow() > 20000) return; // tope de seguridad
-    sh.appendRow([new Date(), evento, String(detalle || '').slice(0, 1500), clean_(p.sid), clean_(p.salida), clean_(p.habitacion),
+    sh.appendRow([new Date(), evento, String(detalle || '').slice(0, 1500), clean_(p.sesion || p.sid), clean_(p.salida), clean_(p.habitacion),
       clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')), clean_(v1.email), clean_(v1.telefono), clean_(v1.nacionalidad),
       clean_(p.pagina), clean_(p.ua)]);
   } catch (e) {
@@ -525,7 +525,7 @@ function registrarRechazo_(r, p) {
     MailApp.sendEmail(cfg.copia_a || Session.getEffectiveUser().getEmail(), '⚠️ Reserva web rechazada: ' + (r.error || 'motivo desconocido'),
       'La web no ha podido registrar una reserva.\n\nMotivo: ' + motivo + '\nSalida: ' + (p.salida || '') + ' · habitación: ' + (p.habitacion || '') +
       '\n\nViajero 1: ' + clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')) + ' · ' + clean_(v1.email) + ' · ' + clean_(v1.telefono) + ' · ' + clean_(v1.nacionalidad) +
-      '\n\nTodo el historial de ese intento está en la pestaña «Registro web» del Sheet de reservas (sesión ' + clean_(p.sid) + ').');
+      '\n\nTodo el historial de ese intento está en la pestaña «Registro web» del Sheet de reservas (sesión ' + clean_(p.sesion || p.sid) + ').');
   } catch (e) {
     console.error('No se pudo avisar del rechazo: ' + e);
   }
