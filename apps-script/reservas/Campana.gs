@@ -16,6 +16,13 @@ const CRM_COL_MAIL = 11; // K
 const CRM_COL_PUBLICIDAD_HEADER = 'Publicidad';
 const PDF_BALI_2027 = '136Kp7cAN5UKorxIvVkYfSmQ7bernEYv1'; // "Viaje Padel y Bali 2027.pdf" (copia en Reservas 2027)
 const ASUNTO_BALI_2027 = 'Fechas Bali 2027: 8 salidas de junio a octubre';
+// 2026-11-18 (Oriol): versión 2 para el resto del CRM («el año pasado te interesaste…», precio que baja).
+// CAMPANA_VERSION decide qué versión sale en los envíos reales; la prueba puede pedir otra con &v=2.
+const CAMPANA_VERSION = 1;
+const CAMPANA_V = {
+  1: { plantilla: 'email_bali_2027', asunto: ASUNTO_BALI_2027, texto: 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/' },
+  2: { plantilla: 'email_bali_2027_v2', asunto: 'Bali 2027: el viaje que se nos quedó pendiente', texto: 'Ya tenemos las fechas de Bali 2027 y el viaje baja a 1.490 € (antes 1.725 €), con reserva de 100 € reembolsables. Mira el viaje y reserva en https://padeltravellers.com/bali/' },
+};
 const PRUEBA_PARA = 'oriol@padeltravellers.com';
 // Oriol (2026-11-15): la campaña SALE SIEMPRE de info@. Si el alias no está, no se envía nada.
 const CAMPANA_FROM = 'info@padeltravellers.com';
@@ -119,8 +126,8 @@ function registrarEvento_(id, tipo, url) {
   }
 }
 
-function htmlCampana_(nombre, email, id) {
-  let html = HtmlService.createHtmlOutputFromFile('email_bali_2027').getContent();
+function htmlCampana_(nombre, email, id, version) {
+  let html = HtmlService.createHtmlOutputFromFile(CAMPANA_V[version || CAMPANA_VERSION].plantilla).getContent();
   if (!String(nombre || '').trim()) html = html.split('Hola {{NOMBRE}},').join('Hola,');
   if (id) {
     // Enlaces a la web, Instagram y WhatsApp → pasan por /go/ para contar el click.
@@ -140,11 +147,11 @@ function campanaPrueba_(p) {
   const para = String(p.para || PRUEBA_PARA).trim().toLowerCase();
   if (PRUEBA_PERMITIDOS.indexOf(para) < 0) return json_({ ok: false, error: 'destinatario' });
   const nombre = String(p.nombre || 'Oriol');
-  const html = htmlCampana_(nombre, para, registrarEnvio_(para, nombre + ' (prueba)'));
+  const v = CAMPANA_V[Number(p.v)] ? Number(p.v) : CAMPANA_VERSION;
+  const html = htmlCampana_(nombre, para, registrarEnvio_(para, nombre + ' (prueba v' + v + ')'), v);
   const pdf = DriveApp.getFileById(PDF_BALI_2027).getAs(MimeType.PDF).setName('Viaje Padel y Bali 2027.pdf');
-  const texto = 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/';
-  GmailApp.sendEmail(para, '[PRUEBA] ' + ASUNTO_BALI_2027, texto, optsCampana_(html, pdf));
-  return json_({ ok: true, enviado_a: para, desde: CAMPANA_FROM });
+  GmailApp.sendEmail(para, '[PRUEBA] ' + CAMPANA_V[v].asunto, CAMPANA_V[v].texto, optsCampana_(html, pdf));
+  return json_({ ok: true, enviado_a: para, desde: CAMPANA_FROM, version: v });
 }
 
 /**
@@ -212,7 +219,7 @@ function campanaEnvio_(p) {
       celda.setValue('enviando'); SpreadsheetApp.flush(); // marcar ANTES de enviar
       try {
         const html = htmlCampana_(nombre, email, registrarEnvio_(email, nombre));
-        GmailApp.sendEmail(email, ASUNTO_BALI_2027, texto, optsCampana_(html, pdf)); // sin fallback: solo info@
+        GmailApp.sendEmail(email, CAMPANA_V[CAMPANA_VERSION].asunto, CAMPANA_V[CAMPANA_VERSION].texto, optsCampana_(html, pdf)); // sin fallback: solo info@
         celda.setValue('enviado ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy HH:mm'));
         res.enviados++;
         if (crm) crmMarcarEnvio_(crm, Number(filas[i][2]), email);
