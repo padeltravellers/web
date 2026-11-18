@@ -52,7 +52,7 @@ const groups: { title: string; items: Faq[] }[] = [
       },
       {
         q: "¿Organizáis viajes a otros destinos?",
-        a: "Sí. Estamos preparando un viaje a Filipinas (Moalboal, Siargao y Bohol) y rutas por otras zonas de Indonesia: Yogyakarta, Bromo, Lombok y Flores. Puedes apuntarte a la lista de espera en su página.",
+        a: "Sí. Estamos preparando un viaje a Filipinas (Moalboal, Siargao y Bohol) y rutas por otras zonas de Indonesia: Yogyakarta, Bromo, Lombok y Komodo. Puedes apuntarte a la lista de espera en su página.",
       },
     ],
   },

@@ -49,7 +49,7 @@ export default function FilipinasPage() {
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Qué recorreremos</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {spots.map((s) => (
-                <div key={s.title} className="bg-pt-cream rounded-3xl overflow-hidden border border-pt-green/10 group">
+                <div key={s.title} className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Img src={s.photo} alt={s.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
                   </div>

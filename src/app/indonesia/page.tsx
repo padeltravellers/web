@@ -6,14 +6,14 @@ import { contact } from "@/data/content";
 
 export const metadata = {
   title: "Indonesia · próximo destino",
-  description: "El gran viaje por Indonesia más allá de Bali: Yogyakarta, Bromo, Lombok y Flores. Próximamente — lista de espera abierta.",
+  description: "El gran viaje por Indonesia más allá de Bali: Yogyakarta, Bromo, Lombok y Komodo. Próximamente — lista de espera abierta.",
 };
 
 const spots = [
   { photo: "/photos/indonesia/spots/yogyakarta.jpg", title: "Yogyakarta", text: "Borobudur y Prambanan, los templos más impresionantes de Java." },
   { photo: "/photos/indonesia/spots/bromo.jpg", title: "Bromo", text: "Amanecer sobre el mar de nubes y el volcán más icónico de Indonesia." },
   { photo: "/photos/indonesia/spots/lombok.jpg", title: "Lombok", text: "Playas vírgenes, las islas Gili y pádel junto al mar." },
-  { photo: "/photos/indonesia/spots/flores.jpg", title: "Flores", text: "Komodo, el lago Kelimutu y naturaleza salvaje sin masas." },
+  { photo: "/photos/indonesia/spots/komodo.jpg", title: "Komodo", text: "Tres días en barco por el parque nacional: Padar, Pink Beach, los dragones y snorkel con mantas." },
 ];
 
 export default function IndonesiaPage() {
@@ -31,11 +31,11 @@ export default function IndonesiaPage() {
                 Indonesia
               </h1>
               <p className="mt-10 text-lg md:text-xl font-light leading-relaxed text-white/95 max-w-xl mx-auto">
-                El gran viaje más allá de Bali: Yogyakarta, Bromo, Lombok y Flores. Lo estamos diseñando — te avisamos en cuanto abramos fechas.
+                El gran viaje más allá de Bali: Yogyakarta, Bromo, Lombok y Komodo. Lo estamos diseñando — te avisamos en cuanto abramos fechas.
               </p>
               <div className="mt-12">
                 <a
-                  href={`${contact.whatsappLink}?text=${encodeURIComponent("Hola! Quiero entrar en la lista de espera para el viaje por Indonesia (Yogyakarta, Bromo, Lombok, Flores). Avisadme cuando abráis fechas.")}`}
+                  href={`${contact.whatsappLink}?text=${encodeURIComponent("Hola! Quiero entrar en la lista de espera para el viaje por Indonesia (Yogyakarta, Bromo, Lombok, Komodo). Avisadme cuando abráis fechas.")}`}
                   className="inline-block px-10 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base hover:bg-pt-cream transition"
                 >
                   Avísame cuando abráis
@@ -50,7 +50,7 @@ export default function IndonesiaPage() {
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Qué recorreremos</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {spots.map((s) => (
-                <div key={s.title} className="bg-pt-cream rounded-3xl overflow-hidden border border-pt-green/10 group">
+                <div key={s.title} className="group bg-white border border-pt-green/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Img src={s.photo} alt={s.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
                   </div>
@@ -61,7 +61,7 @@ export default function IndonesiaPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-xs text-pt-muted/80 text-center">Fotos de Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Borobudur_Sunrise_2012-01-05.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Yogyakarta</a> (Justine Hong, CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Bromo_and_Semeru_volcanoes,_Java,_Indonesia,_20220820_0717_9517.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Bromo</a> (Jakub Hałun, CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Blue_Water_Hits_the_White_Sand_of_Gili_Trawangan.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Lombok</a> (Christine Anggeline, CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Kelimutu_Crater_Lake.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Flores</a> (LukeTriton, CC BY-SA 4.0).</p>
+            <p className="mt-6 text-xs text-pt-muted/80 text-center">Fotos de Yogyakarta, Bromo y Lombok: Wikimedia Commons, <a href="https://commons.wikimedia.org/wiki/File:Borobudur_Sunrise_2012-01-05.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Yogyakarta</a> (Justine Hong, CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Bromo_and_Semeru_volcanoes,_Java,_Indonesia,_20220820_0717_9517.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Bromo</a> (Jakub Hałun, CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Blue_Water_Hits_the_White_Sand_of_Gili_Trawangan.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Lombok</a> (Christine Anggeline, CC BY-SA 4.0).</p>
           </div>
         </section>
 
