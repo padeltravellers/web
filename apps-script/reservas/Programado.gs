@@ -5,6 +5,7 @@
  * - Antes de cada tanda: detecta rebotes ("email no existe") y amplía la lista con todo el CRM.
  * - A quién SÍ: todos los del CRM con email válido, MENOS:
  *     · estado actual (el más a la derecha de Estado 1/2/3) = Comprado… / No cumple / Spam web
+ *     · «No cumple» en cualquiera de las tres columnas (2026-11-18)
  *     · columna "Publicidad" con algo (baja o rebote)
  * - Se vuelve a comprobar el CRM justo antes de enviar cada email (por si ha cambiado).
  * - Cuota de la cuenta: 100 emails/día. Se reservan RESERVA_CUOTA para los emails de reservas.
@@ -113,6 +114,11 @@ function estadoActual_(fila) {
   return e;
 }
 
+/** 2026-11-18 (Oriol): «No cumple» en CUALQUIERA de Estado 1/2/3 excluye (se aplica el más restrictivo). */
+function tieneNoCumple_(fila) {
+  return CRM_COL_ESTADOS.some((c) => String(fila[c - 1] || '').trim().toLowerCase() === 'no cumple');
+}
+
 function estadoExcluido_(estado) {
   const e = String(estado || '').trim().toLowerCase();
   return e.indexOf('comprado') === 0 || e === 'no cumple' || e === 'spam web';
@@ -147,7 +153,7 @@ function ampliarLista_() {
   const fuera = new Set();
   datos.forEach((r) => {
     const e = String(r[CRM_COL_MAIL - 1]).trim().toLowerCase();
-    if (estadoExcluido_(estadoActual_(r)) || (colPub && String(r[colPub - 1]).trim())) fuera.add(e);
+    if (estadoExcluido_(estadoActual_(r)) || tieneNoCumple_(r) || (colPub && String(r[colPub - 1]).trim())) fuera.add(e);
   });
   const nuevos = [];
   for (let i = datos.length - 1; i >= 0; i--) { // los más recientes primero
@@ -208,6 +214,7 @@ function motivoNoEnviar_(crm, fila, email) {
   if (String(r[CRM_COL_MAIL - 1]).trim().toLowerCase() !== email) return '';
   const estado = estadoActual_(r);
   if (estadoExcluido_(estado)) return 'excluido: estado ' + estado;
+  if (tieneNoCumple_(r)) return 'excluido: No cumple en otra columna';
   if (crm.colPub && String(r[crm.colPub - 1]).trim()) return 'excluido: ' + String(r[crm.colPub - 1]).trim();
   return '';
 }

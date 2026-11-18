@@ -18,7 +18,7 @@ const PDF_BALI_2027 = '136Kp7cAN5UKorxIvVkYfSmQ7bernEYv1'; // "Viaje Padel y Bal
 const ASUNTO_BALI_2027 = 'Fechas Bali 2027: 8 salidas de junio a octubre';
 // 2026-11-18 (Oriol): versión 2 para el resto del CRM («el año pasado te interesaste…», precio que baja).
 // CAMPANA_VERSION decide qué versión sale en los envíos reales; la prueba puede pedir otra con &v=2.
-const CAMPANA_VERSION = 1;
+const CAMPANA_VERSION = 2; // Oriol 2026-11-18: «empieza», 90 al día
 const CAMPANA_V = {
   1: { plantilla: 'email_bali_2027', asunto: ASUNTO_BALI_2027, texto: 'Fechas Bali 2027: 8 salidas de junio a octubre, 14 días de pádel, cultura y aventura. Mira el viaje y reserva en https://padeltravellers.com/bali/' },
   2: { plantilla: 'email_bali_2027_v2', asunto: 'Bali 2027: el viaje que se nos quedó pendiente', texto: 'Ya tenemos las fechas de Bali 2027 y el viaje baja a 1.490 € (antes 1.725 €), con reserva de 100 € reembolsables. Mira el viaje y reserva en https://padeltravellers.com/bali/' },
@@ -180,7 +180,7 @@ function crmMarcarEnvio_(crm, fila, email) {
   try {
     if (!fila || fila < 2) return;
     const m = String(crm.sh.getRange(fila, CRM_COL_MAIL).getValue()).trim().toLowerCase();
-    if (m === email) crm.sh.getRange(fila, crm.col).setValue('enviado ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy'));
+    if (m === email) crm.sh.getRange(fila, crm.col).setValue('enviado' + (CAMPANA_VERSION > 1 ? ' v' + CAMPANA_VERSION : '') + ' ' + Utilities.formatDate(new Date(), 'Europe/Madrid', 'dd/MM/yyyy'));
   } catch (err) {
     console.error('CRM: no se pudo marcar el envío: ' + err);
   }
