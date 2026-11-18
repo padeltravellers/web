@@ -507,7 +507,7 @@ function registrarWeb_(evento, detalle, p) {
     }
     if (sh.getLastRow() > 20000) return; // tope de seguridad
     sh.appendRow([new Date(), evento, String(detalle || '').slice(0, 1500), clean_(p.sesion || p.sid), clean_(p.salida), clean_(p.habitacion),
-      clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')), clean_(v1.email), clean_(v1.telefono), clean_(v1.nacionalidad),
+      clean_((v1.nombre || '') + ' ' + (v1.apellidos || '')), clean_(v1.email), "'" + clean_(v1.telefono), clean_(v1.nacionalidad),
       clean_(p.pagina), clean_(p.ua)]);
   } catch (e) {
     console.error('No se pudo escribir en Registro web: ' + e);
