@@ -10,10 +10,10 @@ export const metadata = {
 };
 
 const spots = [
-  { icon: "🛕", title: "Yogyakarta", text: "Borobudur y Prambanan, los templos más impresionantes de Java." },
-  { icon: "🌋", title: "Bromo", text: "Amanecer sobre el mar de nubes y el volcán más icónico de Indonesia." },
-  { icon: "🎾", title: "Lombok", text: "Playas vírgenes, las islas Gili y pádel junto al mar." },
-  { icon: "🦎", title: "Flores", text: "Komodo, el lago Kelimutu y naturaleza salvaje sin masas." },
+  { photo: "/photos/indonesia/spots/yogyakarta.jpg", title: "Yogyakarta", text: "Borobudur y Prambanan, los templos más impresionantes de Java." },
+  { photo: "/photos/indonesia/spots/bromo.jpg", title: "Bromo", text: "Amanecer sobre el mar de nubes y el volcán más icónico de Indonesia." },
+  { photo: "/photos/indonesia/spots/lombok.jpg", title: "Lombok", text: "Playas vírgenes, las islas Gili y pádel junto al mar." },
+  { photo: "/photos/indonesia/spots/flores.jpg", title: "Flores", text: "Komodo, el lago Kelimutu y naturaleza salvaje sin masas." },
 ];
 
 export default function IndonesiaPage() {
@@ -50,13 +50,18 @@ export default function IndonesiaPage() {
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Qué recorreremos</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {spots.map((s) => (
-                <div key={s.title} className="bg-pt-cream rounded-3xl p-7 border border-pt-green/10">
-                  <div className="text-3xl mb-3">{s.icon}</div>
-                  <h3 className="font-display font-semibold text-xl text-pt-green mb-2">{s.title}</h3>
-                  <p className="text-pt-muted text-sm leading-relaxed">{s.text}</p>
+                <div key={s.title} className="bg-pt-cream rounded-3xl overflow-hidden border border-pt-green/10 group">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Img src={s.photo} alt={s.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display font-semibold text-xl text-pt-green mb-2">{s.title}</h3>
+                    <p className="text-pt-muted text-sm leading-relaxed">{s.text}</p>
+                  </div>
                 </div>
               ))}
             </div>
+            <p className="mt-6 text-xs text-pt-muted/80 text-center">Fotos de Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Borobudur_Sunrise_2012-01-05.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Yogyakarta</a> (Justine Hong, CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Bromo_and_Semeru_volcanoes,_Java,_Indonesia,_20220820_0717_9517.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Bromo</a> (Jakub Hałun, CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Blue_Water_Hits_the_White_Sand_of_Gili_Trawangan.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Lombok</a> (Christine Anggeline, CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Kelimutu_Crater_Lake.jpg" target="_blank" rel="noopener" className="underline underline-offset-2">Flores</a> (LukeTriton, CC BY-SA 4.0).</p>
           </div>
         </section>
 

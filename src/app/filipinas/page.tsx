@@ -10,9 +10,9 @@ export const metadata = {
 };
 
 const spots = [
-  { icon: "🤿", title: "Moalboal", text: "El banco de sardinas y las tortugas, snorkel desde la misma orilla." },
-  { icon: "🏄", title: "Siargao", text: "La capital del surf de Filipinas: olas, lagunas y ambiente isleño." },
-  { icon: "🏝️", title: "Bohol", text: "Las Chocolate Hills, los tarseros y las playas de Panglao." },
+  { photo: "/photos/filipinas/spots/moalboal.jpg", title: "Moalboal", text: "El banco de sardinas, las tortugas y las vistas desde el Osmeña Peak." },
+  { photo: "/photos/filipinas/spots/siargao.jpg", title: "Siargao", text: "La capital del surf de Filipinas: olas, lagunas y ambiente isleño." },
+  { photo: "/photos/filipinas/spots/bohol.jpg", title: "Bohol", text: "Las Chocolate Hills, los tarseros y las playas de Panglao." },
 ];
 
 export default function FilipinasPage() {
@@ -49,10 +49,14 @@ export default function FilipinasPage() {
             <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Qué recorreremos</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {spots.map((s) => (
-                <div key={s.title} className="bg-pt-cream rounded-3xl p-7 border border-pt-green/10">
-                  <div className="text-3xl mb-3">{s.icon}</div>
-                  <h3 className="font-display font-semibold text-xl text-pt-green mb-2">{s.title}</h3>
-                  <p className="text-pt-muted text-sm leading-relaxed">{s.text}</p>
+                <div key={s.title} className="bg-pt-cream rounded-3xl overflow-hidden border border-pt-green/10 group">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Img src={s.photo} alt={s.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display font-semibold text-xl text-pt-green mb-2">{s.title}</h3>
+                    <p className="text-pt-muted text-sm leading-relaxed">{s.text}</p>
+                  </div>
                 </div>
               ))}
             </div>

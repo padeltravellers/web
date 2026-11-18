@@ -492,7 +492,7 @@ export const destinations: Destination[] = [
     deposit: "—",
     trips: [],
     highlights: [
-      { icon: "🤿", title: "Moalboal", text: "El banco de sardinas y las tortugas, snorkel desde la misma orilla." },
+      { icon: "🤿", title: "Moalboal", text: "El banco de sardinas, las tortugas y las vistas desde el Osmeña Peak." },
       { icon: "🏄", title: "Siargao", text: "La capital del surf de Filipinas: olas, lagunas y ambiente isleño." },
       { icon: "🏝️", title: "Bohol", text: "Las Chocolate Hills, los tarseros y las playas de Panglao." },
     ],
