@@ -5,9 +5,15 @@ import Footer from "@/components/Footer";
 import { contact } from "@/data/content";
 
 export const metadata = {
-  title: "Filipinas · 1 salida 2027",
-  description: "Una única salida a Filipinas en 2027: del 25 de julio al 7 de agosto. Pádel y travesía por las islas. Plazas limitadas, lista de espera abierta.",
+  title: "Filipinas · próximo destino",
+  description: "Pádel y travesía por las islas de Filipinas: Moalboal, Siargao y Bohol. Próximamente — lista de espera abierta.",
 };
+
+const spots = [
+  { icon: "🤿", title: "Moalboal", text: "El banco de sardinas y las tortugas, snorkel desde la misma orilla." },
+  { icon: "🏄", title: "Siargao", text: "La capital del surf de Filipinas: olas, lagunas y ambiente isleño." },
+  { icon: "🏝️", title: "Bohol", text: "Las Chocolate Hills, los tarseros y las playas de Panglao." },
+];
 
 export default function FilipinasPage() {
   return (
@@ -15,25 +21,40 @@ export default function FilipinasPage() {
       <Header transparent />
       <main className="text-pt-ink">
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
-          <Img src="/photos/filipinas/1.jpg" alt="Filipinas" fill priority className="object-cover ken-burns" />
+          <Img src="/photos/filipinas/1.jpg" alt="Paisajes de Filipinas" fill priority className="object-cover ken-burns" />
           <div className="absolute inset-0 bg-gradient-to-b from-pt-ink/30 via-pt-ink/10 to-pt-ink/85" />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6 lg:px-12 max-w-3xl text-white fade-up">
-              <p className="font-display uppercase tracking-[0.26em] text-pt-cream text-sm md:text-base font-semibold mb-5">1 salida · 2027</p>
+              <p className="font-display uppercase tracking-[0.26em] text-pt-cream text-sm md:text-base font-semibold mb-5">Próximamente</p>
               <h1 className="font-display font-medium text-7xl md:text-9xl lg:text-[12rem] leading-[0.88] tracking-tight">
                 Filipinas
               </h1>
               <p className="mt-10 text-lg md:text-xl font-light leading-relaxed text-white/95 max-w-xl mx-auto">
-                Una única salida en 2027: del <strong className="font-semibold">25 de julio al 7 de agosto</strong>, 13 días. Pádel y travesía por las islas: Moalboal, Siargao y Bohol. Plazas limitadas.
+                Pádel y travesía por las islas: Moalboal, Siargao y Bohol. Lo estamos diseñando — te avisamos en cuanto abramos fechas.
               </p>
               <div className="mt-12">
                 <a
-                  href={`${contact.whatsappLink}?text=${encodeURIComponent("Hola! Me interesa el viaje a Filipinas del 25 de julio al 7 de agosto de 2027. ¿Me contáis más?")}`}
+                  href={`${contact.whatsappLink}?text=${encodeURIComponent("Hola! Quiero entrar en la lista de espera para el viaje a Filipinas (Moalboal, Siargao y Bohol). Avisadme cuando abráis fechas.")}`}
                   className="inline-block px-10 py-4 rounded-full bg-white text-pt-green font-display font-semibold text-base hover:bg-pt-cream transition"
                 >
-                  Quiero más información
+                  Avísame cuando abráis
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 lg:py-20 px-6 lg:px-12 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <p className="font-display uppercase tracking-[0.12em] text-base md:text-lg font-semibold text-pt-clay mb-3 text-center">Qué recorreremos</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {spots.map((s) => (
+                <div key={s.title} className="bg-pt-cream rounded-3xl p-7 border border-pt-green/10">
+                  <div className="text-3xl mb-3">{s.icon}</div>
+                  <h3 className="font-display font-semibold text-xl text-pt-green mb-2">{s.title}</h3>
+                  <p className="text-pt-muted text-sm leading-relaxed">{s.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -45,8 +66,7 @@ export default function FilipinasPage() {
               Bali 2027 abierto
             </h2>
             <p className="text-pt-muted text-lg mb-8 max-w-xl mx-auto leading-relaxed">
-              8 salidas entre junio y octubre. Si te gusta la idea de pádel + isla + cultura, ya tienes plan
-              este año.
+              8 salidas entre junio y octubre. Si te gusta la idea de pádel + isla + cultura, ya tienes plan este año.
             </p>
             <Link href="/bali" className="inline-block px-9 py-4 rounded-full bg-pt-green text-white font-display font-bold text-base hover:bg-pt-green-soft transition">
               Ver destino Bali
