@@ -179,7 +179,7 @@ function crearReserva_(p) {
       BIC: cfg.bic || 'Se indica en el email de confirmación',
       CONCEPTO: id + ' · ' + nombreCompleto + ' · Bali 2027 Viaje ' + salida.viaje,
       ACEPTACION: Utilities.formatDate(ahora, 'Europe/Madrid', 'dd/MM/yyyy HH:mm') + ' (hora de España), en padeltravellers.com' + (pax === 2 && i === 1 ? ', reserva hecha junto a ' + nombres[0] : ''),
-    }, id + ' · ' + salida.codigo + ' · ' + nombreCompleto);
+    }, id + ' · ' + salida.codigo + ' · ' + nombreCompleto, carpetaViaje_(cfg, salida));
 
     const values = {
       'ID': id,
@@ -259,7 +259,30 @@ function edad_(iso) {
 
 // ---------- contrato ----------
 
-function generarContrato_(cfg, campos, nombre) {
+// 2026-11-18 (Oriol): el PDF de cada reserva va a Viajes 2027 / <Destino> / «Viaje N · fechas».
+// Las carpetas se crean solas si no existen. Si algo falla, el PDF se queda en Contratos 2027.
+function carpetaViaje_(cfg, salida) {
+  try {
+    if (!cfg.carpeta_viajes) return null;
+    const raiz = DriveApp.getFolderById(cfg.carpeta_viajes);
+    const nd = String(salida.destino).trim();
+    const itd = raiz.getFoldersByName(nd);
+    const dest = itd.hasNext() ? itd.next() : raiz.createFolder(nd);
+    const pref = 'Viaje ' + salida.viaje;
+    const it = dest.getFolders();
+    while (it.hasNext()) {
+      const f = it.next();
+      const n = f.getName();
+      if (n === pref || n.indexOf(pref + ' ') === 0) return f;
+    }
+    return dest.createFolder(pref + (salida.etiqueta ? ' · ' + salida.etiqueta : ''));
+  } catch (e) {
+    console.error('carpetaViaje_ ' + salida.codigo + ': ' + e);
+    return null;
+  }
+}
+
+function generarContrato_(cfg, campos, nombre, carpetaPdf) {
   const carpeta = DriveApp.getFolderById(cfg.carpeta_contratos);
   const copia = DriveApp.getFileById(cfg.plantilla_contrato).makeCopy('Contrato ' + nombre, carpeta);
   const doc = DocumentApp.openById(copia.getId());
@@ -270,7 +293,7 @@ function generarContrato_(cfg, campos, nombre) {
   const sinRellenar = body.getText().match(/\{\{[A-Z_]+\}\}/g);
   if (sinRellenar) console.warn('Campos sin rellenar en el contrato ' + nombre + ': ' + sinRellenar.join(', '));
   doc.saveAndClose();
-  const pdf = carpeta.createFile(copia.getAs(MimeType.PDF)).setName('Reserva ' + nombre + '.pdf');
+  const pdf = (carpetaPdf || carpeta).createFile(copia.getAs(MimeType.PDF)).setName('Reserva ' + nombre + '.pdf');
   copia.setTrashed(true);
   return pdf;
 }
