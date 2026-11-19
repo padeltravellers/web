@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Inter, Petit_Formal_Script } from "next/font/google";
+import CookieConsent from "@/components/CookieConsent";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import "./globals.css";
 
@@ -145,45 +146,47 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
         />
-        {/* Google Analytics 4 — Padel Travellers */}
+        {/* Google Analytics 4 + Meta Pixel con consentimiento (2026-11-19). Sin aceptar cookies:
+            GA en Consent Mode (sin cookies) y el píxel de Meta ni se carga. Ver src/lib/track.ts */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLNXCY4BM8" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-TLNXCY4BM8');
+              (function(){
+                var c = null; try { c = localStorage.getItem('pt_consent'); } catch (e) {}
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                function state(v){ var g = v === 'granted' ? 'granted' : 'denied';
+                  return { ad_storage: g, ad_user_data: g, ad_personalization: g, analytics_storage: g }; }
+                gtag('consent', 'default', state(c));
+                gtag('js', new Date());
+                gtag('config', 'G-TLNXCY4BM8');
+                window.ptLoadPixel = function(){
+                  if (window.fbq) { window.fbq('consent', 'grant'); return; }
+                  !function(f,b,e,v,n,t,s)
+                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(window, document,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  fbq('init', '1251864486670086');
+                  fbq('track', 'PageView');
+                };
+                window.ptConsent = function(v){
+                  try { localStorage.setItem('pt_consent', v); } catch (e) {}
+                  gtag('consent', 'update', state(v));
+                  if (v === 'granted') window.ptLoadPixel();
+                  else if (window.fbq) window.fbq('consent', 'revoke');
+                  try { window.dispatchEvent(new Event('pt-consent-' + v)); } catch (e) {}
+                };
+                if (c === 'granted') window.ptLoadPixel();
+              })();
             `,
           }}
         />
-        {/* Meta Pixel — Padel Travellers */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1251864486670086');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1251864486670086&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
         {/* Auto-tracking — clicks, scroll depth, WhatsApp, outbound */}
         <script
           dangerouslySetInnerHTML={{
@@ -218,6 +221,11 @@ export default function RootLayout({
 
                   // WhatsApp
                   if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
+                    try {
+                      if (localStorage.getItem('pt_consent') === 'granted' && typeof window.fbq === 'function') {
+                        window.fbq('track', 'Contact', { content_name: section || window.location.pathname });
+                      }
+                    } catch (e) {}
                     track('whatsapp_click', {
                       link_text: text,
                       link_url: href,
@@ -310,6 +318,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white text-pt-ink">
         {children}
         <FloatingWhatsApp />
+        <CookieConsent />
       </body>
     </html>
   );

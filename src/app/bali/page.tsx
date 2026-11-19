@@ -2,6 +2,7 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TrackView from "@/components/TrackView";
 import PhotoCarousel from "@/components/PhotoCarousel";
 import PdfLeadMagnet from "@/components/PdfLeadMagnet";
 import TripCards from "@/components/TripCards";
@@ -71,6 +72,7 @@ export default function BaliPage() {
   return (
     <>
       <Header transparent />
+      <TrackView name="Bali" />
       <main className="text-pt-ink">
         {/* HERO con carousel */}
         <section className="relative h-[85svh] min-h-[600px] overflow-hidden">

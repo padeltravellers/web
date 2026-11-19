@@ -2,6 +2,7 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TrackView from "@/components/TrackView";
 import { contact } from "@/data/content";
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function IndonesiaPage() {
   return (
     <>
       <Header transparent />
+      <TrackView name="Indonesia" category="destino" />
       <main className="text-pt-ink">
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
           <Img src="/photos/extra/arrozales/1.jpg" alt="Paisajes de Indonesia" fill priority className="object-cover ken-burns" />

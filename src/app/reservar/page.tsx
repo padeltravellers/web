@@ -1,6 +1,7 @@
 import Img from "@/components/Img";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TrackView from "@/components/TrackView";
 import BookingFlow from "@/components/booking/BookingFlow";
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function ReservarPage() {
   return (
     <>
       <Header />
+      <TrackView name="Reservar" category="reserva" />
       <main className="text-pt-ink bg-[#FBFAF5]">
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">

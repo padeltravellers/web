@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Img from "@/components/Img";
 import SocialIcons from "@/components/SocialIcons";
+import { CookieSettingsLink } from "@/components/CookieConsent";
 
 export default function Footer() {
   return (
@@ -20,6 +21,7 @@ export default function Footer() {
           <Link href="/condiciones-de-contratacion/" className="hover:text-pt-cream/90">Condiciones de contratación</Link>
           <Link href="/politica-de-privacidad-y-proteccion-de-datos/" className="hover:text-pt-cream/90">Privacidad</Link>
           <Link href="/politica-de-cookies/" className="hover:text-pt-cream/90">Cookies</Link>
+          <CookieSettingsLink className="hover:text-pt-cream/90" />
         </nav>
       </div>
     </footer>

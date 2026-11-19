@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Img from "@/components/Img";
 import CountryPicker from "@/components/CountryPicker";
+import { track } from "@/lib/track";
 import { destinations } from "@/data/destinations";
 import { contact } from "@/data/content";
 import {
@@ -195,6 +196,10 @@ export default function BookingFlow() {
       return;
     }
     setTouched(false);
+    // Meta/GA: ha elegido salida y habitación y pasa a los datos de los viajeros
+    if (to === 2 && step === 1 && trip && room) {
+      track("InitiateCheckout", { content_name: code(trip.n), content_category: room, value: rooms[room].price * travellers.length, currency: "EUR", num_items: travellers.length });
+    }
     setStep(to);
     if (to !== cur) window.history.pushState({ ...(window.history.state || {}), ptStep: to }, "");
     document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -296,6 +301,7 @@ export default function BookingFlow() {
         console.info("[reserva prototipo]", Object.fromEntries(body));
       }
       setStatus("done");
+      track("Purchase", { content_name: code(trip.n), content_category: room, value: rooms[room].price * travellers.length, currency: "EUR", num_items: travellers.length });
       document.getElementById("reserva")?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (e) {
       logReserva("fallo_envio", { error: String((e as Error)?.message || e).slice(0, 300), salida: trip ? code(trip.n) : "", habitacion: room });

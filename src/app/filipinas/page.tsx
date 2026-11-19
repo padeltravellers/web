@@ -2,6 +2,7 @@ import Img from "@/components/Img";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TrackView from "@/components/TrackView";
 import { contact } from "@/data/content";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function FilipinasPage() {
   return (
     <>
       <Header transparent />
+      <TrackView name="Filipinas" category="destino" />
       <main className="text-pt-ink">
         <section className="relative h-[95svh] min-h-[640px] overflow-hidden">
           <Img src="/photos/filipinas/1.jpg" alt="Paisajes de Filipinas" fill priority className="object-cover ken-burns" />
