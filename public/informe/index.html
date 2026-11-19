@@ -2,50 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Informe · Padel Travellers</title>
-<style>
-  body{margin:0;background:#F5EFE6;color:#16241F;font:15px/1.45 Helvetica,Arial,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
-  .box{background:#fff;border:1px solid #E4DDD1;border-radius:16px;padding:28px 24px;max-width:360px;width:100%;text-align:center}
-  h1{font-size:20px;color:#0E3B2D;margin:0 0 6px}p{margin:0 0 18px;color:#6B7470;font-size:14px}
-  input{width:100%;box-sizing:border-box;font:inherit;padding:12px 14px;border:1px solid #D9D2C5;border-radius:10px;margin-bottom:12px}
-  button{width:100%;font:inherit;font-weight:bold;background:#0E3B2D;color:#fff;border:0;border-radius:999px;padding:12px;cursor:pointer}
-  .err{color:#B8543A;font-size:13px;margin-top:10px;min-height:18px}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informes · Padel Travellers</title>
 </head>
-<body>
-<div class="box" id="caja">
-  <h1>Informe de campañas</h1>
-  <p id="msg">Introduce la clave de acceso.</p>
-  <form id="f"><input id="k" type="password" placeholder="Clave" autocomplete="current-password" required><button>Entrar</button></form>
-  <div class="err" id="err"></div>
-</div>
+<body style="font-family:system-ui,sans-serif;color:#0B1F19;text-align:center;padding:40px">
+<p>El informe de campañas se ha movido al portal de informes.</p>
+<p><a href="https://informes.padeltravellers.com/#tab=email" style="color:#0E3B2D;font-weight:bold">Abrir el portal</a></p>
 <script>
-/* Página interna (noindex). La clave NO está aquí: se pide una vez y se guarda en este navegador. */
-(function () {
-  var EXEC = 'https://script.google.com/macros/s/AKfycbzsbb_HmKLSnk6MVKoSVfhkA-WLQQ7SPhrsFke19q_nwt99ulncsNYg62fM4zKz26xG/exec';
-  var KEY = 'pt_informe_k';
-  function guardar(k) { try { localStorage.setItem(KEY, k); } catch (e) {} }
-  function leer() { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
-  function cargar(k) {
-    document.getElementById('msg').textContent = 'Cargando datos…';
-    document.getElementById('err').textContent = '';
-    fetch(EXEC + '?action=informe_json&k=' + encodeURIComponent(k))
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (!d.ok) { try { localStorage.removeItem(KEY); } catch (e) {} throw new Error('Clave incorrecta'); }
-        guardar(k);
-        document.open(); document.write(d.html); document.close();
-      })
-      .catch(function (e) {
-        document.getElementById('msg').textContent = 'Introduce la clave de acceso.';
-        document.getElementById('err').textContent = e.message === 'Clave incorrecta' ? 'Clave incorrecta.' : 'No se han podido cargar los datos. Prueba otra vez.';
-      });
-  }
-  document.getElementById('f').onsubmit = function (ev) { ev.preventDefault(); cargar(document.getElementById('k').value.trim()); };
-  var k = leer(); if (k) cargar(k);
-})();
+  // 2026-11-19: el informe vive ahora en el portal privado (Cloudflare Access). Se borra la clave antigua del navegador.
+  try { localStorage.removeItem('pt_informe_k'); } catch (e) {}
+  location.replace('https://informes.padeltravellers.com/#tab=email');
 </script>
 </body>
 </html>
